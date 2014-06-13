@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+        xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd
+  		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.2.xsd">
+	   	
+	<context:component-scan base-package="com.fox.it.erm.reports"/>
+	   	
+	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+  		<property name="locations" value="classpath:reportsServer.properties"/>
+	</bean>
+	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate"> 
+        <property name="dataSource"><ref bean="dataSource" /></property> 
+ 	</bean> 
+ 
+	<!-- bean id="dataSource"
+         class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+                <property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
+                <property name="url" value="jdbc:oracle:thin:@FFEUSCNUXDB80.foxinc.com:1521:EDMD1" />
+                <property name="username" value="WFSYS" />
+                <property name="password" value="Wf5y5_dev" />
+        </bean -->
+
+	<bean id="dataSource"
+         class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+                <property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
+                <property name="url" value="jdbc:oracle:thin:@FFEUSPLUXDB79.foxinc.com:1521:EDMP1" />
+                <property name="username" value="WFSYS" />
+                <property name="password" value="Wf5y5_prd" />
+        </bean>
+
+	<bean id="WFServer"
+    class="com.fox.it.erm.reports.config.WFServerConfiguration">
+ 		<property name="enableUrls" value="${enableUrls}"/>
+		<property name="wfServer" value="${wfServer}"/>
+		<property name="reportsEnv" value="${reportsEnv}"/>
+	</bean>
+
+</beans>

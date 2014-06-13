@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+        xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd
+  		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.2.xsd">
+	   	
+	<context:component-scan base-package="com.fox.it.erm.reports.factory"/>
+	   	
+
+	<bean id="productInquiryExcelReport"
+    class="com.fox.it.erm.reports.factory.products.ProductInquiryExcelReportBean">
+ 		<property name="reportName" value="productInquiryReport"/>
+		<property name="shortName" value="PIR1"/>
+		<property name="fexFileName" value="product_inquiry_excel.fex"/>
+	</bean>
+	
+	<bean id="productInquiryPreviewReport"
+    class="com.fox.it.erm.reports.factory.products.ProductInquiryPreviewReportBean">
+ 		<property name="reportName" value="productInquiryReport"/>
+		<property name="shortName" value="PIR3"/>
+		<property name="fexFileName" value="product_inquiry.fex"/>
+	</bean>
+
+
+	<bean id="rightsAsEnteredPreviewReport"
+    class="com.fox.it.erm.reports.factory.products.RightsAsEnteredPreviewReportBean">
+ 		<property name="reportName" value="rightsAsEnteredReport"/>
+		<property name="shortName" value="RER3"/>
+		<property name="fexFileName" value="rights_strands_as_entered.fex"/>
+	</bean>
+	
+	<bean id="rightsAsEnteredExcelReport"
+    class="com.fox.it.erm.reports.factory.products.RightsAsEnteredExcelReportBean">
+ 		<property name="reportName" value="rightsAsEnteredReport"/>
+		<property name="shortName" value="RER1"/>
+		<property name="fexFileName" value="rights_strands_as_entered_excel.fex"/>
+	</bean>
+	
+	<bean id="distributionRightsPreviewReport"
+    class="com.fox.it.erm.reports.factory.products.DistributionRightsPreviewReportBean">
+ 		<property name="reportName" value="distributionRightsReport"/>
+		<property name="shortName" value="DRR3"/>
+		<property name="fexFileName" value="distribution_rights.fex"/>
+	</bean>
+	
+	<bean id="distributionRightsExcelReport"
+    class="com.fox.it.erm.reports.factory.products.DistributionRightsExcelReportBean">
+ 		<property name="reportName" value="distributionRightsReport"/>
+		<property name="shortName" value="DRR1"/>
+		<property name="fexFileName" value="distribution_rights_excel.fex"/>
+	</bean>
+
+</beans>

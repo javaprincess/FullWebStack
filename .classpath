@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/Oracle WebLogic Server 12c (12.1.1) JRE">
+		<attributes>
+			<attribute name="owner.project.facets" value="java"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="oracle.eclipse.tools.weblogic.lib.system">
+		<attributes>
+			<attribute name="owner.project.facets" value="jst.web"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/httpClient"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/log4j-1.2.15.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/org-apache-commons-codec.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
+	<classpathentry kind="lib" path="C:/adev/weblogic/wlserver/server/lib/ojdbc6.jar"/>
+	<classpathentry kind="lib" path="C:/adev/Java/spring-framework-master/spring-jdbc-3.2.4.release.jar"/>
+	<classpathentry kind="lib" path="C:/Users/tracyade/Downloads/spring-jdbc-1.0-m4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/tracyade/Downloads/javax.servlet-api-3.1.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/tracyade/Downloads/org.springframework.web.servlet-3.0.6.RELEASE.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/spring-core"/>
+	<classpathentry kind="output" path="build/classes"/>
+</classpath>
