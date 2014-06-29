@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+        xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd
+  		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.2.xsd">
+	   	
+	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+  		<property name="locations" value="classpath:reportsServer.properties"/>
+	</bean>
+	
+	<bean id="WFServer"
+    class="com.fox.it.com.reports.config.WFServerConfiguration">
+ 		<property name="enableUrls" value="${enableUrls}"/>
+ 		<property name="wfServer" value="${wfServer}"/>
+		<property name="reportsEnv" value="${reportsEnv}"/>
+	</bean>
+
+<!-- bean id="WFSecurityAuthService"
+    class="com.fox.it.com.reports.beans.WFSecurityAuthBean">
+ 		<property name="username" value="WFSYS"/>
+ 		<property name="password" value="Wf5y5_dev"/>
+	</bean -->
+</beans>
