@@ -2149,6 +2149,7 @@ function RightStrandUpdate(){
 		var jsonData = JSON.stringify(ob);	
 		
 		var jqxhr = $.post(this.sse_path.getRightStrandAdoptRESTPath(), {q:jsonData}, function(data){
+			var applyFilter = true;			
 			var isStrandRestrictions = data && data.ermRestrictions && data.ermRestrictions.length>0;
 			sse_submitPopupWindow.close();
 			var rsArray = ob.ids;
@@ -2160,7 +2161,7 @@ function RightStrandUpdate(){
 			if(rsArray && rsArray.length > 0){
 			  rcscope.setUpdatedStrands(eval(rsArray.length));				
 			}
-			rcscope.viewStrandsGrid(rcscope.currentProductArray.foxVersionId, rsArray,isStrandRestrictions);
+			rcscope.viewStrandsGrid(rcscope.currentProductArray.foxVersionId, rsArray,isStrandRestrictions,applyFilter);
 			rcscope.$apply();
 		}).fail(function(xhr,status,message){
 			sse_submitPopupWindow.close();
