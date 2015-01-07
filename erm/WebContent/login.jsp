@@ -68,7 +68,7 @@ response.setHeader("Cache-Control", "max-stale=0"); // HTTP 1.1
 	      </div>
 	  </c:if>
 	  <div class="browserWarning">  
-	  	Supported web browsers:  IE9, IE10, Safari and Chrome.<BR/>Please use Chrome for the best browsing experience.
+	  	Supported web browsers:  IE9, IE10, IE11, Safari and Chrome.<BR/>Please use Chrome for the best browsing experience.
 	  </div>
   </div> 
 </div>
