@@ -66,12 +66,24 @@
     				var selectedValues = multiSelect.value();
     				return $.inArray(value, selectedValues) >= 0;
     			};
-    			if (!hasValue(multiSelect, value)) {
-    				var selectedValues = multiSelect.value();
-    				// selectedValues.push(value);
-    				var newValues = selectedValues.slice();
-    				newValues.push(value);
-    				multiSelect.value(newValues);
+    			if (Array.isArray(value)) {
+    				value.forEach(function(value) {
+    	    			if (!hasValue(multiSelect, value)) {
+    	    				var selectedValues = multiSelect.value();
+    	    				// selectedValues.push(value);
+    	    				var newValues = selectedValues.slice();
+    	    				newValues.push(value);
+    	    				multiSelect.value(newValues);
+    	    			}    					
+    				});
+    			} else {
+	    			if (!hasValue(multiSelect, value)) {
+	    				var selectedValues = multiSelect.value();
+	    				// selectedValues.push(value);
+	    				var newValues = selectedValues.slice();
+	    				newValues.push(value);
+	    				multiSelect.value(newValues);
+	    			}
     			}
     		},
     		setRadioValue: function setRadioValue(radio) {
