@@ -1,0 +1,154 @@
+<div id="AddEditClearancePopupLayer" class="panel panel-primary reducedSpacing popup smallFontRights">
+	<div class="panel panel-default reducedSpacing versionTitleBar">
+	  <div class="panel reducedSpacing versionTitleBarItem ellipses" style="width:16%;">
+			<span title="{{cmRealProductTitle}}" class="divColorDisplayTitle">Title: <font class="boldFont cmRealProductTitle">{{cmRealProductTitle}}</font></span>
+		</div>					
+		<div class="panel reducedSpacing versionTitleBarItem ellipses" style="width:10%;">
+			<span class="divColorDisplayTitle">Financial Title ID (WPR ID): <font class="boldFont cmProductCode">{{cmProductCode}}</font></span>
+		</div>			   			   			   			
+		<div class="panel reducedSpacing versionTitleBarItem ellipses" style="width:12%;">
+			<span class="divColorDisplayTitle">Product Type: <font class="boldFont cmProductTypeDesc">{{cmProductTypeDesc}}</font></span>
+		</div>
+		<div class="panel reducedSpacing versionTitleBarItem ellipses" style="width:13%;">
+			<span class="divColorDisplayTitle">US Release Date: <font class="boldFont cmFirstReleaseDate">{{cmFirstReleaseDate}}</font></span>
+		</div>
+		<div class="panel reducedSpacing versionTitleBarItem ellipses" style="width:13%;">
+			<span class="divColorDisplayTitle">Production Year: <font class="boldFont cmProductionYear">{{cmProductionYear}}</font></span>
+		</div>
+		<div class="panel reducedSpacing versionTitleBarItem ellipses" style="width:8%;">
+			<span class="divColorDisplayTitle">Fox ID: <font class="boldFont cmFoxId">{{cmFoxId}}</font></span>
+		</div>
+		<div class="panel reducedSpacing versionTitleBarItem ellipses" style="width:13%;">
+			<span class="divColorDisplayTitle">Fox Version ID: <font class="boldFont cmFoxVersionId">{{cmFoxVersionId}}</font></span>
+		</div>
+		<div class="panel reducedSpacing versionTitleBarItem ellipses" style="width:10%;">
+			<span class="divColorDisplayTitle">JDE Version ID: <font class="boldFont cmFoxIdJDE">{{cmFoxIdJDE}}</font></span>
+		</div>
+  </div>
+  <div class="clearanceMemoTOC">
+  	<div class="memoInfoTitle">Memo Table of Contents
+  	  <div id="memo-toc-response">
+  			<span id="memo-toc-spinner" class="icon-spinner icon-spin icon-small"></span><span id="memo-toc-check" class="icon-check icon-small"></span> <span id="memo-toc-spinner-message"></span>
+			</div>
+  	</div>
+  	<div class="memoInfoToolbar">  	  
+  	  <button id="cm-add-node" class="btn-sm btn-primary btn-add" title="Add"><span class="icon-plus-sign-alt"> </span></button>  		
+  		<button id="cm-levelup-node" class="btn-sm btn-primary btn-copy btn-disabled" disabled="disabled" title="Move Up"><span class="icon-arrow-up"> </span></button>
+  		<button id="cm-leveldown-node" class="btn-sm btn-primary btn-copy btn-disabled" disabled="disabled" title="Move Down"><span class="icon-arrow-down"> </span></button>  		
+  		<button id="cm-tabright-node" class="btn-sm btn-primary btn-copy btn-disabled" disabled="disabled" title="Indent Right"><span class="icon-arrow-right"> </span></button>
+  		<button id="cm-tableft-node" class="btn-sm btn-primary btn-copy btn-disabled" disabled="disabled" title="Indent Left"><span class="icon-arrow-left"> </span></button>
+  		<button id="cm-link-node" class="btn-sm btn-primary btn-edit" style="margin-left: 5px;" title="Link"><span class="icon-link"> </span></button>
+  		<button id="cm-remove-node" class="btn-sm btn-primary btn-delete btn-disabled" disabled="disabled" style="margin-left: 11px;" title="Remove"><span class="icon-remove"> </span></button>
+  	</div>
+  	<div class="k-item select-root-node" id="select-root-node">Sections</div>
+  	<div id="clearanceMemoTreeView" style="float: left; clear: both; width: 100%; overflow-y: auto; max-height: 450px !important;"></div>  	
+  	<div id="tocTitleEditWindow">
+  		<div id="errorDiv"  class="errorClass" style="display: none; height : 60%; margin : auto;">
+  			<i class="icon-warning-sign"></i>&nbsp; <span id="errorParagraph"></span>
+  		</div>
+  		<div style="height : auto; margin-top: 20px; text-align: left; margin-bottom: 5px; margin-left: 25%; width: 50%;">
+  		  Please enter your title for section <span style="font-weight: bold;" id="tocTitleEditWindowTreePosition"></span>  			
+  		</div>  		
+  		<div style="height : auto; margin-top: 5px; text-align: left; margin-bottom: 10px; margin-left: 25%; width: 50%;">
+  		  <input id="tocTitleEditWindowInput" value="" size="50"/>  			
+  		</div>
+  		<div style="height : auto; margin-top: 5px; text-align: left; margin-bottom: 10px; margin-left: 25%; width: 50%;">
+  		  <input type="checkbox" name="tocIgnoreTitle" id="tocIgnoreTitle" value="1"> Hide Title   			
+  		</div>
+  		<div class="submitClass" style="clear: both; text-align: right; height : auto; padding-top : 10px;">
+  		  <button id="toc-title-entry-save" class="btn-xs btn-primary btn-edit" style="margin : 0px; margin-bottom: 2.3em; margin-left : auto; margin-right : auto;">Save Title</button>
+  		  <button id="toc-title-entry-cancel" class="btn-xs btn-primary" style="margin : 0px; margin-bottom: 2.3em; margin-left : 20px; margin-right : auto;">Cancel</button>
+			</div>			
+  	</div>
+  	<div id="baselineTitleEditWindow">
+  		<div id="baselineErrorDiv"  class="errorClass" style="display: none;">
+  			<i class="icon-warning-sign"></i>&nbsp; <span id="baselineErrorParagraph"></span>
+  		</div>
+  		<div style="height : auto; margin-top: 20px; text-align: left; margin-bottom: 5px; margin-left: 25%; width: 50%;">
+  		  Please enter the title of the baseline version  			
+  		</div>
+  		<div style="height : auto; margin-top: 5px; text-align: left; margin-bottom: 10px; margin-left: 25%; width: 50%;">
+  		  <input id="baselineTitleEditWindowInput" value="" size="50"/>  			
+  		</div>			
+  		<div class="submitClass" style="clear: both; text-align: right; height : auto; padding-top : 10px;">
+  		  <button id="baseline-title-entry-save" class="btn-xs btn-primary btn-edit" style="margin : 0px; margin-bottom: 2.3em; margin-left : auto; margin-right : auto;">Save Baseline Version</button>
+  		  <button id="baseline-title-entry-cancel" class="btn-xs btn-primary" style="margin : 0px; margin-bottom: 2.3em; margin-left : 20px; margin-right : auto;">Cancel</button>
+			</div>			
+  	</div>
+  </div>
+  <div class="clearanceMemoEditor">
+  	<div class="memoInfoTitle">Memo Text
+  		<div id="memo-text-response">
+  			<span id="memo-text-spinner" class="icon-spinner icon-spin icon-small"></span><span id="memo-text-check" class="icon-check icon-small"></span> <span id="memo-text-spinner-message"></span>
+			</div>
+		</div>
+  		<div class="memoTextControls">
+  			<span class="memoFieldTitle" style="float: left; width: 30%">TOC Item Status:</span>
+ 				<select id="toc-item-status" name="toc-item-status" style="width:55%;">
+  				<option value="0">--select---</option>      				
+  			</select>
+  			<span id="editorMaximize" onClick="maximizeEditor();" style="cursor: pointer; clear: both; margin-left: 4.9%;" class="k-icon k-i-maximize" role="presentation">
+  			  Maximize
+  			</span>  			  			  	
+			  <span style="padding: 1%;float:left;width: 58%;"><input type="checkbox" name="appears-on-report-only" id="appears-on-report-only" value="Y"> <span style="padding: 1%;">Appears on the Report only</span> <span class="icon-eye-close"></span> </span>
+			  <span style="float:left;" onClick="popAttachments();" class="tocAttachments"><span class="icon-paperclip"></span></span>
+  		</div>
+  		<span id="editorMinimize" onClick="minizeEditor();" style="display: none; margin-right: 13px; cursor: pointer; clear: both; float: right;" class="k-icon k-i-minimize" role="presentation">
+  		  Minimize
+  		</span>  	
+  		<textarea id="clearanceMemoEditor" rows="10" cols="30" style="max-height: 425px !important;" >  		  
+  		</textarea>
+  		<div class="updateButton">  
+  		  <span style="padding: 0% 1% 1% 38%; float: left; width: 75%;"><input type="checkbox" name="create-new-version" id="create-new-version" value=""> <span style="padding: 1%;">Create New Version</span></span>  		    		  	
+  		  <button id="update-clearance-memo-text" class="btn-xs btn-primary btn-copy btn-update">Update</button>  		  
+  		</div>	
+  </div>
+  <div class="clearanceMemoEditPreview">
+  	<div class="memoInfoTitle memoPreviewTitle">Memo Preview
+  	</div>
+  	<div class="memoPreviewLinks clearanceViewSelector">   		
+			<span style="padding: 1%;"><input id="clearance-editview-radio-m" onChange="switchClearanceView('M');" type="radio" name="clearance-view-radio" value="M"> Clearance Memo</span>
+			<span style="padding: 1%;"><input id="clearance-editview-radio-r" onChange="switchClearanceView('R');" type="radio" name="clearance-view-radio" value="R"> Clearance Report <button id="create-baseline-version" class="btn-xs btn-xxs btn-primary btn-copy btn-update">Baseline Version</button></span>
+  	</div>
+		<div id="memo-preview-response">
+  		<span id="memo-preview-spinner" class="icon-spinner icon-spin icon-small"></span><span id="memo-preview-check" class="icon-check icon-small"></span> <span id="memo-preview-spinner-message"></span>
+		</div>
+  	<div class="memoPreviewContent">
+  	  <div class="memoPreviewFoxLogo hideControls"><img src="/erm/img/20th_century_fox_logo.gif"  alt="20th Century Fox"/><BR/>
+		  	<span class="twentiethCenturyFoxTitleFont">TWENTIETH CENTURY FOX</span>
+		  	<span class="twentiethCenturyFoxSubTitleFont">A UNIT OF TWENTIETH CENTURY FOX FILM CORPORATION</span>
+		  </div>										
+  		<div class="memoPreviewContentAllMedia">All Media Distribution Rights</div>
+  		<div class="memoPreviewContentTitle"><font class="cmPreviewRealProductTitle">{{cmRealProductTitle}}</font>  <font class="cmPreviewRealProductionYear">{{cmProductionYear}}</font></div>
+  		<div class="memoPreviewContentPrivileged">PRIVILEGED AND CONFIDENTIAL<br/>SUBJECT TO ATTORNEY-CLIENT AND ATTORNEY WORK PRODUCT PRIVILEGES<br/>DO NOT DUPLICATE - DO NOT CIRCULATE</div>
+  		<div class="memoPreviewContentMemorandum">This memorandum does not include obligations under United States guild agreements which may affect Fox's rights to exploit this property, such as the director's editing rights under the DGA Agreement. Please contact Labor Relations if you have any questions regarding such obligations.</div>
+  		<div class="clearanceReportHeader hideControls">
+  			<div class="header">IRD</div>
+  			<div class="cmPreviewRealProductionYear subHeader"></div>
+  			<div class="header">Title</div>
+  			<div class="cmPreviewRealProductTitle subHeader"></div>
+  			<div class="header">Made For</div>
+  			<div class="cmProductTypeDesc subHeader"></div>
+  			<div class="header">Type</div>
+  			<div class="cmProductTypeDesc subHeader"></div>
+  			<div class="header">Fox Produced</div>
+  			<div class="cmFoxProduced subHeader"></div>
+  			<div class="header">Prepared By</div>
+  			<div class="cmPreparedBy subHeader"></div>
+  			<div class="header">Last Reviewed</div>
+  			<div class="cmLastReviewed subHeader"></div>
+  			<div class="header">Fox Entity</div>
+  			<div class="cmFoxEntity subHeader"></div>
+  			<div class="header">Contractual Party</div>
+  			<div class="cmContractualParty subHeader"></div>
+  			<div class="header"></div>
+  			<div class="subHeader"></div>
+  			<div class="header">Contract Information</div>
+  			<div class="subHeader"></div>
+  		</div>  		  		
+  		<div class="memoPreviewContentTOC hideControls"></div>
+  		<div class="memoPreviewConfirmationStatus"></div>
+  		<div class="memoPreviewContentData"></div>  		
+  	</div>
+  </div>		
+</div>

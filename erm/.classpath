@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/Oracle WebLogic Server 12c (12.1.1) JRE">
+		<attributes>
+			<attribute name="owner.project.facets" value="java"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="oracle.eclipse.tools.weblogic.lib.system">
+		<attributes>
+			<attribute name="owner.project.facets" value="jst.web"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
+	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
+	<classpathentry kind="con" path="oracle.eclipse.tools.weblogic.lib.application/erm-ear"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/jax-rs"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/jacksonlib"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/erm-ejb"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/ejbprovider"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/docx4jlib-all"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/clearance-memo-parse"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/iText"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/spring-core"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/swagger"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/apache-http-client"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/httpClient"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/spring-security"/>
+	<classpathentry kind="output" path="build/classes"/>
+</classpath>

@@ -1,0 +1,8 @@
+@CHARSET "ISO-8859-1";
+#icp_informationCodeCommentDiv table.k-editor {    
+    margin-top: 0 !important;
+    height: 70px !important;
+}    
+#icp_informationCodeCommentDiv .k-editor .k-content {
+	  height: 70px !important;
+}

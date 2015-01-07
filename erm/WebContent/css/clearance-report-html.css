@@ -1,0 +1,129 @@
+body {
+	font-family: arial, sans-serif;
+	font-size: 12px;
+	padding-left: 5%;
+	padding-right: 5%;
+}
+.memoPreviewFoxLogo {
+	width: 15%;
+	float: left;
+}
+.legalClearanceTitle {
+	float: left;
+	width: 70%;
+	font-size: 30px;
+	clear: right;
+	text-align: center;
+	padding-top: 3%;
+}
+.memoPreviewFoxLogoImg {
+  width: 100%;
+  height: 100%;
+  float: left;
+}
+.twentiethCenturyFoxTitleFont {
+	float: left;
+	font-family: 'Century Gothic';
+	width: 100%;
+	text-align: left;
+	clear: both;
+	font-size: 14px;
+}
+.twentiethCenturyFoxSubTitleFont {
+	font-size: 8px;	
+	line-height: 7px;
+	width: 100%;	
+	float: left;	
+	font-family: 'Century Gothic';
+	text-align: left;	
+}
+.memoPreviewContentPrivileged {
+	float: left;
+	width: 100%;		
+}
+.underlineCaps {
+	font-size: 10px;
+	text-decoration: underline;
+	text-align: center;
+	width: 612px;
+}
+.underline{
+	text-decoration: underline;
+}
+.clearanceReportHeader {
+	width: 100%;
+}
+.clearanceReportContent {
+	padding-top: 2%;
+	clear: both;
+}
+.clearanceReportContentTOC {
+	width: 100%;
+}
+.tocHeader {
+	width: 20%;
+	float: left;
+	clear: left;
+}
+.tocSubHeader {
+	width: 60%;
+	float: left;
+}
+.tocPosition {
+	width: 10%;
+	float: left;
+	clear: left;
+}
+.tocTitle {
+	width: 37%;
+	float: left;
+}
+.tocItemStatus {
+	width: 40%;
+	float: left;
+}
+.header {
+	width: 100%;
+	padding-top: 10px;
+	float: left;
+}
+.subHeader {
+	width: 100%;
+	padding-top: 10px;
+	float: left;
+}
+.paragraph {
+	width: 100%;
+}
+.subParagraph {
+	width: 100%;
+}
+.contentPosition {
+	width: 5%;
+	float: left;
+	clear: left;
+}
+.contentTitle {
+	float: left;
+	clear: right;
+	width: 90%;
+	text-decoration: underline;
+}
+.contentNoTitle {
+  padding-left: 0 !important;
+  float: left !important;
+  clear: none !important;
+  width: 90%;
+}
+.headerContent, .subHeaderContent, .paragraphContent, .subParagraphContent {	
+	width: 90%;
+	padding-left: 5%;
+	display: block;
+	float: none;
+	clear: both;
+}
+@media print {
+	.pageBreak {
+		page-break-after:always;
+	}
+}	

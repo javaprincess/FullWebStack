@@ -1,0 +1,602 @@
+.clearanceMemoToolbar .k-widget {
+	display: none;
+	float: left;
+	clear: both;
+	width: 100%;
+}
+.k-file-error{
+  height: 100%;
+  float: left;
+  width: 100%;
+}
+.k-dropzone {
+  display: none !important;
+}
+.k-upload-files {
+  border-style: none !important;
+}
+
+.k-upload-status {
+  position: relative !important;  
+  width: 100%;
+  right: 0;
+}
+.k-upload-button {
+	display: none !important
+}
+.k-upload-status-total .uploadError {
+	display: none !important
+}
+.uploadError {
+  clear: both;
+  width: 97%;  
+  margin: 0;
+  font-size: 9px;
+}
+#AddEditClearancePopupLayer {
+	box-shadow: none;
+}
+.clearanceMemoTOC {
+ 	width: 24%;
+  float: left;  
+}
+.clearanceMemoEditor {
+	width: 27%;
+  float: left;
+  padding-left: 0.5%;  
+}
+
+.clearanceMemoEditorMax {
+	width: 100%;
+  position: absolute;
+  top: 2%;
+  z-index: 10;
+  background-color: white;
+  left: 0%;
+}
+
+.clearanceMemoEditPreview {
+	width: 49%;
+	padding-left: 0.5%;
+  float: left;  
+}  
+.memoInfoTab {
+	width: 20%;
+	float: left;
+}
+.memoPreviewTab {
+	width: 80%;
+	float: left;	
+	background-color: rgb(255, 255, 255);
+	border: 1px solid rgb(221, 221, 221);	
+	box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.05);	
+}
+.memoField {
+	clear: both;
+}
+.memoInfoTitle {
+	font-size: 18px;
+	font-weight: bold;
+	float: left;
+	width: 100%;
+}
+.memoPreviewTitle {
+	width: 22%;
+}
+.memoPreviewLinks {
+	width: 49%;
+	float: left;
+}
+.memoFieldTitle {
+	font-size: 12px;
+	width: 50%;	
+	float: left;
+}
+.memoFieldValue {
+	font-size: 12px;
+	font-wieght: bold;
+	width: 50%;	
+	float: left;
+}
+.clearanceMemoToolbar {
+	width: 100%;
+	float: left;
+	background: rgba(240,240,240, 0.8);
+}
+.memoTextControls {
+	padding: 2.5%;
+	float: left;
+	width: 100%;
+	background-color: rgb(241,241,241);
+	margin-bottom: 2%;
+	margin-top: 1%;
+}
+.toolBarButton {
+	float: left;
+	width: 13%;
+	padding: 1%;
+}
+.clearanceViewSelection {
+	padding: 1%;
+	float: left;
+	width: 100%;
+}
+
+.clearanceMemoPreview {
+	float: left;
+	width: 100%;
+	text-align: center;
+	height: 100%;
+	margin-top: auto;
+	margin-bottom: auto;
+	min-height: 250px;		
+	position: relative;
+	font-size: 12px;
+}
+
+.memoPreviewTab .clearanceMemoPreview .memoPreviewContent  {
+	min-height: 300px;
+  max-height: 300px;
+  text-align: left;
+}
+
+.createNewClearanceText {
+	top: 50%; 
+	position: absolute; 
+	width: 50%; 
+	left: 25%;
+	font-size: 20px;
+	opacity: 0.5;
+}
+.memoInfoToolbar {
+	padding: 4%;
+	float: left;
+	width: 98%;
+	background-color: rgb(241,241,241);
+	margin-bottom: 2%;
+	margin-top: 1%;
+}
+.memoInfoToolbar button {
+	margin-right: 1%;
+}
+.memoInfoToolbar .btn-sm, .memoInfoToolbar .btn-xs {
+  padding: 1% 2%;
+}
+.treeInlineEdit {
+	-webkit-user-select: normal;
+}
+#tocTitleEditWindow, #baselineTitleEditWindow {
+	display: none;	
+}
+#baselineErrorDiv {
+	height: 60%;
+	margin: auto; 	
+}
+#template_addEditClearanceMemo .k-checkbox {
+	display: none !important;
+}
+.select-root-node {
+	clear: both;
+	margin-top:5%;
+	width: 25%;
+	padding: 1px 3px 1px 2px;
+}
+.select-root-node:hover {
+	border-radius: 4px 4px 4px 4px;
+	border-color: rgb(169, 159, 154);
+	-moz-box-sizing: border-box;
+	box-shadow: 0px 0px 3px 1px rgb(169, 159, 154) inset;
+	cursor: default;
+	border-style: solid;
+	border-width: 0;	
+}
+table.k-editor {  
+  height: 425px; 
+  *height: 375px;  
+  width: 100% !important;  
+  margin-top: 10%;
+  border-style: none !important;   
+}
+.k-ie10 table.k-editor {
+	height: 375px;
+}
+.k-webkit .k-editor-toolbar li, 
+.k-ff .k-editor-toolbar li,
+.k-ie9 .k-editor-toolbar li {  
+  padding: 0;
+  float: left;
+}
+.k-editor .k-editor-toolbar-wrap {
+  width: 100% !important;	
+  float: left;
+}
+.k-editor-toolbar ul, UL.k-editor-toolbar {
+	width: inherit !important;
+}
+.k-editor-toolbar li {
+  display: block !important;
+  zoom: 1;
+  *display: inline;
+  width: auto !important;
+  float: left !important;
+}
+.k-editor .k-input, .k-editor .k-tool-icon  {
+	min-height: 30px !important;
+}
+.memoPreviewContent {
+  width: 100%;
+  float: left;
+  border: 1px solid rgb(200,200,200);  
+  min-height: 525px;
+  max-height: 525px;
+  overflow-y: auto;
+  padding: 2%; 
+  margin-top: 0.5%;
+ 	font-size: 12px;
+  line-height: normal;
+}	
+.memoPreviewContentAllMedia {
+	font-weight: bold;
+	font-size: 28px;
+	text-align: center;
+	width: 100%;
+	float: right;
+	padding-bottom: 2%;
+}
+.memoPreviewContentAllMediaShortWidth {
+	width: 67% !important;
+	padding-top: 3%;
+	text-align: left;
+}
+.memoPreviewContentTitle {
+	font-weight: bold;
+	font-size: 24px;
+	text-transform:uppercase;
+	text-align: center;
+ 	padding: 2%;
+}
+.memoPreviewContentPrivileged {	
+	font-size: 12px;
+	text-transform:uppercase;
+	text-align: center;
+	padding-bottom: 2%;
+	text-decoration: underline;
+}
+.memoPreviewContentMemorandum {
+	font-size: 12px;
+}
+.btn-update {
+	float: right;
+	margin-right: 5%;
+}
+.updateButton {
+	padding-top: 1%;
+}
+.k-editor .k-upperLowerCase {
+	background: no-repeat url('/erm/img/icons/UpperLowerCase.png');
+  background-size: 20px 20px; 
+  padding-left: 1px;   
+  background-position:center; 
+}
+.k-editor .k-upperLowerCase:hover {
+  background: no-repeat url('/erm/img/icons/UpperLowerCaseActive.png');
+  background-size: 20px 20px;
+  background-position:center; 
+  background-color: rgb(169,159,154);
+}
+.k-editor .k-extraSpaces {
+	background: no-repeat url('/erm/img/icons/ExtraSpaces.png');
+  background-size: 20px 20px; 
+  padding-left: 1px;   
+  background-position:center; 
+}
+.k-editor .k-extraSpaces:hover {
+  background: no-repeat url('/erm/img/icons/ExtraSpacesActive.png');
+  background-size: 20px 20px;
+  background-position:center; 
+  background-color: rgb(169,159,154);
+}
+
+.k-editor .k-extraParagraphSpaces {
+	background: no-repeat url('/erm/img/icons/ExtraParagraphSpaces.png');
+  background-size: 20px 20px; 
+  padding-left: 1px;   
+  background-position:center; 
+}
+.k-editor .k-extraParagraphSpaces:hover {
+  background: no-repeat url('/erm/img/icons/ExtraParagraphSpacesActive.png');
+  background-size: 20px 20px;
+  background-position:center; 
+  background-color: rgb(169,159,154);
+}
+
+.k-editor .k-extractNumbers {
+	background: no-repeat url('/erm/img/icons/ExtractNumbers.png');
+  background-size: 20px 20px; 
+  padding-left: 1px;   
+  background-position:center; 
+}
+.k-editor .k-extractNumbers:hover {
+  background: no-repeat url('/erm/img/icons/ExtractNumbersActive.png');
+  background-size: 20px 20px;
+  background-position:center; 
+  background-color: rgb(169,159,154);
+}
+
+.k-editor .k-tabIcon {
+	background: no-repeat url('/erm/img/icons/TabIcon.png');
+  background-size: 20px 20px; 
+  padding-left: 1px;   
+  background-position:center; 
+}
+.k-editor .k-tabIcon:hover {
+  background: no-repeat url('/erm/img/icons/TabIconActive.png');
+  background-size: 20px 20px;
+  background-position:center; 
+  background-color: rgb(169,159,154);
+}
+
+.k-editor .k-pageBreak {
+	background: no-repeat url('/erm/img/icons/PageBreak.png');
+  background-size: 20px 20px; 
+  padding-left: 1px;   
+  background-position:center; 
+}
+.k-editor .k-pageBreak:hover {
+  background: no-repeat url('/erm/img/icons/PageBreakActive.png');
+  background-size: 20px 20px;
+  background-position:center; 
+  background-color: rgb(169,159,154);
+}
+
+.displayInline {
+	display: inline-block !important;
+}
+
+.hideControls {
+	display: none;
+}
+.largerClearanceMemoEditPreview {
+	width: 75%;
+}
+#memo-text-spinner, #memo-text-check {
+	display: none;
+}
+#memo-text-response {
+  display: none;
+  float: right;
+  width: 74%;
+  font-size: 12px !important;
+  text-align: right;
+  padding-top: 5px;
+}
+#memo-toc-spinner, #memo-toc-check {
+	display: none;
+}
+#memo-toc-response {
+  display: none;
+  float: right;
+  width: 41%;
+  font-size: 12px !important;
+  text-align: right;
+  padding-top: 5px;
+}
+#memo-preview-spinner, #memo-preview-check {
+	display: none;
+}
+#memo-preview-response {
+  display: none;
+  float: right;
+  width: 26%;
+  font-size: 12px !important;
+  text-align: right;
+  padding-top: 5px;
+}
+.tocErrorClass {
+  color: rgb(153, 43, 15);
+}
+.tocItemStatus {  
+  float: right;
+  width: 30%;
+  text-align: right;
+}
+.movingClass {  
+  color: rgb(0,162,232);
+}
+.memoPreviewFoxLogo {
+	float: left;
+	width: 33%;
+}
+.memoPreviewFoxLogo img {
+	height: 60px;
+}
+.twentiethCenturyFoxTitleFont {
+	clear: both;
+}
+.twentiethCenturyFoxSubTitleFont {
+	float: left;
+	font-size:8px;
+	clear: both;
+	line-height: 10px;
+}
+.memoPreviewContentPrivileged {
+	clear: both;
+}
+.memoPreviewContentTOC, .memoPreviewContentData {
+	width: 100%;
+	float: left;
+}
+.memoPreviewContentTOC div {
+	padding-top: 1%;
+}
+.memoPreviewContentData {
+  padding-top: 2%;	
+  padding-bottom: 6%;
+}
+.memoPreviewContentData div {	
+}
+.selectedContent {
+	border: 2px solid rgb(48,178,241);
+}
+.tocPosition {
+	float: left;
+	padding-right: 5px;
+}
+.tocTitle {
+	float: left;	
+	max-width: 360px;
+}
+.content {
+	clear: both;
+	width: 100%;
+	float: left;
+}
+.contentPosition {
+	float: left;	
+	padding-right: 5px;
+}
+.contentTitle {
+	float: left;	
+	text-decoration: underline;
+}
+.contentNoTitle {
+	padding-left: 0 !important;
+  float: left !important;
+  clear: none !important;
+  width: 90%;
+}
+.headerContent {
+	float: left;
+  clear: both;
+}
+.subHeaderContent {
+	float: left;
+  clear: both;
+} 
+.paragraphContent {
+	float: left;
+  clear: both;
+} 
+.subParagraphContent {
+	float: left;
+  clear: both;
+}
+.memoPreviewConfirmationStatus {
+	color: red;
+	font-size: 12px;
+	padding-top: 2%;
+}
+.clearanceReportHeader .header {
+	float: left;
+	width: 20%;
+	clear: both;
+	text-align: left;
+	padding-top:1%;
+	text-decoration: underline;
+}
+.clearanceReportHeader .subHeader {
+	padding-top:1%;
+	float: right;
+	width: 80%;
+	clear: right;
+	padding-left: 5px;
+}
+
+
+.memoPreviewContentTOC .header {
+	float: left;
+	width: 90%;
+}
+.memoPreviewContentTOC .subHeader {
+	float: left;
+	width: 70%;
+}
+.memoPreviewContentTOC .paragraph {
+	float: left;
+	width: 70%;
+}
+.memoPreviewContentTOC .subParagraph {
+	float: left;
+	width: 70%;
+}
+
+.memoPreviewContentData .header {
+	float: left;
+	width: 100%;
+	clear: right;
+	padding-top: 1%;
+  padding-bottom: 2%;
+}
+.memoPreviewContentData .subHeader {	
+	padding-left: 0.5%;
+	float: right;
+	width: 95%;
+	clear: right;
+	padding-top: 1%;
+  padding-bottom: 2%;
+}
+.memoPreviewContentData .paragraph {
+	padding-right: 5%;	
+	float: right;
+	width: 91%;
+	clear: right;
+	padding-top: 1%;
+  padding-bottom: 2%;
+}
+.memoPreviewContentData .subParagraph {
+	padding-right: 10%;
+	padding-right: 10%;
+	float: right;
+	width: 81%;
+	clear: right;
+}
+span.k-in {
+	text-overflow: ellipsis; 
+	white-space: nowrap;
+	max-width: 90%;
+	overflow: hidden;
+}
+.btn-xxs {
+    padding: 1px 5px;
+    font-size: 11px;
+    line-height: 1;
+    margin-top: 4px;
+}
+.tocAttachments {
+	display: none;
+	cursor: pointer;
+	float: right;
+	padding-top: 1%;
+	padding-right: 0%;
+	font-size: 14px;
+}
+.contentAttachments {
+  padding: 1% 0px;
+  float: left;
+}
+pre {
+  display: block;
+  padding: 0;
+  margin: 0;
+  font-size: 12px;
+  line-height: normal;
+  color: black;
+  word-break: normal;
+  word-wrap: normal;
+	white-space: pre-wrap;
+	white-space: -moz-pre-wrap;
+	white-space: -o-pre-wrap;
+  overflow: auto;
+  background-color: white;
+  border: 0;
+  border-radius: 0;
+  font-family: arial,sans-serif;
+}
+
+.k-editor-dialog { 
+  width: 800px !important;
+}
+.k-editor-dialog .k-editor-textarea {
+	height: 475px !important;
+	width: 790px !important;
+}

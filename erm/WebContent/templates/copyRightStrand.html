@@ -1,0 +1,359 @@
+<div id="crs_popupLayer" class="panel  panel-primary reducedSpacing popup smallFontRights" style="padding-top: 0; margin-top: 0;"> <!--  style="height : 750px; max-height : 750px; min-height : 750px;">  -->
+			<!-- Start Header -->
+			<div class="panel reducedSpacing" style="padding-top: 0; margin-top: 0;"> <!--  style="height : 290px;"> --> 
+				<div class="panel reducedSpacing" style="height : 30px; padding-top: 0; margin-top: 0;">
+					<div class="panel panel-default reducedSpacing" style="width:89%; float : left;"><span style="font-weight : bold;" id="crs_productTitlePopup">{{crs_MovieTitle}}</span></div>
+				</div>
+				
+				<div class="panel panel-default reducedSpacing" style="padding-top: 0; margin-top: 0; height : 30px; background-color : #4d6b8a;">
+					
+					<div class="panel reducedSpacing" style="width:13%; float : left; margin-left : 5px; background-color : #4d6b8a; border-color : #4d6b8a;">
+						<span class="divColorDisplayTitle">Financial Title ID (WPR ID): <span class="boldFont" id="crs_productCode"></span></span>
+					</div>
+					<div class="panel reducedSpacing" style="width:13%; float : left; margin-left : 5px; background-color : #4d6b8a; border-color : #4d6b8a;">
+						<span class="divColorDisplayTitle">Product Type : <font class="boldFont" id="crs_productTypeCode"></font></span>
+					</div>
+					<div class="panel reducedSpacing" style="width:20%; float : left; margin-left : 5px; background-color : #4d6b8a; border-color : #4d6b8a;">
+						<span class="divColorDisplayTitle">US Release Date : <font class="boldFont" id="crs_firstReleaseDate"></font></span>
+					</div>
+					<div class="panel reducedSpacing" style="width:12%; float : left; margin-left : 5px; background-color : #4d6b8a; border-color : #4d6b8a;">
+						<span class="divColorDisplayTitle">Production Year : <font class="boldFont" id="crs_productionYear"></font></span>
+					</div>
+					<div class="panel reducedSpacing" style="width:10%; float : left; margin-left : 5px; background-color : #4d6b8a; border-color : #4d6b8a;">
+						<span class="divColorDisplayTitle">Fox ID : <font class="boldFont" id="crs_currentFoxId"></font></span>
+					</div>
+					<div class="panel reducedSpacing" style="width:14%; float : left; margin-left : 5px; background-color : #4d6b8a; border-color : #4d6b8a;">
+						<span class="divColorDisplayTitle">Fox Version ID : <font class="boldFont" id="crs_currentFoxVersionId"></font></span>
+					</div>
+					<div class="panel reducedSpacing" style="width:10%; float : left; margin-left : 5px; background-color : #4d6b8a; border-color : #4d6b8a;">
+						<span class="divColorDisplayTitle">JDE Version ID : <font class="boldFont" id="crs_currentFoxIdJDE"></font></span>
+					</div>
+				</div>
+				<!-- it used to have overflow-y: hidden -->
+				<div id="crs_errorPanel" class="panel panel-danger" style="height : 100px;  margin : 2px; padding : 1px; border-color : #8c3737; display : none;">
+					<div class="panel-heading boldFont" style="height : 18%; margin : auto; text-align : right; background-color : #8c3737; padding : 2px;"><a id="crs_errorPanelClose" style="font-weight : 800; color : #ffffff;">close</a></div>
+					<div id="crs_errorPanelInner"  class="panel-body" style="height : 80%; margin : auto; color : #992b0f; font-weight : 800;overflow-y : auto;"></div>
+				</div>
+				
+				<div class="panel panel-default reducedSpacing" style="height : 35px; position : relative; margin-right : 0px; margin-left : 0px; padding-left : 0px; padding-right : 0px;">
+					<div class="panel reducedSpacing" style="width : 60%; float :left;">
+						<div class="panel  reducedSpacing" style="width : 7%; float : left;">
+							<span style="margin-top : 3px;">Type : </span>
+						</div>
+						<div class="panel  reducedSpacing" style="width : 20%; float : left; margin-top : 0px;">
+							<div class="panel-body" style="width : 16%; float : left;"><input id="crs_inclusion" name="inclusionExclusionProduct" type="radio" style="margin-bottom : 2px;" value="1"></div><div class="panel-body" style="margin-top : 3px; padding-bottom : 0px; height : 90%; float : right; width : 82%; font-weight : bold; color : #3e613d;"><span> <i class="icon-plus"></i> Inclusion</span></div>
+						</div>
+						<div class="panel reducedSpacing" style="width : 20%; float : left; margin-top : 0px;">
+							<div class="panel-body" style="width : 16%; float : left;"><input id="crs_exclusion" name="inclusionExclusionProduct" type="radio" value="2"></div><div class="panel-body" style="margin-top : 3px; padding-bottom : 0px; height : 90%; float : right; width : 82%; font-weight : bold;"><span style="color : #992b0f;"> <i class="icon-stop"></i> Exclusion</span></div>
+						</div>
+						<div id="crs_bothObption" class="panel reducedSpacing" style="width : 50%; float : left; margin-top : 0px;">
+							<div class="panel-body" style="width : 8%; float : left;"><input id="crs_both" type="radio" name="inclusionExclusionProduct" value="3"></div><div class="panel-body" style="margin-top : 3px; padding-bottom : 0px; height : 90%; float : left; width : 80%; font-weight : bold; text-align : left;"><span style="color : #3e613d;"> <i class="icon-plus"></i> Inclusion</span> & <span style="color : #992b0f;"><i class="icon-stop"></i> Exclusion</span> (Both)</div>
+						</div>
+					</div>
+					<div class="panel reducedSpacing" style="width : 38%; float : right;">
+						<div class="panel reducedSpacing divFontDisplay" style="width : 38%; float : left; text-align : center; padding : 0px; margin : 0px;">
+							<input type="checkbox" id="crs_strandSetControlCheckbox">&nbsp;<span id="crs_strandSetText">Strand Set Name  </span>
+						</div>
+						<div class="panel reducedSpacing" style="width : 60%; float : right; padding-right : 0px; margin-right : 0px;">
+						<span style="width : 100%;">
+							<input id="crs_strandSetComboBox" style="width : 96.1%;">	<!-- <button id="crs_addStrandSetComment" class="btn btn-xs btn-primary" style="margin : 0px;">...</button>	-->	
+						</span>
+						</div>
+					</div>
+				</div>
+				<div class="panel panel-default reducedSpacing" style="width : 60%; height : 20px; position : relative;">
+					<span style="font-weight : bold;">Rights Strand(s) To Copy</span>
+				</div>
+				<div id="crs_parent_rightStrandGrid" class="panel panel-default reducedSpacing" style="width : 99%; height : 150px; position : relative;"> <!-- overflow-y : auto; overflow-x : hidden;  -->
+					<div  style="width : 99%; height : 100%;" id="crs_rightStrandGrid" class="panel panel-default reducedSpacing"></div><!-- overflow-y : auto;"   -->
+				</div>
+							
+			</div>
+			<!-- End Header -->
+			<div class="panel panel-default reducedSpacing" style="width : 100%; height : 40px; margin-top : 10px;">
+				<div class="panel panel-default reducedSpacing" style="width : 50%; height : 100%; float:left;">
+						<span style="font-weight : bold;" class="copyRightStrandPopupSearch">Search for Target Product(s) to Copy to</span>
+				</div>
+				<div class="panel panel-default reducedSpacing" style="width : 49%; height : 100%; float:right; text-align: right;">
+					<button id="crs_populateActiveTerritories" class="btn btn-xs btn-primary" style="margin : 0px;margin-right : 10px;">Populate Active Territories</button>
+				</div>
+			</div>
+			
+			<div id="crs_copyStrandError" class="panel panel-default reducedSpacing copyRightStrandPopupSearch" style="width : 99%; margin-top : 5px; position : relative; height : 17px; display : none;">
+				<div style="width : 9%; float : left; height : 100%; font-size : 11px;">
+				</div>
+				<div id="crs_copyStrandFailureText" class="errorClass" style="width : 45%; float : left; height : 100%; font-size : 11px;">
+				</div>
+				<div id="crs_copyStrandSuccessText" class="successClass" style="width : 44.5%; float : left;height : 100%; font-size : 11px;">
+				</div>
+			</div>
+			<div class="panel panel-default reducedSpacing copyRightStrandPopupSearch" style="width : 99%; margin-top : 5px; position : relative;">
+					<div style="width : 9%; float : left;">
+						<button id="crs_searchForTargetProductsButton" class="btn-xs btn-primary btn-search"><i class="icon-search"></i> Search...</button>
+						<button id="crs_removeTargetProductsToCopy" class="btn-xs btn-primary btn-delete" style="margin-top: 7px;"><i class="icon-remove"></i>Target(s)</button>
+					</div>
+					<div style="width : 45%; float : left;">
+						<select id="crs_targetProductList" class="form-control smallFontRights crossProductTargetsArea" multiple size="4" style="width:99%; height : auto; margin : 0px; padding : 0px;"></select>
+					</div>
+					<div style="width : 44.5%; float : left;">
+						<select id="crs_targetProductListSuccess" class="form-control smallFontRights crossProductTargetsAreaSuccess" multiple size="4" style="width:99%; height : auto; margin : 0px; padding : 0px;"></select>
+					</div>
+			</div>
+			
+			<div class="panel panel-default reducedSpacing" style="clear: both; width : 99%; height : 30px; padding-top : 20px; position : relative;">
+					<span style="font-weight : bold;">Select Dimensions To Modify</span>
+			</div>
+			<div class="panel panel-default reducedSpacing" style="height : 400px; width : 99%; position : relative;"> <!-- height : 72% -->
+				<div class="panel panel-default reducedSpacing" style="height : 99%; float : left; width : 59%;">
+				  <div class="panel panel-default reducedSpacing" style="height : 99%;">
+					<div class="panel reducedSpacing" style="width : 32%; height : 99%; float : left; padding : 0px; margin:0px; margin-left : 5px;">
+						<div class="panel-body divFontDisplay" style="width : 98%"><input type="checkbox" id="crs_mediaControlCheckbox">&nbsp;<span id="crs_mediaText">Media</span></div>
+						<div class="panel reducedSpacing1 treeview-back" style="width : 98%; height : 99%; padding : 0px; border : 0px;">
+							<div class="panel-body reducedSpacing" style="width : 100%; height : 60%; padding : 0px; margin : 0px;">
+								<select id="crs_mediaSelector" multiple class="form-control smallFontRights" size="25" style="width: 100%; height : 100%;"></select>
+							</div>
+							<div class="panel-body reducedSpacing iconFooterClass" style="width : 100%; height : 7%; padding : 0px; margin : 0px;">
+								<i id="crs_removeMedia" class="icon-collapse-top divFontDisplay"></i>
+								<i id="crs_addMedia" class="icon-collapse divFontDisplay"></i>
+							</div>
+							<div class="panel-body reducedSpacing divFontDisplay" style="width : 100%; height : 5%; padding : 0px; margin : 0px; text-align : center;">
+								<span id="crs_mediaTextSelected">Selected Media</span>
+							</div>
+							<div class="panel-body reducedSpacing" style="width : 100%; height : 27%; padding : 0px; margin : 0px;">
+								<select id="crs_mediaSelected" class="form-control smallFontRights" multiple style="width: 100%; height : 100%;"></select>
+							</div>
+						</div>
+			
+					</div>
+					<div class="panel reducedSpacing" style="width : 33%; height : 99%; float : left; padding : 0px; margin:0px; margin-left : 5px;">
+						<div class="panel-body divFontDisplay" style="width : 98%;">
+							<input type="checkbox" id="crs_territoryControlCheckbox">&nbsp;<span id="crs_territoryText">Territory</span>
+						</div>
+						<div class="panel reducedSpacing1 treeview-back" style="width : 98%; height : 99%; padding : 0px; border : 0px;">
+							<div class="panel-body" style="width: 100%; height : 60%; padding : 0px; margin : 0px;">
+								<select id="crs_territorySelector"  multiple class="form-control smallFontRights" size="25" style="width: 100%; height : 100%; overflow-x : auto;"></select>
+							</div>
+							<div class="panel-body reducedSpacing iconFooterClass" style="width : 100%; height : 7%; padding : 0px; margin : 0px;">
+								<i id="crs_removeTerritory" class="icon-collapse-top divFontDisplay"></i>
+								<i id="crs_addTerritory" class="icon-collapse divFontDisplay"></i>
+							</div>
+							<div class="panel-body reducedSpacing divFontDisplay" style="width : 100%; height : 5%; padding : 0px; margin : 0px; text-align : center;">
+								<span id="crs_territoryTextSelected">Selected Territories</span>
+							</div>
+							<div class="panel-body reducedSpacing" style="width : 100%; height : 27%; padding : 0px; margin : 0px;">
+								<select id="crs_territorySelected" class="form-control smallFontRights" multiple style="width: 100%; height : 100%;"></select>
+							</div>
+						</div>
+
+					</div>
+					<div class="panel reducedSpacing" style="width : 32%; height : 99%; float : left; padding : 0px; margin:0px; margin-left : 5px;">
+						<div class="panel-body divFontDisplay" style="width : 98%;">
+							<input type="checkbox" id="crs_languageControlCheckbox">&nbsp;<span id="crs_languageText">Language</span>
+						</div>
+						<div class="panel reducedSpacing1 treeview-back" style="width : 98%; height : 99%; padding : 0px; border : 0px;">
+							<div class="panel-body" style="width : 100%; height : 60%; padding : 0px; margin : 0px;">
+								<select id="crs_languageSelector" multiple class="form-control smallFontRights" size="25" style="width: 100%; height : 100%;"></select>
+							</div>
+							<div class="panel-body reducedSpacing iconFooterClass" style="width : 100%; height : 7%; padding : 0px; margin : 0px;">
+								<i id="crs_removelanguage" class="icon-collapse-top divFontDisplay"></i>
+								<i id="crs_addlanguage" class="icon-collapse divFontDisplay"></i>
+							</div>
+							<div class="panel-body reducedSpacing divFontDisplay" style="width : 100%; height : 5%; padding : 0px; margin : 0px; text-align : center;">
+								<span id="crs_languageTextSelected">Selected Languages</span>
+							</div>
+							<div class="panel-body reducedSpacing" style="width : 100%; height : 27%; padding : 0px; margin : 0px;">
+								<select id="crs_languageSelected" class="form-control smallFontRights" multiple style="width: 100%; height : 100%;"></select>
+							</div>
+						</div>
+
+					</div>
+				  </div>
+				</div>
+					
+				<div class="panel reducedSpacing" style="float : right; width : 40.5%; height : 99%; margin : 0px;">
+					<div class="panel reducedSpacing" style="width : 50%; height : 99%; float : left; margin-left : 0px;">
+						<div class="panel-body" style="width : 98%; border-bottom : 2px solid #d1d1d1; vertical-align : top; padding-bottom : 5px;">
+							<input type="checkbox" id="crs_termControlCheckbox">&nbsp;<font class="divFontDisplay" style="margin-top : 0px; padding-top : 0px; vertical-align : top;"><span id="crs_terms">Term</span></font>  
+						</div>
+						<div id="crs_startContractualDateText" class="panel-body divFontDisplay" style="width : 98%;">
+							Term Start Date
+						</div>
+						<div class="panel-body" style="width : 98%;">
+							<input id="crs_startContractualDate" style="width:98%; height : 24px;" /> 
+						</div>
+						<div class="panel-body" style="width : 98%;  padding-top : 5px;">
+							<div class="panel-body pull-left" style="width : 50%;">
+								<div id="crs_startDateCodeText" class="panel-body divFontDisplay" style="width : 98%">
+									Start Date Code
+								</div>
+								<div class="panel-body" style="width : 98%">
+									<input id="crs_startDateCode" style="width : 98%;">
+								</div>
+							</div>
+							<div class="panel-body pull-right" style="width : 49%;">
+								<div id="crs_startDateStatusText" class="panel-body divFontDisplay" style="width : 98%">
+									Start Date Status
+								</div>
+								<div class="panel-body" style="width : 98%">
+									<input id="crs_startDateStatus" style="width : 98%;">
+								</div>
+							</div>
+						</div>
+						<div id="crs_startOverrideDateText" class="panel-body divFontDisplay" style="width : 98%;">
+							Start Override Date
+							<span id="crs_startOverrideDeleteSection">
+								<input type="checkbox" id="crs_startOverrideDelete"> Delete
+							</span>							
+						</div>
+						<div class="panel-body" style="width : 98%; border-bottom : 2px solid #d1d1d1; padding-bottom : 5px;">
+							<input id="crs_startOverrideDate" style="width:98%; height : 24px;" />
+						</div>
+						
+						<div id="crs_endContractualDateText" class="panel-body divFontDisplay" style="width : 98%;  padding-top : 3px;">
+							Contractual End Date
+						</div>
+						<div class="panel-body" style="width : 98%;">
+							<input id="crs_endContractualDate" style="width:98%; height : 24px;" />
+						</div>
+						<div class="panel-body" style="width : 98%;  padding-top : 5px;">
+							<div class="panel-body pull-left" style="width : 50%;">
+								<div id="crs_endDateCodeText" class="panel-body divFontDisplay" style="width : 98%">
+									End Date Code
+								</div>
+								<div class="panel-body" style="width : 98%">
+									<input id="crs_endDateCode" style="width: 98%;"/>
+								</div>
+							</div>
+							<div class="panel-body pull-right" style="width : 49%;">
+								<div id="crs_endDateStatusText" class="panel-body divFontDisplay" style="width : 98%">
+									End Date Status
+								</div>
+								<div class="panel-body" style="width : 98%">
+									<input id="crs_endDateStatus" style="width: 98%;"/>
+								</div>
+							</div>
+						</div>
+						<div id="crs_endOverrideDateText" class="panel-body divFontDisplay" style="width : 98%;">
+							End Override Date
+							<span id="crs_endOverrideDeleteSection">
+								<input type="checkbox" id="crs_endOverrideDelete"> Delete
+							</span>							
+						</div>
+						<div class="panel-body" style="width : 98%;">
+							<input id="crs_endOverrideDate" style="width:98%; height : 24px;" />
+						</div>
+						
+						<div class="panel panel-default reducedSpacing" style="height : 33%; padding : 0px; margin : 0px;margin-top : 5px;">							
+							
+							<div id="crs_infoCodeTermAddEdit" class="panel reducedSpacing1" style="width : 98%; height : 20%; margin : 0px; overflow : auto; border : 1px solid #d1d1d1; overflow : hidden;">
+								<div id="crs_infoCodeTerms" class="panel-body pull-left divFontDisplay blueFontStyle" style="width : 49%; font-size : 10px; margin : 0px; margin-top : 10px; padding-bottom : 0px; margin-bottom : 0px;">
+									Info Code Term(s)
+								</div>
+								<div class="panel reducedSpacing1" style="width : 49%; padding : 0px; margin : 0px; border : 0px; float : right; text-align : right;">
+									<button id="crs_addEditButton" class="btn btn-xs btn-default btn-add" style="margin : 0px; margin-left : auto;margin-right : auto;">Modify Terms</button>
+								</div>
+							</div>
+						
+							<div id="crs_infoCodeCustomDateDisplay" class="panel reducedSpacing1 blueFontStyle" style="width : 98%; height : 60%; margin : 0px; margin-top : 10px; overflow : auto;  border : 1px solid #d1d1d1; "></div>
+															
+						</div>
+						
+					</div>
+					
+					<div id="crs_multiPanelInfoCodes" class="panel reducedSpacing" style="width : 46%; height : 99%; float : right; padding : 0px; margin : 0px; margin-left : 5px;">
+						<div id="crs_infoCodeTreeViewMultiText" class="panel-body divFontDisplay1" style="width : 98%; margin : 0px; margin-top : 3px;">
+							<input type="checkbox" id="crs_infoCodeControlCheckbox">&nbsp;<span id="crs_infoCodeText">Info Codes</span>
+						</div>
+						
+						<div class="panel-body reducedSpacing" style="width : 99%; height : 59%; padding : 0px; margin : 0px; margin-top : 6px;">
+							<select id="crs_infoCodeSelector" class="form-control smallFontRights"   multiple="true" style="width: 100%; height : 100%;"></select>
+						</div>
+						
+						<div id="crs_accumulator" class="panel reducedSpacing" style="height : 37%;">
+							<div class="panel reducedSpacing" style="width:47%; float : left; height : 98%; padding : 0px; margin : 0px;">
+								<div class="panel-body iconFooterClass" style="height : 16%;">
+									<i id="crs_removeInfoCodesAdd" class="icon-collapse-top divFontDisplay blueFontStyle"></i>
+									<i id="crs_addInfoCodesAdd" class="icon-collapse divFontDisplay blueFontStyle"></i>
+								</div>
+								<div id="crs_restrictionAddSelectedText" class="panel reducedSpacing1 divFontDisplay1" style="width : 99%; height : 10%; overflow : auto; border : 0px;padding : 0px; margin : 0px; font-size : 10px; overflow : hidden; text-align:center;">
+									<span>Add/Update</span>
+								</div>
+								<div  class="panel reducedSpacing1  blueFontStyle" style="width : 99%; height : 75%; overflow : auto; border : 1px solid #d1d1d1;padding : 0px; margin : 0px; margin-top : 3px;">
+									<select id="crs_restrictionAddSelected" class="form-control smallFontRights"   multiple="true" style="width: 100%; height : 100%;"></select>
+								</div>
+							</div>
+							<div class="panel reducedSpacing" style="width:47%; float : right; height : 98%;  padding : 0px; margin : 0px;">
+								<div class="panel-body iconFooterClass" style=" height : 16%;">
+									<i id="crs_removeInfoCodesRemove" class="icon-collapse-top divFontDisplayIcon"></i>
+									<i id="crs_addInfoCodesRemove" class="icon-collapse divFontDisplayIcon"></i>
+								</div>
+								<div id="crs_restrictionRemoveSelectedText" class="panel reducedSpacing1  divFontDisplayIcon" style="width : 99%; height : 10%; overflow : auto; border : 0px;padding : 0px; margin : 0px; font-size : 10px; overflow : hidden; text-align:center;">
+									<span>Remove</span>
+								</div>
+								<div  class="panel reducedSpacing1  blueFontStyle" style="width : 99%; height : 75%; overflow : auto; border : 1px solid #d1d1d1;padding : 0px; margin : 0px; margin-top : 3px;">
+									<select id="crs_restrictionRemoveSelected" class="form-control smallFontRights"   multiple style="width: 100%; height : 100%;"></select>
+								</div>
+							</div>
+						</div>
+									
+					</div>
+					
+				</div>
+			</div>
+			
+			<!-- AMV add comment -->
+			<!-- START COMMENT SECTION -->
+			<!-- amv add comments button -->
+			<div id="crs_commentSection" style="margin-top: 10px">
+			<button id="addRightStrandCommentsAndAttachments" name="adCommentButton" onClick="strandComments.addStrandComment('crs_commentSection');" class="btn-xs btn-primary btn-add"  style="font-size: 9px;"><i class="icon-comment-alt icon-flip-horizontal"></i> Add Comment</button>
+			<input type="hidden" name="commentId">			
+			<!-- end comments button -->
+			<div id="crs_comment" name="comment" class="commentStrand" style="display:none; width : 99.5%; margin-left : 0px; margin-top : 5px; border : 1px solid #989898; padding : 5px;">
+				<div style="float: right; text-align: right;">
+					<a name="edit" href="#">Edit</a>
+					<a name="remove" href="#">Remove</a>
+				</div>
+				<div>
+				<div>			
+				<span>Subject:</span>
+				<span name="title"></span>
+				</div>
+				<div>
+				<span name="text"></span>
+				</div>
+				</div>
+				<div name="attachments" style="border-top: 1px dotted gray; margin-top: 10px">
+				</div>							
+			</div>
+			</div>
+			<!-- END COMMENT SECTION -->
+			
+			<!-- end comment -->						
+			<div class="panel reducedSpacing" style="height : 40; margin-top : 10px;">
+				<div style="float : right; margin : 0px; margin-right : 5px;margin-top : 10px;">
+					<button id="crs_convertRightStrand" class="btn btn-xs btn-primary btn-add" style="margin : 0px; margin-left : auto;margin-right : auto; display : none;">Convert Rights Strand(s)</button>
+					<button id="crs_copyRightStrand" class="btn btn-xs btn-primary btn-add" style="margin : 0px; margin-left : auto;margin-right : auto;">Copy Rights Strand(s)</button>
+					<button id="crs_cancelCopyRightStrand" class="btn btn-xs btn-primary" style="margin : 0px; margin-left : auto;margin-right : auto;">Cancel</button>
+				</div>
+			</div>
+		
+			<div id="crs_submitPopupWindow" style="display :none;">
+		  		<div id="submitDiv"  class="submitClass" style="height : 50%; margin-top : 20px;">
+		  			<i class="icon-spinner icon-spin icon-large"></i>&nbsp; Processing, please wait...
+		  		</div>
+		  	</div>
+		  	
+		  	<div id="crs_copyRightStrandUnsuccessful" style="display :none;">
+		  		<div style="width : 95%; float : right; margin-left : auto; margin-right : auto;">
+					The system was unsuccessful in copying the right strands below, because of some overlapping dimensions. You can change one or more dimension and retry. 
+				</div>
+		  		<div style="width : 95%; float : right; margin-left : auto; margin-right : auto;">
+					<select id="crs_targetProductListError" class="form-control smallFontRights" multiple size="2" style="width:99%; height : 50px; margin : 0px; padding : 0px;"></select>
+				</div>
+				<div style="margin : 0px; margin-right : 5px;margin-top : 10px; width : 95%; margin-left : auto; margin-right : auto;">
+					<button id="crs_reCopyRightStrand" class="btn btn-xs btn-primary btn-add" style="margin : 0px; margin-left : auto;margin-right : auto;">Change Dimensions And Try Copy Again</button>
+					<button id="crs_cancelReCopyRightStrand" class="btn btn-xs btn-primary" style="margin : 0px; margin-left : auto;margin-right : auto;">Cancel</button>
+				</div>
+		  	</div>
+		  	
+</div>

@@ -1,0 +1,1394 @@
+<script src="js/rightStrandInitializeKendoElements.js"></script>
+<div id="rightsController" class="rightsController panel" ng-show="doneLoading" ng-controller="RightsController" style="display: none; width:99%; height: 100%; float: left; padding: 0px; border: 0px; margin-top: 0px; z-index: 0; position: relative;">
+	
+	<div id="ProductDetailsSection" class="rowStyle">
+	
+		<div id="sidebarInformation" class="panel sidebarStyle" style="overflow-x: hidden; overflow-y: auto;">
+			<!--Sidebar content-->
+			<!-- <div class="divNoPaddingOrMargin maximumWidth">
+				<span class="label"
+					style="background-color: #f0f0f0; color: #426d93; font-size: 14px; margin-left: 10px; margin-top: 5px; margin-bottom: 10px; font-weight: 500; display: inline-block;">Version
+					Selector</span>
+			</div>
+			-->
+			<a ng-show="productVersionTree.children[0].children != null && productVersionTree.children[0].children.length > 0 && !allExpanded" href="" ng-click="xpandAllVersions()" style="display: none; float: right; padding-right: 6px;">Expand All</a>
+			<a ng-show="productVersionTree.children[0].children != null && productVersionTree.children[0].children.length > 0 && allExpanded" href="" ng-click="collapseAllVersions()" style="display: none; float: right; padding-right: 6px;">Collapse All</a>
+			<BR/>			
+			<div class="divNoPaddingOrMargin maximumWidth">
+				<ul style="float: left;  list-style-type: none;"
+					class="divNoPaddingOrMargin maximumWidth">
+					<li>
+						<i class="icon-arrow-right versionArrow" ng-show="defaultFoxVersionId == foxVersionId" style="padding-top: 3px; padding-left: 2%; padding-right: 2%; float: left;  display: none;"></i>
+						<i class="versionArrow" ng-show="defaultFoxVersionId != foxVersionId" style="padding-top: 5px; padding-left: 2%; padding-right: 5%; float: left; display: none;">&nbsp;</i>
+						<img style="float: left;" id="rightsIndicator_{{defaultFoxVersionId}}" title="{{getIndicatorTitle(rightsIconType)}}" ng-src="{{getIndicator(rightsIconType)}}"><span
+						style="float: left; margin-left: 5px; width: 77%;"><a
+							ng-click="doRightSearchLocal(defaultFoxVersionId, defaultFoxId,undefined,isFoxipediaSearch);"
+							class="urm" title="{{truncateString(movieTitle)}}">{{truncateString(movieTitle)}}</a></span>						
+						<ul class="divNoPaddingOrMargin maximumWidth"
+							style="float: left; list-style-type: none; margin-left: 5%;">												
+							<li bindonce ng-repeat="version in productVersionTree.children" style="float: left;" class="leftNavProductVersions">
+								<div ng-if="version.data.foxVersionId != defaultFoxVersionId">
+								<i class="icon-arrow-right versionArrow" ng-show="version.data.foxVersionId == foxVersionId" style="padding-top: 5px; float: left; display: none;">&nbsp;</i>
+								<i class="versionArrow" ng-show="version.data.foxVersionId != foxVersionId" style="float: left; display: none;">&nbsp;&nbsp;&nbsp;&nbsp;</i>								
+								<img style="float: left;" id="rightsIndicator_{{version.data.foxVersionId}}" title="{{getIndicatorTitle(version.data.rightsIconType)}}" ng-src="{{getIndicator(version.data.rightsIconType)}}">
+								<span ng-class="{'divNoPaddingOrMargin sidebarMenuColor':(version.data.foxVersionId == foxVersionId || checkHighlightedElement($index)), 'divNoPaddingOrMargin':(version.data.foxVersionId != foxVersionId || !checkHighlightedElement($index))}">
+									<a ng-click="toggleProductVersion(version)"
+									ng-show="version.children.length > 0" style="font-size: 16px; padding-right: 2%;">
+										<i ng-show="!version.data.showFactor" class="icon-expand-alt" style="float: left; display: none; padding-left: 3%; padding-right: 1%;"></i>
+										<i ng-show="version.data.showFactor" class="icon-collapse-alt" style="float: left; display: norightsControllerne; padding-left: 3%; padding-right: 1%;"></i>
+								</a> <a id="urm1_{{version.data.foxVersionId}}"
+									ng-click="doRightSearchLocal(version.data.foxVersionId, version.data.foxId,undefined,isFoxipediaSearch);"
+									class="urm1" title="{{version.data.isDefaultVersion ? version.data.title : version.data.versionTitle}}">{{version.data.isDefaultVersion ? version.data.title : version.data.versionTitle}}<br/>
+									<span class="urmReleaseDate">{{version.data.product.releaseDate | date:'MM/dd/yyyy'}}</span></a>
+							</span>
+								<ul class="divNoPaddingOrMargin maximumWidth"
+									style="list-style-type: none; margin-left: 15%;display: none;"
+									ng-show="version.data.showFactor && (version.children.length > 0)">
+									<li bindonce ng-repeat="version2 in version.children" style="display: none;"
+										ng-show="!version2.data.isDefaultVersion">																													
+										<span
+										ng-class="{'divNoPaddingOrMargin sidebarMenuColor':(version2.data.foxVersionId == foxVersionId || checkHighlightedElement(version2.data.foxVersionId)), 'divNoPaddingOrMargin':(version2.data.foxVersionId != foxVersionId || !checkHighlightedElement(version2.data.foxVersionId))}">																													
+											<a id="urm1_{{version2.data.foxVersionId}}"
+											title="{{version2.data.versionTitle}}"
+											ng-click="doRightSearchLocal(version2.data.foxVersionId, version2.data.foxId,undefined,isFoxipediaSearch);"
+											class="urm1">
+											<i class="icon-arrow-right versionArrow"  ng-show="version2.data.foxVersionId == foxVersionId" style="padding-top: 5px; display: none;"></i>											
+											<img id="rightsIndicator_{{version2.data.foxVersionId}}" title="{{getIndicatorTitle(version2.data.rightsIconType)}}" ng-src="{{getIndicator(version2.data.rightsIconType)}}" /> <span class="icon-caret-right"></span>
+												{{version2.data.versionTitle}}<BR/>
+												<span class="urmReleaseDateEpisodes">{{version2.data.product.releaseDate | date:'MM/dd/yyyy'}}</span></a>
+										 </span></li>
+								</ul>
+								</div>
+								<div ng-if="version.data.foxVersionId == defaultFoxVersionId">
+									<div bindonce ng-repeat="version2 in version.children" ng-show="!version2.data.isDefaultVersion">																				
+										<i class="icon-arrow-right versionArrow" ng-show="version2.data.foxVersionId == foxVersionId" style="padding-top: 5px; float: left; display: none;">&nbsp;</i>
+										<i class="versionArrow" ng-show="version2.data.foxVersionId != foxVersionId" style="float: left; display: none;">&nbsp;&nbsp;&nbsp;&nbsp;</i>																			
+										<span ng-class="{'divNoPaddingOrMargin sidebarMenuColor':(version2.data.foxVersionId == foxVersionId || checkHighlightedElement(version2.data.foxVersionId)), 'divNoPaddingOrMargin':(version2.data.foxVersionId != foxVersionId || !checkHighlightedElement(version2.data.foxVersionId))}">																													
+													<a id="urm1_{{version2.data.foxVersionId}}" title="{{version2.data.versionTitle}}"
+													ng-click="doRightSearchLocal(version2.data.foxVersionId, version2.data.foxId,undefined,isFoxipediaSearch);"
+													class="urm1" style="width: 75%;">
+													<img style="float: left;" id="rightsIndicator_{{version2.data.foxVersionId}}" title="{{getIndicatorTitle(version2.data.rightsIconType)}}" ng-src="{{getIndicator(version2.data.rightsIconType)}}" /> <span class="icon-caret-right" style="padding-left: 2%;"></span>
+														{{version2.data.versionTitle}}<BR/>
+														<span class="urmReleaseDate">{{version2.data.product.releaseDate | date:'MM/dd/yyyy'}}</span></a>
+												</span>
+									</div>
+								</div>
+								</li>
+						</ul></li>
+				</ul>
+
+			</div>
+
+
+		</div>
+		<div id="productInformation"
+			class="panel productStyle divNoPaddingOrMargin maximumWidth" style="border: none;">
+			<div class="panel panel-default reducedSpacing versionTitleBar">
+				<div ng-click="toggleProductPanelMaximize();" class="panel reducedSpacing versionTitleBarItem" ng-show="!productPanelMaximized" style="cursor: pointer; color: #FFF; float: left; width: 2%;">
+					<span class="divColorDisplayTitle icon-chevron-left"></span>
+				</div>
+				<div ng-click="toggleProductPanelMaximize();" class="panel reducedSpacing versionTitleBarItem" ng-show="productPanelMaximized" style="cursor: pointer; color: #FFF; float: left; width: 2%;">
+					<span class="divColorDisplayTitle icon-chevron-right"></span>
+				</div>
+				<div class="panel reducedSpacing versionTitleBarItem" style="width: 2%;">
+ 					<i ng-if="currentProductArray.statusCode=='SEMI'" class="icon-unlock icon-large"></i>
+ 					<i ng-if="currentProductArray.statusCode=='CNFDL'" class="icon-lock icon-large"></i>									
+				</div>
+				<div class="panel reducedSpacing versionTitleBarItem"
+					style="width: 20%;">
+					<span title="{{currentProductArray.realProductTitle}}"
+						class="divColorDisplayTitle"><font
+						class="ellipses" id="sse_productTitle">Title:<BR/><b>{{currentProductArray.realProductTitle}}</b>&nbsp;</font></span>
+				</div>
+				<div class="panel reducedSpacing versionTitleBarItem"
+					style="width: 9%;">
+					<span class="divColorDisplayTitle"><font
+						class="ellipses" id="sse_productCode">Financial Title ID (WPR ID):<BR/><b>{{currentProductArray.productCode}}</b>&nbsp;</font></span>
+				</div>
+				<div class="panel reducedSpacing versionTitleBarItem"
+					style="width: 9%;">
+					<span class="divColorDisplayTitle"><font
+						class="ellipses" id="sse_productTypeCode">Product Type:<BR/><b>{{currentProductArray.productTypeDesc}}</b>&nbsp;</font></span>
+				</div>
+				<div class="panel reducedSpacing versionTitleBarItem"
+					style="width: 12%;">
+					<span class="divColorDisplayTitle"><font
+						class="ellipses" id="sse_firstReleaseDate">US Release Date:<BR/><b>{{currentProductArray.firstReleaseDate}}</b>&nbsp;</font></span>
+				</div>
+				<div class="panel reducedSpacing versionTitleBarItem"
+					style="width: 12%;">
+					<span class="divColorDisplayTitle"><font
+						class="ellipses" id="sse_productionYear">Production Year:<BR/><b>{{currentProductArray.productionYear}}</b>&nbsp;</font></span>
+				</div>
+				<div class="panel reducedSpacing versionTitleBarItem"
+					style="width: 8%;">
+					<span class="divColorDisplayTitle"><font
+						class="ellipses" id="sse_currentFoxId">Fox ID:<BR/><b>{{currentProductArray.foxId}}</b>&nbsp;</font></span>
+				</div>
+				<div class="panel reducedSpacing versionTitleBarItem"
+					style="width: 10%;">
+					<span class="divColorDisplayTitle"><font
+						class="ellipses" id="sse_currentFoxVersionId">Fox Version ID:<BR/><b>{{currentProductArray.foxVersionId}}</b>&nbsp;</font></span>
+				</div>
+				<div class="panel reducedSpacing versionTitleBarItem"
+					style="width: 10%;">
+					<span class="divColorDisplayTitle"><font
+						class="ellipses" id="sse_currentFoxIdJDE">JDE Version ID:<BR/>{{currentProductArray.jdeId}}&nbsp;</font></span>
+				</div>								
+			</div>
+
+			<div id="product_header_div"
+				class="panel divNoPaddingOrMargin maximumWidth"
+				style="display: inline-block; margin: 0px; padding: 0px;">
+
+				<div
+					ng-class="{'navbar headerStyle divProductHeaderBackgroundOpen':productHeaderShow == true, 'navbar headerStyle divProductHeaderBackgroundClosed':productHeaderShow == false}">
+					<table class="divNoPaddingOrMargin"
+						style="margin-top: 0px; margin-left: 0px; width: 100%;">
+						<tr>
+							<td style="width: 2%;"><a href="" ng-click="doShowProductHeader()"
+								class="navbar-brand headerIconSize"> <i
+									ng-show="productHeaderShow"
+									class="icon-collapse-top iconCollapseAttributes"></i> <i
+									ng-show="!productHeaderShow"
+									class="icon-collapse iconCollapseAttributes"></i>
+							</a></td>
+							<td>
+								<p class="navbar-text  divNoPaddingOrMargin">
+									<a href="" ng-click="doShowProductHeader()"
+										class="navbar-brand"
+										style="font-size: 14px; color: #4e82ae; font-weight: bold;">Product
+										Information</a>
+								</p>
+								<div style="float: right; text-align: right; width: 50%; padding-top: 0.5%; color: rgb(0, 128, 0);">
+									<span style="display: none;"
+										ng-show="currentProductArray.savingProduct"><i
+										class="icon-spinner icon-spin icon-large"></i> Saving...</span> <span
+										style="display: none;"
+										ng-show="currentProductArray.finishedSavingProduct"><i
+										class="icon-ok"></i> Changes saved</span> <span
+										style="display: none;"
+										ng-show="currentProductArray.errorSavingProduct"><i
+										class="icon-warning-sign"></i> Problem saving changes</span>
+								</div>
+							</td>
+						</tr>
+					</table>
+				</div>
+				<div id="product_header_body"
+					class="divProductColor divNoPaddingOrMargin maximumWidth"
+					ng-show="productHeaderShow">
+					<div class="divNoPaddingOrMargin maximumWidth"
+						style="float: left; border: 0px; margin-top: 1%; margin-left: 1%; width: 98%;">
+						<ul class="nav nav-tabs">
+							<li ng-click="switchTabs('general');"
+								class="{{ currentTab=='general' ? 'active' : '' }}"><a
+								href="">General</a></li>
+							<li ng-click="switchTabs('clearanceMemo');" ng-show="security.canModifyClearanceMemos || (currentProductArray.legalConfirmationStatusId != 4 && currentProductArray.legalConfirmationStatusId != 3)" style="display: none;" id="ClearanceMemoTab" class="{{ currentTab=='clearanceMemo' ? 'active' : '' }}"><a
+								href=""><b style="color : #e2952c;">Clearance Memo</b></a></li>
+							<li ng-click="switchTabs('subrights');" ng-show="security.canReadSubrights"
+								class="{{ currentTab=='subrights' ? 'active' : '' }}"><a
+								href="">Subrights</a></li>							
+							<li ng-show="security.canReadSalesAndMarketing" style="display: none; " ng-click="switchTabs('sales');"
+								class="{{ currentTab=='sales' ? 'active' : '' }}"><a
+								href="">Sales &amp; Marketing</a></li>
+							<li ng-click="switchTabs('copyright');"
+								class="{{ currentTab=='copyright' ? 'active' : '' }}"><a
+								href="">Copyright Notice</a></li>
+							<li ng-click="switchTabs('contacts');"
+								class="{{ currentTab=='contacts' ? 'active' : '' }}"><a
+								href="">Contacts</a></li>
+						</ul>
+					</div>
+					
+					<!--******** GENERAL TAB (start) ********-->
+					<div class="panel productLeftDivStyle panelTab"
+						ng-show="currentTab=='general'" style="display: none;">						
+						<div id="version_info">
+						
+						    <!--  FOXIPEDIA DATA (start) -->   
+							<table id="FoxipediaData" class="maximumWidth">
+								<tr  class="maximumWidth">
+									<td style="padding-bottom: 1px; padding-right:10px;" class="tdFontStyle tdFontStyleColor versionInfoTitle" align="right">Title:</td>
+									<td style="padding-bottom: 1px;" class="tdFontStyleOther versionInfoValue titleDisplay ng-binding">{{currentProductArray.productTitle}}</td>
+									<td style="padding-bottom: 1px; padding-right:10px;" class="tdFontStyle tdFontStyleColor versionInfoTitle" align="right">Product Type:</td>
+									<td style="padding-bottom: 1px;" class="tdFontStyleOther versionInfoValue">{{currentProductArray.productTypeDesc}} 
+										<span ng-show="(currentProductArray.productTypeCode=='EPSD' || currentProductArray.productTypeCode=='SEASN') && currentProductArray.episodeCount > 0">({{currentProductArray.episodeCount}} episodes in season)</span>
+										<span ng-show="(currentProductArray.productTypeCode=='SRIES' || currentProductArray.productTypeCode=='SEASN') && currentProductArray.seasonCount > 0">({{currentProductArray.seasonCount}} seasons in series)</span>
+									</td>
+									<td style="padding-bottom: 1px; padding-right:10px;" class="tdFontStyle tdFontStyleColor versionInfoTitle" align="right">Production Year:</td>
+									<td style="padding-bottom: 1px;" class="tdFontStyleOther versionInfoValue">{{currentProductArray.productionYear}}</td>
+								</tr>
+								<tr>
+									<td class="tdFontStyle tdFontStyleColor versionInfoTitle" style="padding-right:10px" align="right">Version:</td>
+									<td class="tdFontStyleOther versionInfoValue">{{currentProductArray.productVersionTitle}}</td>
+									<td style="padding-bottom: 1px; padding-right:10px;" class="tdFontStyle tdFontStyleColor versionInfoTitle" align="right" width="16%">Division:</td>
+									<td style="padding-bottom: 1px;" class="tdFontStyleOther versionInfoValue">{{currentProductArray.financialDivisionDesc}}</td>									
+									<td class="tdFontStyle tdFontStyleColor versionInfoTitle" style="padding-right:10px;" align="right">US Release Date:</td>
+									<td class="tdFontStyleOther versionInfoValue">{{currentProductArray.firstReleaseDate| date:'MM/dd/yyyy'}}</td>																																												
+								</tr>									
+								<tr>
+									<td class="tdFontStyle tdFontStyleColor versionInfoTitle" style="padding-right:10px;" align="right">Financial Title ID (WPR ID):</td>
+									<td class="tdFontStyleOther versionInfoValue" >{{currentProductArray.productCode}}</td>
+									<td style="padding-bottom: 1px; padding-right:10px;" class="tdFontStyle tdFontStyleColor versionInfoTitle" align="right">Lifecycle Status:</td>
+									<td style="padding-bottom: 1px;" class="tdFontStyleOther versionInfoValue" ng-if="currentProductArray.lifecycleStatusDescription != null">{{currentProductArray.lifecycleStatusDescription}}</td>
+									<td style="padding-bottom: 1px;" class="tdFontStyleOther versionInfoValue" ng-if="currentProductArray.lifecycleStatusDescription == null"></td>
+                                    <td class="tdFontStyle tdFontStyleColor versionInfoTitle" style="padding-right:10px;" align="right">Run Time (min):</td>
+									<td class="tdFontStyleOther versionInfoValue">{{currentProductArray.runtime}}</td>                                    																																												
+								</tr>
+								<tr>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td id="SourcedFrom" style="padding-bottom: 1px;font-size : 10px;" align="right">
+                                      <i>Sourced from Foxipedia</i>
+                                      <br><a href="http://foxipedia/#/Products" target="_blank" class="linkStyle"><u>Additional Foxipedia Details</u></a>
+                                  	</td>																	
+								</tr>
+									
+							</table>
+							<!--  FOXIPEDIA DATA (end) -->
+							
+							<!--  SCRIPTED (start) -->
+							<div style="float: left; width: 100%;">
+								<div style="float: left; width: 100%; display: none;">
+									<label class="checkbox-inline"> <input type="checkbox"
+										id="scripted" name="scripted" ng-change="changeScripted();"
+										ng-model="currentProductArray.scriptedFlag" value="option1"
+										ng-checked="currentProductArray.scriptedFlag"> <font
+										class="tdFontStyleOther">Scripted</font>
+									</label>
+								</div>
+
+								<hr size=27></hr>
+
+						<!--  ERMData (begin) -->
+							<!--  ERMData-PLIC (begin) -->
+							<div id="ERMData-PLIC">
+							  
+							  <div id="ERMData: Main Section"  ng-model="currentProductArray.ermProductRestrictionObject">
+							        <div style ="float : left; padding-left:3%">
+							        	
+							 			<label class="tdFontStyle tdFontStyleColor versionInfoTitle" ng-if="currentProductArray.ermProductRestrictionObject.length > 0">The following Product Level Informational Codes exist:</label>
+									    <label class="tdFontStyle tdFontStyleColor versionInfoTitle" ng-if="currentProductArray.ermProductRestrictionObject.length === 0"> No product Level Informational Codes exist. </label>
+										<table id="productLevelInfoCodes">															
+										   			<tr bindonce ng-repeat="restriction in currentProductArray.ermProductRestrictionObject track by $index">
+														<td><img style="float: left;" id="productInfoCodeIndicator" ng-src="{{getIndicator(restriction.iconType)}}">
+														</td>
+														<td><label class="tdFontStyleOther versionInfoValue" >{{restriction.restriction.description}}</label>
+														</td>					  		
+													</tr>
+										</table>
+									</div> 
+									<div id="ERMData: legal section" style="margin-left:49%" >
+								 
+										<table id="legalData">
+											<tr>
+												<td></td>
+												<td class="trPaddingRight tdFontStyle tdFontStyleColor versionInfoTitle" align="right">Legal Status:</td>								 
+								    			<td class="tdFontStyleOther versionInfoValue">{{legalConfirmationDescMap[currentProductArray.legalConfirmationStatusId]}}</td>
+								    		</tr>
+								    		<tr>
+								    	    	<td></td>
+												<td class="trPaddingRight tdFontStyle tdFontStyleColor" align="right">Future Media now known or hereafter devised:</td>
+												<td class="tdFontStyle"
+													style="width: 45%">
+													<span ng-show="security.canUpdateFutureMedia">
+														<label class="radio-inline"> <input type="radio"name="futureMedia" value="1" ng-model="currentProductArray.futureMediaInd"  ng-change="changeFutureMedia()"> Yes</label> 
+														<label class="radio-inline"> <input type="radio" name="futureMedia" value="0" ng-model="currentProductArray.futureMediaInd" ng-change="changeFutureMedia()"> No</label> 
+														<label class="radio-inline"> <input type="radio"name="futureMedia" value="-1" ng-model="currentProductArray.futureMediaInd" ng-change="changeFutureMedia()"> Undetermined</label>
+													</span>
+													<span ng-if="!security.canUpdateFutureMedia" ng-switch on="currentProductArray.futureMediaInd">
+														<label  ng-switch-when="1" style="margin-bottom:0">Yes</label>
+														<label  ng-switch-when="0" style="margin-bottom:0">No</label>
+														<label  ng-switch-when="-1" style="margin-bottom:0">Undetermined</label>										
+													</span>
+												</td>
+											</tr>
+											<tr>
+												<td></td>
+												<td class="trPaddingRight tdFontStyle tdFontStyleColor" align="right">Central
+													File Number(s):<br>
+													</td>
+												<td class="tdFontStyle" style="width : 50%">
+													<div style="width : 66%; float : left;">
+													<input
+														class="productFileNumberInput form-control formElementStyle" type="text"
+														placeholder="Separate with commas"
+														id="productFileNumberInput"
+														style="width: 100%; float: left; display: inline-block;"
+														ng-model="currentProductArray.productFileNumberInput" ng-show="security.canAddOrDeleteCentralFileNumber">
+								    				<input disabled
+														class="form-control formElementStyle" type="text"
+														id="productFileNumberInput"
+														style="width: 100%; display: inline-block;"
+														ng-model="currentProductArray.productFileNumberInput" ng-show="!security.canAddOrDeleteCentralFileNumber">
+														</div>
+														<div style="width : 32%; float:right; height : 100%;">									
+															<button ng-show="security.canAddOrDeleteCentralFileNumber" class="btn btn-primary btn-sm btn-add"
+															id="productFileNumberButton"
+															ng-click="saveProductFileNumber()"
+															style="width: 89%; display: inline-block; vertical-align: middle; font-size : 11px; margin-left : 5px; margin-top : 8px;"><i class="icon-plus-sign"></i> Add</button>
+														</div>
+												</td>
+											</tr>
+											<tr>
+												<td></td>
+												<td class="trPaddingRight tdFontStyle tdFontStyleColor"></td>
+												<td class="tdFontStyle">
+													<div style="width : 66%; float : left;">
+														<select id="centralFileNumberSelector" multiple class="form-control smallFontRights" ng-model="currentProductArray.productFileNumber"
+											 				style="width : 100%; margin-top : 5px; margin-left : 5px; display: inline-block;" ng-show="security.canAddOrDeleteCentralFileNumber">
+											 				<option bindonce ng-repeat="c in currentProductArray.productFileNumbers" value="{{c.productFileNumberId}}" ng-bind-html-unsafe="c.fileNumber"></option>
+														</select>
+														<select disabled id="centralFileNumberSelector" multiple class="form-control smallFontRights" ng-model="currentProductArray.productFileNumber"
+											 				style="width : 100%; margin-top : 5px; margin-left : 5px; display: inline-block;" ng-show="!security.canAddOrDeleteCentralFileNumber">
+											 				<option bindonce ng-repeat="c in currentProductArray.productFileNumbers" value="{{c.productFileNumberId}}" ng-bind-html-unsafe="c.fileNumber"></option>
+														</select>
+													</div>
+													<div style="width : 32%; float:right; height : 100%;">
+														<button ng-show="security.canAddOrDeleteCentralFileNumber" class="btn btn-primary btn-sm btn-delete"
+															id="productFileNumberButtonDelete" ng-click="deleteProductFileNumber()"
+															style="width: 89%; display: inline-block; vertical-align: top;margin-top : 5px; font-size : 11px; margin-left : 5px;"><i class="icon-remove"></i> Delete</button>
+													</div>
+												</td>																						
+											</tr>
+										</table> 
+										<!-- ******* legalData table (end) *******-->
+									  </div>
+ 
+									  <!-- ******* legal section w/PLIC (end) *******-->
+								</div>
+								<!-- ******* ERMData Main Section (end) *******-->
+							</div>
+							<!--  ERMData-PLIC (end) -->
+							
+						<!--  ERMData (end) -->
+					</div>
+					<!-- ******* GENERAL TAB (end) *******-->
+					</div>
+					</div>
+					<div class="panel productLeftDivStyle panelTab"
+						ng-show="currentTab=='clearanceMemo'" style="display: none;">
+						<div class="memoInfoTab">
+							<div class="memoInfoTitle">Memo Info</div>
+							<br /> <br />
+							<div class="memoField">
+								<span class="memoFieldTitle">Creation Date:</span> <span
+									class="memoFieldValue" id="memoCreatedDate"></span>
+							</div>
+							<div class="memoField">
+								<span class="memoFieldTitle">Prepared By:</span> <span
+									class="memoFieldValue" id="memoCreatedBy"></span>
+							</div>
+							<div class="memoField">
+								<span class="memoFieldTitle">Last Revised:</span> <span
+									class="memoFieldValue" id="memoLastUpdatedDate"></span>
+							</div>
+							<div class="memoField">
+								<span class="memoFieldTitle">Revised By:</span> <span
+									class="memoFieldValue" id="memoLastUpdatedBy"></span>
+							</div>
+							<br /> <br />
+							<div class="confirmationStatus">
+								<span class="memoFieldTitle">Legal Status:</span><br />
+								<select ng-change="changeConfirmationStatus(); displayConfirmationStatus();"
+									class="form-control formElementStyle"
+									ng-model="currentProductArray.legalConfirmationStatusId"
+									ng-disabled="!security.canModifyClearanceMemos" 
+									ng-options="legal.confirmationStatusId as legal.confirmationStatusDescription for legal in legalConfirmationStatus"
+									style="width: 76%;">										
+								</select>								
+							</div>
+							<br />
+							<div class="memoInfoTitle">Report Info</div>
+							<br />
+							<div class="memoField">
+								<span class="memoFieldTitle">Fox Produced:</span><br /> 
+								<select 
+									ng-show="security.canUpdateFoxProduced"
+									ng-change="changeFoxProducedInd();" ng-model="currentProductArray.foxProducedInd" class="form-control formElementStyle" style="width: 40%;">
+									<option ng-if="currentProductArray.foxProducedInd == 1 || currentProductArray.foxProducedInd == 0" value=""></option>									
+									<option value="1">YES</option>
+									<option value="0">NO</option>
+								</select>
+								<span ng-if="!security.canUpdateFoxProduced&&(!currentProductArray.foxProducedInd)"></span>
+								<span ng-if="!security.canUpdateFoxProduced&&currentProductArray.foxProducedInd===1">YES</span>
+								<span ng-if="!security.canUpdateFoxProduced&&(currentProductArray.foxProducedInd===0)">NO</span>																	
+							</div>
+							<br />
+							<div class="memoField">
+									<button
+										ng-show="security.canModifyClearanceMemos"
+										class="modifyContractualPartyButton btn-xs btn-primary btn-edit"
+										style="margin: 0px; margin-left: auto; margin-right: auto;">
+										<i class="icon-edit"></i> Setup Contractual Parties
+									</button>
+									<button
+										ng-show="!security.canModifyClearanceMemos"
+										class="modifyContractualPartyButton btn-xs btn-primary btn-edit"
+										style="margin: 0px; margin-left: auto; margin-right: auto;">
+										<i class="icon-edit"></i> View Contractual Parties
+									</button>
+								</div>
+						</div>
+						<div class="memoPreviewTab">
+							<div class="clearanceMemoToolbar">
+								<div class="toolBarButton" style="display: none;"
+									ng-show="security.canUploadOrCreateClearanceMemos && !currentProductArray.hasClearanceMemo">
+									<a href="#" title="upload" id="upload-clearance-memo-button"><span class="icon-upload-alt"> </span><span>Upload</span></a>
+								</div>
+								<div class="toolBarButton" style="display: none;"
+									ng-show="security.canUploadOrCreateClearanceMemos && !currentProductArray.hasClearanceMemo">
+									<a href="#" title="create" id="add-clearance-memo-button"><span class="icon-edit"> </span><span>Create</span></a>
+								</div>
+								<div class="toolBarButton" style="display: none;"
+									ng-show="currentProductArray.hasClearanceMemo">
+									<a href="#" title="edit/view" id="edit-clearance-memo-button"><span class="icon-edit"> </span><span ng-show="security.canModifyClearanceMemos">Edit</span><span ng-show="!security.canModifyClearanceMemos">View</span></a>
+								</div>
+								<div class="toolBarButton" style="display: none;"
+									ng-show="currentProductArray.hasClearanceMemo">
+									<a href="#" title="Print" id="print-clearance-memo-button"><span class="icon-print"> </span><span>Print</span></a>
+								</div>
+								<div class="toolBarButton" style="display: none;"
+									ng-show="currentProductArray.hasClearanceMemo">
+									<a href="#" title="PDF" id="download-clearance-memo-button"><span class="icon-book"> </span><span>PDF</span></a>
+								</div>
+								<div class="toolBarButton" style="display: none; width: 25%;"
+									ng-show="currentProductArray.hasClearanceMemo">
+									<a href="#" title="Preview" id="systemx-clearance-memo-button"><span class="icon-external-link"> </span><span>Clearance Memo Preview</span></a>
+								</div>
+								<div class="toolBarButton" style="display: none; float: right;"
+									ng-show="security.canDeleteClearanceMemo && currentProductArray.hasClearanceMemo">
+									<a href="#" title="delete clearance memo" id="delete-clearance-memo-button"><span class="icon-remove"> </span><span>Delete</span></a>
+								</div>
+								<input name="file" id="upload-cm" type="file" style="display: none !important;"/>
+							</div>							
+							<div class="clearanceMemoPreview">
+								  <span class="createNewClearanceText" style="display: none;"
+									ng-show="security.canUploadOrCreateClearanceMemos && !currentProductArray.hasClearanceMemo">Upload
+									or Create New Clearance Memo</span> <span class="createNewClearanceText"
+									style="display: none;"
+									ng-show="!security.canUploadOrCreateClearanceMemos && !currentProductArray.hasClearanceMemo">No
+									Clearance Memo</span>
+									<div ng-show="security.canViewClearanceReport" class="memoPreviewLinks clearanceViewSelector" style="width: 90%; display: none;"> 
+							  		<span style="padding: 1%; float:left;">Select View</span>
+										<span style="padding: 1%; float:left;"><input id="clearance-prevview-radio-m" onChange="switchClearanceView('M');" type="radio" name="clearance-view-radio-prev" value="M"> Clearance Memo</span>
+										<span style="padding: 1%; float:left;"><input id="clearance-prevview-radio-r" onChange="switchClearanceView('R');" type="radio" name="clearance-view-radio-prev" value="R"> Clearance Report</span>										
+										<div class="baselineVersionsClass" style="width: 40%; float: right;" >
+							  			<select id="baselineVersions" onChange="openBaselineVersion(this.value);" class="form-control input-sm formElementStyle baselineVersionsSelect"></select>
+										</div>	
+							  	</div>
+									<div ng-show="currentProductArray.hasClearanceMemo" class="memoPreviewContent" style="display: none;">
+										<div class="memoPreviewFoxLogo hideControls"><img src="/erm/img/20th_century_fox_logo.gif"  alt="20th Century Fox"/><BR/>
+									  	<span class="twentiethCenturyFoxTitleFont">TWENTIETH CENTURY FOX</span>
+									  	<span class="twentiethCenturyFoxSubTitleFont">A UNIT OF TWENTIETH CENTURY FOX FILM CORPORATION</span>
+									  </div>										
+							  		<div class="memoPreviewContentAllMedia">All Media Distribution Rights</div>							  		
+							  		<div class="memoPreviewContentTitle"><font class="cmPreviewRealProductTitle">{{cmRealProductTitle}}</font>  <font class="cmPreviewRealProductionYear">{{cmProductionYear}}</font></div>
+							  		<div class="memoPreviewContentPrivileged">PRIVILEGED AND CONFIDENTIAL<br/>SUBJECT TO ATTORNEY-CLIENT AND ATTORNEY WORK PRODUCT PRIVILEGES<br/>DO NOT DUPLICATE - DO NOT CIRCULATE</div>
+							  		<div class="memoPreviewContentMemorandum">This memorandum does not include obligations under United States guild agreements which may affect Fox's rights to exploit this property, such as the director's editing rights under the DGA Agreement. Please contact Labor Relations if you have any questions regarding such obligations.</div>
+							  		<div class="clearanceReportHeader hideControls">
+							  			<div class="header">IRD</div>
+							  			<div class="cmPreviewRealProductionYear subHeader">{{cmProductionYear}}</div>
+							  			<div class="header">Title</div>
+							  			<div class="cmPreviewRealProductTitle subHeader">{{cmRealProductTitle}}</div>
+							  			<div class="header">Made For</div>
+							  			<div class="cmOriginalMediaDesc subHeader">{{cmProductTypeDesc}}</div>
+							  			<div class="header">Type</div>
+							  			<div class="cmProductTypeDesc subHeader">{{cmProductTypeDesc}}</div>
+							  			<div class="header">Fox Produced</div>
+							  			<div class="cmFoxProduced subHeader"></div>
+							  			<div class="header">Prepared By</div>
+							  			<div class="cmPreparedBy subHeader"></div>
+							  			<div class="header">Last Reviewed</div>
+							  			<div class="cmLastReviewed subHeader"></div>
+							  			<div class="header">Fox Entity</div>
+							  			<div class="cmFoxEntity subHeader"></div>
+							  			<div class="header">Contractual Party</div>
+							  			<div class="cmContractualParty subHeader"></div>
+							  			<div class="header"></div>
+							  			<div class="subHeader"></div>
+							  			<div class="header">Contract Information</div>
+							  			<div class="subHeader"></div>
+							  		</div>  		  		
+							  		<div class="memoPreviewContentTOC hideControls"></div>
+							  		<div class="memoPreviewConfirmationStatus"></div>
+							  		<div class="memoPreviewContentData"></div>  		
+							  	</div>
+							</div>
+						</div>
+					</div>
+					<div class="panel productLeftDivStyle panelTab mediumFontRights subrightsTabFontColor subrights_SM_Main_tab"
+						ng-show="currentTab=='subrights'" style="display: none;">
+						<div class="panel subrights_SM_Menu_tab" style="width : 14%; float : left; box-shadow: 0px 0 0 rgba(0, 0, 0, 0.05);">
+							<span class="subrights_SM_Menu_Title">Subrights</span>
+							<ul class="nav nav-pills nav-stacked subrightsTab" style="margin-top:10px;">							 
+								<li	bindonce ng-repeat="gc in subrightGrantCodes" class="{{ grantCodeSubtab.grantCode==gc.grantCode ? 'active' : '' }} subrights_SM_Menu_Items" ng-show="security.canReadSubrights && security.canViewGrantCode(gc.grantCodeId)" >								
+									<a href="" ng-click="switchSubTabs(gc.grantCode);">{{formatMenuItem(gc.grantCodeDescription)}}</a>
+								</li>
+							</ul>
+							<span class="subrights_SM_Menu_Title" style="height: 200px;">&nbsp;</span>
+						</div>
+						
+						<div ng-show="security.canReadSubrights" class="panel subrights_SM_Product_Grant_Panel" style="width : 86%; float : right; box-shadow: 0px 0 0 rgba(0, 0, 0, 0.05);">
+							<div class="panel-body subrights_HeaderClass">{{formatMenuItem(productSubrightsCurrent.title)}}</div>
+							<div class="panel-body" style="margin-top : 15px; height : 30px; width : 100%; ">
+								<form class="form-inline" role="form">
+									<div class="form-group">
+										<label for="remakesSequelsStatusId">Status : </label>													
+										<select ng-disabled="!security.canCreateSubrights" class="form-control input-sm" style="width:auto;" ng-model="productSubrightsCurrent.grantStatus" ng-options="item as item.grantStatusDescription for item in subrightsStatusArray" ng-change="productSubrightsStatusChanged()">
+											<!--  <option value="">No Status (blank)</option> -->
+										</select>
+									</div>
+								</form>												
+							</div>
+							<div class="panel-body" style="margin-top: 30px; width : 100%;">
+								<span><i class="icon-comment icon-flip-horizontal" style="color : #e5c45e; font-size : 16px;"></i> <i class="icon-paper-clip" style="font-size:16px;"></i>  
+								Comments and Attachments:
+								<button id="addCommentsAndAttachments" class="btn-xs btn-primary btn-add" ng-show="security.canCreateSubrights&&security.canEditGrantCode(productSubrightsCurrent.grantCodeId)">
+								<i class="icon-comment-alt icon-flip-horizontal"></i> Add Comments</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="" ng-click="toggleSubrightsComments()" ng-show="productSubrightsCurrent.comments.length > 0"><span ng-show="!productSubrightsCurrent.showComments">Expand All</span><span ng-show="productSubrightsCurrent.showComments">Collapse All</span></a></span>
+							</div>
+							<div class="panel-body" style="margin-top: 15px; padding : 0px; border-top : 1px solid #cdcdcd; width : 100%;">							
+							</div>
+							<div class="panel-body" style="margin-top: 3px; padding : 3px; padding-left : 0px; width : 100%;">
+								<div bindonce ng-repeat="comment in productSubrightsCurrent.comments">
+									<div ng-show="(comment.comment.publicInd == 1 || comment.comment.publicInd == null) || ((security.isBusiness && comment.comment.business && security.canViewPrivateComments) || (!security.isBusiness && comment.comment.legal && security.canViewPrivateComments)) || (user.userId == comment.comment.createName)"  style="width : 99.5%; margin-left : 0px; margin-top : 5px; border : 1px solid #989898; padding : 5px;">
+										<div style="width : 100%;">
+											<div style="width : 49%; float : left;">
+											<span><b>{{comment.comment.updateName}} {{comment.comment.updateDate | date:'MM/dd/yyyy'}}</b></span>
+											</div>
+											<div style="width : 49%; float : right; text-align : right;">
+												<a href="" onClick="subrightObject.openAddCommentsAndAttachmentsPopupWindow({{comment.comment.id}},{{comment.id}})" ng-show="security.canUpdateSubrights">Edit</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="" onClick="subrightObject.openDeleteCommentsAndAttachmentsPopopWindow({{comment.comment.id}})" ng-show="security.canDeleteSubrights">Remove</a>
+											</div>
+										</div>									
+										<div style="width : 100%; clear: both;">
+											<span ng-show="comment.comment.publicInd == 0" class="icon-eye-close"> </span><a href="" ng-click="comment.commentExpanded = !comment.commentExpanded">Subject : <b>{{comment.comment.shortDescription}}</b></a>
+										</div>
+										<div ng-bind-html-unsafe="comment.comment.longDescription" style="width : 100%; margin-top : 5px;" class="commentLongDescription" ng-show="comment.commentExpanded">
+										</div>
+										<div style="width : 100%;">
+											<span>Attachment(s) ({{comment.attachments.length > 0 ? comment.attachments.length : 0}})</span>
+										</div>
+										<div style="width : 100%; margin-top : 5px;margin-bottom : 5px; border-bottom : 1px solid #cdcdcd;">
+										</div>
+										<div bindonce style="width : 100%;" ng-repeat="attach in comment.attachments">
+											<span id="documentId_{{attach.documentId}}"><a href="/erm/rest/Comments/getAttachment/{{attach.documentId}}/{{attach.attachmentName}}" target="_blank"><b>{{attach.attachmentName}}</b></a></span>
+										</div>
+									</div>
+								</div>							
+							</div>
+						</div>						
+					</div>				
+					<div class="panel productLeftDivStyle panelTab mediumFontRights subrightsTabFontColor subrights_SM_Main_tab" ng-show="currentTab=='sales'" style="display: none;">
+						<div class="panel" style="width : 16%; float : left; padding-right : 0px; margin-right : 0px; border : 0px;">
+							<span class="subrights_SM_Menu_Title">Sales & Marketing</span>
+							<ul class="nav nav-pills nav-stacked subrightsTab">																	
+								<li bindonce	ng-repeat="gc in salesAndMarketingTab" class="{{ salesAndMarketingSubtab.grantCode.id==gc.grantCode.id ? 'active' : '' }} subrights_SM_Menu_Items" ng-show="security.canReadSalesAndMarketing&&security.canViewGrantCode(gc.grantCode.id)">
+									<a href="" style="word-wrap: break-word;" ng-click="switchSalesMarketingSubTabs(gc.grantCode.code);">{{formatMenuItem(gc.grantCode.description)}} ({{getSMTabCommentCount(gc.grantCode.id)}})</a>
+								</li>
+							</ul>
+						</div>						
+						<div id="salesAndMarketingContentPanel" ng-show="security.canReadSalesAndMarketing&&security.canViewGrantCode(salesAndMarketingSubtab.grantCode.id)" class="panel subrights_SM_Product_Grant_Panel" style="width : 84%; float : right;">							
+							<div class="panel-body" style="font-size : 14px; width : 45%; float : left; margin-top : 3px;"><span class="subrights_HeaderClass">{{formatMenuItem(salesAndMarketingSubtab.grantCode.description)}}</span> : <span class="subrights_MenuItemHeaderClass">{{formatMenuItem(salesAndMarketingSubtab.grantCategorySelected.description)}}</span></div>
+							<div class="panel-body" style="width : 54%; float : right;">
+								<form class="form-inline" role="form">
+									<div class="form-group">
+										<label for="categoryViewFilter">Category view filter : </label>													
+										<select id="categoryViewFilter" class="form-control input-sm" style="width:auto;" ng-model="salesAndMarketingSubtab.grantCategorySelected" ng-options="item as item.description for item in salesAndMarketingSubtab.grantCategory" ng-change="setCurrentCommentsByGrantCode();">
+											<!-- <option value="">No Status (blank)</option> -->
+										</select>
+									</div>
+								</form>												
+							</div>
+							<div class="panel-body" style="margin-top: 50px; width : 100%;">
+								<span><i class="icon-comment icon-flip-horizontal" style="color : #e5c45e;font-size:16px;"></i> <i class="icon-paper-clip" style="font-size:16px;"></i>  Comments and Attachments: 
+								<button id="addSalesMarketingCommentsAndAttachments" class="btn-xs btn-primary btn-add" ng-show="security.canCreateSalesAndMarketing&&security.canEditGrantCode(salesAndMarketingSubtab.grantCode.id)">
+								<i class="icon-comment-alt icon-flip-horizontal"></i> Add Comments</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="" ng-click="toggleSalesMarketingComments()" ng-show="salesAndMarketingSubtab.sortedComments.length > 0"><span ng-show="!salesAndMarketingSubtab.showComments">Expand All</span><span ng-show="salesAndMarketingSubtab.showComments">Collapse All</span></a></span>
+							</div>
+							<!-- 
+							<div class="panel-body" style="margin-top: 15px; padding : 0px; border-top : 1px solid #cdcdcd; width : 100%;">							
+							</div>
+							-->
+							<div class="panel-body" style="margin-top: 3px; padding : 3px; padding-left : 0px; width : 100%;">
+								<div style="width : 100%; margin-bottom : 10px;" ng-repeat="com in salesAndMarketingSubtab.currentComments" >
+									<div ng-show="com.comments.length > 0" style="width : 99.5%; height : 20px; background-color : #a3a3a3; color : #ffffff; padding-left : 3px;">{{com.description}}</div>
+									<div bindonce ng-repeat="comment in com.comments">										  									
+										<div ng-show="(comment.comment.publicInd == 1 || comment.comment.publicInd == null) || ((security.isBusiness && comment.comment.business && security.canViewPrivateComments) || (!security.isBusiness && comment.comment.legal && security.canViewPrivateComments)) || (user.userId == comment.comment.createName)"  style="width : 99.5%; margin-left : 0px; margin-top : 5px; border : 1px solid #989898; padding : 5px;">																		
+											<div style="width : 100%;">
+												<div style="width : 49%; float : left;">
+												<span><b>{{comment.comment.updateName}} {{comment.comment.updateDate | date:'MM/dd/yyyy'}}</b></span>
+												</div>
+												<div style="width : 49%; float : right; text-align : right;"> 	
+													<a href="" onClick="subrightObject.openAddSMCommentsAndAttachmentsPopupWindow({{comment.comment.id}}, '{{com.id}}', {{comment.entityTypeId}},{{comment.id}})" ng-show="security.canUpdateSalesAndMarketing && security.canEditGrantCode(salesAndMarketingSubtab.grantCode.id)">Edit</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="" onClick="subrightObject.openDeleteCommentsAndAttachmentsPopopWindow({{comment.comment.id}})" ng-show="security.canDeleteSalesAndMarketing && security.canDeleteGrantCode(salesAndMarketingSubtab.grantCode.id)">Remove</a>
+												</div>
+											</div>
+											<div style="width : 100%; clear: both;">
+												<span ng-show="comment.comment.publicInd == 0" class="icon-eye-close"> </span><a href="" ng-click="comment.commentExpanded = !comment.commentExpanded">Subject : <b>{{comment.comment.shortDescription}}</b></a>
+											</div>
+											<div ng-bind-html-unsafe="comment.comment.longDescription" style="width : 100%; margin-top : 5px;" class="commentLongDescription" ng-show="comment.commentExpanded">											
+											</div>
+											<div style="width : 100%;">
+												<span>Attachment(s) ({{comment.attachments.length > 0 ? comment.attachments.length : 0}})</span>
+											</div>
+											<div style="width : 100%; margin-top : 5px;margin-bottom : 5px; border-bottom : 1px solid #cdcdcd;">
+											</div>
+											<div style="width : 100%;" ng-repeat="attach in comment.attachments">
+												<span id="documentId_{{attach.documentId}}"><a href="rest/Comments/getAttachment/{{attach.documentId}}/{{attach.attachmentName}}" target="_blank"><b>{{attach.attachmentName}}</b></a></span>
+											</div>
+										</div>
+									</div>
+								</div>							
+							</div>
+						</div>
+					</div>
+					<div class="panel productLeftDivStyle panelTab"
+						ng-show="currentTab=='copyright'" style="display: none;"> 
+						<div style="width : 100%;"><b><p ng-bind-html-unsafe="copyrightNoticeHTML"></p><!-- {{copyrightNotice.copyrightNotice}} --></b></div>
+						<div style="width : 100%; margin-top : 5px;font-size : 9px; text-align : right;">
+							<i><b>Sourced from CopDoc</b></i>
+						</div>
+					</div>
+					<div ng-controller="ContractualPartyController" id="contractualPartyController">
+						<div id="template_addEditContractualParty" style="display: none;">
+									<div class="contractualPartyPopUp">
+								  	<div class="contractualPartyTitle">Fox Entities, Contractual Parties, and Contract Dates
+								  	  <div id="memo-contractp-response">
+								  			<span id="memo-contractp-spinner" class="icon-spinner icon-spin icon-small"></span><span id="memo-contractp-check" class="icon-check icon-small"></span> <span id="memo-contractp-spinner-message"></span>
+											</div>
+								  	</div>
+								  	<div class="contractualPartyRows">
+									  	<div class="contractualPartyHeaderRow">
+									  		<div class="contractualPartyHeader cpFoxEntity">Fox Entity</div>
+									  		<div class="contractualPartyHeader cpCP">Contractual Party</div>
+									  		<div class="contractualPartyHeader cpType">Type</div>	  		
+									  		<div class="contractualPartyHeader cpDate">Date</div>
+									  		<div class="contractualPartyHeader cpComments">&nbsp;</div>	  		
+									  		<div class="contractualPartyHeader cpControls">
+									  			<button ng-show="security.canModifyClearanceMemos" id="contractp-add" ng-click="addContractualParty();" class="btn-sm btn-primary btn-add btn-partyheader" title="Add"><span class="icon-plus-sign-alt"> </span></button>
+									  		</div>
+									  	</div>
+									  	<div class="contractualPartyRow"  bindonce ng-repeat="contractualParty in savedContractualParties">
+									  		<div class="contractualPartyRow cpFoxEntity">
+													<select ng-show="security.canModifyContractualParties" ng-disabled="!security.canModifyContractualParties" class="form-control formElementStyle cpFoxEntitySelect"
+														id="cpFoxEntity_{{contractualParty.index}}" style="width: 90%;"
+														ng-model="contractualParty.foxEntityPartyId"						
+														ng-options="foxEntity.partyId as foxEntity.displayName for foxEntity in foxEntities | orderBy:'displayName'">																
+													</select>
+													<span class="contractualPartyStaticRow" ng-show="!security.canModifyContractualParties">{{foxEntitiesMap[contractualParty.foxEntityPartyId]}}</span>
+									  		</div>
+									  		<div class="contractualPartyRow cpCP">
+									  			<select ng-show="security.canModifyContractualParties" ng-disabled="!security.canModifyContractualParties" class="form-control formElementStyle cpCPSelect"	  			
+														id="cpCP_{{contractualParty.index}}" style="width: 90%;"
+														ng-model="contractualParty.contractualPartyId"
+														ng-options="party.partyId as party.displayName for party in contractualParties | orderBy:'displayName'">															
+													</select>
+													<span class="contractualPartyStaticRow" ng-show="!security.canModifyContractualParties">{{contractualPartiesMap[contractualParty.contractualPartyId]}}</span>
+									  		</div>
+									  		<div class="contractualPartyRow cpType">
+									  			<select ng-show="security.canModifyContractualParties" ng-disabled="!security.canModifyContractualParties" class="form-control formElementStyle cpTypeSelect"
+														id="cpType_{{contractualParty.index}}" style="width: 90%;"
+														ng-model="contractualParty.contractualPartyTypeId"																
+														ng-options="partyType.contractualPartyTypeId as partyType.contractualPartyTypeDesc for partyType in contractualPartyTypes">												
+													</select>
+													<span class="contractualPartyStaticRow" ng-show="!security.canModifyContractualParties">{{contractualPartyTypesMap[contractualParty.contractualPartyTypeId]}}</span>
+												</div>	  		
+									  		<div class="contractualPartyRow cpDate">
+									  			<input ng-show="security.canModifyContractualParties" ng-disabled="!security.canModifyContractualParties" ng-model="contractualParty.contractDate" class="formElementStyle cpCPDate"  onChange="checkValidDateFormat(this.value, 'cpDate_{{contractualParty.index}}')" title="Enter a valid date mm/dd/yyyy" id="cpDate_{{contractualParty.index}}" style="width:90%; height: 32px;" />
+									  			<span class="contractualPartyStaticRow" ng-show="!security.canModifyContractualParties">{{contractualParty.contractDate | date:'MM/dd/yyyy' }}</span>					
+									  		</div>
+									  		<div ng-show="security.canModifyContractualParties" class="contractualPartyRow cpComments">
+									  			<a href="" ng-if="contractualParty.contractInfoId != null" ng-click="openAddCommentsAndAttachments({{contractualParty.contractInfoId}}, {{contractualParty.comment == null ? 0 : contractualParty.comment.commentId}});">
+									  				<i class="icon-comment icon-flip-horizontal" ng-style="contractualParty.comment == null ? {'color' : '#878787', 'font-size' : '16px'} : {'color' : '#e5c45e', 'font-size' : '16px'}"></i><i class="icon-paper-clip" style="font-size:16px;"></i>
+									  			</a>
+									  		</div>
+									  		<div class="contractualPartyRow cpControls">
+									  			<button ng-show="security.canModifyContractualParties" id="contractp-add" ng-click="addContractualParty();" class="btn-sm btn-primary btn-add btn-partyrow" title="Add"><span class="icon-plus-sign-alt"> </span></button>	  			  		  	
+									  			<button ng-show="security.canModifyContractualParties" id="contractp-delete" ng-click="removeContractualParty({{contractualParty}});" style="margin-left: 5px;" class="btn-sm btn-primary btn-delete btn-partyrow" title="Remove"><span class="icon-remove"> </span></button>
+									  		</div>
+									  	</div>	
+								  	</div>
+								  	<div class="contractualPartyControls">
+								  		<button title="close" id="cancelContractualPartiesButton"
+												class="btn-xs btn-primary btn-copy">
+												Close
+											</button>
+								  		<button ng-show="security.canModifyClearanceMemos" id="saveContractualPartiesButton"
+												class="btn-xs btn-primary btn-add">
+												<i class="icon-save"></i> Save Contractual Parties
+											</button>			
+										</div>								
+								  </div>
+								</div>						
+						<div id="productContactsTab" class="panel productLeftDivStyle panelTab" ng-show="currentTab=='contacts'" style="display: none;">
+							<div id="productcontacts-response">
+	  						<span id="productcontacts-spinner" class="icon-spinner icon-spin icon-small"></span><span id="productcontacts-check" class="icon-check icon-small"></span> <span id="productcontacts-spinner-message"></span>
+							</div>						
+							<div class="assignContactControls">				  		
+					  		<button ng-show="security.canAssignContact" id="assignContactToProduct"
+									class="btn-xs btn-primary btn-add">
+									<i class="icon-user"></i> Assign Contact To Product
+								</button>			
+							</div>
+							<div class="foxContacts">				  		
+					  		<div class="foxContactsTitle">Fox Contacts</div>
+					  		<div class="foxContactsHeaderRow">
+						  		<div class="foxContactsName header">Name</div>
+						  		<div class="foxContactsType header">Type</div>
+						  		<div class="foxContactsRole header">Role</div>
+						  		<div class="foxContactsAccessType header">Access Type</div>
+						  		<div class="foxContactsMoreInfo header">More Info</div>
+						  		<div class="foxContactsDelete header">&nbsp;</div>
+					  		</div>
+					  		<div class="foxContactsDataRow" ng-show="security.canViewPrivateContacts || ermProductContact.accessTypeIdString != '3'" bindonce ng-repeat="ermProductContact in currentProductContacts">				  			
+						  		<div class="foxContactsName header">{{ermProductContact.contact.displayName}}&nbsp;</div> 
+						  		<div class="foxContactsType header"  bo-html="contractualPartyTypesMap[ermProductContact.contact.partyTypeCode]">						  			
+						  		</div>
+						  		<div class="foxContactsRole header">
+						  		  {{partyTypesMap[ermProductContact.contact.partyTypeCode]}}					
+						  		</div>
+						  		<div ng-show="security.canModifyContact" class="foxContactsRole header">
+						  		  <select name="selectContactTypeId" ng-change="switchContactType(ermProductContact.productContactId, ermProductContact.contactTypeIdString)"  ng-model="ermProductContact.contactTypeIdString" ng-options="k as v for (k,v) in contactTypesMap"></select>						
+						  		</div>
+						  		<div ng-show="security.canModifyContact" class="foxContactsAccessType header">					  			
+						  			<select name="selectAccessTypeId" ng-change="switchAccessType(ermProductContact.productContactId, ermProductContact.accessTypeIdString)" ng-model="ermProductContact.accessTypeIdString" ng-options="k as v for (k,v) in accessTypesMap"></select>						
+						  		</div>
+						  		<div ng-show="!security.canModifyContact" class="foxContactsRole header">
+						  		  {{contactTypesMap[ermProductContact.contactTypeIdString]}}						
+						  		</div>
+						  		<div ng-show="!security.canModifyContact" class="foxContactsAccessType header">
+						  			{{accessTypesMap[ermProductContact.accessTypeIdString]}}					  									
+						  		</div>
+						  		<div class="foxContactsMoreInfo header"><span style="cursor: pointer; color: blue;" ng-click="editContactLink({{ermProductContact.partyId}})">Details</span></div>
+						  		<div class="foxContactsDelete header deletedClass"><i ng-show="security.canAssignContact" ng-click="openDeleteProductContactPopopWindow(ermProductContact.productContactId, ermProductContact.contact.givenName, ermProductContact.contact.familyName)" class="icon-remove" style="cursor: pointer"></i></div>
+								</div>				  						  		
+							</div>	
+						</div>
+						<div id="selectContactToAdd" style="display: none;">
+							<div class="selectContactPopUp">
+						  	<div class="selectContactSearchRow">
+						  		<div class="availableContactsRow">
+						  			<div class="numberAvailableContacts">
+						  				<b>{{availableContacts.length}}</b> Contacts Available to Choose From
+						  			</div>  			  			
+										<input class="filterContacts ng-valid ng-dirty" type="text"  placeholder="Enter text to filter" ng-model="filterResults"></input>
+										<i class="icon-remove" style="color: rgb(66, 139, 202); cursor: pointer;" ng-click="clearFilter()"></i>
+										<span class="availableContactsAdvancedSearchButton"><a ng-click="advancedSearchLink()" style="cursor: pointer;"><i class="icon-search"></i> Advanced Search</a></span>
+										<span class="addContactButton">
+											<button ng-show="security.canModifyContact" id="addContactButton"
+												class="btn-xs btn-primary btn-add" style="padding:1px 4px;" ng-click="editContactLink(0)">
+												<i class="icon-plus"></i> Add Contact
+											</button>
+										</span>
+						  		</div>
+						  		<div class="selectContactsStatus">
+						  			<div id="selectcontacts-response">
+						  				<span id="selectcontacts-spinner" class="icon-spinner icon-spin icon-small"></span><span id="selectcontacts-check" class="icon-check icon-small"></span> <span id="selectcontacts-spinner-message"></span>
+										</div>
+						  		</div>
+						  	</div>
+						  	<div class="selectContactRows">
+							  	<div class="selectContactHeaderRow">
+							  		<div class="selectContactHeader schRadioInput">&nbsp;</div>
+							  		<div class="selectContactHeader schDisplayName"><a href="" ng-click="setSortColumn('displayName')">Name</a></div>	  		
+							  		<div class="selectContactHeader schTitle"><a href="" ng-click="setSortColumn('jobTitle')">Title</a></div>	  		
+							  		<div class="selectContactHeader schContactType"><a href="" ng-click="setSortColumn('partyTypeCode')">Contact Type</a></div>
+							  		<div class="selectContactHeader schType"><a href="" ng-click="setSortColumn('partyTypeCode')">Type</a></div>
+							  		<div class="selectContactHeader schOrganization"><a href="" ng-click="setSortColumn('organizationName')">Organization</a></div>
+							  		<!-- <div class="selectContactHeader schComment">Comment</div>  -->	  			  		
+							  	</div>
+							  	<div class="selectContactDataRows">
+								  	<div class="selectContactRow" bindonce ng-repeat="contact in availableContacts | filter: filterResults| orderBy:'displayName'">
+								  		<div class="selectContactRow schRadioInput">
+												<input type="radio" id="selectContact_{{contact.partyId}}" ng-click="selectContact({{contact.partyId}});" name="contactIdToAdd" value="{{contact.partyId}}">					
+								  		</div>
+								  		<div class="selectContactRow schDisplayName">
+												{{contact.displayName}}
+								  		</div>		  		
+								  		<div class="selectContactRow schTitle">
+								  			{{contact.jobTitle}}	  			
+								  		</div>  		
+								  		<div class="selectContactRow schContactType">	 	  		  
+								  		  {{contractualPartyTypesMap[contact.partyTypeCode]}}	   
+								  		</div>
+								  		<div class="selectContactRow schType">
+								  		  {{partyTypesMap[contact.partyTypeCode]}}	  
+								  		</div>
+								  		<div class="selectContactRow schOrganization">	 
+								  			{{contact.organizationName}}	  			 
+								  		</div>
+								  		<!-- <div class="selectContactRow schComment">	
+								  		  {{contact.comment.comment.longDescription}}
+								  		</div>  -->	  				  		
+								  	</div>
+								  </div>	
+						  	</div>
+						  	<div class="contactTabControls">
+						  		<button id="saveAssignContactToProductButton"
+										class="btn-xs btn-primary btn-add">
+										<i class="icon-user"></i> Add Contact to Product
+									</button>			
+						  		<button id="cancelAssignContactToProductButton"
+										class="btn-xs btn-primary btn-copy">
+										<i class="icon-remove"></i> Cancel / Close
+									</button>  		
+								</div>								
+						  </div>
+						</div>
+						
+						
+						
+						<div id="editContact" style="display: none;">
+							<div class="editContactStatus">
+								<div id="editcontact-response">
+										<span id="editcontact-spinner" class="icon-spinner icon-spin icon-small"></span><span id="editcontact-check" class="icon-check icon-small"></span> <span id="editcontact-spinner-message"></span>
+							  </div>
+							</div>
+							<div class="editContactPopUp">  	
+						  	<div class="editContactRows">  		
+						  		<div class="editContactRow">		  		
+							  		<div class="editContactRowHeader editType">Active</div>
+							  		<div class="editContactRowData editType"><input ng-disabled="!security.canModifyContact" type="checkbox" name="editContactActiveFlag" ng-model="editContact.active"></div>	  			  		
+							  	</div>
+						  		<div class="editContactRow">		  		
+							  		<div class="editContactRowHeader editType">Type</div>
+							  		<div class="editContactRowData editType"><select ng-disabled="!security.canModifyContact" class="editContactInput" ng-model="editContact.partyTypeCode" ng-options="k as v for (k,v) in partyTypesMap"></select></div>	  			  		
+							  	</div>
+							  	<div class="personalInformation">
+							  		<div class="editContactSectionHeader">
+							  			Name and Gender
+							  		</div>		
+							  		<div class="editContactRow">		  		
+								  		<div class="editContactRowHeader editPrefix">Prefix</div>
+								  		<div class="editContactRowData editPrefix"><input ng-disabled="!security.canModifyContact" class="editContactInput" type="text" ng-model="editContact.prefixName" maxLength="5" style="width : 10%;"></div>
+								  	</div>
+							  		<div class="editContactRow">		  		
+								  		<div class="editContactRowHeader editFirstName">First Name</div>
+								  		<div class="editContactRowData editFirstName"><input ng-disabled="!security.canModifyContact" class="editContactInput" type="text" ng-model="editContact.givenName" maxLength="99"></div>
+								  	</div>
+								  	<div class="editContactRow">		  		
+								  		<div class="editContactRowHeader editLastName">Last Name</div>
+								  		<div class="editContactRowData editLastName"><input ng-disabled="!security.canModifyContact" class="editContactInput" type="text" ng-model="editContact.familyName" maxLength="99"></div>
+								  	</div>	  		  		  		  		  		  
+								  	<div class="editContactRow">		  		
+								  		<div class="editContactRowHeader editGender">Gender</div>
+								  		<div class="editContactRowData editGender"><select ng-disabled="!security.canModifyContact" class="editContactInput" name="gender" ng-model="editContact.gender" ng-options="k as v for (k,v) in genderMap"></select></div>
+								  	</div>
+							  	</div>
+							  	<div class="addressAndPhone">  
+								 	  <div class="editContactSectionHeader">
+							  			Phone and Address
+							  		</div>		
+								  	<div class="editContactRow">		  		
+								  		<div class="editContactRowHeader editPhone">Phone #</div>
+								  		<div class="editContactRowData editPhone"><input ng-disabled="!security.canModifyContact" class="editContactInput" type="text" ng-model="editContact.phoneNumber" maxLength="99"></div>
+								  	</div>	  	
+								  	<div class="editContactRow">		  		
+								  		<div class="editContactRowHeader editCell">Cell #</div>
+								  		<div class="editContactRowData editCell"><input ng-disabled="!security.canModifyContact" class="editContactInput" type="text" ng-model="editContact.phoneNumber2" maxLength="99"></div>
+								  	</div>	  	
+								  	<div class="editContactRow">		  		
+								  		<div class="editContactRowHeader editFax">Fax #</div>
+								  		<div class="editContactRowData editFax"><input ng-disabled="!security.canModifyContact" class="editContactInput" type="text" ng-model="editContact.faxNumber" maxLength="99"></div>
+								  	</div>	  	
+								  	<div class="editContactRow">		  		
+								  		<div class="editContactRowHeader editEmail">Email</div>
+								  		<div class="editContactRowData editCell"><input ng-disabled="!security.canModifyContact" class="editContactInput" type="text" ng-model="editContact.emailAddress" maxLength="199"></div>
+								  	</div>	  	
+								  	<div class="editContactRow">		  		
+								  		<div class="editContactRowHeader editAddress">Address 1</div>
+								  		<div class="editContactRowData editAddress"><input ng-disabled="!security.canModifyContact" class="editContactInput" type="text" ng-model="editContact.address1" maxLength="199"></div>
+								  	</div>	  	
+								  	<div class="editContactRow">		  		
+								  		<div class="editContactRowHeader editAddress2">Address 2</div>
+								  		<div class="editContactRowData editAddress2"><input ng-disabled="!security.canModifyContact" class="editContactInput" type="text" ng-model="editContact.address2" maxLength="199"></div>
+								  	</div>	  	
+								  	<div class="editContactRow">		  		
+								  		<div class="editContactRowHeader editAddress2">Country</div>
+								  		<div class="editContactRowData editAddress2"><select ng-disabled="!security.canModifyContact" class="editContactInput" ng-model="editContact.country" ng-options="opt.label as opt.key for opt in countriesMap"></select></div>
+								  	</div>
+							  	</div>
+							  	<div class="legalInformation">
+							  		<div class="editContactSectionHeader">
+							  			Legal Information
+							  		</div>
+								  	<div class="editContactRow">		  		
+								  		<div class="editContactRowHeader editFoxContact">Fox Contact</div>
+								  		<div class="editContactRowData editFoxContact"><select ng-disabled="!security.canModifyContact" class="editContactInput" name="foxContact" ng-model="editContact.foxContactFlag" ng-options="k as v for (k,v) in foxContactMap"></select></div>
+								  	</div>	  	
+								  	<div class="editContactRow">
+								  		<div class="editContactRowHeader editTitle">Title</div>
+								  		<div class="editContactRowData editTitle"><input ng-disabled="!security.canModifyContact" class="editContactInput" type="text" ng-model="editContact.jobTitle" maxLength="95"></div>
+								  	</div>	  	  		
+								  	<div class="editContactRow">
+								  		<div class="editContactRowHeader editOrganization">Org</div>
+								  		<div class="editContactRowData editOrganization"><input ng-disabled="!security.canModifyContact" class="editContactInput" type="text" ng-model="editContact.organizationName" maxLength="199"></div>
+								  	</div>	  
+								  	<div class="editContactRow">		  		
+								  		<div class="editContactRowHeader editOrgType">Org Type</div>
+								  		<div class="editContactRowData editType"><select ng-disabled="!security.canModifyContact" class="editContactInput" name="organizationTypeCode" ng-model="editContact.organizationTypeCode" ng-options="k as v for (k,v) in organizationTypesMap"></select></div>
+								  	</div>	  			  		  
+								  	<div class="editContactRow">
+								  		<div class="editContactRowHeader editDepartment">Department</div>
+								  		<div class="editContactRowData editDepartment"><input ng-disabled="!security.canModifyContact" class="editContactInput" type="text" ng-model="editContact.department" maxLength="99"></div>
+								  	</div>
+								  </div>	  			  
+							  	<div class="editContactRowTextArea">		  		
+							  		<div class="editContactSectionHeader">
+							  			Comment
+							  		</div>	
+							  		<div class="editContactRowData editComment"><textarea id="editContactLongDescription" ng-disabled="!security.canModifyContact" class="editContactInput" data-bind="value: editContactLongDescription"></textarea></div>
+							  	</div>
+						  	</div>
+						  	<div class="contactTabControls">
+						  		<button ng-show="security.canModifyContact" id="saveEditContactButton" ng-click="saveContact(editContact.partyId)"
+										class="btn-xs btn-primary btn-add">
+										<i class="icon-save"></i> Save Contact
+									</button>			
+						  		<button id="cancelEditContactButton"
+										class="btn-xs btn-primary btn-copy">
+										<i class="icon-remove"></i> Cancel / Close
+									</button>  		
+								</div>								
+						  </div>
+						</div>
+						
+						<div id="searchContacts" style="display: none;">
+							<div class="editContactPopUp"> 
+								<div class="editContactRow">		  		
+							  	<div class="editContactRowHeader editType" style="width: 100%;"><a href="" ng-click="clearAdvancedSearch()"><i class="icon-remove"></i> Clear Search</a></div>	  		  			  		
+							  </div> 	
+						  	<div class="editContactRows">  		
+						  		<div class="editContactRow">		  		
+							  		<div class="editContactRowHeader editType">Active</div>
+							  		<div class="editContactRowData editType"><input type="checkbox" name="searchContactsActiveFlag" ng-model="advancedSearch.active"></div>	  			  		
+							  	</div>
+						  		<div class="editContactRow">		  		
+							  		<div class="editContactRowHeader editType">Type</div>
+							  		<div class="editContactRowData editType"><select class="editContactInput" ng-model="advancedSearch.partyTypeCode" ng-options="k as v for (k,v) in partyTypesMap"></select></div>	  			  		
+							  	</div>
+							  	<div class="personalInformation">
+							  		<div class="editContactSectionHeader">
+							  			Search By Name
+							  		</div>		
+							  		<div class="editContactRow">		  		
+								  		<div class="editContactRowHeader editFirstName">First Name</div>
+								  		<div class="editContactRowData editFirstName"><input class="editContactInput" type="text" ng-model="advancedSearch.givenName"></div>
+								  	</div>
+								  	<div class="editContactRow">		  		
+								  		<div class="editContactRowHeader editLastName">Last Name</div>
+								  		<div class="editContactRowData editLastName"><input class="editContactInput" type="text" ng-model="advancedSearch.familyName"></div>
+								  	</div>		  	
+							  	</div>	  	
+							  	<div class="legalInformation">
+							  		<div class="editContactSectionHeader">
+							  			Search By Legal Information
+							  		</div>		  		  
+								  	<div class="editContactRow">
+								  		<div class="editContactRowHeader editTitle">Title</div>
+								  		<div class="editContactRowData editTitle"><input class="editContactInput" type="text" ng-model="advancedSearch.jobTitle"></div>
+								  	</div>	  	  		
+								  	<div class="editContactRow">
+								  		<div class="editContactRowHeader editOrganization">Org</div>
+								  		<div class="editContactRowData editOrganization"><input class="editContactInput" type="text" ng-model="advancedSearch.organizationName"></div>
+								  	</div>	  
+								  	<div class="editContactRow">		  		
+								  		<div class="editContactRowHeader editOrgType">Org Type</div>
+								  		<div class="editContactRowData editType"><select class="editContactInput" name="organizationTypeCode" ng-model="advancedSearch.organizationTypeCode" ng-options="k as v for (k,v) in organizationTypesMap"></select></div>
+								  	</div>	  			  		  
+								  	<div class="editContactRow">
+								  		<div class="editContactRowHeader editDepartment">Department</div>
+								  		<div class="editContactRowData editDepartment"><input class="editContactInput" type="text" ng-model="advancedSearch.department"></div>
+								  	</div>
+								  </div>
+						  	</div>
+						  	<div class="contactTabControls">
+						  		<button id="searchContacts" ng-click="searchContacts()"
+										class="btn-xs btn-primary btn-add">
+										<i class="icon-search"></i> Search
+									</button>			
+						  		<button id="cancelSearchContacts"
+										class="btn-xs btn-primary btn-copy">
+										<i class="icon-remove"></i> Cancel / Close
+									</button>  		
+								</div>								
+						  </div>
+						</div>
+					</div>
+				</div>
+			<!--   /div -->
+
+
+			<div id="right_strands_div" ng-show="true"
+				class="panel divNoPaddingOrMargin maximumWidth"
+				style="display: inline-block;">
+				<div
+					ng-class="{'navbar navbar-inner headerStyle divProductHeaderBackgroundOpen':rightStrandsShow == true, 'navbar navbar-inner headerStyle divProductHeaderBackgroundClosed':rightStrandsShow == false}">
+					<table class="divNoPaddingOrMargin"
+						style="margin-top: 0px; margin-left: 0px; width: 100%;">
+						<tr>
+							<td class="divNoPaddingOrMargin" style="width: 2%"><a href=""
+								ng-click="doShowRightStrands()"
+								class="navbar-brand headerIconSize"> <i
+									ng-show="rightStrandsShow"
+									class="icon-collapse-top iconCollapseAttributes"
+									style="display: none;"></i> <i ng-show="!rightStrandsShow"
+									class="icon-collapse iconCollapseAttributes"
+									style="display: none;"></i>
+							</a></td>
+							<td style="width: 90%;">
+								<p class="navbar-text  divNoPaddingOrMargin">
+									<a href="" ng-click="doShowRightStrands()" class="navbar-brand"
+										style="font-size: 14px; color: #4e82ae; font-weight: bold;">Informational Codes and Rights Strands</a>
+								</p>
+								<p style="padding-left: 1%;" class="navbar-text  divNoPaddingOrMargin">
+									<a href="" ng-click="doRefreshRightStrands()" class="navbar-brand"
+										style="font-size: 14px; color: #4e82ae; font-weight: bold;"><i class="icon-refresh"></i></a>
+								</p>
+								<!-- amv added palce to show status -->
+								<div style="float: right; text-align: right; width: 50%; padding-top: 0.5%; color: rgb(0, 128, 0);">
+									<span style="display: none;" ng-show="strandsSection.savingProduct"><i class="icon-spinner icon-spin icon-large"></i> Saving...</span> <span style="display: none;" ng-show="strandsSection.finishedSavingProduct"><i class="icon-ok"></i> Changes saved</span> <span style="display: none;" ng-show="strandsSection..errorSavingProduct"><i class="icon-warning-sign"></i> Problem saving changes</span>
+								</div>								
+								<!-- end -->
+							</td>
+						</tr>
+					</table>
+				</div>
+
+				<div id="right_strands_body"
+					class="divProductColor divNoPaddingOrMargin maximumWidth"
+					style="display: none;" ng-show="rightStrandsShow">
+					<!--  && rightStrands != null && rightStrands.length > 0 -->
+
+					<table class="divNoPaddingOrMargin"
+						style="margin-top: 0px; margin-left: 15px; width : 100%;">
+						<tr>
+							<td style="width : 1%;"><a href="" ng-click="doProductInfoCodes()"
+								class="navbar-brand headerIconSize"> <i
+									ng-show="productInfoCodesShow"
+									class="icon-collapse-alt iconCollapseAttributes"></i> <i
+									ng-show="!productInfoCodesShow"
+									class="icon-expand-alt iconCollapseAttributes"></i>
+							</a></td>
+							<td style="width : 30%;">
+								<p class="navbar-text  divNoPaddingOrMargin">
+									<a href="" ng-click="doProductInfoCodes()" class="navbar-brand"
+										style="font-size: 14px; color: #4e82ae; font-weight: bold;">
+										Informational Codes - Product Level</a>
+								</p>
+							</td>
+							<td style="width : 35%;">
+								<span style="background-color : #ccffcc; display : none; padding : 10px;" ng-show="showSyncSuccessMessage">Synchronization of Dates Completed Successfully!!!</span>
+							</td>							
+							<td style="width : 33%; text-align: right; padding-right: 3%;"><button class="btn btn-primary btn-xs" ng-show="security.canSyncReleaseDate && shouldShowSyncButton" ng-click="sync('strandsGrid')">Sync Release Date</button></td>
+						</tr>
+					</table>
+
+					<div id="product_info_codes_body" ng-show="productInfoCodesShow"
+						style="display: none;">
+						<div id="product-restrictions-buttons" style="margin-left: 2%;">
+							<div class="row">
+								<div id="add" class="rightStrandButtons"
+									style="margin: 5px; float: left; width: auto;">
+									<button ng-show="security.canCreateProductRestrictions"
+										id="addInfoCodesButton" class="btn-xs btn-primary btn-add"
+										style="margin: 0px; margin-left: auto; margin-right: auto;">
+										<i class="icon-plus-sign"></i> Add Product Info Codes
+									</button>
+								</div>
+								<div id="adopt" class="rightStrandButtons"
+									style="margin: 5px; float: left; width: auto;">
+									<button
+										ng-show="security.canAdoptBusinessProductRestrictions || security.canAdoptLegalProductRestrictions"
+										id="adopt-product-info-codes"
+										class="btn-xs btn-primary btn-adopt"
+										style="margin: 0px; margin-left: auto; margin-right: auto;">
+										<i class="icon-share"></i> Adopt Product Info Codes
+									</button>
+								</div>
+								<div id="delete" class="rightStrandButtons"
+									style="margin: 5px; float: left; width: auto;">
+									<button
+										ng-show="security.canDeleteBusinessProductRestrictions || security.canDeleteLegalProductRestrictions"
+										id="delete-product-info-codes"
+										class="btn-xs btn-primary btn-delete"
+										style="margin: 0px; margin-left: auto; margin-right: auto;">
+										<i class="icon-remove"></i> Delete Product Info Codes
+									</button>
+								</div>	
+									<div id="copy" class="rightStrandButtons"
+									style="margin: 5px; float: left; width: auto;">
+									<button
+										ng-show="false"
+										id="copy-product-info" class="btn-xs btn-primary btn-copy"
+										style="margin: 0px; margin-left: auto; margin-right: auto;">
+										<i class="icon-copy"></i> Copy Product Info Codes
+									</button>
+								</div>							
+							</div>
+						</div>
+						<div id="product-restrictions-grid-section"
+							style="width: 98%; margin-left: 1%;">
+							<div id="product-restrictions-grid-spinner">
+								<span class="icon-spinner icon-spin icon-large"></span> Loading
+								Product Info Codes.....
+							</div>
+							<!-- start grid stuff -->
+							<div id="restrictions-message"
+								class="alert alert-success alert-dismissable"
+								style="display: none;">
+								<span class="message"></span>
+								<button type="button"
+									id="restrictions-message-alert-close-button" class="close"
+									aria-hidden="true">&times;</button>
+							</div>
+							<div id="product-restrictions-grid"></div>
+						</div>
+						<!-- end grid stuff -->
+					</div>
+
+					<div class="rightStrandsGridHeader"
+						style="float: left; clear: both; width: 98%; margin-top: 1%; margin-left: 0.5%; font-size: 14px; font-weight: bold; font-weight: bold;">
+						Business and Legal Rights Strands</div>
+					<div id="right-strands-buttons" style="margin-left: 2%;">
+						<div class="row">
+							<div class="rightStrandButtons"
+								style="margin: 5px; float: left; width: auto;">
+								<button ng-show="security.canCreateStrands" id="addRightStrand"
+									class="btn-xs btn-primary btn-add">
+									<i class="icon-plus-sign"></i> Add Rights Strands
+								</button>
+							</div>
+							<div class="rightStrandButtons"
+								style="margin: 5px; float: left; width: auto;">
+								<button ng-show="security.canAdoptRightStrand"
+									id="adopt-right-strands" class="btn-xs btn-primary btn-adopt"
+									style="margin: 0px; margin-left: auto; margin-right: auto;">
+									<i class="icon-share"></i> Adopt Rights Strands / Info Codes
+								</button>
+							</div>
+							<div class="rightStrandButtons"
+								style="margin: 5px; float: left; width: auto;">
+								<button
+									ng-show="security.canUpdateBusinessStrands || security.canUpdateLegalStrands"
+									id="modifyRightStrandsButton"
+									class="btn-xs btn-primary btn-edit">
+									<i class="icon-edit"></i> Modify Rights Strands / Info Codes
+								</button>
+							</div>
+							<div class="rightStrandButtons"
+								style="margin: 5px; float: left; width: auto;">
+								<button
+									ng-show="security.canCopyBusinessStrands || security.canCopyLegalStrands"
+									id="copy-right-strands" class="btn-xs btn-primary btn-copy">
+									<i class="icon-copy"></i> Copy Rights Strands / Info Codes
+								</button>
+							</div>
+							<div class="rightStrandButtons"
+								style="margin: 5px; float: left; width: auto;">
+								<button
+									ng-show="security.canDeleteBusinessStrands || security.canDeleteLegalStrands"
+									id="delete-right-strands" class="btn-xs btn-primary btn-delete">
+									<i class="icon-remove"></i> Delete Rights Strands/Info Codes
+								</button>
+							</div>
+							<!-- amv business conf status -->
+							<div 
+								style="margin: 5px; float: right; width: auto; min-width: 29%; padding-right: 1%;" ng-show="security.canViewBusinessConfirmationStatus">
+								Rights Consumption Status:
+								<select style="margin-left: 2%; float: right; width: auto;" name="businessConfirmationStatus"
+										ng-disabled="!security.canUpdateBusinessConfirmationStatus" 
+										ng-change="doChangeBusinessConfirmationStatus();"  ng-model="currentProductArray.businessConfirmationStatusId" 
+										ng-options="s.confirmationStatusId as s.confirmationStatusDescription for s in businessConfirmationStatus" 
+										class="form-control ng-pristine ng-valid">
+										<option value="" class="">---Select status---</option>
+								</select>
+							</div>
+							
+							<!-- end business conf status -->
+							<div class="rightStrandButtons"
+								style="margin: 5px; float: left; width: 150px;">
+								<div style="width : 8%; float : left; margin-bottom : 10px;"><input id="rightStrandshowAllDates" type="checkbox" ng-click="showHideColumn('strandsGrid')"></div>
+								<div style="width : 87%; float : left; padding-left : 5px; margin-top : 3px; font-size : 12px; color: #4e82ae; font-weight: 800; font-family: arial, sans-serif;"> Show All Dates</div>								
+							</div>							
+						</div>						
+						<div id="indicatesPriorValue">* Indicates Prior Value</div>
+						<div ng-show="!showExpandStrandInformationalCodes" id="collapseAllStrandInfoCodes" style="display: none;">Collapse Strand Informational Codes</div>
+						<div ng-show="expandStrandInformationalCodesSpinner" id="expandingAllStrandInfoCodes"><span class="icon-spinner icon-spin icon-large"></span> Expanding Strand Informational Codes</div>						
+						<div ng-show="showExpandStrandInformationalCodes && !expandStrandInformationalCodesSpinner" id="expandAllStrandInfoCodes">Expand Strand Informational Codes</div>																		
+					</div>
+
+					<!-- begin strands section -->
+					<!-- 1 is private -->
+					<div ng-if="currentProductArray.businessConfirmationStatusId==1&&!security.canViewPrivateStrands">
+					This product is currently being updated and is not available at this time.  Please check back later.
+					</div>
+					<div id="strands-grid-spinner" style="margin: 1%;" ng-if="!(currentProductArray.businessConfirmationStatusId==1&&!security.canViewPrivateStrands)">
+						<span class="icon-spinner icon-spin icon-large"></span> Loading
+						Rights Strands.....
+					</div>					
+					<div id="strands-grid-section" ng-if="!(currentProductArray.businessConfirmationStatusId==1&&!security.canViewPrivateStrands)" style="width: 98%; margin-left: 1%;margin-bottom : 20px;" class="k-content">
+						<!-- grid stuff -->
+						<div id="strands-message"
+							class="alert alert-success alert-dismissable"
+							style="display: none;">
+							<span class="message"></span>
+							<button type="button" id="message-alert-close-button"
+								class="close" aria-hidden="true">&times;</button>
+						</div>
+						<div style="min-height: 20px;">
+							<a style="cursor:pointer;" id="toggle-filter" type="button">Show Filter</a>
+							<div id="standsFilter" class="collapse">
+								<form id="standsFilterForm">
+									<input type="radio" id="all-inclusion-exclusion-radio"
+										name="inclusion-exclusion-radio" value="A" checked="checked">All
+									<input type="radio" id="exclusions-radio"
+										name="inclusion-exclusion-radio" value="E">Exclusions
+									<input type="radio" id="inclusions-radio"
+										name="inclusion-exclusion-radio" value="I">Inclusions
+									<br/>
+									<input type="radio" id="all-business-legal-radio"
+										name="business-legal-radio" value="A" checked="checked">All
+									<input type="radio" id="business-radio"
+										name="business-legal-radio" value="B">Business <input
+										type="radio" id="legal-radio" name="business-legal-radio"
+										value="L">Legal <select id="territory-multi-select"
+										name="territory" style="width: 250px"
+										data-placeholder="Select territories..."></select> <select
+										id="media-multi-select" name="media" style="width: 250px"
+										data-placeholder="Select media..."></select> <select
+										id="language-multi-select" name="language"
+										style="width: 250px" data-placeholder="Select language..."></select>
+
+									<select id="strand-set-multi-select" name="restrictions"
+										style="width: 250px" data-placeholder="Select strand set..."></select>
+									<select id="restrictions-multi-select" name="restrictions"
+										style="width: 250px" data-placeholder="Select informational codes..."></select>
+									<!-- all or any
+									 AMV 12/3/2014
+									 -->
+									 <input type="radio" id="restrictions-any" name="restrictions-all-any" value="any" checked></input>Any									 
+									 <input type="radio" id="restrictions-all" name="restrictions-all-any" value="all"></input>All
+									<div>
+										Start Date:<input type="text" name="start-date" id="start-date-filter" size="7"/>
+										End Date:<input type="text" name="end-date" id="end-date-filter" size="7"/>
+									</div>
+									<button id="filter-grid-button" type="button">Filter</button>
+									<button id="filter-clear-button" type="button">Clear</button>
+									<button id="select-grid-button" type="button">Select</button>
+									<button id="select-right-restrictions-grid-button" type="button">Select Info Codes</button>
+									<button id="select-expand-right-restrictions-grid-button" type="button">Select And Expand Info Codes</button>
+								</form>
+							</div>
+							<div id="strandsGrid" class='smallFontRights'></div>
+						</div>
+						<!-- end grid section -->
+					</div>
+					<!-- end grid stuff -->
+
+				</div>
+			</div>
+
+		</div>
+	</div>
+</div>
+</div>
+	<script>
+		//NOTE: renderRightsEditTemplate is a global function
+		//$(document).ready(renderRightsEditTemplates);
+	</script>
+	
+	<div id="deletePopupWindow">
+		<div id="submitDiv" class="submitClass"
+			style="height: 50%; margin-top: 20px;">
+			<i class="icon-spinner icon-spin icon-large"></i>&nbsp; Deleting
+			checked strands/informational codes, please wait...
+		</div>
+	</div>
+
+	<div id="deleteConfirmationWindow">
+		<div class="submitClass"
+			style="height: auto; margin-top: 20px; float: left; margin-bottom: 10px; width: 100%;">
+			Are you sure you would like to permanently delete <span
+				id="deleteConfirmDetails"
+				style="float: left; margin-bottom: 10px; width: 100%;"></span>
+		</div>
+		<div id="strands-set-warning-div" class="warningClass">
+			<i class="icon-warning-sign"></i> Please note that you are about to
+			delete one or more strands that belong to a Strand Set. This may
+			result in a mismatch between the Strand Set Name and the group of
+			remaining strands as a whole.
+		</div>
+		<div class="submitClass"
+			style="clear: both; text-align: right; height: auto; padding-top: 10px;">
+			<button id="delete-right-strands-confirm"
+				class="btn-xs btn-primary btn-delete"
+				style="display: none; margin: 0px; margin-bottom: 2.3em; margin-left: auto; margin-right: auto;">Yes,
+				Delete Rights Strands and/or Informational Codes</button>
+			<button id="delete-product-info-restriction-confirm"
+				class="btn-xs btn-primary btn-delete"
+				style="display: none; margin-bottom: 2.3em; margin: 0px; margin-left: auto; margin-right: auto;">Yes,
+				Delete Product Info Code</button>
+			<button id="delete-clearance-memo-confirm"
+				class="btn-xs btn-primary btn-delete"
+				style="display: none; margin: 0px; margin-bottom: 2.3em; margin-left: auto; margin-right: auto;">Yes,
+				Delete Clearance Memo</button>
+		  <button id="delete-attachment-confirm"
+				class="btn-xs btn-primary btn-delete"
+				style="display: none; margin: 0px; margin-bottom: 2.3em; margin-left: auto; margin-right: auto;">Yes,
+				Delete Attachment</button>
+			<button id="delete-contractualparty-confirm"
+				class="btn-xs btn-primary btn-delete"
+				style="display: none; margin: 0px; margin-bottom: 2.3em; margin-left: auto; margin-right: auto;">Yes,
+				Delete Contractual Information</button>
+			<button id="cancel-right-strands-delete" class="btn-xs btn-primary"
+				style="margin: 0px; margin-bottom: 2.3em; margin-left: 20px; margin-right: auto;">Cancel</button>
+		</div>
+	</div>
+
+	<div id="doNotLicenseConfirmationWindow">
+		<div class="warningClass"
+			style="height: auto; margin-top: 20px; text-align: center; margin-bottom: 10px; width: 100%;">
+			<i class="icon-warning-sign"></i> Are you sure you would like to
+			change this product's "Do Not License" informational code?
+		</div>
+		<div class="submitClass"
+			style="clear: both; text-align: right; height: auto; padding-top: 10px;">
+			<button id="do-not-license-confirm"
+				class="btn-xs btn-primary btn-edit"
+				style="margin: 0px; margin-bottom: 2.3em; margin-left: auto; margin-right: auto;">Yes,
+				I would like to change the "Do Not License" informational code.</button>
+			<button id="cancel-do-not-license" class="btn-xs btn-primary"
+				style="margin: 0px; margin-bottom: 2.3em; margin-left: 20px; margin-right: auto;">Cancel</button>
+		</div>
+	</div>
+
+<!-- templates -->
+	<!-- 
+	<div id="sse_rightStrandPopupWindow"></div>
+
+	<div id="template_addEditClearanceMemo" class="k-content"></div>
+
+	<div id="test2_addEditInfoCodeWindow" class="k-content"></div>
+	
+	<div id="template_addCommentsAndAttachments" class="k-content" style="display : none;"></div>
+	
+	<div id="commentsAndAttachmentPopupWindow" style="display : none;"></div>
+	
+	<div id="crs_rightStrandCopyPopupWindow" style="display : none;"></div>
+	
+	<div id="cre_rightStrandCreatePopupWindow" style="display : none;"></div>
+	 -->
+<!-- end templates -->	
+	
+</div>
+</div>
+</div>
+<div class="ermSidePanelOuter" ng-show="security.canUseProductSidePanel" ng-click="toggleERMSidePanel();" style="display: none;">
+	   <i title="ERM Side Panel Operations" class="ermSidePanelChevron icon-chevron-left" style="margin-left: 20%;"></i>
+	   <img class="crossProductText" src="/erm/img/comments_rotated.png"/>									
+</div>
+	
+

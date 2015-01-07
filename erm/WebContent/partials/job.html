@@ -1,0 +1,19 @@
+<div ng-show="job != null  && checkingStatus">
+ 		<div id="progress"> 
+			<div class="progress" ng-class="{'progress-striped active':!job.completed && checkingStatus && !job.error}">
+	  		<div class="progress-bar" ng-class="{'progress-bar-danger':job.error, 'progress-bar-success':!job.error}"  role="progressbar" aria-valuenow="{{job.percentage}}" aria-valuemin="0" aria-valuemax="100" style="width: {{ !job.error ? job.percentage : 100}}%">
+	    		<span class="sr-only">{{job.name}} {{job.percentage}}% {{job.message}}</span>
+	    	</div>
+	  	</div>  
+	  </div>     
+	  <div ng-show="detailsShown && checkingStatus">				
+	  		<div class="jobActions" ng-show="job.actions.length == 0">
+						<i class="icon-spinner icon-spin icon-large"></i> Loading Job Details...
+				</div>
+				<div class="jobActions" ng-repeat="action in job.actions">
+					<div class="jobAction id">{{action.id}}</div>
+					<div class="jobAction name">{{action.name}}</div>
+					<div class="jobAction status">{{action.status}}<p class="jobActionError" ng-bind-html-unsafe="action.error"></p></div>					
+				</div>	
+	  </div>	  
+</div>

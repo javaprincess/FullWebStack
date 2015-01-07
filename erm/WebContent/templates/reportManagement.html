@@ -1,0 +1,436 @@
+<script>
+
+</script>
+<div id="rep_rightManagementPopup" class="maximumWidth smallFontRights" style="min-height : 800px; height : 950px;">
+	<div class="panel reducedPadding noBorder" style="height : 3%; margin-bottom : 1px;">
+		<div class="panel-body boldFont" style="width:30%; float : left;">
+			<span id="rep_reportNameDisplay">Report Query Management</span>
+		</div>
+		<div class="panel-body boldFont" style="width:20%; float : right;height : 99%;">
+			<div class="panel-body boldFont" style="width:45%; float : left; text-align : right; margin-right : 3px;">
+				Output Format:
+			</div>
+			<div class="panel-body reportTypeFormatWithPDF" style="width : 50%; float : right; text-align : right; height : 90%;">
+				<select id="rep_reportTypeFormat" class="form-control input-sm smallFontRights" style="padding : 0px; margin : 0px; height : 100%; width : 100%;" data-bind="value: reportTypeFormat">
+					<option value="1">EXCEL</option>
+					<option value="2">PDF</option>
+					<option value="3">Preview</option>
+				</select>
+			</div>
+			
+		</div>
+	</div>
+	<div class="panel reducedPadding noBorder" style="padding-top : 0px; height : 3%; background-color : #f4f4f4; margin-bottom : 1px;">
+		<div class="panel-body blueFontStyle boldFont" style="width: 13%; float : left; margin-top : 5px;">
+			<span>Report Query Name : </span>
+		</div>
+		<div class="panel-body" style="width: 30%; float : left;">
+			<input class="savedQuerySearchClass" type="text" id="rep_reportSearch" style="margin-top : 0px; height : 20px; width : 100%;" data-bind="value: reportQueryName">
+		</div>
+		<div class="panel-body" style="width: 10%; float : left;">		
+			<span class="input-group-btn">
+				<button type="button" class="btn btn-default btn-xs" id="rep_searchForSavedQuery"><i class="icon-search"></i></button>
+			</span>			
+		</div>
+	</div>
+	<div class="panel reducedPadding" style="height : 3.5%; margin-bottom : 1px; background-color : #f4f4f4;">
+		<div class="panel-body" style="width : 2%; float : left; font-size : 16px;"><a href="javascript:$.noop()" id="rep_showHideQueryPanel"><i class="icon-collapse-top iconCollapseAttributes"></i></a></div>
+		<div class="panel-body blueFontStyle boldFont" style="width : 21%; float : left;">Enter Search Parameters&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <a href="javascript:$.noop()" id="rep_clearParameters">clear</a></div>	
+		<div class="panel-body" style="height : 100%; width : 4%; float : left;"></div>
+		<div class="panel" style="background-color : #f4f4f4; border : 0px; width : 70%; float : left; height: 100%;  margin : 0px; padding : 0px;">
+			<div class="panel-body" style="float:left; width:15%; margin : 0px; margin-top : 3px; padding : 0px;"></div>
+			<div class="panel-body" style="float:left; width:2%; margin : 0px; margin-bottom : 2px; padding : 0px;">				
+				<input id="rep_rightCheckBusiness" type="radio" value="BUSINESS" name="dataType" data-bind="checked: rightsCheckType">				
+			</div>
+			<div class="panel-body" style="float:left; width:12%; margin : 0px; padding : 0px; margin-top : 3px;">				
+				Business				
+			</div>
+			<div class="panel-body" style="float:left; width:2%; margin : 0px; padding : 0px;">
+				<input id="rep_rightCheckLegal" type="radio" value="LEGAL" name="dataType"  data-bind="checked: rightsCheckType"> 
+			</div>
+			<div class="panel-body legalRadioCheckClass" style="float:left; width:13%; margin : 0px; margin-top : 3px; padding : 0px;">
+				Legal
+			</div>
+			
+			<div class="panel-body rightsAsEnteredClass" style="float:left; width:2%; margin : 0px; padding : 0px;">
+				<input id="rep_rightCheckBoth" type="radio" value="BOTH" name="dataType"  data-bind="checked: rightsCheckType">
+			</div>
+			
+			<div class="panel-body rightsAsEnteredClass" style="float:left; width:45%; margin : 0px; margin-top : 3px; padding : 0px;">
+				Both Business And Legal
+			</div>
+			
+		</div>
+	</div>
+	
+	<div id="rep_queryPanel" class="panel reducedPadding searchProductDiv" style="padding : 0px; height : 24%; margin-top : 1px; margin-bottom : 5px; background-color : #f4f4f4;">
+		<div class="panel noBorder searchProductDiv" style="height : 100%; padding-top : 0px; background-color : #f4f4f4; margin-bottom : 0px;">
+			
+			<div class="panel reducedPadding noBorder" style="width : 79%; float : left; height : 100%; background-color : #f4f4f4;">
+				<div class="panel-body maximumWidth blueFontStyle boldFont" style="margin-bottom : 5px;">
+					<font id="rep_selectedProductsForReport"></font>Selected Products For Report
+				</div>
+				<div class="panel-body maximumWidth">
+					<button id="rep_searchProductsForReport" class="btn btn-primary btn-xs btn-search"><i class="icon-search"></i> Search Products...</button>
+					<button id="rep_deleteSearchResultProducts" class="btn btn-primary btn-xs btn-delete"><i class="icon-remove"></i> Delete</button>					
+					<font style="margin-left : 20px; font-size : 12px; font-weight : 800" id="rep_searchProductCount">Number of products included : 0</font>
+					<div id="rep_deleteSearchResultIcon" style="font-size : 12px; color : #ff0000; font-weight : 800;"><i class="icon-spinner icon-spin"></i>&nbsp; Products deleted <span id="rep_deletingFont"></span></div>
+				</div>
+				<div id="rep_searchProductResultGridParent" class="panel-body maximumWidth" style="height : 170px; margin : 0px; margin-top : 5px; padding : 0px; overflow-x : hidden; overflow-y : hidden;">
+					<div id="rep_searchProductResultGrid" style="height : 160px; overflow-y : hidden;"></div>
+				</div>
+			</div>
+			<div class="panel reducedPadding noBorder" style="width : 20%; float : right; height : 100%; background-color : #f4f4f4;">
+				<div id="rep_productTypeLabel" class="panel-body maximumWidth  blueFontStyle boldFont" style="margin-bottom : 5px; height : 10%;">
+					International Product Type
+				</div>
+				<div class="panel-body" class="maximumWidth" style="height : 90%;">
+					<select id="rep_productType" size="10" multiple style="height : 97%; width : 100%;" class="form-control input-sm smallFontRights">
+					</select>
+				</div>
+			</div>
+		</div>
+	</div>
+		
+		
+		
+		
+	<div id="rep_queryPanelMTLT" class="panel reducedPadding" style="padding : 0px; height : 40%; margin-top : 1px; margin-bottom : 5px; background-color : #f4f4f4;">
+		<!-- 
+		<div class="panel noBorder" style="width : 100%; height : 2%; margin-bottom : 1px; margin-top : 0px; background-color : #f4f4f4; padding-top : 0xp;">
+			<div class="panel-body blueFontStyle boldFont" style="margin-top : 0px; padding-top : 0px;">
+				<font id="rep_denoteRequiredFields"></font>
+			</div>
+		</div>
+		-->
+		<div class="panel noBorder" style="padding : 0px; height : 87%; padding-top : 1px; background-color : #f4f4f4; margin-bottom : 1px;">
+			<div class="panel noBorder" style="width : 18%; float : left; height : 100%; padding-top : 1px; background-color : #f4f4f4; ">
+				<div id="rep_mediaText" class="panel-body boldFont" style="height : 5%; width : 100%;">
+					<font id="rep_selectedMediaRequired"></font>Media
+				</div>
+				<div class="panel-body" style="height : 53%;">
+					<select id="rep_mediaSelector" multiple size="10" style="width : 100%; height : 100%; padding-bottom : 5px;" class="form-control smallFontRights"></select>
+				</div>
+				<div class="panel-body iconFooterClass" style="width : 100%; height : 5%; text-align : center; margin-top : 5px; margin-bottom : 5px;">
+					<i id="rep_removeMedia" class="icon-collapse-top divFontDisplay"></i>
+					<i id="rep_addMedia" class="icon-collapse divFontDisplay"></i>
+				</div>
+				<div id="rep_mediaSelectedText" class="panel-body boldFont divFontDisplay" style="height : 5%; width : 100%;">
+					Selected Media
+				</div>
+				<div class="panel-body" style="width : 100%; height : 33%;">
+					<select multiple id="rep_mediaSelected" size="8" style="width : 100%; height : 100%;" class="form-control smallFontRights"></select>
+				</div>
+			</div>
+			
+			<div class="panel noBorder" style="width : 18%; float : left; height : 100%; padding-top : 1px; background-color : #f4f4f4;">
+				<div id="rep_territoryGroupsText" class="panel-body boldFont" style="height : 5%; width : 100%;">
+					Territory Groups
+				</div>
+				<div class="panel-body boldFont" style="height : 9%; width : 100%; margin-bottom : 5px; overflow-y : auto;">
+					<input id="rep_territoryGroups" style="width : 100%;">
+				</div>
+				<div id="rep_territoryText" class="panel-body boldFont" style="height : 5%; width : 100%;">
+					<font id="rep_selectedTerritoryRequired"></font>Territory
+				</div>
+				<div class="panel-body" style="height : 38%;">
+					<select id="rep_territorySelector" multiple style="width : 100%; height : 100%;" class="form-control smallFontRights"></select>
+				</div>
+				<div class="panel-body iconFooterClass" style="width : 100%; height : 5%; text-align : center; margin-top : 5px; margin-bottom : 5px;">
+					<i id="rep_removeTerritory" class="icon-collapse-top divFontDisplay"></i>
+					<i id="rep_addTerritory" class="icon-collapse divFontDisplay"></i>
+				</div>
+				<div id="rep_territorySelectedText" class="panel-body boldFont divFontDisplay" style="height : 5%; width : 100%;">
+					Selected Territories
+				</div>
+				<div class="panel-body" style="width : 100%; height : 33%;">
+					<select multiple id="rep_territorySelected" size="8" style="width : 100%; height : 100%;" class="form-control smallFontRights"></select>
+				</div>
+			</div>
+			
+			<div class="panel noBorder" style="width : 18%; float : left; height : 100%; padding-top : 1px; background-color : #f4f4f4;">
+				<div id="rep_languageGroupsText" class="panel-body boldFont" style="height : 5%; width : 100%;">
+					Language Groups
+				</div>
+				<div class="panel-body boldFont" style="height : 9%; width : 100%; margin-bottom : 5px; overflow-y : auto;">
+					<input type="text" id="rep_languageGroups" style="width : 100%;">
+				</div>
+				<div id="rep_languageText" class="panel-body boldFont" style="height : 5%; width : 100%;">
+					<font id="rep_selectedLanguageRequired"></font>Language
+				</div>
+				<div class="panel-body" style="height : 38%;">
+					<select id="rep_languageSelector" multiple style="width : 100%; height : 100%;" class="form-control smallFontRights"></select>
+				</div>
+				<div class="panel-body iconFooterClass" style="width : 100%; height : 5%; text-align : center; margin-top : 5px; margin-bottom : 5px;">
+					<i id="rep_removeLanguage" class="icon-collapse-top divFontDisplay"></i>
+					<i id="rep_addLanguage" class="icon-collapse divFontDisplay"></i>
+				</div>
+				<div id="rep_languageSelectedText" class="panel-body boldFont divFontDisplay" style="height : 5%; width : 100%;">
+					Selected Languages
+				</div>
+				<div class="panel-body" style="width : 100%; height : 33%;">
+					<select multiple id="rep_languageSelected" size="8" style="width : 100%; height : 100%;" class="form-control smallFontRights"></select>
+				</div>
+			</div>
+			
+			<div class="panel noBorder showTimePeriod" style="width : 20%; float : left; height : 70%; padding-top : 1px; background-color : #f4f4f4; border : 1px solid #cdcdcd" id="rep_timePeriodElements">
+				<div id="rep_timePeriodText" class="panel-body boldFont" style="height : 7%; width : 100%;">
+					Time Period
+				</div>
+				<div class="panel-body blueFontStyle" style="width : 100%; height : 10%; margin-bottom : 5px; font-size : 10px;">
+					<label class="radio inline" style="margin-top:0px; padding-top:0px;"> <input type="radio" value="W" id="rep_timePeriodAnytime" name="rep_timePeriod" data-bind="checked: timePeriod"> Anytime during the time period</label>
+				</div>
+				<div class="panel-body blueFontStyle" style="width : 100%; height : 10%; font-size : 10px;">
+					<label class="radio inline" style="margin-top:0px; padding-top:0px;"> <input type="radio" value="T" id="rep_timePeriodThroughout" name="rep_timePeriod" data-bind="checked: timePeriod"> Throughout the entire time period</label>
+				</div>
+				<div class="panel boldFont" style="width : 100%; height : 30%; background-color : #f4f4f4; padding-top : 4px; padding-bottom : 0px; margin-bottom : 3px; margin-top : 5px;">
+					<div style="width : 100%; margin:0px; padding : 0px; height : 70%; text-align:center;">From : <font style="font-size : 9px;">(mm/dd/yy)</font> <input type="text" id="rep_fromTimePeriod" style="height : 24px;"></div>
+					<div style="width : 17%; float : left; height : 29%;"></div><div style="margin-top:0px;width : 13%; float:left;"><input id="rep_fromIncludeTBA" type="checkbox"></div> <div style="margin:0px; margin-top:4px; width : 68%; float:left;">IncludeTBA</div>
+				</div>
+				<div class="panel boldFont" style="width : 100%; height : 30%; background-color : #f4f4f4;  padding-top : 4px; margin-bottom : 0px; margin-top : 3px;">
+					<div style="width : 100%; margin:0px; margin-bottom : 10px; padding : 0px; height : 70%; text-align:center;">To : <font style="font-size : 9px;">(mm/dd/yy)</font> <input type="text" id="rep_toTimePeriod" style="height : 24px;"></div>
+					<div style="width : 17%; float : left; height : 25%;"></div><div style="margin-top:0px;width : 13%; float:left;"><input id="rep_toIncludeTBA" type="checkbox"></div> <div style="margin:0px; margin-top:4px; width : 68%; float:left;">IncludeTBA</div>
+				</div>
+				<div class="panel-body" style="width : 100%; height : 1%; text-align : center; margin-top : 5px; margin-bottom : 3px;"></div>
+				
+			</div>
+			
+			<div id="rep_infoCodeViewPanel" class="panel noBorder showInfoCodesMarker rightInquiryReportClass" style="width : 26%; float : left; height : 100%; padding-top : 1px; background-color : #f4f4f4;">
+				<div class="panel-body boldFont showInfoCodesMarker" style="height : auto; width : 100%; margin-bottom : 2px;">
+					Populate Method of Transmission codes for: <a href="javascript:$.noop()" id="rep_motClearInfoCodes">Clear Info Codes</a>
+				</div>
+				<!--
+				<div class="panel-body boldFont showInfoCodesMarker" style="height : 5%; width : 100%;">
+					<label class="checkbox inline blueFontStyle" style="margin-top:0px; padding-top:0px;"> <input type="radio" value="N" id="rep_motClearInfoCodes" name="rep_openOrCloseInternet"> Clear Info Codes </label> 
+				</div>
+				-->
+				<div class="panel-body boldFont showInfoCodesMarker" style="height : 5%; width : 100%;">
+					<label class="checkbox inline blueFontStyle" style="margin-top:0px; padding-top:0px;"> <input type="radio" value="N" id="rep_motOpenInternet" name="rep_openOrCloseInternet"> Open Internet </label> <!-- <i class="icon-arrow-right"></i> -->
+				</div>
+				<div class="panel-body boldFont showInfoCodesMarker" style="height : 5%; width : 100%;">
+					<label class="checkbox inline blueFontStyle" style="margin-top:0px; padding-top:0px;"> <input type="radio" value="N" id="rep_motClosedInternet" name="rep_openOrCloseInternet"> Closed Internet, IPTV </label>
+				</div>
+				<div class="panel-body showInfoCodesMarker" style="width : 100%; height : 1%; text-align : center; margin-top : 5px; margin-bottom : 3px;"></div>
+				<div id="rep_infoCodeTypesText" class="panel-body boldFont productInquiryReportClass" style="height : 5%; width : 100%;">
+					Info Code Group
+				</div>
+				<div class="panel-body boldFont productInquiryReportClass" style="height : 7%; width : 100%; margin-bottom : 5px;">
+					<input type="text" id="rep_infoCodeGroups" style="width : 100%;">
+				</div>
+				<div id="rep_infoCodeSeverityText" class="panel-body boldFont productInquiryReportClass" style="height : 5%; width : 100%;">
+					Info Code Severity
+				</div>
+				<div class="panel-body boldFont productInquiryReportClass" style="height : 6%; width : 100%; margin-bottom : 5px;">
+					<input type="text" id="rep_infoCodeSeverity" style="width : 100%;">
+				</div>
+				<div id="rep_infoCodesText" class="panel-body boldFont" style="height : 5%; width : 100%;">
+					Info Codes
+				</div>
+				<div class="panel-body" style="height : 30%;">
+					<select id="rep_infoCodeSelector" multiple style="width : 100%; height : 98%;" class="form-control smallFontRights"></select>
+				</div>
+				
+				
+				<div class="panel-body" style="width : 49%; height : 43%; text-align : center; margin-top : 5px; margin-bottom : 0px; float : left;">
+					<div class="iconFooterClass" style="width : 98%; height : 20%; padding : 0px; margin : 0px;">
+						<i id="rep_removeInfoCodeAdd" class="icon-collapse-top divFontDisplay"></i>
+						<i id="rep_addInfoCodeAdd" class="icon-collapse divFontDisplay"></i>
+					</div>
+					<div class="boldFont divFontDisplay" style="height : 7%; width : 98%;">
+						<div style="float : left; width : 49.5%">
+							<div style="float:left; width : 10%;"><input type="radio" value="1" id="rep_infoCodeAny" name="rep_infoCodeRadio" data-bind="checked: infoCodeRadio"></div><div id="rep_infoCodeAddSelectedAnyText" style="float:left; width : 80%; text-align : left; margin-left : 5px;  margin-top : 2px;"> Any</div> <!-- <label id="rep_infoCodeAddSelectedAnyText" class="radio inline" style="margin-top:0px; padding-top:0px;"> Any </label> --> 
+						</div>
+						<div style="float : right; width : 49.5%;">
+							<div style="float:left; width : 10%;"><input type="radio" value="2" id="rep_infoCodeAll" name="rep_infoCodeRadio" data-bind="checked: infoCodeRadio"></div><div id="rep_infoCodeAddSelectedNoneText" style="float:left; width : 80%; text-align : left; margin-left : 5px;  margin-top : 2px;"> All</div> <!-- <label id="rep_infoCodeAddSelectedAllText" class="radio inline" style="margin-top:0px; padding-top:0px;">All</label> -->
+						</div>
+					</div>
+					<div style="width : 98%; height : 60%; margin-top : 13px;"><!--  margin-top : 67px; -->
+						<select multiple id="rep_infoCodeAddSelected" size="8" style="width : 100%; height : 100%;" class="form-control smallFontRights"></select>
+					</div>
+				</div>
+				
+				<div class="panel-body" style="width : 1%; height : 43%; margin-top : 5px; margin-bottom : 0px; float : left; border-right : 1px solid #bbbbbb;">
+				</div>
+				
+				<div class="panel-body" style="width : 49%; height : 43%; text-align : center; margin-top : 5px; margin-bottom : 0px; float : right;">
+					<div class="iconFooterClass" style="width : 100%; height : 20%;">
+						<i id="rep_removeInfoCodeRemove" class="icon-collapse-top divFontDisplayIcon"></i>
+						<i id="rep_addInfoCodeRemove" class="icon-collapse divFontDisplayIcon"></i>
+					</div>
+					<div id="rep_infoCodeRemoveSelectedText" class="panel-body boldFont errorFontText" style="height : 8%; width : 100%;">
+						<div style="float:left; width : 10%;"><input type="radio" value="10" id="rep_infoCodeNone" name="rep_infoCodeNoneRadio" checked></div><div id="rep_infoCodeAddSelectedAllText" style="float:left; width : 80%; text-align : left; margin-left : 5px;  margin-top : 2px;"> None</div> <!-- <label id="rep_infoCodeAddSelectedAllText" class="radio inline" style="margin-top:0px; padding-top:0px;">  None</label> -->
+					</div>
+					<div style="width : 100%; height : 60%; margin-top : 12px;">
+						<select multiple id="rep_infoCodeRemoveSelected" size="8" style="width : 100%; height : 100%;" class="form-control smallFontRights"></select>
+					</div>
+				</div>
+				
+			</div>			
+			<div class="panel noBorder rightInquiryReportClass" style="width : 20%; float : left; height : 100%; padding-top : 1px; background-color : #f4f4f4; display : none;" id="rep_rightsInquirySideElements">
+				<div id="rep_subrightsSalesAndMarketingText" class="panel-body maximumWidth boldFont" style="margin-bottom : 5px;">
+					Subrights Sales And Marketing
+				</div>
+				<div class="panel-body maximumWidth" style="height : 25%; margin-bottom : 10px;">
+					<select id="rep_subrightsSalesAndMarketing" multiple style="width : 100%; height : 98%; " class="form-control smallFontRights"></select> 
+				</div>
+				<div id="rep_methodOfTransmissionText" class="panel-body maximumWidth boldFont methodOfTransmissionClass" style="margin-bottom : 5px;width : 69%;float:left;">
+					Method Of Transmission
+				</div>
+				<div id="rep_methodOfTransmissionText" class="panel-body maximumWidth boldFont methodOfTransmissionClass" style="margin-bottom : 5px;width : 30%;float:right; text-align:right;">
+					<a href="javascript:$.noop()" id="rep_methodOfTransmissionLink">Clear</a>
+				</div>
+				<div class="panel-body maximumWidth methodOfTransmissionClass" style="height : 29%; margin-bottom : 10px;margin-top : 30px;">
+					<select id="rep_methodOfTransmission" multiple style="width : 100%; height : 100%;" class="form-control smallFontRights"></select> 
+				</div>
+				<div class="panel-body maximumWidth methodOfTransmissionClass" style="height : 30%; margin-bottom : 20px;">
+					 <i class="icon-warning-sign" style="color:#e6a044;"></i> <font style="color : #992b0f;">LEGAL USE ONLY - Method of Transmission Results are based on Legal strands entered before June 11th, 2014 (existing titles).
+For Legal strands entered after June 11th, 2014 (new titles) please select a MEDIA.
+To get the full set of results, run the report with Method of Transmission and then run a report again by selecting corresponding MEDIA.
+</font>
+				</div>
+			</div>
+		</div>
+		
+	</div>
+	
+	<!-- FOR RIGHTS INQUIRY REPORT (BOTTOM ELEMENTS : START) -->
+	<div class="panel reducedPadding rightInquiryReportClass" style="padding : 0px; height : 17%; padding-top : 1px; background-color : #f4f4f4; margin-top : 1px;" id="rep_inquiryReportBottomElements">
+		<div class="panel" style="width : 18%; float : left; height : 100%; padding-top : 1px; background-color : #f4f4f4;">
+			<div id="rep_dateOptionText" class="panel-body maximumWidth boldFont" style="margin-bottom : 5px;">
+				Date Option
+			</div>
+			<div class="panel-body maximumWidth" style="margin-bottom : 5px;">
+				<select id="rep_dateOption" style="width : 100%;" class="smallFontRights">
+					<option value=""></option>
+					<option value="1">Expiring</option>
+					<option value="2">Not-expiring</option>
+				</select>
+			</div>
+			<div id="rep_dateOptionFromText" class="panel-body boldFont" style="width : 22%; float : left; margin-bottom : 5px;">
+				From
+			</div>
+			<div class="panel-body" style="width : 50%; float : left; margin-bottom : 5px;">
+				<input type="text" id="rep_dateOptionFrom" style="height : 25px; width : 100%;">
+			</div>
+			<div id="rep_dateOptionFromTBAText" class="panel-body" style="width : 25%; float : left; font-size : 9px; margin-bottom : 5px;">
+				<input type="checkbox" id="rep_dateOptionFromTBA" style="margin-left : 3px;"> TBA
+			</div>
+			
+			<div id="rep_dateOptionToText" class="panel-body boldFont" style="width : 22%; float : left; clear: both; padding-top: 12px;">
+				To
+			</div>
+			<div class="panel-body" style="width : 50%; float : left; padding-top: 5px;">
+				<input type="text" id="rep_dateOptionTo" style="height : 25px; width : 100%; ">
+			</div>
+			<div id="rep_dateOptionToTBAText" class="panel-body" style="width : 25%; float : left; font-size : 9px; padding-top: 5px;">
+				<input type="checkbox" id="rep_dateOptionToTBA" style="margin-left : 3px;"> TBA
+			</div>
+			
+		</div>
+		<div class="panel noBorder" style="width : 18%; float : left; height : 100%; padding-top : 1px; background-color : #f4f4f4;">
+			<div id="rep_legalConfirmationStatusText" class="panel-body maximumWidth boldFont" style="margin-bottom : 5px;">
+				Legal Confirmation Status
+			</div>
+			<div class="panel-body maximumWidth" style="margin-bottom : 5px;">
+				<select id="rep_legalConfirmationStatus" style="width : 100%;" class="smallFontRights">
+					<option value=""></option>
+					<option value="1">Business</option>
+					<option value="2">Legal</option>
+				</select>
+			</div>
+			<div id="rep_productInformationCodeText" class="panel-body maximumWidth boldFont" style="margin-bottom : 5px;">
+				Product Information Code
+			</div>
+			<div class="panel-body maximumWidth" style="margin-bottom : 5px;">
+				<select id="rep_productInformationCode" style="width : 100%;" class="smallFontRights">
+					<option value=""></option>
+					<option value="AUX">AUX</option>
+					<option value="COM">COM</option>
+				</select>
+			</div>
+			<div id="rep_doNotLicenseText" class="panel-body boldFont" style="margin-bottom : 5px; width : 50%; float : left; font-size : 10px;">
+				Do Not License
+			</div>
+			<div id="rep_futureMediaText" class="panel-body boldFont" style="margin-bottom : 5px; width : 50%; float : left; font-size : 10px;">
+				Future Media
+			</div>
+			<div class="panel-body" style="margin-bottom : 5px; width : 49%; float : left;">				
+				<select id="rep_doNotLicense" style="width : 100%;" class="smallFontRights">
+					<option value=""></option>
+					<option value="AUX">AUX</option>
+					<option value="COM">COM</option>
+				</select>
+			</div>
+			<div class="panel-body" style="margin-bottom : 5px; width : 49%; float : right;">				
+				<select id="rep_futureMedia" style="width : 100%;" class="smallFontRights">
+					<option value=""></option>
+					<option value="AUX">AUX</option>
+					<option value="COM">COM</option>
+				</select>
+			</div>
+		</div>
+		<div class="panel noBorder" style="width : 18%; float : left; height : 100%; padding-top : 1px; background-color : #f4f4f4;">
+			<div id="rep_contractualPartyTypeText" class="panel-body maximumWidth boldFont" style="margin-bottom : 5px;">
+				Contractual Party Type
+			</div>
+			<div class="panel-body maximumWidth" style="margin-bottom : 5px;">
+				<select id="rep_contractualPartyType" style="width : 100%;" class="smallFontRights">
+					<option value=""></option>
+					<option value="1">Business</option>
+					<option value="2">Legal</option>
+				</select>
+			</div>
+			<div id="rep_contractualPartyText" class="panel-body maximumWidth boldFont" style="margin-bottom : 5px;">
+				Contractual Party
+			</div>
+			<div class="panel-body maximumWidth" style="margin-bottom : 5px;">
+				<select id="rep_contractualParty" style="width : 100%;" class="smallFontRights">
+					<option value=""></option>
+					<option value="1">Business</option>
+					<option value="2">Legal</option>
+				</select>
+			</div>
+			<div id="rep_foxEntityText" class="panel-body maximumWidth boldFont" style="margin-bottom : 5px;">
+				Fox Entity
+			</div>
+			<div class="panel-body maximumWidth" style="margin-bottom : 5px;">
+				<select id="rep_foxEntity" style="width : 100%;" class="smallFontRights">
+					<option value=""></option>
+					<option value="1">Business</option>
+					<option value="2">Legal</option>
+				</select>
+			</div>
+		</div>
+		<div class="panel noBorder" style="width : 26%; float : left; height : 100%; padding-top : 1px; background-color : #f4f4f4;">
+			<div id="rep_contactsText" class="panel-body maximumWidth boldFont" style="margin-bottom : 5px;">
+				Contacts
+			</div>
+			<div class="panel-body maximumWidth" style="margin-bottom : 5px; height : 87%;">
+				<select id="rep_contacts" multiple style="width : 100%; height : 100%;" class="form-control smallFontRights"></select>
+			</div>
+		</div>
+	</div>
+	<!-- FOR RIGHTS INQUIRY REPORT (BOTTOM ELEMENTS : END) -->
+	
+	<div id="rep_rightsPanelButtons" class="panel reducedPadding rightsGroupClass" style="height : 3.5%; margin-bottom : 0px; margin-top : 5px; background-color : #f4f4f4;">
+		<div class="panel-body" style="width : 1%; float : left; font-size : 16px;"><a href="javascript:$.noop()" id="rep_showHideRightsPanel"><i class="icon-collapse iconCollapseAttributes"></i></a></div>
+		<div class="panel-body blueFontStyle boldFont" style="width : 90%; float : left; text-align : left;">Rights Groups&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <button class="btn btn-default btn-xs btn-delete" id="rep_removeFromRightsGroup">Delete</button>&nbsp;&nbsp;<button class="btn btn-primary btn-xs" id="rep_addToRightsGroup">Add Rights Group</button></div>
+		<!-- 
+		<div class="panel-body" style="width : 77%; text-align : left; float : left;">
+			<button class="btn btn-primary btn-xs" id="rep_addToRightsGroup">Add Rights Group</button>
+		</div>
+		 -->
+	</div>
+	<div id="rep_rightsPanel" class="panel reducedPadding rightsGroupClass" style="padding : 0px; min-height : 8%; height : auto; margin-top : 0px; background-color : #f4f4f4; display : none; overflow-y : auto;">
+		<div id="rep_rightsPanelGrid" style="height : auto;"></div>
+	</div>
+	<div class="panel reducedPadding noBorder" style="padding : 0px; height : 4%; margin-top : 5px;">
+		<div style="height : 100%; width : 53%; float : left;"></div>
+		<div style="height : 100%; width : 46%; float : left; text-align : right;">
+			<button class="btn btn-primary btn-xs btn-edit" id="rep_updateQuery">Update Query</button><button class="btn btn-primary btn-xs btn-add" id="rep_saveQuery">Save Query</button>		
+			<button id="rep_runQuery" class="btn btn-primary btn-xs">Run Report</button> <button id="rep_cancelQuery" class="btn btn-primary btn-xs ">Clear</button>
+			<button id="rep_exitPopup" class="btn btn-primary btn-xs ">Exit</button>
+		</div>
+	</div>
+	<a href="" style="display:none;" id="rep_redirectUrlParam"></a>
+</div>

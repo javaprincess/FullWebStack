@@ -1,0 +1,130 @@
+body {
+	font-family: arial, sans-serif;
+	font-size: 12px;
+	padding-left: 1%;
+	padding-right: 1%;
+}
+@page {
+ margin-bottom: 0.65in;  
+}
+.commentsContent { 
+  clear: both;
+}
+.commentContent {
+	padding-bottom: 30px;
+}
+.legalClearanceTitle {
+  float: left;
+  width: 100%;
+  font-size: 30px;
+  text-align: center;
+  margin-top: 10px;
+	margin-bottom: 10px;  
+}
+.underlineCaps {
+	font-size: 10px;
+	text-decoration: underline;
+	text-align: center;
+	width: 612px;
+}
+.underline{
+	text-decoration: underline;
+}
+.contentAttachments {
+  padding: 1% 0px !important;
+}
+.subrights_HeaderClass {
+	font-size: 16px;
+	font-weight: bold;
+}
+.header {
+	width: 100%;
+	padding: 1px;
+}
+.subHeader {
+ width: 90%;
+ margin-left: 5%;
+}
+.paragraph {
+	width: 80%;
+	margin-left: 10%;
+}
+.subParagraph {
+	width: 70%;
+	margin-left: 15%;
+}
+.contentPosition {
+  display: none;
+}
+.contentTitle {
+	float: left;
+	clear: right;
+	width: 90%;
+	text-decoration: underline;
+}
+.contentNoTitle {
+	padding-left: 0 !important;
+  float: left !important;
+  clear: none !important;
+  width: 90%;
+}
+.headerContent, .subHeaderContent, .paragraphContent, .subParagraphContent {	
+	width: 100%;
+	display: block;
+	float: none;
+	clear: both;
+}
+pre {
+  display: block;
+  padding: 0;
+  margin: 0;
+  font-size: 12px;
+  line-height: normal;
+  color: black;
+  word-break: normal;
+  word-wrap: normal;
+	white-space: pre-wrap;
+	white-space: -moz-pre-wrap;
+	white-space: -o-pre-wrap;
+  overflow: auto;
+  background-color: white;
+  border: 0;
+  border-radius: 0;
+  font-family: arial,sans-serif;
+}
+@media screen {
+  div.divTopLeftFooter, div.divTopRightFooter, div.divBottomLeftFooter, div.divBottomRightFooter{
+		display: none;  
+	}	 
+}	
+@media print {
+	.pageBreak {
+		page-break-after:always;
+	}
+	.printOnlyClearanceMemoHeader {
+		display: none;
+		position: fixed;
+		top: -13px;
+		left: 0;
+	}
+	div.divTopLeftFooter {
+		position: fixed;
+    top: 0;
+    left: 0;
+  }
+  div.divTopRightFooter {
+		position: fixed;
+		top: 0;
+    right: 0;
+  }
+  div.divBottomLeftFooter {
+		position: fixed;
+		bottom: 0;
+    right: 0;
+  }     
+  div.divBottomRightFooter {
+		position: fixed;
+		bottom: 0;
+    right: 0;
+  }           
+}	

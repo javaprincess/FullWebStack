@@ -1,0 +1,115 @@
+#template_addEditContractualParty {
+	box-shadow: none;
+}
+
+#memo-contractp-response {
+  display: none;
+  float: right;
+  width: 50%;
+  font-size: 12px !important;
+  text-align: right;
+  padding-top: 5px;
+}
+#memo-contractp-spinner, #memo-contractp-check {
+	display: none;
+}
+.contractualPartyRows {
+	min-height: 300px;
+	overflow-y: auto;
+	max-height: 300px;
+	float: left;
+	width: 100%;
+}
+
+.contractualPartyTitle {
+	font-size: 18px;
+	padding-top: 0.5%;
+	padding-bottom: 0.5%;
+	float: left;
+	width: 100%;
+	border-bottom: 1px solid; 
+}
+
+.contractualPartyHeaderRow {
+	font-size: 20px;
+	float: left;
+	width: 100%;
+	padding-top: 0.5%;
+	padding-bottom: 0.5%;
+}
+.contractualPartyHeader {
+	font-size: 16px;
+	float: left;
+	width:100%;
+	padding-left: 0.5%;	
+}
+.contractualPartyHeader.cpFoxEntity {
+	width: 30%;
+}
+.contractualPartyHeader.cpType {
+	width: 20%;
+}
+.contractualPartyHeader.cpCP {
+	width: 25%;
+}
+.contractualPartyHeader.cpDate {
+	width: 10%;
+	min-width: 125px;
+}
+.contractualPartyHeader.cpComments {
+	width: 5%;
+}
+.contractualPartyHeader.cpControls {
+	width: 10%;
+}
+.contractualPartyRow {
+	float: left;
+	width:100%;
+	padding-bottom: 0.5%;
+}
+.contractualPartyRow.cpFoxEntity {
+	width: 30%;
+}
+.contractualPartyRow.cpType {
+	width: 20%;
+}
+.contractualPartyRow.cpCP {
+	width: 25%;
+}
+.contractualPartyRow.cpDate {
+	width: 10%;
+	min-width: 125px;
+}
+.contractualPartyRow.cpComments {
+	width: 5%;
+	text-align: center;
+	padding-top: 1%;
+}
+.contractualPartyRow.cpControls {
+	width: 10%;
+}
+.btn-partyheader {  
+  margin-left: 25%;
+}
+.btn-partyrow {
+  margin-top: 8%;
+  margin-left: 25%;
+}
+.contractualPartyControls {	
+	width: 100%;
+	border-top: 1px solid;
+	float: left;
+	clear: both;
+	padding-top: 2%;
+}
+.contractualPartyControls button{
+	float: right;
+	padding-top: 0.5%;
+	margin-left: 2.5%;
+}
+.contractualPartyRowError {
+	border: 1px solid #992b0f !important;	
+}
+.contractualPartyErrorClass {
+  color: rgb(153, 43, 15);
+}

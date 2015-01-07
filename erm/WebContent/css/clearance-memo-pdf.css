@@ -1,0 +1,171 @@
+body {
+	font-family: arial, sans-serif;
+	font-size: 14px;
+}
+.memoPreviewFoxLogo {
+	width: 86px;
+	float: left;
+}
+p {
+	padding-bottom: 10px;
+}
+.tab {		
+	width: 8px;
+	padding-left: 15px;
+	display: inline-block;
+	float: none;
+	clear: both;
+}
+.legalClearanceTitle {
+	width: 600px;
+	font-size: 28px;
+	clear: both;
+	text-align: center;
+}
+.memoPreviewFoxLogoImg {
+	width: 87px;
+	height: 60px;
+	float: left;
+}
+.twentiethCenturyFoxTitleFont {
+	float: left;
+	font-family: 'Century Gothic';
+	width: 612px;
+	text-align: left;
+	clear: both;
+}
+.confirmationStatus {
+	color: red;
+	clear: both;
+	padding-bottom: 20px;
+}
+.twentiethCenturyFoxSubTitleFont {
+	font-size: 6px;	
+	line-height: 7px;
+	width: 202px;	
+	float: left;	
+	font-family: 'Century Gothic';
+	text-align: left;	
+}
+.memoPreviewContentPrivileged {
+	width: 612px;
+	text-align: center;
+	clear: both;		
+}
+.underlineCaps {
+	font-size: 10px;
+	text-decoration: underline;
+	text-align: center;
+	width: 612px;
+}
+.underline{
+	text-decoration: underline;
+}
+.clearanceReportHeader {
+	width: 612px;
+}
+.clearanceReportContent {
+	
+}
+.clearanceReportContentTOC {
+	width: 612px;
+}
+.tocHeader {
+	width: 150px;
+	float: left;
+}
+.tocSubHeader {
+	width: 450px;
+	float: left;
+}
+.tocPosition {
+	display: none;
+}
+.tocTitle {
+	width: 300px;
+	float: left;
+}
+.header {
+	width: 720px;
+	float: none;
+}
+.subHeader {
+	width: 698px;
+	float: none;		
+	word-break:break-all;		
+	display: inline-block;
+	clear: both;
+	padding-left: 22px; 
+}
+.paragraph {
+	width: 640px;
+	padding-left: 44px;
+	float: none;	
+	word-break:break-all;		
+	display: inline-block;
+}
+.subParagraph {
+	width: 612px;
+	float: none;
+	word-break:break-all;		
+	display: inline-block;	
+}
+.contentTitle {
+	float: none;
+	clear: right;
+	text-decoration: underline;
+}
+.contentNoTitle {
+	padding-left: 0 !important;
+  float: left !important;
+  clear: none !important;
+  width: 90%;
+}
+.headerContent {
+	word-break:break-all;	
+	width: 720px;
+	display: inline-block;
+	float: none;
+	clear: both;
+}
+.subHeaderContent {
+	word-break:break-all;	
+	width: 640px;
+	display: inline-block;
+	float: none;
+	clear: both;
+}
+.paragraphContent {
+	word-break:break-all;	
+	width: 560px;	
+	display: inline-block;
+	float: none;
+	clear: both;
+}
+.subParagraphContent {
+	word-break:break-all;	
+	width: 300px;
+	padding-left: 22px;
+	display: inline-block;
+	float: none;
+	clear: both;
+}
+pre {
+  display: block;
+  padding: 0;
+  margin: 0;    
+  line-height: normal;
+  color: black;
+  word-break: normal;
+  word-wrap: normal;
+	white-space: pre-wrap;
+	white-space: -moz-pre-wrap;
+	white-space: -o-pre-wrap;
+  overflow: auto;
+  background-color: white;
+  border: 0;
+  border-radius: 0;
+}
+.pageBreak {
+	page-break-after:always;
+}

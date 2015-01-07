@@ -1,0 +1,62 @@
+<div id="rep_saveQueryForm" class="panel smallFontRights" style="min-height : 325px; height : 325px; width : 500px; min-width : 500px; margin-left : auto; margin-right : auto;">
+	<div class="panel reducedSpacing" style="width : 100%; height : 5%;">
+		<div class="panel-body" style="width : 40%; height : 100%; float : left;">
+			Created By: <font id="rep_savedQueryUserName" class="boldFont blueFontStyle"></font>
+		</div>
+		<div class="panel-body" style="width : 50%; height : 100%; float : right;">
+			Source: <font id="rep_savedQueryReportName" class="boldFont blueFontStyle"></font>
+		</div>
+	</div>
+	
+	<div class="panel reducedSpacing" style="width : 100%; height : 5%;">
+		<div class="panel-body" style="width : 100%; height : 100%;">
+			Date Saved: <font id="rep_savedQueryDateSaved" class="boldFont blueFontStyle"></font>
+		</div>
+	</div>
+	<div class="panel reducedSpacing" style="width : 100%; height : 10%; margin-top : 10px;">
+		<div class="panel-body" style="width : 100%; height : 100%;">
+			<font class="blueFontStyle">* Denotes Required Fields</font>
+		</div>
+	</div>
+	
+	<div class="panel reducedSpacing" style="width : 100%; height : 50%; margin-top : 5px;">
+		<div class="panel reducedSpacing" style="width : 49%; height : 100%; margin : 0px; padding : 0px; border : 0px; float : left;">
+			<div class="panel-body" style="width : 100%; height : 30%;">
+				*Query Name : <input type="text" id="rep_queryName" class="form-control input-sm" data-bind="value: queryName" data-value-update="keyup">
+			</div>
+			<div class="panel-body" style="width : 100%; height : 30%; margin-top : 5px;">
+				Personal Tag : <input type="text" id="rep_personalTag" class="form-control input-sm" data-bind="value: personalTag">
+			</div>
+			<div class="panel-body canCreatePublicQueryClass" style="width : 100%; height : 30%; margin-top : 10px;">
+				<div style="width : 20%; float : left; margin-top : 3px;">
+					Public :
+				</div>	
+				<div style="width : 69%; float : left; margin-bottom : 5px;">		
+					<input type="checkbox" id="rep_publicPrivateStatus" data-bind="checked: publicPrivateStatus" value="public">
+				</div>
+			</div>
+		</div>
+		<div class="panel reducedSpacing" style="width : 49%; height : 100%; margin : 0px; padding : 0px; border : 0px; float : right;">
+			<div class="panel-body" style="width : 100%; height : 10%;">
+				Comments
+			</div>
+			<div class="panel-body" style="width : 100%; height : 79%; text-align : right;">
+				<textarea id="rep_commentForSaveQuery" class="form-control" data-bind="value: commentForQueryToBeSaved" style="width : 100%; height : 100%;"></textarea>
+			</div>
+		</div>
+	</div>
+	
+	<div class="panel reducedSpacing" style="width : 100%; height : 10%; margin-top : 10px; text-align : right;">
+		<div class="panel-body" style="width : 65%; height : 100%; float : left;"></div>
+		<div class="panel-body" style="width : 15%; height : 100%; float : left;" id="rep_updateQueryFromPopupParent">
+			<button class="btn btn-primary btn-xs btn-edit" id="rep_updateQueryFromPopup">Update Query</button>
+		</div>
+		<div class="panel-body" style="width : 15%; height : 100%; float : left;" id="rep_saveQueryFromPopupParent">
+			<button class="btn btn-primary btn-xs btn-add" id="rep_saveQueryFromPopup">Save Query</button>
+		</div>
+		<div class="panel-body" style="width : 15%; height : 100%; float : left; margin-left : 10px;">
+		 	<button class="btn btn-primary btn-xs" id="rep_cancelSaveQueryFromPopup">Cancel</button>
+		</div>
+	</div>
+	
+</div>

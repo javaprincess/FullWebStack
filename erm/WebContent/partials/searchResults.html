@@ -1,0 +1,104 @@
+<div style="padding-top: 10px;" ng-show="groups[0] != null && groups[0].products.length > 0"><a href="" class="hideSearchResultsLink" ng-click="doHideSearchResults();"><i class="icon-chevron-up" style="margin-left: 5px; color: rgb(66, 139, 202); cursor: pointer;"></i> Hide Search Results</a></div>
+<div bindonce ng-repeat="group in groups">
+	<div ng-show="groups.length > 0" style="padding-top: 10px;">{{group.description}}</div>
+	<div ng-if="isShowTotal() && group.products.length > 0" style="float: left; clear: both; padding-top: 10px; padding-bottom: 10px;  width: 100%;">
+    Results: {{group.products.length}} Product{{group.products.length == 1 ? '' : 's'}} found
+  </div> 
+	<table ng-show="group.products.length > 0" class="table" style="width: 100%; float: left; clear: both;">
+		<thead>
+			<tr>
+				<th align="center" ng-show="results.showCheckboxes">
+					<input type="checkbox" class="cross-product-checkall" ng-model="results.crossProductCheckAll" ng-change="results.crossProductCheckAllChanged();"/>								
+				</th>
+				<th align="left">
+					<a href="" ng-click="results.setSortColumn('ermProductVersionHeader.rightsIndicator')">B/L <span erm-sort-indicator-non-alpha is-sorted="results.isSorted('ermProductVersionHeader.rightsIndicator')" ascending="results.isAscending()"></span></a>				
+				</th>
+				<th align="left">
+					<a href="" ng-click="results.setSortColumn('title')">Title <span erm-sort-indicator is-sorted="results.isSorted('title')" ascending="results.isAscending()"></span></a>
+					<input type="text" ng-model="group.filterResults" placeholder="Enter text to filter" ng-show="isShowSearch()" style="margin-left: 10px;"> <i ng-click="group.filterResults=''" class="icon-remove" style="color: rgb(66, 139, 202);  cursor: pointer;"></i>   
+				</th>
+				<th align="left">
+					<a href="" ng-click="results.setSortColumn('statusCode')"> C <span erm-sort-indicator is-sorted="results.isSorted('statusCode')" ascending="results.isAscending()"></a>
+				</th>
+				<th align="left">
+					<a href="" ng-click="results.setSortColumn('financialProductId')">Financial Title ID (WPR ID) <span erm-sort-indicator is-sorted="results.isSorted('financialProductId')" ascending="results.isAscending()"></a>
+				</th>
+				<th align="left">
+					<a href="" ng-click="results.setSortColumn('productTypeDesc')">Product Type <span erm-sort-indicator is-sorted="results.isSorted('productTypeDesc')" ascending="results.isAscending()"></a>
+				</th>
+				<th align="left">
+					<a href="" ng-click="results.setSortColumn('productionYear')">Production Year <span erm-sort-indicator is-sorted="results.isSorted('productionYear')" ascending="results.isAscending()"></a>
+				</th>
+				<th align="left">
+					<a href="" ng-click="results.setSortColumn('financialDivisionCode')">Division<span erm-sort-indicator is-sorted="results.isSorted('financialDivisionCode')" ascending="results.isAscending()"></a>
+				</th>
+				<th align="left">
+					<a href="" ng-click="results.setSortColumn('releaseDate')">US Release Date <span erm-sort-indicator is-sorted="results.isSorted('releaseDate')" ascending="results.isAscending()"></a>
+				</th>
+			</tr>
+		</thead>
+		<tbody class="table-striped" bindonce ng-repeat="product in group.products| filter: group.filterResults| orderBy:results.sortBy:results.reverse">
+			<tr style="{{searchId == product.defaultVersionId ? 'background-color: rgba(53,126,189,0.2)' : ''}}">
+ 			<!-- binding --> 
+			<td ng-if="results.showCheckboxes"> 
+				<input type="checkbox" class="cross-product-checkbox" id="cpcb_{{product.defaultVersionId}}" value="{{product.defaultVersionId}}"/>
+			</td>
+			<td>
+				<span bo-html=product.icon></span>
+				<!-- 
+				<span erm-rights-indicator-icon product="product"></span>
+				 -->
+			</td>
+			<td>
+				<a ng-click="doToggleProductVersions(product)">
+						<i  ng-show="!isProductVersionsExpanded(product) && (!product.checkedChildren || product.hasChildren)" class="icon-expand-alt" style="cursor: pointer;"></i>
+						<i  ng-show="isProductVersionsExpanded(product) && (!product.checkedChildren || product.hasChildren)" class="icon-collapse-alt" style="cursor: pointer;"></i>
+						<i  ng-show="product.expanding" class="icon-spinner icon-spin icon-large"></i>											
+				</a>
+				<a bo-href="'#rights/'+product.defaultVersionId+'?isFoxipediaSearch=' + isFoxipediaSearch" class="searchResultsProductTitle" ng-click="doSelectProduct(product); !productSearch.productSearchCompleted" bo-text="product.title"></a>
+			 </td>
+			 <!-- confidential icon -->
+			 <td>
+			 <i bo-if="product.statusCode=='SEMI'" class="icon-unlock icon-large"></i>
+			 <i bo-if="product.statusCode=='CNFDL'" class="icon-lock icon-large"></i>			 
+			 </td>			 
+			 <!-- end confidential icon -->
+			 <td bo-text="product.displayFinancialProductId">
+			 </td>
+			 <td bo-text="product.productTypeDesc">
+			 </td>
+			 <td bo-text="product.displayProductionYear">
+			 </td>
+			 <td bo-text="product.displayFinancialDivisionDesc">
+			 </td>
+			 <td bo-text="product.displayReleaseDate|date:'shortDate'">
+			 </td>
+
+			 </tr>
+			 
+			 <!-- start versions --> 
+			 <tr bindonce ng-repeat="version in product.versions | orderBy:productOrdering" ng-show="isProductVersionsExpanded(product) && product.defaultVersionId != version.foxVersionId" style="{{searchId == version.foxVersionId ? 'background-color: rgba(255, 255, 0, 0.6)' : ''}}">
+			 	<td ng-if="results.showCheckboxes">
+			 		<input type="checkbox" class="cross-product-checkbox" id="cpcb_{{version.foxVersionId}}" value="{{version.foxVersionId}}"/>
+			 	</td>
+			 	<td>
+			 	</td>
+			 	<td class="productSearchVersions">			 	    
+			 		<span erm-rights-indicator-icon product="version"></span>			 	
+			 		<a href="#rights/{{version.foxVersionId}}" class="searchResultsProductTitle" ng-click="doSelectProduct(product,version);!productSearch.productSearchCompleted">{{version.versionTitle}}</a>
+			 	</td>
+			 	<td bo-text="version.financialProductId">
+			 	</td>
+			 	<td bo-text="product.productTypeDesc">
+			 	</td>
+				<td bo-text="product.displayProductionYear">
+				</td>
+				<td bo-text="product.financialDivisionDesc">
+				</td>
+				<td bo-text="product.displayReleaseDate|date:'shortDate'">
+				</td>			 	
+			 </tr>
+			 <!-- end versions -->
+		</tbody>
+	</table>    
+</div>

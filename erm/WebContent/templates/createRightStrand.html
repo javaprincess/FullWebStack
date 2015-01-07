@@ -1,0 +1,317 @@
+<div id="cre_popupLayer" style="padding-top: 0; margin-top: 0;" class="panel  panel-primary reducedSpacing popup smallFontRights"> <!--  style="height : 750px; max-height : 750px; min-height : 750px;">  -->
+			<!-- Start Header -->
+			<div class="panel reducedSpacing" style="padding-top: 0; margin-top: 0;"> <!--  style="height : 290px;"> --> 
+				<div class="panel reducedSpacing" style="padding-top: 0; margin-top: 0; height : 30px;">
+					<div class="panel panel-default reducedSpacing" style="width:89%; float : left;"><span style="font-weight : bold;" id="cre_productTitlePopup">New Rights Definition(s) for {{cre_MovieTitle}}</span></div>
+				</div>
+				
+				<div class="panel panel-default reducedSpacing" style="padding-top: 0; margin-top: 0; height : 45px; background-color : #4d6b8a;">
+					
+					<div class="panel reducedSpacing" style="width:12%; float : left; margin-left : 5px; background-color : #4d6b8a; border-color : #4d6b8a;">
+						<span class="divColorDisplayTitle">Financial Title ID (WPR ID): </span><br>
+						<span class="divColorDisplayTitle boldFont" id="cre_productCode"></span>
+					</div>
+					<div class="panel reducedSpacing" style="width:20%; float : left; margin-left : 5px; background-color : #4d6b8a; border-color : #4d6b8a;">
+						<span class="divColorDisplayTitle">Product Type: </span><br><span class="divColorDisplayTitle boldFont" id="cre_productTypeCode"></span>
+					</div>
+					<div class="panel reducedSpacing" style="width:12%; float : left; margin-left : 5px; background-color : #4d6b8a; border-color : #4d6b8a;">
+						<span class="divColorDisplayTitle">US Release Date: </span><br><span class="divColorDisplayTitle boldFont" id="cre_firstReleaseDate"></span>
+					</div>
+					<div class="panel reducedSpacing" style="width:12%; float : left; margin-left : 5px; background-color : #4d6b8a; border-color : #4d6b8a;">
+						<span class="divColorDisplayTitle">Production Year: </span><br><span class="divColorDisplayTitle boldFont" id="cre_productionYear"></span>
+					</div>
+					<div class="panel reducedSpacing" style="width:10%; float : left; margin-left : 5px; background-color : #4d6b8a; border-color : #4d6b8a;">
+						<span class="divColorDisplayTitle">Fox ID: </span><br><span class="divColorDisplayTitle boldFont" id="cre_currentFoxId"></span>
+					</div>
+					<div class="panel reducedSpacing" style="width:14%; float : left; margin-left : 5px; background-color : #4d6b8a; border-color : #4d6b8a;">
+						<span class="divColorDisplayTitle">Fox Version ID: </span><br><span class="divColorDisplayTitle boldFont" id="cre_currentFoxVersionId"></span>
+					</div>
+					<div class="panel reducedSpacing" style="width:10%; float : left; margin-left : 5px; background-color : #4d6b8a; border-color : #4d6b8a;">
+						<span class="divColorDisplayTitle">JDE Version ID : </span><br><span class="divColorDisplayTitle boldFont" id="cre_currentFoxIdJDE"></span>
+					</div>
+				</div>
+				
+				<div id="cre_errorPanel" class="panel panel-danger" style="height : 100px; overflow-y : hidden; margin : 2px; padding : 1px; border-color : #8c3737; display : none;">
+					<div class="panel-heading boldFont" style="height : 18%; margin : auto; text-align : right; background-color : #8c3737; padding : 2px;"><a id="cre_errorPanelClose" style="font-weight : 800; color : #ffffff;">close</a></div>
+					<div id="cre_errorPanelInner"  class="panel-body" style="height : 80%; margin : auto; color : #992b0f; font-weight : 800;overflow-y : auto;"></div>
+				</div>
+				
+				<div class="panel panel-default reducedSpacing" style="height : 35px; position : relative; margin-right : 0px; margin-left : 0px; padding-left : 0px; padding-right : 0px;">
+					<div class="panel reducedSpacing" style="width : 60%; float :left;">
+						<div class="panel  reducedSpacing" style="width : 7%; float : left;">
+							<span style="margin-top : 3px;">Type : </span>
+						</div>
+						<div class="panel  reducedSpacing" style="width : 20%; float : left; margin-top : 0px;">
+							<div class="panel-body inclusionExclusionClass" style="width : 16%; float : left;"><input id="cre_inclusion" name="inclusionExclusionProduct" type="radio" style="margin-bottom : 2px;" value="1"></div><div class="panel-body inclusionExclusionClass" style="margin-top : 3px; padding-bottom : 0px; height : 90%; float : right; width : 82%; font-weight : bold; color : #3e613d;"><span> <i class="icon-plus"></i> Inclusion</span></div>
+						</div>
+						<div class="panel reducedSpacing" style="width : 20%; float : left; margin-top : 0px;">
+							<div class="panel-body inclusionExclusionClass" style="width : 16%; float : left;"><input id="cre_exclusion" name="inclusionExclusionProduct" type="radio" value="2"></div><div class="panel-body inclusionExclusionClass" style="margin-top : 3px; padding-bottom : 0px; height : 90%; float : right; width : 82%; font-weight : bold;"><span style="color : #992b0f;"> <i class="icon-stop"></i> Exclusion</span></div>
+						</div>
+						<div id="cre_bothObption" class="panel reducedSpacing" style="width : 50%; float : left; margin-top : 0px;">
+							<div class="panel-body" style="width : 8%; float : left;"><input id="cre_productInfoCodeType" type="radio" name="inclusionExclusionProduct" value="3"></div><div class="panel-body" style="margin-top : 3px; padding-bottom : 0px; height : 90%; float : left; width : 80%; font-weight : bold; text-align : left;"><span style="color : #c09318;"> <i class="icon-warning-sign"></i> Product Info Codes </span></div>
+						</div>
+					</div>
+					<div class="panel reducedSpacing" style="width : 38%; float : right;">
+						<div class="panel reducedSpacing divFontDisplay" style="width : 38%; float : left; text-align : center; padding : 0px; margin : 0px;">
+							<span id="cre_strandSetText">Strand Set Name  </span>
+						</div>
+						<div class="panel reducedSpacing" style="width : 60%; float : right; padding-right : 0px; margin-right : 0px;">
+						<span style="width : 100%;">
+							<input id="cre_strandSetComboBox" style="width : 96.1%;">	<!-- <button id="cre_addStrandSetComment" class="btn btn-xs btn-primary" style="margin : 0px;">...</button>	-->	
+						</span>
+						</div>
+					</div>
+				</div>
+					
+			</div>
+			<!-- End Header -->
+			
+			<div class="panel panel-default reducedSpacing" style="width : 99%; height : 20px; position : relative;">
+					<span style="font-weight : bold;">Select Dimensions</span>
+			</div>
+			<div class="panel panel-default reducedSpacing" style="height : 400px; width : 99%; position : relative;"> <!-- height : 72% -->
+				<div class="panel panel-default reducedSpacing" style="height : 99%; float : left; width : 59%;">
+				  <div class="panel panel-default reducedSpacing" style="height : 99%;">
+					<div class="panel reducedSpacing" style="width : 32%; height : 99%; float : left; padding : 0px; margin:0px; margin-left : 5px;">
+						<div class="panel-body divFontDisplay" style="width : 98%"><span id="cre_mediaText">Media</span></div>
+						<div class="panel reducedSpacing1 treeview-back" style="width : 98%; height : 99%; padding : 0px; border : 0px;">
+							<div class="panel-body reducedSpacing" style="width : 100%; height : 60%; padding : 0px; margin : 0px;">
+								<select id="cre_mediaSelector" multiple class="form-control smallFontRights" size="25" style="width: 100%; height : 100%;"></select>
+							</div>
+							<div class="panel-body reducedSpacing iconFooterClass" style="width : 100%; height : 7%; padding : 0px; margin : 0px;">
+								<i id="cre_removeMedia" class="icon-collapse-top divFontDisplay"></i>
+								<i id="cre_addMedia" class="icon-collapse divFontDisplay"></i>
+							</div>
+							<div class="panel-body reducedSpacing divFontDisplay" style="width : 100%; height : 5%; padding : 0px; margin : 0px; text-align : center;">
+								<span id="cre_mediaTextSelected">Selected Media</span>
+							</div>
+							<div class="panel-body reducedSpacing" style="width : 100%; height : 27%; padding : 0px; margin : 0px;">
+								<select id="cre_mediaSelected" class="form-control smallFontRights" multiple style="width: 100%; height : 100%;"></select>
+							</div>
+						</div>
+			
+					</div>
+					<div class="panel reducedSpacing" style="width : 33%; height : 99%; float : left; padding : 0px; margin:0px; margin-left : 5px;">
+						
+						<div id="cre_territoryGroupText" class="panel-body divFontDisplay" style="height : 5%; width : 100%;">
+							Territory Groups
+						</div>
+						<div class="panel-body boldFont" style="height : 8%; width : 100%; margin-bottom : 0px; overflow-y : auto;">
+							<input id="cre_territoryGroups" style="width : 100%;">
+						</div>
+						<div class="panel-body divFontDisplay" style="width : 98%; height : 5%;margin-top : 6px;">
+							<span id="cre_territoryText">Territory</span>
+						</div>
+						<div class="panel reducedSpacing1 treeview-back" style="width : 98%; height : 80%; padding : 0px; border : 0px;">
+							<div class="panel-body" style="width: 100%; height : 55%; padding : 0px; margin : 0px;">
+								<select id="cre_territorySelector"  multiple class="form-control smallFontRights" size="25" style="width: 100%; height : 100%; overflow-x : auto;"></select>
+							</div>
+							<div class="panel-body reducedSpacing iconFooterClass" style="width : 100%; height : 7%; padding : 0px; margin : 0px;margin-bottom : 6px;">
+								<i id="cre_removeTerritory" class="icon-collapse-top divFontDisplay"></i>
+								<i id="cre_addTerritory" class="icon-collapse divFontDisplay"></i>
+							</div>
+							<div class="panel-body reducedSpacing divFontDisplay" style="width : 100%; height : 5%; padding : 0px; margin : 0px; margin-bottom : 5px; text-align : center;">
+								<span id="cre_territoryTextSelected">Selected Territories</span>
+							</div>
+							<div class="panel-body reducedSpacing" style="width : 100%; height : 33%; padding : 0px; margin : 0px;">
+								<select id="cre_territorySelected" class="form-control smallFontRights" multiple style="width: 100%; height : 100%;"></select>
+							</div>
+						</div>
+
+					</div>
+					<div class="panel reducedSpacing" style="width : 32%; height : 99%; float : left; padding : 0px; margin:0px; margin-left : 5px;">
+						<div id="cre_languageGroupText" class="panel-body divFontDisplay" style="height : 5%; width : 100%;">
+							Language Groups
+						</div>
+						<div class="panel-body boldFont" style="height : 8%; width : 100%; margin-bottom : 5px; overflow-y : auto;">
+							<input id="cre_languageGroups" style="width : 100%;">
+						</div>
+						<div class="panel-body divFontDisplay" style="width : 98%; height : 5%;margin-top : 6px;">
+							<span id="cre_languageText">Language</span>
+						</div>
+						<div class="panel reducedSpacing1 treeview-back" style="width : 98%; height : 80%; padding : 0px; border : 0px;">
+							<div class="panel-body" style="width : 100%; height : 55%; padding : 0px; margin : 0px;">
+								<select id="cre_languageSelector" multiple class="form-control smallFontRights" size="25" style="width: 100%; height : 100%;"></select>
+							</div>
+							<div class="panel-body reducedSpacing iconFooterClass" style="width : 100%; height : 7%; padding : 0px; margin : 0px;margin-bottom : 6px;">
+								<i id="cre_removelanguage" class="icon-collapse-top divFontDisplay"></i>
+								<i id="cre_addlanguage" class="icon-collapse divFontDisplay"></i>
+							</div>
+							<div class="panel-body reducedSpacing divFontDisplay" style="width : 100%; height : 5%; padding : 0px; margin : 0px; margin-bottom : 5px; text-align : center;">
+								<span id="cre_languageTextSelected">Selected Languages</span>
+							</div>
+							<div class="panel-body reducedSpacing" style="width : 100%; height : 33%; padding : 0px; margin : 0px;">
+								<select id="cre_languageSelected" class="form-control smallFontRights" multiple style="width: 100%; height : 100%;"></select>
+							</div>
+						</div>
+
+					</div>
+				  </div>
+				</div>
+					
+				<div class="panel reducedSpacing" style="float : right; width : 40.5%; height : 99%; margin : 0px;">
+					<div class="panel reducedSpacing" style="width : 50%; height : 99%; float : left; margin-left : 0px;">						
+						<div class="panel-body" style="width : 98%; border-bottom : 2px solid #d1d1d1; vertical-align : top; padding-bottom : 5px;">
+							<font class="divFontDisplay" style="margin-top : 0px; padding-top : 0px; vertical-align : top;"><span id="cre_terms">Term</span></font>  
+						</div>
+						<div id="cre_startContractualDateText" class="panel-body divFontDisplay" style="width : 98%;">
+							Term Start Date
+						</div>
+						<div class="panel-body" style="width : 98%;">
+							<input id="cre_startContractualDate" onChange="checkValidDateFormat(this.value, 'cre_startContractualDate')" title="Enter a valid date mm/dd/yyyy" style="width:98%; height : 24px;" /> 
+						</div>
+						<div class="panel-body" style="width : 98%;  padding-top : 5px;">
+							<div class="panel-body pull-left" style="width : 50%;">
+								<div id="cre_startDateCodeText" class="panel-body divFontDisplay" style="width : 98%">
+									Start Date Code
+								</div>
+								<div class="panel-body" style="width : 98%">
+									<input id="cre_startDateCode" onChange="checkValidDateFormat('', 'cre_startContractualDate')" style="width : 98%;">
+								</div>
+							</div>
+							<div class="panel-body pull-right" style="width : 49%;">
+								<div id="cre_startDateStatusText" class="panel-body divFontDisplay" style="width : 98%">
+									Start Date Status
+								</div>
+								<div class="panel-body" style="width : 98%">
+									<input id="cre_startDateStatus" style="width : 98%;">
+								</div>
+							</div>
+						</div>		
+						<div id="cre_endContractualDateText" class="panel-body divFontDisplay" style="float: left; width : 98%;  padding-top : 3px;">
+							Contractual End Date
+						</div>
+						<div class="panel-body" style="width : 98%;">
+							<input id="cre_endContractualDate" onChange="checkValidDateFormat(this.value, 'cre_endContractualDate')" title="Enter a valid date mm/dd/yyyy" style="width:98%; height : 24px;" />
+						</div>
+						<div class="panel-body" style="width : 98%;  padding-top : 5px;">
+							<div class="panel-body pull-left" style="width : 50%;">
+								<div id="cre_endDateCodeText" class="panel-body divFontDisplay" style="width : 98%">
+									End Date Code
+								</div>
+								<div class="panel-body" style="width : 98%">
+									<input id="cre_endDateCode" onChange="checkValidDateFormat('', 'cre_endContractualDate')" style="width: 98%;"/>
+								</div>
+							</div>
+							<div class="panel-body pull-right" style="width : 49%;">
+								<div id="cre_endDateStatusText" class="panel-body divFontDisplay" style="width : 98%">
+									End Date Status
+								</div>
+								<div class="panel-body" style="width : 98%">
+									<input id="cre_endDateStatus" style="width: 98%;"/>
+								</div>
+							</div>
+						</div>
+						<div id="cre_startOverrideDateText" class="panel-body divFontDisplay" style="float: left; padding-top: 7px; width : 98%;">
+							Override Start Date
+						</div>
+						<div class="panel-body" style="width : 98%; padding-bottom : 5px;">
+							<input id="cre_startOverrideDate" onChange="checkValidDateFormat(this.value, 'cre_startOverrideDate')" title="Enter a valid date mm/dd/yyyy" style="width:98%; height : 24px;" />
+						</div>
+						<div id="cre_endOverrideDateText" class="panel-body divFontDisplay" style="width : 98%;">
+							Override End Date
+						</div>
+						<div class="panel-body" style="width : 98%;">
+							<input id="cre_endOverrideDate" onChange="checkValidDateFormat(this.value, 'cre_endOverrideDate')" title="Enter a valid date mm/dd/yyyy" style="width:98%; height : 24px;" />
+						</div>
+						
+						<div class="panel panel-default reducedSpacing" style="clear: both; height : 33%; padding : 0px; margin : 0px; margin-top: 0;">														
+							<div id="cre_infoCodeTermAddEdit" class="reducedSpacing1" style="float: left; clear: both; width : 98%; height : 20%; margin: 6% 0px 0px; overflow : auto; overflow : hidden;">
+								<div id="cre_infoCodeTerms" class="panel-body pull-left divFontDisplay blueFontStyle" style="width : 49%; font-size : 10px; margin : 0px; margin-top : 5px; padding-bottom : 0px; margin-bottom : 0px;">
+									Info Code Term(s)
+								</div>
+								<div class="panel reducedSpacing1" style="width : 49%; padding : 0px; margin : 0px; border : 0px; float : right; text-align : right;">
+									<button id="cre_addEditButton" class="btn btn-xs btn-default btn-add" disabled="disabled" style="margin : 0px; margin-left : auto;margin-right : auto;">Modify Terms</button>
+								</div>
+							</div>						
+							<div id="cre_infoCodeCustomDateDisplay" class="panel reducedSpacing1 blueFontStyle" style="margin-top: 4%; float: left; width : 98%; height : 55%; margin : 0px; margin-top : 10px; overflow : auto;  border : 1px solid #d1d1d1; "></div>													
+						</div>
+						
+					</div>
+					
+					<div id="cre_multiPanelInfoCodes" class="panel reducedSpacing" style="width : 46%; height : 99%; float : right; padding : 0px; margin : 0px; margin-left : 5px;">
+						<div class="panel-body divFontDisplay1" style="height : 5%; width : 100%;">
+							Info Code Groups
+						</div>
+						<div class="panel-body boldFont" style="height : 8%; width : 100%; margin-bottom : 5px; overflow-y : auto;">
+							<input id="cre_infoCodeGroups" style="width : 100%;">
+						</div>
+						<div id="cre_infoCodeTreeViewMultiText" class="panel-body divFontDisplay1" style="width : 98%; margin : 0px; margin-top : 3px; height : 5%;">
+							<span id="cre_infoCodeText">Info Codes</span>
+						</div>
+						
+						<div class="panel-body reducedSpacing" style="width : 99%; height : 43%; padding : 0px; margin : 0px; margin-top : 6px;">
+							<select id="cre_infoCodeSelector" class="form-control smallFontRights"   multiple style="width: 100%; height : 100%;"></select>
+						</div>
+						
+						<div id="cre_accumulator" class="panel reducedSpacing" style="height : 36%; margin-bottom : 0px;">
+							<div class="panel reducedSpacing" style="width:99%; float : left; height : 98%; padding : 0px; margin : 0px;">
+								<div class="panel-body iconFooterClass" style="height : 16%;">
+									<i id="cre_removeInfoCodesAdd" class="icon-collapse-top divFontDisplay blueFontStyle"></i>
+									<i id="cre_addInfoCodesAdd" class="icon-collapse divFontDisplay blueFontStyle"></i>
+								</div>
+								<div id="cre_restrictionAddSelectedText" class="panel reducedSpacing1 divFontDisplay1" style="width : 99%; height : 10%; overflow : auto; border : 0px;padding : 0px; margin : 0px; margin-bottom : 5px; overflow : hidden; text-align:center;">
+									<span>Add/Update</span>
+								</div>
+								<div  class="panel reducedSpacing1  blueFontStyle" style="width : 99%; height : 75%; overflow : auto; border : 1px solid #d1d1d1;padding : 0px; margin : 0px; margin-top : 3px;">
+									<select id="cre_restrictionAddSelected" class="form-control smallFontRights"   multiple="true" style="width: 100%; height : 100%;"></select>
+								</div>
+							</div>							
+						</div>
+									
+					</div>
+					
+				</div>
+			</div>
+			<!-- START COMMENT SECTION -->
+			<!-- amv add comments button -->
+			<div id="cre_commentSection">
+			<button id="addRightStrandCommentsAndAttachments" name="adCommentButton" onClick="strandComments.addStrandComment('cre_commentSection');" class="btn-xs btn-primary btn-add"  style="font-size: 9px;"><i class="icon-comment-alt icon-flip-horizontal"></i> Add Comment</button>
+			<input type="hidden" name="commentId">			
+			<!-- end comments button -->
+			<div id="cre_comment" name="comment" class="commentStrand" style="display:none; width : 99.5%; margin-left : 0px; margin-top : 5px; border : 1px solid #989898; padding : 5px;">
+				<div style="float: right; text-align: right;">
+					<a name="edit" href="#">Edit</a>
+					<a name="remove" href="#">Remove</a>
+				</div>
+				<div>
+				<div>			
+				<span>Subject:</span>
+				<span name="title"></span>
+				</div>
+				<div>
+				<span name="text"></span>
+				</div>
+				</div>
+				<div name="attachments" style="border-top: 1px dotted gray; margin-top: 10px">
+				</div>				
+			</div>
+			</div>
+			<!-- END COMMENT SECTION -->
+			<div class="panel reducedSpacing" style="height : 40px; margin-top : 10px;">
+				<div style="float : right; margin : 0px; margin-right : 5px;margin-top : 10px;">
+					<button id="cre_createRightStrand" class="btn btn-xs btn-primary btn-add" style="margin : 0px; margin-left : auto;margin-right : auto;">Create</button>
+					<button id="cre_cancelCreateRightStrand" class="btn btn-xs btn-primary" style="margin : 0px; margin-left : auto;margin-right : auto;">Cancel</button>
+				</div>
+			</div>
+		
+			<div id="cre_submitPopupWindow" style="display :none;">
+		  		<div id="submitDiv"  class="submitClass" style="height : 50%; margin-top : 20px;">
+		  			<i class="icon-spinner icon-spin icon-large"></i>&nbsp; Processing, please wait...
+		  		</div>
+		  	</div>
+		  	
+		  	<div id="cre_createRightStrandUnsuccessful" style="display :none;">
+		  		<div style="width : 95%; float : right; margin-left : auto; margin-right : auto;">
+					The system was unsuccessful in copying the right strands below, because of some overlapping dimensions. You can change one or more dimension and retry. 
+				</div>
+		  		<div style="width : 95%; float : right; margin-left : auto; margin-right : auto;">
+					<select id="cre_targetProductListError" class="form-control smallFontRights" multiple size="2" style="width:99%; height : 50px; margin : 0px; padding : 0px;"></select>
+				</div>
+				<div style="margin : 0px; margin-right : 5px;margin-top : 10px; width : 95%; margin-left : auto; margin-right : auto;">
+					<button id="cre_reCreateRightStrand" class="btn btn-xs btn-primary btn-add" style="margin : 0px; margin-left : auto;margin-right : auto;">Change Dimensions And Try Create Again</button>
+					<button id="cre_cancelReCreateRightStrand" class="btn btn-xs btn-primary" style="margin : 0px; margin-left : auto;margin-right : auto;">Cancel</button>
+				</div>
+		  	</div>
+		  	
+</div>

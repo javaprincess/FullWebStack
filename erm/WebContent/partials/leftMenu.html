@@ -1,0 +1,14 @@
+<ul id="treeview">
+    <li data-expanded="true">
+        <span class="k-sprite folder"></span>
+        <span>{{movieTitle}}</span>
+        <ul>
+            <li data-expanded="true" ng-repeat="menu1 in productVersionTree.children">
+                <span class="k-sprite"></span>{{menu1.data.versionTitle}}
+                <ul ng-show="menu1.children.length > 0">
+                    <li ng-repeat="menu2 in menu1.children"><span class="k-sprite image"></span>{{menu2.data.versionTitle}}</li>
+                </ul>
+            </li>           
+        </ul>
+    </li>
+</ul>

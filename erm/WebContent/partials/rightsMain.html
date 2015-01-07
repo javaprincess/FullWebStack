@@ -1,0 +1,27 @@
+<div ng-controller="RightsController">
+This is the rights maintenance page for product with ID : {{foxVersionId}} / {{rightSearch.searchInProgress}} / {{rightSearch.searchExecuted}}<br>
+<form class="form-search" ng-submit="doDummyRightRestrictions()">
+<button class="btn">Retrieve</button>
+</form>
+
+<div ng-show="rightSearch.searchInProgress"><i class="icon-refresh icon-spin"></i> loading product with ID {{foxVersionId}}...</div>
+<div id="rightResults" ng-show="rightSearch.searchExecuted">
+<b>Created Name</b> : {{productVersion.createName}}<br>
+<b>Created Date</b> : {{productVersion.createDate}}<br>
+<b>Confirmation Status Id</b> : {{productVersion.confirmationStatusId}}<br>
+<b>Based On Template Id</b> : {{productVersion.basedOnTemplateId}}<br>
+<b>Business Inherits From Version Id</b> : {{productVersion.businessInheritsFromVersionId}}<br>
+<b>Fox Version Id</b> : {{productVersion.foxVersionId}}<br>
+<b>Legal Inherits From Version Id</b> : {{productVersion.legalInheritsFromVersionId}}<br>
+<b>Product Type Id</b> : {{productVersion.productTypeId}}<br>
+<b>Product Version Status Id</b> : {{productVersion.productVersionStatusId}}<br>
+<b>Update Date</b> : {{productVersion.updateDate}}<br>
+<b>Update Name</b> : {{productVersion.updateName}}<br>
+<b>Title Name</b> : {{productVersion.titleName}}<br>
+</div>
+<br/><br/>
+<div>
+
+{{productRestrictions | json }}
+</div>
+</div>

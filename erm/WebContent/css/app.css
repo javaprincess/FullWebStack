@@ -1,0 +1,1089 @@
+/* app css stylesheet */
+a [class^="icon-"], a [class*=" icon-"] {
+    text-decoration: none;
+}
+a:focus {
+  outline: none;
+}
+.topLogo {
+	float: left;
+	position: relative; 	
+	cursor: pointer;
+}
+.menu {
+  list-style: none;
+  border-bottom: 0.1em solid black;
+  margin-bottom: 2em;
+  padding: 0 0 0.5em;
+}
+
+.menu:before {
+  content: "[";
+}
+
+.menu:after {
+  content: "]";
+}
+
+.menu > li {
+  display: inline;
+}
+
+.menu > li:before {
+  content: "|";
+  padding-right: 0.3em;
+}
+
+.menu > li:nth-child(1):before {
+  content: "";
+  padding: 0;
+}
+
+.navbar {
+  height: auto;  
+  min-height:0;
+}
+.navbar-brand {
+  padding: 5px;
+  line-height: normal;
+}
+
+.searchOptionsEntered {
+  font-weight: bold;
+  padding-right: 5px;
+}
+
+.backgroundColorHighlight {
+  background-color: rgba(53,126,189,0.2) !important;
+}
+
+.notAcknowledgedBackgroundColorHighlight {
+  background-color: rgba(93,152,202,0.8);
+}
+
+.productSearchVersions {
+	padding-left: 2em !important;
+}
+
+.input-year {
+	width: 50px;
+}
+
+.no-left-padding {
+	padding-left: 0px;
+}
+
+.icon-expand-alt, .icon-collapse-alt {
+  cursor: pointer;
+}
+
+.treeNodeLevel0 {
+	color: green;	
+}
+
+.treeNodeLevel1 {
+	color:blue;
+}
+
+.treeNodeLevel2 {
+	color: yellow;
+}
+
+.treeNodeLevel4 {
+	color: red;
+}
+
+body {
+	width : 90%;
+	margin-left : auto;
+	margin-right : auto;
+}
+
+th {
+	background-color: #E6E6E6;
+}
+
+.btn-sm, .btn-xs {
+  border-radius: 4px 4px 4px 4px !important;
+}
+.btn-add, .btn-add:active, .btn-add:focus {
+	background-color: rgba(0, 128, 0, 1);
+	border-color: rgba(0, 128, 0, 1);	
+}
+.btn-add:hover {
+	background-color: rgba(0, 128, 0, 0.8);
+	border-color: rgba(0, 128, 0, 0.8);	
+}
+.btn-delete, .btn-delete:active, .btn-delete:focus {
+	background-color: rgba(255, 0, 0, 1);
+	border-color: rgba(255, 0, 0, 1);	
+}
+.btn-delete:hover {
+	background-color: rgba(255, 0, 0, 0.8);	
+	border-color: rgba(255, 0, 0, 0.8);
+}
+.btn-edit, .btn-edit:active, .btn-edit:focus {
+	background-color: rgba(266, 149, 44, 1);
+	border-color: rgba(266, 149, 44, 1);	
+}
+.btn-edit:hover {
+	background-color: rgba(266, 149, 44, 0.8);
+	border-color: rgba(266, 149, 44, 0.8);	
+}
+.btn-copy, .btn-copy:active, .btn-copy:focus {
+	background-color: rgba(0,162,232, 1);
+	border-color: rgba(0,162,232, 1);
+}
+.btn-copy:hover {
+	background-color: rgba(0,162,232, 0.8);
+	border-color: rgba(0,162,232, 0.8);
+}
+.btn-search, .btn-search:active, .btn-search:focus {
+	background-color: rgba(53,126,189, 1);
+	border-color: rgba(53,126,189, 1);
+}
+.btn-search:hover {
+	background-color: rgba(53,126,189, 0.8);
+	border-color: rgba(53,126,189, 0.8);
+}
+.btn-disabled, .btn-disabled:hover, .btn-disabled:active {
+	background-color: rgba(242, 242, 242, 1) !important;
+	border-color: rgba(242, 242, 242, 1)  !important;
+	cursor: default;
+	color: rgb(0, 0, 0) !important;	
+}
+
+
+.btn-adopt {
+	background-color : rgba(135, 73, 158, 1);
+	border-color : rgba(135, 73, 158, 1);
+}
+
+.btn-adopt:hover {
+	background-color : rgba(135, 73, 158, 0.8);
+	border-color : rgba(135, 73, 158, 0.8);
+}
+
+.btn-unadopt {
+	background-color : rgba(112, 99, 67, 1);
+	border-color : rgba(112, 99, 67, 1);
+}
+
+.btn-unadopt:hover {
+	background-color : rgba(112, 99, 67, 0.8);
+	border-color : rgba(112, 99, 67, 0.8);
+}
+
+.rightStrandButtons {
+  margin: 5px;
+  float: left;
+  width: auto;
+}
+.rightStrandsGridHeader {	
+  float: left; 
+  clear: both;
+  width: 98%; 	
+  margin-top: 1%; 
+  margin-left: 2%;
+  font-size : 14px;
+  color:#4e82ae;
+  font-weight : bold;
+}
+.forceShow {
+	display: inline !important;
+}
+
+.strand-set-link {
+}
+
+.search-show, .search-hide {
+	-webkit-transition:max-height 0.5s;
+	-moz-transition:max-height 0.5s;
+	-ms-transition:max-height 0.5s;
+	-o-transition:max-height 0.5s;
+	transition:max-height 0.5s;
+}
+ 
+#advanced-product-search-options {
+	font-size: 13px;
+} 
+.control-label {
+	padding-top: 1% !important;
+}
+.search-show {	
+	max-height: 0;	
+}
+.search-show-active.search-show-active {		
+ 	max-height: 500px;  
+}
+ 
+.search-hide {		
+  max-height: 500px; 		
+}
+.search-hide-active.search-hide-active {
+	max-height: 0;	
+}
+
+.k-window-titlebar {    
+ height: 2.1em !important;
+}
+.k-state-selected, .k-button:active, .k-draghandle.k-state-selected:hover, .k-state-selected a {	  
+  color:  white !important;  
+  box-shadow: 0;
+}
+
+.k-in.k-state-selected {
+	background-image: none !important;
+}
+
+.k-popup.k-list-container{
+	min-width: 200px !important;
+}
+
+.warningClass {
+	margin: 2%; 
+	width: 95%; 
+	display: none; 
+	float: left;
+	text-align: left; 
+	height: auto;
+	color: rgb(266, 149, 44);
+	text-align: center !important;
+}
+
+.successClass {
+	color: rgb(0, 128, 0);
+}
+.deletedClass {
+	color: rgb(255, 0, 0);	
+}
+#sse_removeInfoCodes, #sse_addInfoCodes {
+	cursor: pointer;
+}
+.searchAndCrossProduct {
+	float: left;
+	width: 100%;
+}
+.crossPanel {
+	float: right;
+	width: 1%;
+	padding-top: 10%;
+	padding-bottom: 10.5%;
+	height: 100%;
+	background-color: rgba(200, 200, 200, 0.1);
+}
+.crossProduct {
+	float: right;
+	width: 1%;
+	background-color: rgba(200, 200, 200, 0.1);
+	cursor: pointer;
+	position: absolute;
+	right: 1.5%;
+	height: 335px;
+	padding-top: 100px;
+	z-index: 5;
+}
+.crossProductText_R {
+	filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=1);
+  -webkit-transform: rotate(90deg); 
+  -moz-transform: rotate(90deg);
+  -ms-transform: rotate(90deg) translate(-10em,0);
+	-ms-transform-origin: 0 0;	 
+	font-size: 11px;	
+	line-height: 8px;
+	padding-top: 0px;
+	padding-left: 8px;		
+}
+.crossProductPanel {
+	min-height: 500px;
+	z-index: 2;
+}
+.card {
+    margin-bottom: 20px;
+    text-align: left;
+}
+.card {
+    background-color: rgb(247, 247, 247);
+    padding: 20px 25px 30px;
+    width: 31%;
+    border-radius: 2px;
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    margin: 1%;
+    float: left;
+    max-height: 200px;
+    padding-top: 50px;
+    height: 175px;    
+}
+.homeTileHeader{
+	font-size: 24px;
+}
+.homeTileBlurb {
+	padding: 5%;
+	font-size: 14px;
+}
+.homeTileClickforMore {
+	padding: 5%;
+}
+.clearfix {
+}
+.k-ie .crossProduct {
+	padding-bottom: 10%;
+}
+
+.crossProductItems {	
+	height: 100%;
+	cursor: pointer;
+	width: 0%;	
+	font-size: 12px;	
+	height: 650px;
+	float: right;	
+	top: 0;
+	position: relative;
+	right: 1%;
+	padding-right: 0.5%;
+	overflow-y: auto;
+	z-index: 11;
+}
+
+.crossProductSuccessDiv, .crossProductDeleteSuccessDiv {
+	color: green;
+	width: 100%;
+	float: left;
+}
+
+.disableLink {
+   pointer-events: none;
+   cursor: default;
+   color: #000000;
+}
+
+.disableLink:hover {
+   text-decoration: none;
+}
+
+
+.searchTypes {
+	float: left; 
+	width: 32.8%;
+	margin-right: 0.5%;
+	padding-left: 1%; 
+	background-color: rgba(200, 200, 200, 0.1);
+	font-size: 11px;
+}
+
+#searchOptionsEntered {
+	float: left; 
+	margin-top: 10px; 
+	padding-bottom: 10px; 
+	width: 98.5%; 
+	background-color: rgba(200, 200, 200, 0.1);
+	padding-left: 1%;
+  padding-top: 1%;
+}
+
+.productResults {
+	overflow-y: auto !important;
+	height: auto;	
+}
+
+.productResultsModal {
+	max-height: 400px !important;
+}
+.searchLinks {
+	float: left; 
+	width: 40%;
+	padding-top: 10px;
+	padding-left: 5px;
+}
+
+.searchLinksLessPad {	
+	padding-top: 0px;
+  margin-bottom: 5px;
+}
+
+#erm-content {
+	float: left;
+	height: auto; 
+	width: 100%;
+	margin-top : 0px; 
+	padding-top : 0.5%; 
+	z-index : 0;
+}
+
+#searchingForProducts {	
+	overflow: hidden;
+	position: relative;
+	width: 98.5%;
+	text-align: center;
+	padding-top: 1%;
+	padding-bottom: 1%;
+	float: left; 
+}
+
+.crossProductInstructions {
+	clear:both;
+	float: left;
+	width: 95%;
+}
+
+.crossProductButtons {
+	clear: left; 
+	margin: 5px;
+	float: left;
+	width: 26%;	
+}
+.crossProductButtons button {
+  margin-bottom: 10% !important;
+}
+
+.crossProductSourceInput {
+  float: left;
+  width: 63%;
+  margin-left: 3%;
+  margin-top: 2%;
+}
+.crossProductTargetsArea {
+	float: left;
+  width: 63%;
+  margin-left: 3%;
+  margin-top: 2%;
+  max-height: 225px;
+  margin-bottom: 3%;
+}
+.crossProductCopyOption {
+	clear: right; 
+  margin-left: 3%;  
+	float: left;
+	width: auto;
+	width: 97%;
+}
+.crossProductCopyOptionCheckBox {
+	float: left;
+	width: 10%;
+}
+.crossProductCopyOptionText  {
+	float: left;
+	width: 90%;	
+}
+.crossProductSubmit {
+	float: right;
+}
+input[type="file"]:focus,
+input[type="radio"]:focus,
+input[type="checkbox"]:focus {
+  outline: none !important;
+  outline-offset: 0 !important;
+}
+
+
+.ermSidePanelInner, .ermSidePanelOuter {
+	float: right;
+	width: 1%;
+	background-color: rgba(200, 200, 200, 0.1);
+	cursor: pointer;
+	position: relative;	
+	height: 500px;
+	padding-top: 80px;
+}
+.ermSidePanelInner {
+	width: 4%;
+	right: 0;
+}
+.ermSidePanelItems {
+	min-height: 700px;
+	float: right;
+	width: 25.5%;
+	top: 0;
+	position: relative;
+	right: 0;
+	padding-right: 0.5%;
+	height: 100%;
+	overflow-y: auto;
+}
+.ermSideClearanceTOC {
+	padding-top: 1%;
+	padding-bottom: 1%;
+}
+.ermSideClearanceTOCSelectArea {
+	width: 100%;
+	height: 200px;
+	overflow-y: auto;
+	list-style-type:none;
+	padding-left: 0;
+	border: 1px solid #E3E4E6;
+}
+.ermSideClearanceTOCSelectArea li {	
+	cursor: pointer;	
+	overflow-x: hidden;
+	overflow-y: hidden;
+  line-height: 17px;
+	text-overflow: ellipsis;
+	white-space: nowrap;	
+}
+.ermSideClearanceMemoSectionTitle {
+	width: 100%;
+	font-size: 16px;
+	font-weight: bold;
+}
+.ermSideClearanceMemoSectionTextArea {
+	height: 250px;
+	overflow-y: auto;	
+	font-size: 11px;
+	border: 1px solid #E3E4E6;
+	margin-top: 1%;
+	margin-bottom: 1%;
+	line-height: 14px;
+}
+
+.ermSideClearanceMemoVersionTitle {	
+	color: rgb(125,173,213);
+	font-weight:bold;
+}
+#memo-sidepanel-top{
+	min-height: 25px;
+}
+#memo-sidepanel-spinner, #memo-sidepanel-check {
+	display: none;
+}
+#memo-sidepanel-response {
+  display: none;
+  float: right;
+  width: 45%;
+  font-size: 12px !important;
+  text-align: right;
+  padding-top: 5px;
+}
+
+#strand-sidepanel-spinner, #strand-sidepanel-check {
+	display: none;
+}
+#strand-sidepanel-response {
+  display: none;
+  float: right;
+  width: 80%;
+  font-size: 12px !important;
+  text-align: right;
+  padding-top: 5px;
+}
+
+#memo-crossproduct-spinner, #memo-crossproduct-check {
+	display: none;
+}
+#memo-crossproduct-response {
+  display: none;  
+  width: 45%;
+  float: right;
+  font-size: 12px !important;
+  text-align: right;
+  padding-top: 5px;
+}
+.crossProductClearanceTOCPanel {
+	position: fixed;
+	right: 200%;
+	top: 11%;
+	width: 25% !important;
+	background-color: white;
+	z-index: 10 !important;
+	border-top: 1px solid rgb(221, 221, 221) !important;
+	border-radius: 4px 4px 4px !important;
+}
+
+.crossProductClearanceTOCSelectArea {
+	height: 440px;
+	overflow-y: auto;	
+	font-size: 11px;
+	border: 1px solid #E3E4E6;
+	margin-top: 1%;
+	margin-bottom: 1%;
+	line-height: 14px;
+	width: 100%;
+	float: left;
+	padding-left: 3%;
+}
+.crossProductClearanceTOCSelectArea li {	
+	cursor: pointer;	
+	overflow-x: hidden;
+	overflow-y: hidden;
+  line-height: 17px;
+	text-overflow: ellipsis;
+	white-space: nowrap;	
+}
+.pendingJob {
+	width: 20%;
+	float: left;
+}
+.noJobs {
+	text-align: center;
+	width: 100%;
+	padding: 1%;
+	float: left;
+	clear:both;
+}
+.jobToolBarButton {
+  float: left;
+	width: 20%;
+	color: rgb(93,152,202);
+	cursor: pointer;
+  padding-left: 2%;
+  height: 25px;
+  padding-top: 5px;
+}
+.jobToolBarButton:hover {
+	text-decoration: underline;
+}
+.jobsHeader {
+	font-size: 16px;
+	text-align: center;
+	width: 100%;
+	font-weight: bold;
+	padding-bottom: 1%;
+}
+.pendingJobRow {
+	width: 100%;
+	float: left;
+}
+.jobActions {	
+	width: 100%;
+	padding-left: 5%;
+	float: left;
+	clear: both;	
+}
+.jobAction {
+	float: left;	
+}
+.jobAction.id {
+	width: 5%;
+}
+.jobAction.name {
+	width: 30%;
+}
+.jobAction.status {
+	width: 60%;
+}
+.jobActionError {
+	color: red;
+}
+.pendingJob.id {
+	width: 5%;
+}
+.pendingJob.checkStatusButton {
+	width: 35%;
+}
+.sr-only {
+	padding-top: 2px;
+	text-align: center;
+	float: left;
+	width: 100%;
+}
+.acknowledge-withmap:before {
+	content: "\f0e8\00A0\00A0\f087";
+  font-family: FontAwesome;
+  color: rgb(93,152,202);
+}
+.acknowledge:before {
+  content: "\f087";
+  font-family: FontAwesome;
+  color: rgb(93,152,202);
+}
+.foxLoginLogo_old {
+	background-image:url('/erm/img/fox_login_logo.png');
+	background-repeat:no-repeat;
+	width: 292px;
+	height: 196px;
+	float: left;
+}
+.foxLoginForm_old {
+	float: left;
+  padding-top: 30%;
+  padding-left: 26%;
+}
+.foxLogin_old {
+	background-image:url('/erm/img/login.png');
+	background-repeat:no-repeat;
+	width: 800px;
+	height: 600px;
+	float: left;
+}
+.foxLoginInvalid_old {
+	background-image:url('/erm/img/login_bad.png');
+	background-repeat:no-repeat;
+	width: 800px;
+	height: 600px;
+	float: left;
+}
+.savedAttachment {
+	line-height: 20px;
+}
+.removeSavedAttachment {
+	cursor: pointer;
+	color: rgb(153, 43, 15);
+}
+.commentStrand {
+	font-size: 11px;
+}
+.contactTabControls {
+	float: right;
+	width: 50%;
+	text-align: right;
+	padding-top: 15px;
+	padding-bottom: 1%;	
+}
+.contactTabControls button  {
+	margin-left: 1%;
+	margin-right: 1%;
+}
+.commentStrandTitle {
+	font-size: 11px;
+	text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow-x: hidden;
+  float: left;
+  width: 90%;
+  padding-left: 2%;
+}
+.foxContacts {
+	width: 100%;
+	padding-top: 2%;
+	padding-bottom: 2%;
+}
+.selectContactPopUp {
+	width: 99%;
+}
+.selectContactHeader {
+	float: left;
+	font-weight: bold;
+	background-color: rgb(239,239,239);
+	padding: 0.5%;
+	
+}
+.selectContactRows {	
+	float: left;
+	width: 100%;
+}
+.selectContactRow {
+	float: left;
+	padding: 1px;
+	width: 100%;
+	padding-left: 0.5%;
+}
+.filterContacts {
+	width: 37%;
+}
+.schRadioInput {
+	width: 5%;
+	padding-left: 1.5%;
+}
+.schRadioInput input {
+	margin: 0;
+}
+.schDisplayName {
+	width: 35%;
+}
+.schTitle, .schContactType, .schType, .schOrganization {
+	width: 15%;
+}
+.schComment {
+}
+.selectContactSearchRow {
+	float: left;
+	width: 98%;
+	background-color: white;
+}
+.selectContactHeaderRow{
+	width: 98%;
+	float: left;
+}
+.selectContactDataRows {	
+	float: left;
+	width: 100%;
+	height: 350px;
+	display: block;
+	overflow-y: auto;
+}
+.availableContactsRow {
+	float: left;
+	width: 50%;
+	padding-bottom: 1%;
+}
+.foxContactsTitle {
+	font-weight: bold;
+	font-size: 20px;
+}
+.availableContactsAdvancedSearchButton {
+	padding-left: 4%;
+	padding-right: 4%;
+}
+.foxContactsHeaderRow .header  {
+	float: left;
+	width: 19%;
+	font-weight: bold;
+	background-color: rgb(239,239,239);
+	padding: 0.5%;
+}
+.foxContactsDataRow {	
+  padding-bottom: 1%;
+  padding-top: 1%;
+  float: left;
+  width: 100%;
+}
+.foxContactsDataRow .header  {
+	float: left;
+	width: 19%;
+}
+.foxContactsDelete.header {
+	width: 4%;
+}
+.foxContactsName.header {
+	width: 20%;
+	clear:both;
+}
+.foxContactsMoreInfo.header{
+	padding-left: 3%;
+}
+.foxContactsDelete.header {
+	padding-left: 3%;
+} 
+.numberAvailableContacts {
+	font-size: 14px;
+}
+.editContactRows {
+	float: left;
+	width: 100%;
+}
+.editContactRow {	
+	width: 50%;
+	float: left;
+	padding-top: 1%;
+	padding-bottom: 1%;
+	height: 35px;
+}
+.editContactRowTextArea {
+	width: 100%;
+	float: left;
+	padding-top: 1%;
+	padding-bottom: 1%;
+}
+.editContactRowHeader{
+	width: 25%;
+  float: left;
+}
+.editContactRowHeader.editComment {
+	width: 8%;	
+}
+.editContactRowData.editComment {  
+  width: 100%;  
+}
+.editContactRowData{
+	width: 75%;
+  float: left;
+}
+.editContactSectionHeader {
+	width: 100%;
+	font-weight: bold;
+	font-size: 14px;
+	clear: both;
+}
+.editContactInput {
+	width: 90%;
+}
+#selectcontacts-spinner, #selectcontacts-check {
+	display: none;
+}
+#selectcontacts-response {
+  display: none;
+  float: right;
+  width: 50%;
+  font-size: 12px !important;
+  text-align: right;
+}
+
+#editcontact-spinner, #editcontact-check {
+	display: none;
+}
+#editcontact-response {
+  display: none;  
+  width: 50%;
+  font-size: 12px !important;
+  text-align: right;
+  float: right;   
+}
+
+#productcontacts-spinner, #productcontacts-check {
+	display: none;
+}
+#productcontacts-response {
+  display: none;
+  float: right;
+  width: 50%;
+  font-size: 12px !important;
+  text-align: right;
+}
+
+.versionArrow {
+	color: rgb(0, 128, 0);
+	float: left;
+}
+.versionIndicator {
+	color: #84A8D1;
+	float: left;
+	padding-top: 5px;
+	padding-left: 3%;
+}
+.icon-collapse-top, .icon-collapse {
+	cursor: pointer;
+}
+#expandAllStrandInfoCodes, #expandingAllStrandInfoCodes, #collapseAllStrandInfoCodes {
+	cursor: pointer; 
+	text-align: right; 
+	color: rgb(66, 139, 202); 
+	text-decoration: none;
+	float: right;
+	width: 35%;
+	padding-right: 5%;
+}
+#indicatesPriorValue {	
+	text-align: right;  
+	text-decoration: none;
+	float: right;
+	width: 35%;
+	padding-right: 5%;
+}
+#expandingAllStrandInfoCodes {
+	cursor: default;	
+}
+#expandAllStrandInfoCodes:hover, #collapseAllStrandInfoCodes:hover{
+	text-decoration: underline;
+}
+
+#commentsPopSectionDescription table.k-editor {    
+    margin-top: 0 !important;
+    height: 200px !important;
+}    
+
+#cre_rightStrandCommentDiv table.k-editor {    
+    margin-top: 0 !important;
+    height: 70px !important;
+}    
+#cre_rightStrandCommentDiv .k-editor .k-content {
+	  height: 70px !important;
+} 	
+
+#cre_copyRightStrandCommentDiv table.k-editor {    
+    margin-top: 0 !important;
+    height: 70px !important;
+}    
+#cre_copyRightStrandCommentDiv .k-editor .k-content {
+	  height: 70px !important;
+} 	
+
+#sse_rightStrandCommentDiv table.k-editor {    
+    margin-top: 0 !important;
+    height: 70px !important;
+}    
+#sse_rightStrandCommentDiv .k-editor .k-content {
+	  height: 70px !important;
+}
+
+.editContactRowTextArea table.k-editor {    
+    margin-top: 0 !important;
+    height: 70px !important;
+}    
+.editContactRowTextArea .k-editor .k-content {
+	  height: 70px !important;
+} 	
+
+
+
+.selectorSelectedRow{
+	color : #c5ccaa;
+	/*color : #98032d;*/
+	font-style : italic !important;
+}
+
+.selectorNormalRow{
+	color : #000000;
+	font-style : normal;
+}
+
+.contractualPartyStaticRow {
+  padding-left: 2%;
+}
+
+.k-grid-header .k-header {    
+  white-space: normal !important;    
+}
+
+.alert {
+	clear:both;
+}
+
+input::-ms-clear {
+  display: none;
+}
+
+.tooltip {
+	background-color: black;	
+}
+.popover-content {
+	max-height: 200px;
+	overflow-y: auto;	
+}
+.popover {
+	color: black;
+}
+
+.tooltip.right .tooltip-arrow {
+	<!-- border-right: 5px solid #FF0000; -->
+}
+
+.k-tool-icon, .k-picker-wrap {
+	min-height: 28px !important;
+}
+.k-colorpicker .k-tool-icon {
+	margin-bottom: 0 !important;
+}
+.k-upload-action {
+	display: none !important;
+}
+.k-filename {
+  max-width: 100%;
+}
+ins {
+	text-decoration: none;
+	color: green;
+	background: white !important;	
+}
+.appVersion {	
+	color : rgb(213, 239, 251);
+	cursor: default !important;
+}
+div.k-window-content { 
+	margin-top: 0;
+	padding-top: 0;
+}
+.strandCommentSectionHeader {
+	padding-top: 5px;
+	padding-bottom: 5px;
+	font-weight: bold;
+}
+#sse_rightStrandGrid .k-state-selected td {
+	background-color: white;
+	color: black !important;
+}
+#sse_rightStrandGrid .k-state-selected a {	
+  color: #428BCA !important;
+}
+#sse_rightStrandGrid .popover-content {
+	max-height: 50px;
+}
+#crs_rightStrandGrid .popover-content {
+    max-height: 50px;
+}
+#right_strands_div, .crossProductPanel {
+  float: left;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+#strandsGrid .k-plus {
+	display: none;
+}

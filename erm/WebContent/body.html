@@ -1,0 +1,1126 @@
+<body ng-app="erm" id="mainController" ng-cloak style="min-width:1280px; max-width : 1600px; width : 97%; border : 0px; padding-left: 0.5%; margin-bottom : 0px;" ng-controller="MainController">  
+  <div class="panel topDivHeader" style="width: 100%; height: 50px; margin-bottom : 0px; padding-bottom : 0px;">  	
+	  <div class="headDivInner">
+	    <img height="25" width="25" class="topLogo" onClick="window.location='/erm'" src="/erm/img/ERM_100x100.png"/>
+	  	<p class="headerLeftText"><a href="/erm" ng-click="showGetStartedMenu=true" style="color : #ffffff;">Enterprise Rights Management</a></p>
+	  </div>
+  	  <div class="headDivInner">
+  	  	<div class="headerRightPosition">  	  		
+  	  		<div id="upper-right-menu">
+  	  			<table style="margin-right: 5%; width: 100%;">
+  	  				<tr>
+  	  					<!--  <td><button class="btn-xs btn-primary btn-search" id="crs_searchForTargetProductsButton" style="color: white; margin-left: 5px; padding: 0 12px;"><i class="icon-search"></i> Search</button></td> -->
+  	  					<td><span class="urm" style="cursor: text;"><i class="icon-user"></i> Welcome, {{user.userId}}</span></td>
+  	  					<td><span style="color : #ffffff;">&nbsp;|&nbsp;</span></td>
+  	  					<td><span class="urm" style="cursor: text;">{{security.userRole}}</span></td>
+  	  					<td><span style="color : #ffffff;">&nbsp;|&nbsp;</span></td>
+  	  					<td><span class="urm appVersion">v.{{ermAppVersion}}</span></td>  	  					
+  	  					<td><span style="color : #ffffff;">&nbsp;|&nbsp;</span></td>  	  					
+  	  					<!-- <td><span class="urm"><a href="" style="color : rgb(213, 239, 251);"><i class="icon-gear"></i> Settings</a></span></td>  
+  	  					<td><span style="color : #ffffff;">&nbsp;&nbsp;|&nbsp;&nbsp;</span></td> -->
+  	  					<td><span class="urm"><a href="logout.jsp"  style="color : rgb(213, 239, 251);">Logout</a></span></td>  	  					  	  				
+  	  				</tr>
+  	  			</table>
+  	  		</div>
+  	  	</div>  	  	
+  	  </div>
+  </div>
+
+	<div id="productSearchController" ng-controller="ProductSearchController" class="">		
+		<div style="float: left; width: 45%; padding-top: 10px; padding-left: 5px;" id="basic-product-search-options"
+					class="collapse {{!productSearch.isBasicSearch()&&' '||'in'}}">				
+					<div class="control-group" style="float: left; width: 75%;">
+						<input id="searchByTitleBasicInput" type="text" class="col-lg-6 no-left-padding" name="title"
+							ng-model="productSearch.title" ng-change="doSetSearchOptionsChanged();" placeholder="Enter ID or Title" />
+						<i ng-click="doClearCriteria();productSearch.clear()" class="icon-remove"
+							style="margin-left: 5px; color: rgb(66, 139, 202); cursor: pointer;"></i>
+						<button id="searchByTitleBasicButton" class="btn-xs btn-primary btn-search" ng-click="productSearch.setSearchByTitle();doProductSearch();" style="color: white; margin-left: 5px; padding: 0 12px;"><i class="icon-search"></i> Search</button>
+						<button id="searchFoxipediaBasicButton" ng-show="security.canViewConfidentialTitles" class="btn-xs btn-primary btn-search" ng-click="productSearch.setSearchByTitleFoxipedia();doProductSearch();" style="color: white; margin-left: 5px; padding: 0 12px;"><i class="icon-search"></i> Search Foxipedia</button>						
+					</div>
+					<a style="float: left; cursor: pointer;"
+						ng-click="doToggleSearchType();productSearch.clear();"
+						ng-show="productSearch.isBasicSearch()"><i class="icon-chevron-down"></i>
+						Advanced Search</a>						
+		</div>
+		<div style="float: left; width: 40%; padding-top: 10px; padding-left: 5px;" 
+					id="advancedSearchOptions" class="collapse {{productSearch.isAdvancedSearchCollapsed&&' '||'in'}}">
+			<span class="switchToBasicSearch" style="float: left; width: 65%; color: rgb(66, 139, 202);"><a
+				style="cursor: pointer;"
+				ng-click="doToggleSearchType(); doClearCriteria();"
+				ng-show="productSearch.isAdvancedSearch()"><i
+					class="icon-chevron-right"></i> Switch to Basic Search</a></span>
+			<span style="float: left;"><i
+					class="icon-chevron-down"></i> Advanced
+				Search</span> 
+		</div>
+		<table class="mainNavigation table" style="margin-bottom: 10px; width: 50%; float: right;">
+			<tr>
+				<!-- <td><a href="#/search" class="navigationLink"><i class="icon-search"></i> Rights</a></td> -->
+				<!-- <td style="border-top: 0;"><i ng-show="!showGetStartedMenu" class="icon-chevron-down" style="display: none;"></i><i ng-show="showGetStartedMenu" class="icon-chevron-up"></i> <a  ng-click="showHelpMenu();"  href="" style="cursor: pointer" class="navigationLink"><i class="icon-book"></i> Home</a></td>	 -->						
+				<td style="border-top: 0;"><a href="" ng-click="popReportsController();"  style="cursor: pointer" class="navigationLink"><i
+						class="icon-file-text"></i> Reports</a></td>
+				<td style="border-top: 0;"><a href="" ng-show="security.canViewJobs" ng-click="popJobsController();" style="cursor: pointer" class="navigationLink"><i class="icon-tasks"></i>
+						My Jobs</a></td>
+				<td style="width: 5%; border-top: 0;"><a href="" title="Media" onClick="window.open('/guide/guide_media.pdf','resources','location=1,status=1,scrollbars=1, width=800,height=600');" style="cursor: pointer" class="navigationLink"><i class="icon-film"></i></a></td>
+				<td style="width: 5%;border-top: 0;"><a href="" title="Territory" onClick="window.open('/guide/guide_territory.pdf','resources','location=1,status=1,scrollbars=1, width=800,height=600');" style="cursor: pointer" class="navigationLink"><i class="icon-globe"></i></a></td>
+				<td style="width: 5%;border-top: 0;"><a href="" title="Language" onClick="window.open('/guide/guide_language.pdf','resources','location=1,status=1,scrollbars=1, width=800,height=600');" style="cursor: pointer" class="navigationLink"><i class="icon-font"></i></a></td>
+				<td style="width: 5%;border-top: 0;"><a href="" title="Informational Codes" onClick="window.open('/guide/guide_info_codes.pdf','resources','location=1,status=1,scrollbars=1, width=800,height=600');" style="cursor: pointer" class="navigationLink"><i class="icon-info-sign"></i></a></td>						
+				<td style="width: 5%;border-top: 0;"><a href="" title="Glossary" onClick="window.open('/guide/guide_glossary.pdf','resources','location=1,status=1,scrollbars=1, width=800,height=600');" style="cursor: pointer" class="navigationLink"><i class="icon-book"></i></a></td>
+				<td style="width: 5%;border-top: 0;"><a href="mailto:ERM.Business@fox.com" title="Help/Feedback" style="cursor: pointer" class="navigationLink"><i class="icon-comment"></i></a></td>				
+				
+				<td style="width: 5%;border-top: 0;"><a href="/erm" title="Home" style="cursor: pointer" class="navigationLink"><i class="icon-home"></i></a></td>																								
+			</tr>
+		</table>		
+		<div class="searchAndCrossProduct">
+		<!-- validation error message -->
+		<div ng-show="validation.hasErrors" class="alert alert-danger" style="display: none;">
+			{{validation.message}}
+		</div>
+		
+		<div class="crossProductItems" ng-show="productSearch.isCrossProduct && !productSearch.isBasicSearch()">
+			<div class="crossProductInstructions" style="text-align: center;">Cross-Product Operations</div>
+		  <div class="crossProductTabs divNoPaddingOrMargin maximumWidth"
+				style="float: left; border: 0px; margin-top: 1%; margin-left: 1%; width: 98%;">
+				<ul class="nav nav-tabs">
+					<li ng-click="switchCrossProductTabs('copy');"
+						class="{{ currentCrossProductTab=='copy' ? 'active' : '' }}"><a
+						href="">Copy</a></li>
+					<li ng-show="false"
+						ng-click="switchCrossProductTabs('update');"
+						class="{{ currentCrossProductTab=='update' ? 'active' : '' }}"><a
+						href="">Update</a></li>
+					<li ng-show="false"
+						ng-click="switchCrossProductTabs('link');"
+						class="{{ currentCrossProductTab=='link' ? 'active' : '' }}"><a
+						href="">Link</a></li>
+					<li ng-click="switchCrossProductTabs('delete');"
+						class="{{ currentCrossProductTab=='delete' ? 'active' : '' }}"><a
+						href="">Delete</a></li>									
+				</ul>
+			</div>
+			<div id="crossProductTabCopy" class="panel productLeftDivStyle panelTab crossProductPanel"  ng-show="currentCrossProductTab=='copy'" style="display: none;">
+			  <div class="crossProductErrorDiv errorClass" ng-if="productSearch.showXProductOptions" style="display: none; text-align: right;">
+  				<i class="icon-warning-sign"></i>&nbsp; <span class="crossProductErrorParagraph"></span>
+  			  </div>
+  			<div class="crossProductSuccessDiv"  ng-if="productSearch.showXProductOptions" style="display: none; text-align: right;">
+  				<i class="icon-check"></i>&nbsp; <span class="crossProductSuccessParagraph"></span>
+  			</div>  			
+				<div class="crossProductInstructions">Select a source product to copy from and target product(s) to copy to.</div>
+				<div class="crossProductModalInstructions" style="display: none;">Check target product(s) from the search.</div>
+				<div class="crossProductSourceButton crossProductButtons">
+					<button class="setCrossProductCopySource btn-xs btn-primary btn-add"
+						style="margin: 0px; margin-left: auto; margin-right: auto;">
+						Source <i class="icon-long-arrow-right"></i> 
+					</button>
+					<a href="" class="clearCrossProductSource"><i class="icon-remove"></i></a>						
+				</div>				
+				<input type="text" class="crossProductSourceInput" value="" placeholder="selected sources will appear here" readonly>
+				<div class="crossProductButtons">
+					<button class="setCrossProductCopyTargets btn-xs btn-primary btn-add"
+						style="margin: 0px; margin-left: auto; margin-right: auto;">
+						Target(s) <i class="icon-long-arrow-right"></i> 
+					</button>
+					<a href="" class="clearCrossProductTargets"><i class="icon-remove"></i></a>					
+					<button class="removeCrossProductTarget btn-xs btn-primary btn-delete"
+						style="margin: 0px; margin-left: auto; margin-right: auto;">
+						<i class="icon-long-arrow-left"></i> Target(s)  
+					</button>						
+				</div>							
+				<select size="20" class="crossProductTargetsArea" readonly multiple>
+				 	<option id="0" value="0">targets will appear here</option>  
+				</select>
+				<div id="crossProductOptions" ng-if="productSearch.showXProductOptions"> <!-- cross product options -->
+				<div class="crossProductInstructions">Select items to Copy: <a class="clearCrossProductItemsBoxes" href=""><i class="icon-remove"></i></a></div>
+				<div class="crossProductCopyOption" ng-show="security.canModifyClearanceMemos">
+					<input class="crossProductCopyOptionCheckBox" value="CLEARANCE_MEMO" type="checkbox" name="crossProductCopyOption" ng-model="crossProduct.copyClearanceMemo">
+					<div class="crossProductCopyOptionText">Clearance Memo <a href="#" ng-show="crossProduct.copyClearanceMemo && crossProduct.source != null" ng-click="toggleCrossProductClearanceTOCPanel();">choose sections to copy</a></div>
+				</div>				
+				<div class="crossProductCopyOption" ng-show="false && security.canCreateSubrights">
+					<input class="crossProductCopyOptionCheckBox" value="SUBRIGHTS" type="checkbox" name="crossProductCopyOption" ng-model="crossProduct.copySubrights">
+					<div class="crossProductCopyOptionText">Subrights</div>						
+				</div>
+				<div class="crossProductCopyOption" ng-show="false && security.canCreateSalesAndMarketing">
+					<input class="crossProductCopyOptionCheckBox" value="SALES_AND_MARKETING" type="checkbox" name="crossProductCopyOption" ng-model="crossProduct.copySalesAndMarketing">
+					<div class="crossProductCopyOptionText">Sales and Marketing</div>						
+				</div>				 
+				<div class="crossProductCopyOption" ng-show="security.canCreateStrands">
+					<input class="crossProductCopyOptionCheckBox" value="STRANDS" type="checkbox" name="crossProductCopyOption" ng-model="crossProduct.copyRightStrandsAndCodes">
+					<div class="crossProductCopyOptionText">Rights Strands and their Info Codes</div>						
+				</div>
+				<div class="crossProductCopyOption" ng-show="security.canCreateStrands">
+					<input class="crossProductCopyOptionCheckBox" value="INFO_CODES" type="checkbox" name="crossProductCopyOption" ng-model="crossProduct.copyProductInfoCodes">
+					<div class="crossProductCopyOptionText">Product Info Codes</div>						
+				</div>
+				<div class="crossProductCopyOption">
+					<input class="crossProductCopyOptionCheckBox" value="COMMENTS" type="checkbox" name="crossProductCopyOption" ng-model="crossProduct.copyCommentsAndAttachments">
+					<div class="crossProductCopyOptionText">Comments and Attachments</div>						
+				</div>
+				<div class="crossProductCopyOption">
+					<input class="crossProductCopyOptionCheckBox" value="CONTACTS" type="checkbox" name="crossProductCopyOption" ng-model="crossProduct.copyContacts">
+					<div class="crossProductCopyOptionText">Contacts</div>						
+				</div>
+				<div class="crossProductCopyOption" ng-show="security.canModifyClearanceMemos">
+					<input class="crossProductCopyOptionCheckBox" value="CONTRACTUAL_PARTIES" type="checkbox" name="crossProductCopyOption" ng-model="crossProduct.copyContractualParties">
+					<div class="crossProductCopyOptionText">Contractual Parties</div>					
+				</div>				
+								
+				<div class="crossProductSubmit">
+					<button ng-click="xProductCopySubmitAndValidate();" class="submitCrossProductCopy btn-xs btn-primary btn-add"
+						style="margin: 0px; margin-left: auto; margin-right: auto;">
+						Submit and Validate 
+					</button>
+					<button class="closeModalProducts btn-xs btn-primary btn-add"
+						style="margin-left: 2%; margin-top: 50px; display: none; float: right;">
+						<i class="icon-remove"></i> Close 
+					</button>								
+				</div>
+				</div> <!-- end cross product options -->				
+				<div class="closeModalProductsForReport" style="display : none">
+					<button id="reportSubmitAndCloseButton" class="btn-xs btn-primary btn-add"
+						style="margin-left: 2%; margin-top: 50px; float: right;">
+						<i class="icon-remove"></i> Submit and Close 
+					</button>
+				</div>
+				<div class="panel productLeftDivStyle panelTab crossProductClearanceTOCPanel" ng-show="crossProduct.copyClearanceMemo && crossProduct.showCrossProductClearanceTOCPanel" style="display: none; width: 95%;">
+					<div id="memo-crossproduct-response">
+  			  	<span id="memo-crossproduct-spinner" class="icon-spinner icon-spin icon-small"></span><span id="memo-crossproduct-check" class="icon-check icon-small"></span> <span id="memo-crossproduct-spinner-message"></span>
+			  	</div>
+					<div class="ermSideClearanceMemoSectionTitle">
+						Clearance Memo TOC
+					</div>
+				  <div class="crossProductInstructions">Select one or more sections to copy (Ctrl + Click)</div>
+				  <div class="crossProductSelectAll">
+				  	<input class="crossProductCopyOptionCheckBox" ng-click="removeHighlighting();" type="checkbox" name="crossProductCopyOption" ng-model="crossProduct.copyClearanceMemoAllSections">
+						<div class="crossProductCopyOptionText">Copy All Sections</div>
+				  </div>
+					<div class="crossProductClearanceTOC">
+						<ul class="crossProductClearanceTOCSelectArea">  
+						</ul>
+					</div>					
+					<button class="btn-xs btn-primary btn-add" ng-click="toggleCrossProductClearanceTOCPanel();" style="color: white; float: right; margin-left: 5px; padding: 0 12px;"><i class="icon-remove"></i> Close</button>					
+				</div>												
+			</div>
+			<div class="panel productLeftDivStyle panelTab crossProductPanel" ng-show="currentCrossProductTab=='update'" style="display: none;">
+			</div>		
+			<div class="panel productLeftDivStyle panelTab crossProductPanel" ng-show="currentCrossProductTab=='link'" style="display: none;">
+			</div>
+			<div id="crossProductTabDelete" class="panel productLeftDivStyle panelTab crossProductPanel" ng-show="currentCrossProductTab=='delete'" style="display: none;">
+			<div class="crossProductDeleteErrorDiv errorClass"  ng-if="productSearch.showXProductOptions" style="display: none; text-align: right;">
+				<i class="icon-warning-sign"></i>&nbsp; <span class="crossProductDeleteErrorParagraph"></span>
+			</div>
+			<div class="crossProductDeleteSuccessDiv" ng-if="productSearch.showXProductOptions" style="display: none; text-align: right;">
+				<i class="icon-check"></i>&nbsp; <span class="crossProductDeleteSuccessParagraph"></span>
+			</div>			
+			<div class="crossProductInstructions">Select a target product from the search results to delete.</div>												
+				<div class="crossProductButtons">
+					<button class="setCrossProductCopyTargets btn-xs btn-primary btn-add"
+						style="margin: 0px; margin-left: auto; margin-right: auto;">
+						Target(s) <i class="icon-long-arrow-right"></i> 
+					</button>
+					<a href="" class="clearCrossProductTargets"><i class="icon-remove"></i></a>
+					<button class="removeCrossProductTarget btn-xs btn-primary btn-delete"
+						style="margin: 0px; margin-left: auto; margin-right: auto;">
+						<i class="icon-long-arrow-left"></i> Target(s)  
+					</button>						
+				</div>							
+				<select size="20" class="crossProductTargetsArea" readonly multiple>
+				 	<option id="0" value="0">targets will appear here</option>  
+				</select>
+				<div id="crossProductOptionsDelete" ng-if="productSearch.showXProductOptions"> <!-- cross product options -->				
+				<div class="crossProductInstructions">Select items to Delete: <a class="clearCrossProductItemsBoxes" href=""><i class="icon-remove"></i></a></div>
+				<div class="crossProductCopyOption" ng-show="security.canDeleteClearanceMemo">
+					<input class="crossProductCopyOptionCheckBox" value="CLEARANCE_MEMO" type="checkbox" name="crossProductCopyOption" ng-model="crossProduct.deleteClearanceMemo">
+					<div class="crossProductCopyOptionText">Clearance Memo</div>
+				</div>
+				<!--  
+				<div class="crossProductCopyOption" ng-show="security.canDeleteSubrights">
+					<input class="crossProductCopyOptionCheckBox" value="SUBRIGHTS" type="checkbox" name="crossProductCopyOption" ng-model="crossProduct.deleteSubrights">
+					<div class="crossProductCopyOptionText">Subrights</div>						
+				</div>
+				<div class="crossProductCopyOption" ng-show="security.canDeleteSalesAndMarketing">
+					<input class="crossProductCopyOptionCheckBox" value="SALES_AND_MARKETING" type="checkbox" name="crossProductCopyOption" ng-model="crossProduct.deleteSalesAndMarketing">
+					<div class="crossProductCopyOptionText">Sales and Marketing</div>						
+				</div>
+				--> 
+				<div class="crossProductCopyOption" ng-show="security.canDeleteStrands">
+					<input class="crossProductCopyOptionCheckBox" value="STRANDS" type="checkbox" name="crossProductCopyOption" ng-model="crossProduct.deleteRightStrandsAndCodes">
+					<div class="crossProductCopyOptionText">Rights Strands and their Info Codes</div>						
+				</div>
+				<div class="crossProductCopyOption" ng-show="security.canDeleteProductRestrictions">
+					<input class="crossProductCopyOptionCheckBox" value="INFO_CODES" type="checkbox" name="crossProductCopyOption" ng-model="crossProduct.deleteProductInfoCodes">
+					<div class="crossProductCopyOptionText">Product Info Codes</div>						
+				</div>
+				<div class="crossProductCopyOption" ng-show="security.canDeleteProductRestrictions">
+					<input class="crossProductCopyOptionCheckBox" value="COMMENTS" type="checkbox" name="crossProductCopyOption" ng-model="crossProduct.deleteCommentsAndAttachments">
+					<div class="crossProductCopyOptionText">Comments and Attachments</div>						
+				</div>
+								
+				<div class="crossProductSubmit">
+					<button ng-click="xProductDelete()" class="submitCrossProductDelete btn-xs btn-primary btn-delete"
+						style="margin: 0px; margin-left: auto; margin-right: auto;">
+						Delete 
+					</button>	
+				</div>
+				</div> <!-- end xproduct -->		
+			</div>								
+		</div>	
+		<div ng-show="!productSearch.isBasicSearch() && security.canUseCrossProductSidePanel" class="crossProduct" ng-click="toggleCrossProduct(true);">
+			<i id="crossProductChevron" title="Cross-Product Operations" class="icon-chevron-left" style="margin-left: 20%;"></i>
+			<img class="crossProductText" src="/erm/img/xproduct_rotated.png"/>									
+		</div>
+		<!-- validation error message -->
+		<div id="advanced-product-search-options" ng-show="!productSearch.isAdvancedSearchCollapsed"
+			style="display: none; overflow: hidden; position:relative; float: left; width: 99%;">						
+			<div class="searchTypes">
+				<span class="muted"
+					style="padding-top: 15px; clear: both; font-size: 10px"> <span
+					style="font-weight: bold; text-align: right; clear: right;">Title
+						Example: (i.e. Titanic; Avatar; 127 Hours)</span>
+				</span>
+				<div class="control-group"  style="padding-top:1%;">
+					<input id="searchByTitleAdvancedInput" type="text" class="col-lg-6 no-left-padding" name="title" ng-change="doSetSearchOptionsChanged();"
+						ng-model="productSearch.title" placeholder="Enter Title">
+					<i ng-click="doClearCriteria();" class="icon-remove"
+						style="margin-left: 5px; color: rgb(66, 139, 202); cursor: pointer;"></i>
+					<button id="searchByTitleAdvancedButton" class="btn-xs btn-primary  btn-search" ng-click="productSearch.setSearchByTitle();doProductSearch();" style="color: white; margin-left: 5px; padding: 0 12px;"><i
+					class="icon-search"></i> Search By Title</button>
+				</div>
+				<div style="padding-top: 5px; clear: both; padding-bottom:5px;">
+					<input style="margin-left: 15px;" type="radio" ng-change="doSetSearchOptionsChanged();"
+						ng-model="productSearch.wildcardType" value="C"> Contains
+					<input style="margin-left: 15px;" type="radio" ng-change="doSetSearchOptionsChanged();"
+						ng-model="productSearch.wildcardType" value="S"> Starts
+					With <input style="margin-left: 15px;" type="radio" ng-change="doSetSearchOptionsChanged();"
+						ng-model="productSearch.wildcardType" value="EQ"> Exact
+					Match
+				</div>
+			</div>
+			<div class="searchTypes">
+				<span class="muted"
+					style="padding-top: 15px; clear: both; font-size: 10px"> <span
+					style="font-weight: bold;  text-align: right; clear: right;">ID Examples: (1457039; 1506391)</span>
+				</span>
+				<div class="control-group" style="padding-top:1%;">
+					<input id="searchByIDAdvancedInput" type="text" class="col-lg-5 no-left-padding" name="title" ng-change="doSetSearchOptionsChanged();"
+						ng-model="productSearch.searchID" placeholder="Enter ID">
+					<i ng-click="doClearCriteria();" class="icon-remove"
+						style="margin-left: 5px; color: rgb(66, 139, 202); cursor: pointer;"></i>
+					<button id="searchByIDAdvancedButton" class="btn-xs btn-primary btn-search" ng-click="productSearch.setSearchByID();doProductSearch();" style="color: white; margin-left: 5px; padding: 0 12px;"><i
+					class="icon-search"></i> Search By ID</button>
+										<span ng-click="togglePasteFromExcel();" style="padding-left: 1%; text-decoration: underline; color: rgb(66,139,220); cursor: pointer;">Cut and Paste <i class="icon-chevron-down" style="display: none;" ng-show="!productSearch.isPasteFromExcelToggle"></i><i class="icon-chevron-up" style="display: none;" ng-show="productSearch.isPasteFromExcelToggle"></i></span>
+				</div>
+				<div style="padding-top: 5px; clear: both; padding-bottom:5px;">
+					<input style="margin-left: 5px;" type="radio" ng-change="doSetSearchOptionsChanged();"
+						ng-model="productSearch.idType" value="WPR"> Financial Title ID (WPR ID) <input
+						style="margin-left: 5px;" type="radio" ng-change="doSetSearchOptionsChanged();"
+						ng-model="productSearch.idType" value="FOXID"> Fox ID <input
+						style="margin-left: 5px;" type="radio" ng-change="doSetSearchOptionsChanged();"
+						ng-model="productSearch.idType" value="FOXVERSIONID"> Fox
+					Version ID <input style="margin-left: 5px;" type="radio" ng-change="doSetSearchOptionsChanged();"
+						ng-model="productSearch.idType" value="JDEVERSIONID"> JDE Version ID
+				</div>
+				<div id="pasteFromExcelDiv" ng-show="productSearch.isPasteFromExcelToggle" style="padding-top: 5px; clear: both; display: none;">
+					<div style="width: 100%;">Select the type of ID above then paste IDs below. Click the "Parse" button and then click "Search by ID".</div>
+					<div style="width: 40%; float: left; ">
+						<textarea id="pastedExcelCodes" style=" width: 90%; height: 100px;"></textarea>
+						<BR/>					
+						<button style="width: 60%; text-align: center; margin-left: 15%; margin-top: 3%; float: left;" ng-click="doClearPastedExcel();" class="btn-xs btn-primary  btn-search"
+							style="margin: 0px; margin-left: auto; margin-right: auto;">
+							 Clear <i class="icon-remove"></i>
+						</button>	
+					</div>
+					<div style="width: 20%; float: left;">
+						<button style="width: 80%; text-align: center; margin-left: 0%; margin-top: 15%; float: left;" ng-click="parsePastedExcelCodes();doSetSearchOptionsChanged();" id="parsePastedExcelCodes" class="btn-xs btn-primary  btn-search">
+							Parse <i class="icon-chevron-right"></i>
+						</button>
+						<button style="width: 80%; text-align: center; margin-left: 0%; margin-top: 15%;  float: left;" ng-click="doClearParsedExcel();doSetSearchOptionsChanged();" id="parsePastedExcelCodes" class="btn-xs btn-primary  btn-search">
+							<i class="icon-chevron-left"></i> Remove
+						</button>					
+					</div>
+					<div style="width: 40%; float: left;">					
+						<select size="10" id="parsedExcelIds" class="parsedExcelIds" readonly multiple style="height: 100px; width: 90%;">
+				  	</select><BR/>
+				  </div>
+				</div>
+			</div>
+			<div class="searchTypes">
+				<span class="muted"
+					style="padding-top: 15px; clear: both; font-size: 10px"> <span
+					style="font-weight: bold;">Enter Foxipedia defined
+						Franchise Group names:</span>
+				</span>
+				<div class="control-group"  style="padding-top:1%;">
+					<input id="searchFoxipediaAdvancedInput" class="col-lg-5 no-left-padding" type="text" ng-change="doSetSearchOptionsChanged();"
+						name="foxipediaGroupQ" ng-model="productSearch.foxipediaGroupQ"
+						placeholder="Enter Foxipedia Group name"> <i
+						ng-click="doClearCriteria();" class="icon-remove"
+						style="margin-left: 5px; color: rgb(66, 139, 202); cursor: pointer;"></i>
+					<button id="searchFoxipediaAdvancedButton" ng-click="doProductSearch();" class="btn-xs btn-primary btn-search" style="color: white; margin-left: 5px; padding: 0 12px;"><i
+					class="icon-search"></i> Search Franchise Groups</button>
+				</div>
+				<div style="padding-top: 5px; clear: both; padding-bottom:5px;">
+					<input style="margin-left: 15px;" type="radio" ng-change="doSetSearchOptionsChanged();"
+						ng-model="productSearch.wildcardType" value="C"> Contains
+					<input style="margin-left: 15px;" type="radio" ng-change="doSetSearchOptionsChanged();"
+						ng-model="productSearch.wildcardType" value="S"> Starts
+					With
+				</div>
+				<span class="muted"
+					style="display: none; padding-top: 15px; clear: both; font-size: 10px;">
+					Franchise Group Name Results: </span>
+				<div class="control-group" style="display: none; clear: both;">
+					<select style="clear: both; width: 50%;" name="productTypes" onChange="doSetSearchOptionsChanged();"
+						class="form-control" size="3" multiple ng-multiple="true"></select>
+				</div>
+			</div>
+			
+			<div id="moreSearchCriteria"
+				ng-show="!productSearch.searchCollapsed"
+				style="float: left; clear: left; padding-left: 1%; margin-top: 10px; padding-bottom: 20px; width: 99.5%; background-color: rgba(200, 200, 200, 0.1);">
+				<div
+					style="float: left; text-align: left; clear: left; width: 98.5%; padding-top: 1%; padding-bottom: 1%;">
+					<span style="font-size: 14px;">MORE SEARCH CRITERIA</span>
+					<a ng-show="!productSearch.searchCollapsed" ng-click="collapseSearchOptions();"><i class="icon-collapse-alt" style="text-decoration: none; cursor: pointer;"></i></a>
+				</div>
+				<div style="float: left; width: 33%">
+					<div>
+						<span style="float: left; width: 120px; text-align: left;"
+							class="control-label" for="prodYearFrom">Production Year: <a href="" ng-click="productSearch.clearProdYear();doSetSearchOptionsChanged();"><i class="icon-remove"></i></a>
+						</span> <input style="float: left;" type="text" class="input-year"
+							min="1900" max="3000" id="advancedSearch_prodYearFrom" name="prodYearFrom" size="2" maxlength="4"
+							ng-model="productSearch.prodYearFrom" title="Enter a valid production from year" ng-change="checkValidNumber(productSearch.prodYearFrom, 'advancedSearch_prodYearFrom'); doSetSearchOptionsChanged();"
+							ng-disabled="productSearch.isFoxipediaGroupSearch()"> <span
+							style="margin-left: 10px; margin-right: 10px; float: left;"
+							class="control-label"> to </span> <input style="float: left;"
+							type="text" id="advancedSearch_prodYearTo" title="Enter a valid production to year" class="input-year" min="1900" max="3000" size="2"
+							maxlength="4" ng-model="productSearch.prodYearTo" ng-change="checkValidNumber(productSearch.prodYearTo, 'advancedSearch_prodYearTo'); doSetSearchOptionsChanged();"
+							ng-disabled="productSearch.isFoxipediaGroupSearch()">
+					</div>
+					<div style="padding-top: 10px; clear: both;">
+						<span style="float: left; width: 120px; text-align: left;"
+							class="control-label" for="releaseYearFrom">Release Year: <a href="" ng-click="productSearch.clearReleaseYear()"><i class="icon-remove"></i></a>
+						</span> <input style="float: left;" type="text" title="Enter a valid release from year" name="releaseYearFrom"
+							class="input-year"  id="advancedSearch_releaseYearFrom" size="4" maxlength="4" ng-change="checkValidNumber(productSearch.releaseYearFrom, 'advancedSearch_releaseYearFrom'); doSetSearchOptionsChanged();"
+							ng-model="productSearch.releaseYearFrom"
+							ng-disabled="productSearch.isFoxipediaGroupSearch()"> <span
+							style="margin-left: 10px; margin-right: 10px; float: left;"
+							class="control-label"> to </span> <input style="float: left;"
+							type="text" id="advancedSearch_releaseYearTo" title="Enter a valid release to year" class="input-year" size="4" maxlength="4"
+							ng-model="productSearch.releaseYearTo" ng-change="checkValidNumber(productSearch.releaseYearTo, 'advancedSearch_releaseYearTo'); doSetSearchOptionsChanged();"
+							ng-disabled="productSearch.isFoxipediaGroupSearch()">
+					</div>
+					<div style="padding-top: 10px; clear: both;">
+						<input style="float: left;" type="checkbox" name="searchAliases"
+							ng-model="productSearch.searchAliases" ng-change="doSetSearchOptionsChanged();"
+							ng-disabled="productSearch.isFoxipediaGroupSearch()"> <span
+							style="float: left; padding-left: 10px; text-align: left;">Include
+							Product Aliases in search</span>
+					</div>
+					<div style="padding-top: 10px; clear: both;">
+						<input style="float: left;" type="checkbox" ng-disabled="productSearch.isFoxipediaGroupSearch()" value="true" ng-change="doSetSearchOptionsChanged();" ng-model="productSearch.onlyDefaultVersion">
+						<span style="float: left; padding-left: 10px; padding-top: 3px; text-align: left;">Include only the Default Version</span>
+					</div>							
+					<div style="padding-top: 10px; clear: both;">
+						<span style="height: 34px; padding: 6px 12px; font-size: 14px; line-height: 1.42857; color: #555; float: left; text-align: left;" class="control-label"
+							for="maxResults">Maximum number of titles: </span> <input
+							style="float: left; width: auto; margin-left: 10px;"
+							type="text" id="advancedSearch_maxResults" size="5" ng-change="checkValidNumber(productSearch.maxResults, 'advancedSearch_maxResults');  doSetSearchOptionsChanged();"
+							ng-model="productSearch.maxResults" name="maxResults" min="0"
+							max="10000" maxlength ="5" />
+					</div>
+				</div>
+				<div style="float: left; width: 33%; min-height: 160px;">
+					<!-- legal stuff -->
+					<div class="form-group">
+						<span style="float: left; width: auto; margin-top:1%; text-align: left; clear: left;"
+							class="control-label">Legal Status: <a href="" ng-click="productSearch.legalConfirmationStatusId=null;doSetSearchOptionsChanged();"><i class="icon-remove"></i></a></span> <select
+							style="margin-left: 2%; float: left; width: auto; max-width: 270px;" name="legalConfirmationStatus"
+							ng-disabled="productSearch.isFoxipediaGroupSearch()"
+							ng-model="productSearch.legalConfirmationStatusId" 
+							ng-change="doSetSearchOptionsChanged();"							
+							class="form-control">
+							<option value=null>---Select status---</option>
+							<option bindonce ng-repeat="legal in legalConfirmationStatus" ng-hide="(legal.confirmationStatusId == 4 || legal.confirmationStatusId == 3) && !security.canModifyClearanceMemos" value="{{legal.confirmationStatusId}}">{{legal.confirmationStatusDescription}}</option>
+						</select>
+					</div>
+					<!-- rights stuff -->
+					<div class="form-group" ng-show="security.canSearchRightConsumptionStatus">
+						<span style="clear: both; float: left; width: auto; margin-top:2%; text-align: left;"
+							class="control-label">Rights Consumption Status: <a href="" ng-click="productSearch.businessConfirmationStatusId=null;doSetSearchOptionsChanged();"><i class="icon-remove"></i></a></span> <select
+							style="margin-left: 2%; margin-top:2%;  float: left; width: auto;"
+							name="businessConfirmationStatus" ng-change="doSetSearchOptionsChanged();"
+							ng-model="productSearch.businessConfirmationStatusId"
+							ng-options="s.confirmationStatusId as s.confirmationStatusDescription for s in businessConfirmationStatus"
+							ng-disabled="productSearch.isFoxipediaGroupSearch()"
+							class="form-control">
+							<option value="">---Select status---</option>
+						</select>
+					</div>
+					<!-- end rights stuff -->
+					<div class="form-group" style="margin-top: 4%; float: left; width: 70%; margin-left: 0%;">
+						<input style="float: left;" type="checkbox"
+							ng-model="productSearch.showStrandOptions" ng-change="doDefaultStrandQuery();doSetSearchOptionsChanged();"
+							ng-disabled="productSearch.isFoxipediaGroupSearch()" /> <span
+							style="float: left; padding-left: 10px; text-align: left;">Only
+							titles ...</span> <input
+							style="float: left; margin-left: 40px; clear: left;" type="radio"
+							ng-model="productSearch.strandsQuery" ng-change="doSetSearchOptionsChanged();"
+							value="withLegalRightStrands"
+							ng-disabled="!productSearch.showStrandOptions" /> <span
+							style="float: left; padding-left: 10px; padding-top: 3px; text-align: left;">with
+							Legal Rights Strands </span> <input
+							style="float: left; margin-left: 40px; clear: left;" type="radio"
+							ng-model="productSearch.strandsQuery" ng-change="doSetSearchOptionsChanged();"
+							value="withoutLegalRightStrands"
+							ng-disabled="!productSearch.showStrandOptions" /> <span
+							style="float: left; padding-left: 10px; padding-top: 3px; text-align: left;">without
+							Legal Rights Strands </span> <input
+							style="float: left; margin-left: 40px; clear: left;" type="radio"
+							ng-model="productSearch.strandsQuery" ng-change="doSetSearchOptionsChanged();"
+							value="withRightStrands"
+							ng-disabled="!productSearch.showStrandOptions" /> <span
+							style="float: left; padding-left: 10px; padding-top: 3px; text-align: left;">with
+							Business Rights Strands</span> <input
+							style="float: left; margin-left: 40px; clear: left;" type="radio"
+							ng-model="productSearch.strandsQuery" ng-change="doSetSearchOptionsChanged();" 
+							value="withoutRightStrands"
+							ng-disabled="!productSearch.showStrandOptions" /> <span
+							style="float: left; padding-left: 10px; padding-top: 3px; text-align: left;">without
+							Business Rights Strands</span>	<input
+							style="float: left; margin-left: 40px; clear: left;" type="radio"
+							ng-show="security.canSyncReleaseDate"
+							ng-model="productSearch.strandsQuery" ng-change="doSetSearchOptionsChanged();" 
+							value="true"
+							ng-disabled="!productSearch.showStrandOptions" /> <span ng-show="security.canSyncReleaseDate"
+							style="float: left; padding-left: 10px; padding-top: 3px; text-align: left;">with 
+							Unsynced Dates</span>
+					</div>
+					<div style="float: left">
+					<input
+					style="float: left;  clear: left;" type="checkbox"
+					ng-show="security.canViewConfidentialTitles"
+					ng-model="productSearch.onlyConfidential" ng-change="doSetSearchOptionsChanged();" />							
+					<span ng-show="security.canViewConfidentialTitles" style="float: left; padding-left: 10px; padding-top: 3px; text-align: left;">Only confidential titles</span>	
+					</div>
+					<!-- end legal stuff -->
+				</div>
+				<div style="float: left; width: 33%">
+					<span style="float: left; width: 25%; text-align: left;"
+						class="control-label">Product Type: <a href="" ng-click="doSetSearchOptionsChanged();productSearch.selectedProductTypes={};"><i class="icon-remove"></i></a></span> <select
+						style="float: left; width: auto;" name="productTypes"
+						class="form-control" size="5" multiple ng-multiple="true"
+						ng-model="productSearch.selectedProductTypes"
+						ng-change="doSetSearchOptionsChanged();"
+						ng-options="pt.code as pt.name for pt in productTypes"
+						ng-disabled="productSearch.isFoxipediaGroupSearch()"></select>												
+				</div>
+				<div style="float: left; width: 33%; padding-top: 1%;">
+					<span style="float: left; width: 43%; text-align: left;"
+						class="control-label">Contractual Party Type: <a href="" ng-click="doSetSearchOptionsChanged();productSearch.contractualPartyTypeId=null"><i class="icon-remove"></i></a></span> <select
+						style="float: left; width: auto;"
+						name="contractualPartyTypeId" ng-change="doSetSearchOptionsChanged();"
+						ng-disabled="productSearch.isFoxipediaGroupSearch()"
+						ng-model="productSearch.contractualPartyTypeId"																
+						ng-options="partyType.contractualPartyTypeId as partyType.contractualPartyTypeDesc for partyType in contractualPartyTypes"
+						class="form-control">
+						<option value="">---Select Type---</option>
+					</select>
+				</div>
+				<div style="float: left; width: 33%; padding-top: 1%;">
+					<span style="float: left; width: 33%; text-align: left;"
+						class="control-label">Contractual Parties: <a href="" ng-click="doSetSearchOptionsChanged();productSearch.contractualPartyId=null"><i class="icon-remove"></i></a></span>
+						<select style="float: left; width: 65%;"
+						ng-change="doSetSearchOptionsChanged();"
+						ng-model="productSearch.contractualPartyId"
+						ng-disabled="productSearch.isFoxipediaGroupSearch()"
+						ng-options="party.shortDisplayName for party in contractualParties"												
+						class="form-control">
+						  <option value="">---Select Party---</option>											
+					  </select>					  
+				</div>
+				<div style="float: left; text-align: center; clear: left; width: 98.5%; padding-top: 1%; padding-bottom: 1%;">
+					<button ng-show="productSearch.isPasteFromExcelToggle" class="btn-xs btn-primary  btn-search" ng-click="productSearch.setSearchByID();doProductSearch();" style="color: white; margin-left: 5px; padding: 0 12px;"><i
+					class="icon-search"></i> Advanced Search By ID</button>
+					<!-- foxipedia button -->
+					<button id="foxipediaSearchButtonBottom" class="btn-xs btn-primary  btn-search" ng-show="security.canViewConfidentialTitles && productSearch.showFoxipediaSearchButton" ng-click="productSearch.setSearchByTitleFoxipedia();doProductSearch();" style="color: white; margin-left: 5px; padding: 0 12px;"><i class="icon-search"></i> Search Foxipedia</button>	
+					<button ng-show="!productSearch.isPasteFromExcelToggle" id="searchByTitleAdvancedButtonBottom" class="btn-xs btn-primary  btn-search" ng-click="productSearch.setSearchByTitle();doProductSearch();" style="color: white; margin-left: 5px; padding: 0 12px;"><i
+					class="icon-search"></i> Search</button> <a style="padding-left: 2%;" href="" ng-click="doClearCriteria();productSearch.clear()"><i class="icon-remove"></i> clear all</a>
+				</div>	
+			</div>		
+		</div>		
+		<div style="display: none;" id="searchOptionsEntered"
+			ng-show="!productSearch.isBasicSearch() && productSearch.searchCollapsed">
+			<p class="" style="font-size: 14px;">
+				MORE SEARCH CRITERIA <a ng-show="productSearch.searchCollapsed" ng-click="expandSearchOptions();"><i class="icon-expand-alt" style="text-decoration: none; cursor: pointer;"></i></a>
+			</p>
+			<span
+				ng-show="productSearch.searchByTitle && !productSearch.isFoxipediaGroupSearch() && productSearch.title.length > 0">
+				Title Search: <span class="searchOptionsEntered">{{productSearch.title}}</span>
+			</span> <span
+				ng-show="productSearch.searchByID && !productSearch.isFoxipediaGroupSearch()">
+				{{productSearch.getIDTypeString()}} Search: <span
+				class="searchOptionsEntered">{{productSearch.searchID}}</span>
+			</span> <span ng-show="productSearch.searchAliases && !productSearch.isFoxipediaGroupSearch()">(include product
+				aliases in search)</span> <span ng-show="productSearch.onlyDefaultVersion && !productSearch.isFoxipediaGroupSearch()">(include only the default version)</span> <span
+				ng-show="productSearch.isFoxipediaGroupSearch()"> Foxipedia
+				Search: <span class="searchOptionsEntered">{{productSearch.foxipediaGroupQ}}</span>
+			</span> <span
+				ng-show="(productSearch.releaseYearFrom || productSearch.releaseYearTo) && !productSearch.isFoxipediaGroupSearch()">
+				Release Year: <span class="searchOptionsEntered">{{productSearch.releaseYearFrom}}</span>
+				<span
+				ng-show="productSearch.releaseYearFrom && productSearch.releaseYearTo && !productSearch.isFoxipediaGroupSearch()">to</span>
+				<span class="searchOptionsEntered">{{productSearch.releaseYearTo}}</span>
+			</span> <span
+				ng-show="(productSearch.prodYearFrom || productSearch.prodYearTo) && !productSearch.isFoxipediaGroupSearch()">
+				Production Year: <span class="searchOptionsEntered">{{productSearch.prodYearFrom}}</span>
+				<span
+				ng-show="(productSearch.prodYearFrom && productSearch.prodYearTo) && !productSearch.isFoxipediaGroupSearch()">to</span>
+				<span class="searchOptionsEntered">{{productSearch.prodYearTo}}</span>
+			</span> <span ng-show="productSearch.businessConfirmationStatusId && !productSearch.isFoxipediaGroupSearch()">
+				Rights Consumption Status: <span class="searchOptionsEntered">{{productSearch.getSelectedBusinessConfirmationStatus()}}</span>
+			</span> <span ng-show="productSearch.legalConfirmationStatusId && !productSearch.isFoxipediaGroupSearch()">
+				Legal Status: <span class="searchOptionsEntered">{{productSearch.getSelectedLegalStatus()}}</span>
+			</span> <span ng-show="productSearch.showStrandOptions && !productSearch.isFoxipediaGroupSearch()"> Only the
+				titles ... <span class="searchOptionsEntered">{{productSearch.getStrandsQueryString()}}</span>
+			</span> <span ng-show="productSearch.selectedProductTypes.length>0 && !productSearch.isFoxipediaGroupSearch()"> Product
+				Type: <span class="searchOptionsEntered">{{productSearch.getSelectedProductDescriptions()}}</span>
+			</span>
+			<span ng-show="productSearch.contractualPartyId && !productSearch.isFoxipediaGroupSearch()">
+				Contractual Party: <span class="searchOptionsEntered">{{productSearch.getContractualPartyDescription()}}</span>
+			</span>
+			<span ng-show="productSearch.contractualPartyTypeId && !productSearch.isFoxipediaGroupSearch()">
+				Contractual Party Type: <span class="searchOptionsEntered">{{productSearch.getContractualPartyTypeDescription()}}</span>
+			</span>			
+		</div>
+		<div id="productSearchErrorMessage" 
+			style="display: none; width: 99%; text-align: center; padding-top: 1%; float: left;"
+			ng-show="productSearch.errorMessage != null">
+			<p class="text-danger">{{productSearch.errorMessage}}</p>
+		</div>
+		<div id="searchingForProducts"
+			ng-show="productSearch.searchInProgress" style="display: none;">
+			<span erm-spinner message="Searching for products..."></span>
+		</div>
+		<div style="position: relative; width: 98.5%; float: left;"
+			class="productResults">
+			<div ng-show="productSearch.productSearchCompleted || productSearch.foxipediaGroupSearchCompleted" style="overflow: hidden; position: relative; float: left; width: 100%;">
+			  <div id="erm-product-search-results" erm-product-search-results groups="groups" is-foxipedia-search="productSearch.foxipediaSearch" show-total="true"
+				  show-search="true"  search-id="productSearch.searchID"></div>
+			</div>
+		</div>		
+	</div>
+	</div>
+	
+	<div id="getStartedController" ng-controller="GetStartedController" style="display: none;" ng-show="showGetStartedMenu">			
+	  <div class="productLeftDivStyle mediumFontRights getStartedTabFontColor getStarted_Main_tab">	  	
+		  <div class="panel getStarted_Menu_tab" style="padding-top: 10%; width : 100%; float : left; box-shadow: 0px 0 0 rgba(0, 0, 0, 0.05);">
+				<div class="card signin-card clearfix">
+						<div class="homeTileHeader"><span class="icon-bullhorn" style="color: #00A2E8"></span> Background</div>
+						<div class="homeTileBlurb"> An introduction to ERM.  <a href="" ng-click="switchGetStartedTabs('news');" ng-show="getStartedTab != 'news'">Full Story...</a><a href="" ng-click="collapseGetStartedTabs();" ng-show="getStartedTab == 'news'">Collapse</a></div>						
+				</div>
+				<div class="card signin-card clearfix">				
+						<div class="homeTileHeader"><span class="icon-star" style="color: #E2952C"></span> Get Started</div>
+						<div class="homeTileBlurb"> Quick guides and videos to help you get started with ERM.   <a href="" ng-click="switchGetStartedTabs('getStarted', '1');" ng-show="getStartedTab != 'getStarted'">Watch and Learn...</a><a href="" ng-click="collapseGetStartedTabs();" ng-show="getStartedTab == 'getStarted'">Collapse</a></div>
+				</div>
+				<div class="card signin-card clearfix">
+						<div class="homeTileHeader"><span class="icon-group" style="color: #00A2E8"></span> Cast &amp; Crew / Questions</div>
+						<div class="homeTileBlurb"> <a href="" ng-click="switchGetStartedTabs('castandcrew');" ng-show="getStartedTab != 'castandcrew'">Click Here...</a><a href="" ng-click="collapseGetStartedTabs();" ng-show="getStartedTab == 'castandcrew'">Collapse</a></div>						
+				</div>				
+			</div>
+			<div ng-show="getStartedTab=='news'" class="panel getStarted_Panel" style="width :100%; float : right; box-shadow: 0px 0 0 rgba(0, 0, 0, 0.05);">				
+			  <div class="panel-body getStarted_HeaderClass">			  				 
+			  	<div id="GUIDE_NEWS"></div>			  	
+			  </div>			  
+			</div>
+			<div ng-show="getStartedTab=='getStarted'" class="panel getStarted_Panel" style="width : 100%; float : right; box-shadow: 0px 0 0 rgba(0, 0, 0, 0.05);">
+			  <div class="panel-body getStarted_HeaderClass">
+			    <div id="GET_STARTED_NAV" class="getStartedGuideTOC"></div>			    			  
+			  	<div id="GUIDE_GETSTARTED"></div>	
+			  </div>
+			</div>
+			<div ng-show="getStartedTab=='guide'" class="panel getStarted_Panel" style="width : 100%; float : right; box-shadow: 0px 0 0 rgba(0, 0, 0, 0.05);">
+			  <div class="panel-body getStarted_HeaderClass" id="GUIDE_GUIDE">Guide</div>	  
+			</div>
+			<div ng-show="getStartedTab=='castandcrew'" class="panel getStarted_Panel" style="width : 100%; float : right; box-shadow: 0px 0 0 rgba(0, 0, 0, 0.05);">
+			  <div class="panel-body getStarted_HeaderClass" id="GUIDE_CASTANDCREW">Cast &amp; Crew</div>
+			</div>
+			<div ng-show="getStartedTab=='downloads'" class="panel getStarted_Panel" style="width : 100%; float : right; box-shadow: 0px 0 0 rgba(0, 0, 0, 0.05);">
+			  <div class="panel-body getStarted_HeaderClass" id="GUIDE_DOWNLOADS">Downloads</div>
+			</div>
+			<div ng-show="getStartedTab=='questions'" class="panel getStarted_Panel" style="width : 100%; float : right; box-shadow: 0px 0 0 rgba(0, 0, 0, 0.05);">
+			  <div class="panel-body getStarted_HeaderClass" id="GUIDE_QUESTIONS">Questions?</div>
+			</div>
+		</div>
+	</div>						
+	
+	<div ng-view id="erm-content"></div>		
+	<div id="initializingPopupWindow">
+		<div id="submitDiv" class="submitClass"
+			style="height: 50%; margin-top: 20px;">
+			<i class="icon-spinner icon-spin icon-large"></i>&nbsp; Loading,
+			please wait...
+		</div>
+	</div>
+	<div id="confirmationPopupWindow" style="display : none;">
+		<div class="warningClass"
+			style="display:inline; margin-top: 20px; text-align: center; margin-bottom: 10px; width: 95%;height : 50px;">
+			<i class="icon-warning-sign"></i>  <span class="confirmationTextSection"></span>
+		</div>
+		<div class="submitClass"
+			style="clear: both; text-align: right; height: auto; padding-top: 10px; width : 95%;">
+			<input type="hidden" class="subrightsCommentIdToBeDeleted">
+			<button class="whatever-confirmation-need-to-be-process btn-xs btn-primary btn-delete"
+				style="margin: 0px; margin-bottom: 2.3em; margin-left: auto; margin-right: auto;">Process</button>
+			<button class="whatever-confirmation-need-to-be-cancel btn-xs btn-primary"
+				style="margin: 0px; margin-bottom: 2.3em; margin-left: 20px; margin-right: auto;">Cancel</button>
+		</div>
+	</div>
+	<div class="ermSidePanelItems" ng-show="isERMSidePanelOut" id="ermSidePanelController" class="panel" ng-controller="ERMSidePanelController" style="display: none;">
+	  <div class="ermSidePanelTabs divNoPaddingOrMargin maximumWidth"
+			style="float: left; border: 0px; margin-top: 1%; margin-left: 1%; width: 95%; font-size: 11px;">
+			<ul class="nav nav-tabs" style="text-align: center;">
+				<li ng-click="switchERMSidePanels('productcomments');"
+					class="{{ currentERMSidePanelTab=='productcomments' ? 'active' : '' }}"><a
+					href="">Product<br/>Comments<div style="text-align:center; width: 100%;">({{productComments.length}})<br/>&nbsp;</div></a></li>
+				<!-- 
+					AMV 11/20/2014 Only show the tab if the product has not private rights consumption status and the user is not admin
+				 -->
+				<li ng-click="switchERMSidePanels('strandcomments');" ng-show="canViewStrandsComments()"
+					class="{{ currentERMSidePanelTab=='strandcomments' ? 'active' : '' }}"><a
+					href="">Strand<br/>Comments<div style="text-align:center; width: 100%;">({{rightStrandCommentsCount}})<br/>&nbsp;</div></a></li>				
+				<li ng-click="switchERMSidePanels('clearancecomments');"
+					class="{{ currentERMSidePanelTab=='clearancecomments' ? 'active' : '' }}"><a
+					href="">Clearance Memo<br/>Comments<div style="text-align:center; width: 100%;">({{clearanceMemoComments.length}})</div></a></li>				
+				<li ng-click="switchERMSidePanels('clearancemapping');"
+					class="{{ currentERMSidePanelTab=='clearancemapping' ? 'active' : '' }}"><a
+					href="">Clearance Memo<br/>Mapping<span><br/>&nbsp;</span></a></li>
+			</ul>
+		</div>			
+		<div class="panel productLeftDivStyle panelTab crossProductPanel" ng-show="currentERMSidePanelTab=='strandcomments'" style="display: none; width: 95%;">
+			<div id="strand-sidepanel-response">
+  		  <i id="strand-sidepanel-spinner" class="icon-li icon-small icon-spinner icon-spin"></i><i id="strand-sidepanel-check" class="icon-check icon-small"></i> <span id="strand-sidepanel-spinner-message"></span>
+			</div>						
+			<div class="panel-body" style="margin-top: 30px; width : 100%;" ng-show="!rightStrandOrRestrictionChecked">
+				<span><!-- Check one or more right strands or informational codes on the left to view/set comments or click one of the links below: --></span>
+			</div>
+			<div class="panel-body" style="font-size: 11px; margin-top: 30px; width : 100%;">				
+				<i class="icon-comment-alt icon-flip-horizontal"></i> Product Informational Code Comments <span style="text-align:center; width: 100%;">({{productInfoCodeCommentsCount}})</span> <a ng-show="productInfoCodeCommentsCount > 0" href="" onClick="strands.showAllStrandComments(false,false,true,false)">show</a> <a ng-show="productInfoCodeComments.length > 0" href="" ng-click="emptyProductInfoCodeComments();">hide</a><BR/>
+				<i class="icon-comment-alt icon-flip-horizontal"></i> Rights Strands Comments <span style="text-align:center; width: 100%;">({{rightStrandStrandCommentsCount}})</span> <a href="" ng-show="rightStrandStrandCommentsCount > 0"  onClick="strands.showAllStrandComments(true,false,false,false)">show</a> <a ng-show="rightStrandStrandComments.length > 0" href="" ng-click="emptyRightStrandStrandComments();">hide</a><BR/>
+				<i class="icon-comment-alt icon-flip-horizontal"></i> Strand Informational Code Comments <span style="text-align:center; width: 100%;">({{rightStrandInfoCodeCommentsCount}})</span> <a ng-show="rightStrandInfoCodeCommentsCount > 0"  href="" onClick="strands.showAllStrandComments(false,true,false,false)">show</a> <a ng-show="rightStrandInfoCodeComments.length > 0" href="" ng-click="emptyRightStrandInfoCodeComments();">hide</a><BR/>
+				<i class="icon-comment-alt icon-flip-horizontal"></i> All Comments <a href="" onClick="strands.showAllStrandComments(true,true,true,false)">show</a> <a ng-show="rightStrandInfoCodeComments.length > 0 || rightStrandStrandComments.length > 0 || rightStrandInfoCodeComments.length > 0" href="" ng-click="emptyProductInfoCodeComments();emptyRightStrandStrandComments();emptyRightStrandInfoCodeComments();">hide</a><BR/>
+			</div>
+			<div class="panel-body" style="font-size: 12px; margin-top: 10px; width : 100%;">
+				<span ng-show="rightStrandOrRestrictionChecked"><i class="icon-comment icon-flip-horizontal" style="color : #e5c45e; font-size : 16px;"></i> <i class="icon-paper-clip" style="font-size:16px;"></i>  Comments and Attachments: <button id="addRightStrandCommentsAndAttachments" ng-click="openAddRightStrandCommentsAndAttachments(0);" class="btn-xs btn-primary btn-add" ng-show="security.canEditRightStrandComments"><i class="icon-comment-alt icon-flip-horizontal"></i> Add Comments</button></span>
+				<BR/><a href="" ng-click="toggleSidePanelComments()" ng-show="productInfoCodeComments.length > 0 || rightStrandStrandComments.length > 0 || rightStrandInfoCodeComments.length > 0"><span ng-show="!sidePanelCommentsShowComments">Expand All</span><span ng-show="sidePanelCommentsShowComments">Collapse All</span></a>				
+			</div>
+			<div class="deletedClass" ng-show="!rightStrandOrRestrictionChecked">
+  		  <span id="strand-sidepanel-conflict-message"></span>
+			</div>
+			<div class="panel-body" style="height: 24px; margin-top: 15px; padding : 0px; border-top : 1px solid #cdcdcd; width : 100%;">				
+			  <a style="padding-top: 5px; float: left;" href="" ng-click="checkAllStrandComments(true)" ng-show="security.canEditRightStrandComments && rightStrandComments.length > 0"><span>Check All</span></a>
+			  <a style="padding-top: 5px; padding-left: 5px; float: left;" href="" ng-click="checkAllStrandComments(false)" ng-show="security.canEditRightStrandComments && rightStrandComments.length > 0 && strandCommentsToDelete.length > 0"><span>Uncheck All</span></a>
+				<button id="deleteCheckedStrandCommentButton" class="btn btn-primary btn-sm btn-delete" style="float: right; margin-top: 5px; font-size:16px;" ng-show="strandCommentsToDelete.length > 0"><i class="icon-remove"></i> Delete Checked Comments</button>										
+			</div>
+			<div class="panel-body" style="margin-top: 3px; padding : 3px; padding-left : 0px; width : 100%;">
+				<div class="strandCommentSectionHeader" ng-show="productInfoCodeComments.length > 0">Product Informational Code Comments</div>
+				<div ng-repeat="comment in productInfoCodeComments">					
+					<div id="comment_{{comment.comment.id}}" ng-show="(comment.comment.publicInd == 1 || comment.comment.publicInd == null) || ((security.isBusiness && comment.comment.business && security.canViewPrivateComments) || (!security.isBusiness && comment.comment.legal && security.canViewPrivateComments))"  class="commentStrand" style="width : 99.5%; margin-left : 0px; margin-top : 5px; border : 1px solid #989898; padding : 5px;">
+						<div style="width : 100%;">
+							<div style="clear: both;">
+								<input style="float: left;" ng-model="this.checked" ng-change="checkEntityItems({{comment.entityTypeId}}, {{comment.comment.id}}, {{comment.entityIdListMap}}, false)" ng-disabled="!security.comments.canDeleteStrandComment(comment)" type="checkbox" id="commenttodelete_{{comment.comment.id}}" name="commentstodelete" ng-click="checkStrandComment({{comment.comment.id}}, this.checked)" ng-show="security.comments.canDeleteStrandComment(comment)"/>
+								<a href="" class="commentStrandTitle" ng-click="checkEntityItems({{comment.entityTypeId}}, {{comment.comment.id}}, {{comment.entityIdListMap}}, true)"><b>{{displayCommentInfo(comment.hasMultipleEntityComments, comment.entityTypeId, comment.entityId)}}</b></a>
+							</div>
+							<div style="padding-left: 4px; padding-top: 4px; width : 49%; float : left;">
+							<span><b>{{comment.comment.updateName}} {{comment.comment.updateDate | date:'MM/dd/yyyy'}}</b></span>
+							</div>
+							<div style="width : 49%; float : right; text-align : right;">
+								<!-- //TODO the ng-show is incorrect -->
+								<a href="" ng-show="security.comments.canEditStrandComment(comment)" ng-click="openAddRightStrandCommentsAndAttachments({{comment.comment.id}})">Edit</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="" ng-click="openDeleteRightStrandCommentsPopopWindow({{comment.comment.id}})" ng-show="security.comments.canDeleteStrandComment(comment)">Remove</a>
+							</div>
+						</div>
+						<div style="width : 100%; clear: both;">
+							<span ng-show="comment.comment.publicInd == 0" class="icon-eye-close"> </span><a href="" ng-click="comment.commentExpanded = !comment.commentExpanded">Subject : <b>{{comment.comment.shortDescription}}</b></a>
+						</div>
+						<div ng-bind-html-unsafe="comment.comment.longDescription" style="width : 100%; margin-top : 5px;" class="commentLongDescription" ng-show="comment.commentExpanded">						
+						</div>
+						<div style="width : 100%;">
+							<span>Attachment(s) ({{comment.attachments.length > 0 ? comment.attachments.length : 0}})</span>
+						</div>
+						<div style="width : 100%; margin-top : 5px;margin-bottom : 5px; border-bottom : 1px solid #cdcdcd;">
+						</div>
+						<div style="width : 100%;" ng-repeat="attach in comment.attachments">
+							<span id="documentId_{{attach.documentId}}"><a href="/erm/rest/Comments/getAttachment/{{attach.documentId}}/{{attach.attachmentName}}" target="_blank"><b>{{attach.attachmentName}}</b></a></span>
+						</div>
+					</div>
+				</div>	
+				<div class="strandCommentSectionHeader" ng-show="rightStrandStrandComments.length > 0">Rights Strand Comments</div>						
+				<div ng-repeat="comment in rightStrandStrandComments">					
+					<div id="comment_{{comment.comment.id}}" ng-show="(comment.comment.publicInd == 1 || comment.comment.publicInd == null) || ((security.isBusiness && comment.comment.business && security.canViewPrivateComments) || (!security.isBusiness && comment.comment.legal && security.canViewPrivateComments))"  class="commentStrand" style="width : 99.5%; margin-left : 0px; margin-top : 5px; border : 1px solid #989898; padding : 5px;">
+						<div style="width : 100%;">
+							<div style="clear: both;">
+								<input style="float: left;" ng-model="value" ng-change="checkEntityItems({{comment.entityTypeId}}, {{comment.comment.id}}, {{comment.entityIdListMap}}, false)" ng-disabled="!security.comments.canDeleteStrandComment(comment)" type="checkbox" id="commenttodelete_{{comment.comment.id}}" name="commentstodelete" ng-click="checkStrandComment({{comment.comment.id}}, this.checked)" ng-show="security.comments.canDeleteStrandComment(comment)"/>
+								<a href="" class="commentStrandTitle" ng-click="checkEntityItems({{comment.entityTypeId}}, {{comment.comment.id}}, {{comment.entityIdListMap}}, true)"><b>{{displayCommentInfo(comment.hasMultipleEntityComments, comment.entityTypeId, comment.entityId)}}</b></a>
+							</div>
+							<div style="padding-left: 4px; padding-top: 4px; width : 49%; float : left;">
+							<span><b>{{comment.comment.updateName}} {{comment.comment.updateDate | date:'MM/dd/yyyy'}}</b></span>
+							</div>
+							<div style="width : 49%; float : right; text-align : right;">
+								<!-- //TODO the ng-show is incorrect -->
+								<a href="" ng-show="security.comments.canEditStrandComment(comment)" ng-click="openAddRightStrandCommentsAndAttachments({{comment.comment.id}})">Edit</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="" ng-click="openDeleteRightStrandCommentsPopopWindow({{comment.comment.id}})" ng-show="security.comments.canDeleteStrandComment(comment)">Remove</a>
+							</div>
+						</div>
+						<div style="width : 100%; clear: both;">
+							<span ng-show="comment.comment.publicInd == 0" class="icon-eye-close"> </span><a href="" ng-click="comment.commentExpanded = !comment.commentExpanded">Subject : <b>{{comment.comment.shortDescription}}</b></a>
+						</div>
+						<div ng-bind-html-unsafe="comment.comment.longDescription" style="width : 100%; margin-top : 5px;" class="commentLongDescription" ng-show="comment.commentExpanded">						
+						</div>
+						<div style="width : 100%;">
+							<span>Attachment(s) ({{comment.attachments.length > 0 ? comment.attachments.length : 0}})</span>
+						</div>
+						<div style="width : 100%; margin-top : 5px;margin-bottom : 5px; border-bottom : 1px solid #cdcdcd;">
+						</div>
+						<div style="width : 100%;" ng-repeat="attach in comment.attachments">
+							<span id="documentId_{{attach.documentId}}"><a href="/erm/rest/Comments/getAttachment/{{attach.documentId}}/{{attach.attachmentName}}" target="_blank"><b>{{attach.attachmentName}}</b></a></span>
+						</div>
+					</div>
+				</div>
+				<div class="strandCommentSectionHeader" ng-show="rightStrandInfoCodeComments.length > 0">Strand Informational Code Comments</div>
+				<div ng-repeat="comment in rightStrandInfoCodeComments">					
+					<div id="comment_{{comment.comment.id}}" class="commentStrand" style="width : 99.5%; margin-left : 0px; margin-top : 5px; border : 1px solid #989898; padding : 5px;">
+						<div style="width : 100%;">
+							<div style="clear: both;">
+								<input style="float: left;" ng-model="value" ng-change="checkEntityItems({{comment.entityTypeId}}, {{comment.comment.id}}, {{comment.entityIdListMap}}, false)" ng-disabled="!security.comments.canDeleteStrandComment(comment)" type="checkbox" id="commenttodelete_{{comment.comment.id}}" name="commentstodelete" ng-click="checkStrandComment({{comment.comment.id}}, this.checked)" ng-show="security.comments.canDeleteStrandComment(comment)"/>
+								<a href="" class="commentStrandTitle" ng-click="checkEntityItems({{comment.entityTypeId}}, {{comment.comment.id}}, {{comment.entityIdListMap}}, true)"><b>{{displayCommentInfo(comment.hasMultipleEntityComments, comment.entityTypeId, comment.entityId)}}</b></a>
+							</div>
+							<div style="padding-left: 4px; padding-top: 4px; width : 49%; float : left;">
+							<span><b>{{comment.comment.updateName}} {{comment.comment.updateDate | date:'MM/dd/yyyy'}}</b></span>
+							</div>
+							<div style="width : 49%; float : right; text-align : right;">
+								<!-- //TODO the ng-show is incorrect -->
+								<a href="" ng-show="security.comments.canEditStrandComment(comment)" ng-click="openAddRightStrandCommentsAndAttachments({{comment.comment.id}})">Edit</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="" ng-click="openDeleteRightStrandCommentsPopopWindow({{comment.comment.id}})" ng-show="security.comments.canDeleteStrandComment(comment)">Remove</a>
+							</div>
+						</div>
+						<div style="width : 100%; clear: both;">
+							<span ng-show="comment.comment.publicInd == 0" class="icon-eye-close"> </span><a href="" ng-click="comment.commentExpanded = !comment.commentExpanded">Subject : <b>{{comment.comment.shortDescription}}</b></a>
+						</div>
+						<div ng-bind-html-unsafe="comment.comment.longDescription" style="width : 100%; margin-top : 5px;" class="commentLongDescription" ng-show="comment.commentExpanded">						
+						</div>
+						<div style="width : 100%;">
+							<span>Attachment(s) ({{comment.attachments.length > 0 ? comment.attachments.length : 0}})</span>
+						</div>
+						<div style="width : 100%; margin-top : 5px;margin-bottom : 5px; border-bottom : 1px solid #cdcdcd;">
+						</div>
+						<div style="width : 100%;" ng-repeat="attach in comment.attachments">
+							<span id="documentId_{{attach.documentId}}"><a href="/erm/rest/Comments/getAttachment/{{attach.documentId}}/{{attach.attachmentName}}" target="_blank"><b>{{attach.attachmentName}}</b></a></span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>		
+		<div class="panel productLeftDivStyle panelTab crossProductPanel" ng-show="currentERMSidePanelTab=='clearancemapping'" style="display: none; width: 95%;">
+		  <div id="memo-sidepanel-top">
+			  <div id="memo-sidepanel-response">
+  			  <span id="memo-sidepanel-spinner" class="icon-spinner icon-spin icon-small"></span><span id="memo-sidepanel-check" class="icon-check icon-small"></span> <span id="memo-sidepanel-spinner-message"></span>
+			  </div>
+			  <BR/>
+ 				<button class="btn-xs btn-primary btn-search hideControls" onClick="mapClearanceTOCItems();" id="ermSideClearanceMap" style="color: white; margin-left: 5px; padding: 0 12px;"><i class="icon-sitemap"></i> Map</button>
+				<button class="btn-xs btn-primary btn-search hideControls" onClick="unMapClearanceTOCItems();" id="ermSideClearanceUnmap" style="color: white; margin-left: 5px; padding: 0 12px;"><i class="icon-sitemap"></i> Unmap</button>
+				<button class="btn-xs btn-primary btn-search hideControls" onClick="showMappedCheckedItems();" id="ermSideClearanceShowMapped" style="color: white; margin-left: 5px; padding: 0 12px;"><i class="icon-sitemap"></i> Show Mapped Table of Contents Section</button><BR/>
+				<button class="btn-xs btn-primary btn-search hideControls" onClick="showStrandsMapped();" id="ermSideClearanceShowMappedStrands" style="color: white; margin-left: 5px; padding: 0 12px;"><i class="icon-sitemap"></i> Check Mapped Strands / Info Codes</button>
+			</div>
+			<div class="ermSideClearanceMemoSectionTitle">
+				Clearance Memo - Table of Contents
+			</div>
+			<div class="ermSideClearanceTOC">
+				<ul class="ermSideClearanceTOCSelectArea">  
+				</ul>
+			</div>
+		  <button class="btn-xs btn-primary btn-search hideControls" onClick="acknowledgeUpdate();" id="ermSideClearanceAcknowledge" style="text-align: center; float: left; width: 100%; padding: 0 12px; margin-bottom: 10px;"><i class="icon-thumbs-up"></i> Acknowledge Update</button>
+		  <BR/>
+			<div class="ermSideClearanceMemoSectionTitle">
+				Memo Section Text
+			</div>
+			<div class="ermSideClearanceMemoSectionTextArea">
+								
+			</div>
+		</div>
+		<div class="panel productLeftDivStyle panelTab crossProductPanel" ng-show="security.canViewBusinessProductComments && currentERMSidePanelTab=='productcomments'" style="display: none; width: 95%;">
+			<div class="panel-body" style="font-size: 12px; clear: both; padding-top: 30px; width : 100%;">
+				<span><i class="icon-comment icon-flip-horizontal" style="color : #e5c45e; font-size : 16px;"></i> <i class="icon-paper-clip" style="font-size:16px;"></i>  Comments and Attachments: <button id="addClearanceCommentsAndAttachments" ng-click="openAddProductCommentsAndAttachments(0);" class="btn-xs btn-primary btn-add" ng-show="security.canEditBusinessProductComments"><i class="icon-comment-alt icon-flip-horizontal"></i> Add Comments</button>
+				<BR/><a href="" ng-click="toggleSidePanelProductComments()" ng-show="productComments.length > 0"><span ng-show="!sidePanelProductCommentsShowComments">Expand All</span><span ng-show="sidePanelProductCommentsShowComments">Collapse All</span></a></span>
+			</div>
+			<div class="panel-body" style="height: 24px; margin-top: 15px; padding : 0px; border-top : 1px solid #cdcdcd; width : 100%;">				
+			  <a style="padding-top: 5px; float: left;" href="" ng-click="checkAllProductComments(true)" ng-show="security.canEditBusinessProductComments && productComments.length > 0"><span>Check All</span></a>
+			  <a style="padding-top: 5px; padding-left: 5px; float: left;" href="" ng-click="checkAllProductComments(false)" ng-show="security.canEditBusinessProductComments &&  productComments.length > 0 && productCommentsToDelete.length > 0"><span>Uncheck All</span></a>
+				<button id="deleteCheckedProductCommentButton" class="btn btn-primary btn-sm btn-delete" style="float: right; margin-top: 5px; font-size:16px;" ng-show="productCommentsToDelete.length > 0"><i class="icon-remove"></i> Delete Checked Comments</button>										
+			</div>
+			<div class="panel-body" style="margin-top: 3px; padding : 3px; padding-left : 0px; width : 100%;">
+				<div ng-repeat="comment in productComments">
+				  <div id="comment_{{comment.comment.id}}" class="commentStrand" style="width : 99.5%; margin-left : 0px; margin-top : 5px; border : 1px solid #989898; padding : 5px;">
+						<div style="width : 100%;">
+							<div>
+								<input style="float: left;" ng-disabled="!security.comments.canDeleteBusinessProductComment(comment)" type="checkbox" id="commenttodelete_{{comment.comment.id}}" name="commentstodelete" ng-click="checkProductComment({{comment.comment.id}}, this.checked)" ng-show="security.comments.canDeleteBusinessProductComment(comment)"/>								
+							</div>
+							<div style="padding-left: 4px; padding-top: 4px; width : 45%; float : left;">
+							<span><b>{{comment.comment.updateName}} {{comment.comment.updateDate | date:'MM/dd/yyyy'}}</b></span>
+							</div>
+							<div style="width : 45%; float : right; text-align : right;">
+								<a href="" ng-show="security.comments.canEditBusinessProductComment(comment)" ng-click="openAddProductCommentsAndAttachments({{comment.comment.id}})">Edit</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="" ng-click="openDeleteProductCommentsPopopWindow({{comment.comment.id}})" ng-show="security.comments.canDeleteBusinessProductComment(comment)">Remove</a>
+							</div>
+						</div>
+						<div style="width : 100%; clear: both;">
+							<span ng-show="comment.comment.publicInd == 0" class="icon-eye-close"> </span><a href="" ng-click="comment.commentExpanded = !comment.commentExpanded">Subject : <b>{{comment.comment.shortDescription}}</b></a>
+						</div>
+						<div ng-bind-html-unsafe="comment.comment.longDescription" style="width : 100%; margin-top : 5px;" class="commentLongDescription" ng-show="comment.commentExpanded">						
+						</div>
+						<div style="width : 100%;">
+							<span>Attachment(s) ({{comment.attachments.length > 0 ? comment.attachments.length : 0}})</span>
+						</div>
+						<div style="width : 100%; margin-top : 5px;margin-bottom : 5px; border-bottom : 1px solid #cdcdcd;">
+						</div>
+						<div style="width : 100%;" ng-repeat="attach in comment.attachments">
+							<span id="documentId_{{attach.documentId}}"><a href="/erm/rest/Comments/getAttachment/{{attach.documentId}}/{{attach.attachmentName}}" target="_blank"><b>{{attach.attachmentName}}</b></a></span>
+						</div>
+					</div>	
+				</div>						
+			</div>
+		</div>
+		<div class="panel productLeftDivStyle panelTab crossProductPanel" ng-show="security.canViewLegalClearanceMemoComments && currentERMSidePanelTab=='clearancecomments'" style="display: none; width: 95%;">
+			<div class="panel-body" style="font-size: 12px; clear: both; padding-top: 30px; width : 100%;">
+				<span><i class="icon-comment icon-flip-horizontal" style="color : #e5c45e; font-size : 16px;"></i> <i class="icon-paper-clip" style="font-size:16px;"></i>  Comments and Attachments: <button id="addClearanceCommentsAndAttachments" ng-click="openAddClearanceCommentsAndAttachments(0);" class="btn-xs btn-primary btn-add" ng-show="security.canEditLegalClearanceMemoComments"><i class="icon-comment-alt icon-flip-horizontal"></i> Add Comments</button>
+				<BR/><a href="" ng-click="toggleSidePanelComments()" ng-show="clearanceMemoComments.length > 0"><span ng-show="!sidePanelCommentsShowComments">Expand All</span><span ng-show="sidePanelCommentsShowComments">Collapse All</span></a></span>
+			</div>
+			<div class="panel-body" style="height: 24px; margin-top: 15px; padding : 0px; border-top : 1px solid #cdcdcd; width : 100%;">				
+			  <a style="padding-top: 5px; float: left;" href="" ng-click="checkAllClearanceMemoComments(true)" ng-show="security.canEditLegalClearanceMemoComments && clearanceMemoComments.length > 0"><span>Check All</span></a>
+			  <a style="padding-top: 5px; padding-left: 5px; float: left;" href="" ng-click="checkAllClearanceMemoComments(false)" ng-show="security.canEditLegalClearanceMemoComments &&  clearanceMemoComments.length > 0 && clearanceMemoCommentsToDelete.length > 0"><span>Uncheck All</span></a>
+				<button id="deleteCheckedClearanceMemoCommentButton" class="btn btn-primary btn-sm btn-delete" style="float: right; margin-top: 5px; font-size:16px;" ng-show="clearanceMemoCommentsToDelete.length > 0"><i class="icon-remove"></i> Delete Checked Comments</button>										
+			</div>
+			<div class="panel-body" style="margin-top: 3px; padding : 3px; padding-left : 0px; width : 100%;">
+				<div ng-repeat="comment in clearanceMemoComments">
+					<div id="comment_{{comment.comment.id}}" class="commentStrand" style="width : 99.5%; margin-left : 0px; margin-top : 5px; border : 1px solid #989898; padding : 5px;">
+						<div style="width : 100%;">
+							<div style="clear: both;">
+								<input style="float: left;" ng-disabled="!security.comments.canDeleteCMComment(comment)" type="checkbox" id="commenttodelete_{{comment.comment.id}}" name="commentstodelete" ng-click="checkClearanceMemoComment({{comment.comment.id}}, this.checked)" ng-show="security.comments.canDeleteCMComment(comment)"/>								
+							</div>
+							<div style="padding-left: 4px; padding-top: 4px; width : 45%; float : left;">
+							<span><b>{{comment.comment.updateName}} {{comment.comment.updateDate | date:'MM/dd/yyyy'}}</b></span>
+							</div>
+							<div style="width : 45%; float : right; text-align : right;">
+								<a href="" ng-show="security.comments.canEditCMComment(comment)" ng-click="openAddClearanceCommentsAndAttachments({{comment.comment.id}})">Edit</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="" ng-click="openDeleteClearanceMemoCommentsPopopWindow({{comment.comment.id}})" ng-show="security.comments.canDeleteCMComment(comment)">Remove</a>
+							</div>
+						</div>
+						<div style="width : 100%; clear: both;">
+							<span ng-show="comment.comment.publicInd == 0" class="icon-eye-close"> </span><a href="" ng-click="comment.commentExpanded = !comment.commentExpanded">Subject : <b>{{comment.comment.shortDescription}}</b></a>
+						</div>
+						<div ng-bind-html-unsafe="comment.comment.longDescription" style="width : 100%; margin-top : 5px;" class="commentLongDescription" ng-show="comment.commentExpanded">						
+						</div>
+						<div style="width : 100%;">
+							<span>Attachment(s) ({{comment.attachments.length > 0 ? comment.attachments.length : 0}})</span>
+						</div>
+						<div style="width : 100%; margin-top : 5px;margin-bottom : 5px; border-bottom : 1px solid #cdcdcd;">
+						</div>
+						<div style="width : 100%;" ng-repeat="attach in comment.attachments">
+							<span id="documentId_{{attach.documentId}}"><a href="/erm/rest/Comments/getAttachment/{{attach.documentId}}/{{attach.attachmentName}}" target="_blank"><b>{{attach.attachmentName}}</b></a></span>
+						</div>
+					</div>
+				</div>							
+			</div>
+		</div>
+		<div class="ermSidePanelInner" ng-click="toggleERMSidePanel();" ng-show="security.canUseProductSidePanel" style="display: none;">
+			<i title="ERM Side Panel Operations" class="ermSidePanelChevron icon-chevron-left" style="margin-left: 20%;"></i>
+			<img class="crossProductText" src="/erm/img/comments_rotated.png"/>									
+		</div>							
+	</div>
+	<div id="jobsController" ng-controller="JobsController" style="display: none;">	
+		<div class="clearanceMemoToolbar">
+	    <div class="jobToolBarButton">
+	    	<span  ng-show="jobSearchType!='pending'">
+	    		<span ng-click="getPendingJobs()" ><i class="icon-tasks"></i> Get Pending Jobs</span>
+	    	</span>
+	    	<span ng-show="jobSearchType=='pending'">
+	    		<span ng-click="getPendingJobs()" ><i class="icon-refresh"></i> Refresh Pending Jobs</span>
+	    	</span>
+	    </div>
+	    <div class="jobToolBarButton">
+	    	<span ng-show="jobSearchType!='all'">
+	    	  <span ng-click="getAllJobs()"><i class="icon-tasks"></i> Get All Jobs</span>
+	    	</span>
+	    	<span ng-show="jobSearchType=='all'">
+	    	  <span ng-click="getAllJobs()"><i class="icon-refresh"></i> Refresh All Jobs</span>
+	    	</span>
+	    </div>
+		</div>	
+		<div class="clearanceMemoToolbar" ng-show="jobSearchType=='pending'">
+	    <div class="jobsHeader">Pending Jobs</div>
+		</div>
+		<div class="clearanceMemoToolbar" ng-show="jobSearchType=='all'">
+	    <div class="jobsHeader">All Jobs</div>
+		</div>
+		<BR/>
+		<BR/>	
+		<div ng-show="noJobs" class="noJobs" style="display:none;">
+			No Jobs Found
+		</div>			  	
+		<div ng-show="!noJobs" class="clearanceMemoToolbar" style="padding-left: 1%; display:none; clear:both;">
+		  <div class="pendingJob id" style="font-weight: bold;"><a ng-click="setSortColumn('id')" href="">ID</a> 
+		  	<span class="ng-isolate-scope ng-scope" ascending="isAscending()" is-sorted="isSorted('id')" erm-sort-indicator="">
+    			<i class="icon-sort-by-alphabet-alt" ng-class="isSorted&&ascending&&'icon-sort-by-alphabet'||isSorted&&!ascending&&'icon-sort-by-alphabet-alt'||''"></i>
+				</span>
+		  </div>
+		  <div class="pendingJob date" style="font-weight: bold;"><a ng-click="setSortColumn('createDate')" href="">Created Date</a> 
+		  	<span class="ng-isolate-scope ng-scope" ascending="isAscending()" is-sorted="isSorted('createDate')" erm-sort-indicator="">
+    			<i class="icon-sort-by-alphabet-alt" ng-class="isSorted&&ascending&&'icon-sort-by-alphabet'||isSorted&&!ascending&&'icon-sort-by-alphabet-alt'||''"></i>
+				</span>
+		  </div>		
+		  <div class="pendingJob name" style="font-weight: bold;"><a ng-click="setSortColumn('name')" href="">Job Name</a> 
+		  	<span class="ng-isolate-scope ng-scope" ascending="isAscending()" is-sorted="isSorted('name')" erm-sort-indicator="">
+    			<i class="icon-sort-by-alphabet-alt" ng-class="isSorted&&ascending&&'icon-sort-by-alphabet'||isSorted&&!ascending&&'icon-sort-by-alphabet-alt'||''"></i>
+				</span>
+		  </div>
+		  <div class="pendingJob status" style="font-weight: bold;"><a ng-click="setSortColumn('status')" href="">Status</a> 
+		  	<span class="ng-isolate-scope ng-scope" ascending="isAscending()" is-sorted="isSorted('status')" erm-sort-indicator="">
+    			<i class="icon-sort-by-alphabet-alt" ng-class="isSorted&&ascending&&'icon-sort-by-alphabet'||isSorted&&!ascending&&'icon-sort-by-alphabet-alt'||''"></i>
+				</span>
+		  </div>	
+		  <div class="pendingJob checkStatusButton" style="font-weight: bold;"></div>
+		  <BR/>
+		  <BR/>			
+		</div>					
+		<BR/>
+		<BR/>
+		<BR/>
+		<BR/>    	  	
+		<div  class="pendingJobRow" style="padding-left: 1%;" id="pendingJob_{{pendingJob.id}}" bindonce ng-repeat="pendingJob in jobs | orderBy:predicate:reverse">
+			<div class="pendingJob id">{{pendingJob.id}}</div>
+			<div class="pendingJob date">{{getCustomDisplayDateWithTime(pendingJob.createDate)}}</div>		
+			<div class="pendingJob name">{{pendingJob.name}}</div>
+			<div id="pendingJobStatus_{{pendingJob.id}}" class="pendingJob status">{{pendingJob.status}}</div>						
+			<div class="pendingJob checkStatusButton"><button ng-show="!statusCheck[{{pendingJob.id}}]" ng-click="doCheckForStatus({{pendingJob.id}})" class="btn-xs btn-primary btn-search">Check Progress</button></div>
+			
+			<div>    	
+		  	<button ng-show="false && statusCheck[{{pendingJob.id}}]" ng-click="doStopJob({{pendingJob.id}})" class="btn-xs btn-primary btn-delete"><i class="icon-stop"></i> Stop Job</button>
+		  	<button ng-show="false && statusCheck[{{pendingJob.id}}]"  ng-click="doStartJob({{pendingJob.id}})" class="btn-xs btn-primary btn-add">Start Job</button>
+		  	<button ng-show="statusCheck[{{pendingJob.id}}]"  ng-click="doDeleteJob({{pendingJob.id}})" class="btn-xs btn-primary btn-delete"><i class="icon-remove"></i> Delete Job</button>		  	
+		  	<button ng-show="statusCheck[{{pendingJob.id}}]" ng-click="doCancelCheckForStatus({{pendingJob.id}})" class="btn-xs btn-primary btn-delete"><i class="icon-stop"></i> Cancel Check Progress</button>
+		  	<button ng-show="statusCheck[{{pendingJob.id}}]" ng-click="doToggleShowDetails({{pendingJob.id}})" class="btn-xs btn-primary btn-search"><i ng-show="showDetails[pendingJob.id]" class="icon-chevron-up"></i><i ng-show="!showDetails[pendingJob.id]" class="icon-chevron-down"></i> Show details</button>
+		  </div>  
+		  <BR/>
+		  <div id="erm-job" erm-job job="pendingJob.job" job-id="pendingJob.id" checking-status="statusCheck[pendingJob.id]" details-shown="showDetails[pendingJob.id]"></div> 	  
+	 	  <BR/>
+		  <BR/>	   
+		</div>				     	  
+	</div>
+	
+	<div id="reportController" class="panel mediumFontRights" style="display: none; margin : 0px; padding : 0px; border : 0px;" ng-controller="ReportController">
+		<div class="panel" style="float:left; width:85%; background-color : #f3f3f3; margin-right : 0px; padding : 0px;">
+			
+			<!-- <div class="panel" style="background-color : #f3f3f3; margin : 0px; padding : 0px; width : 90%;"> -->
+				<div class="panel" style="width:100%; background-color : #f3f3f3; margin : 0px; padding : 0px;">				
+					<table class="table" style="height : 100%; margin-bottom : 0px; padding-bottom : 0px;">
+						<tr style="border-bottom : 1px solid #dddddd;" bindonce ng-repeat="report in reportData.reports.reportsList">
+							<td style="border-right : 1px solid #dddddd; width : 20%; font-size : 14px; font-weight : 800;"><a href="" onClick="rep_reportManagementObject.openReportManagementWindowMain({{report.id}}, null, false);">{{report.description}}</a></td>
+							<td style=" width : 80%;" ng-bind-html-unsafe="report.additionalComment"></td><!-- {{report.additionalComment == null ? '' : report.additionalComment}} -->
+						</tr>
+					</table>
+				</div>
+			<!-- </div> -->
+		</div>
+		<div class="panel" style="float:right; width : 14.5%; background-color : #f3f3f3; margin-left : 0px;">
+			<div class="panel-body">
+				<span style="font-weight : 800;">Saved Report Queries</span>
+				<div class="maximumWidth" style="margin-top : 5px; margin-bottom : 5px; height: 24px;">
+					<div style="width : 80%; float:left;"><input class="savedQuerySearchClass" id="rep_searchForQuery" type="text" style="width : 100%; height : 100%;"></div>
+					
+					<div style="width:19%;float:right; height : 100%;">
+						<button class="btn btn-default btn-xs" id="rep_openSearchSavedQuery"><i class="icon-search"></i></button>
+					</div>
+				</div>
+				<div class="maximumWidth" style="margin-top : 15px;"></div>
+				<div class="maximumWidth" style="padding : 0px; height : 200px; overflow-y : auto; overflow-x : hidden;" ng-show="reportData.savedReportQueries != null && reportData.savedReportQueries.length > 0">
+					<!-- <div class="maximumWidth" style="padding : 0px; margin-bottom : 3px;" ng-repeat="savedQuery in reportData.savedReportQueries">
+						<a href="" onClick="rep_reportManagementObject.openReportManagementWindowMain({{savedQuery.sourceReportId}},{{savedQuery.id}}, false);">{{savedQuery.name}}</a>
+					</div> -->
+					<ul style="margin-left : 10px; padding : 5px;" > <!-- list-style: decimal;  -->
+					<li class="maximumWidth" style="padding : 0px; margin-bottom : 3px; font-size : 11px;" ng-repeat="savedQuery in reportData.savedReportQueries">
+						<a href="javascript:$.noop()" onClick="rep_reportManagementObject.openReportManagementWindowMain({{savedQuery.sourceReportId}},{{savedQuery.id}}, false);">{{savedQuery.name}}</a>
+					</li>
+					</ul>
+				</div>
+			</div>
+			<div class="panel-body" style="margin-top : 50px; height : 150px; overflow-y : auto; overflow-x : hidden;" ng-show="reportData.recentReportQueries != null && reportData.recentReportQueries.length > 0">
+				<span style="font-weight : 800;">Recent Report Queries</span>
+				<!-- <div class="panel-body" ng-repeat="recentQuery in reportData.recentReportQueries">
+					<a href="" onClick="rep_reportManagementObject.openReportManagementWindowMain({{recentQuery.sourceReportId}},{{recentQuery.id}}, false);">{{recentQuery.name}}</a>
+				</div> -->
+				<ul style="margin-left : 10px; padding : 5px;]">
+				<li class="panel-body" style="padding : 0px; margin-bottom : 3px; font-size : 11px;" ng-repeat="recentQuery in reportData.recentReportQueries">
+					<a href="javascript:$.noop()" onClick="rep_reportManagementObject.openReportManagementWindowMain({{recentQuery.sourceReportId}},{{recentQuery.id}}, false);">{{recentQuery.name}}</a>
+				</li>
+				</ul>
+			</div>		
+		</div>
+	</div>
+
+	<div id="rep_reportQueryManagementPopupWindow" style="display:none;"></div>
+	<div id="rep_saveReportPopupWindow" style="display : none;"></div>
+	<div id="rep_searchReportPopupWindow" style="display : none;"></div>
+	<div id="successPopupWindow" style="width: 750px; height: 300px;  display : none;"></div>	
+	<div id="errorPopupWindow" style="width: 750px; height: 300px;  display : none;">		
+  	<div id="errorDiv"  class="errorClass" style="height : 60%; margin : auto;">
+  		<font style="font-size : 18px;"><i class="icon-warning-sign"></i></font>&nbsp; <span id="errorParagraph"></span>
+  	</div>
+  	<div class="errorClass" style="height : 30%; margin-bottom : 5px;">
+      <button id="errorCloseButton" class="btn btn-xs btn-primary" style="margin : 0px; margin-left : auto; margin-right : auto;">Close</button>
+    </div>  		
+	</div>
+	<div id="rep_submitPopupWindow" style="display :none;">
+		<div id="submitDiv"  class="submitClass" style="height : 50%; margin-top : 20px;">
+			<i class="icon-spinner icon-spin icon-large"></i>&nbsp; Processing, please wait...
+		</div>
+	</div>
+	<div id="rep_searchSavedQueriesPopupWindow" style="display :none;">
+		<div id="rep_searchSavedQueriesDiv"  class="submitClass" style="height : 50%; margin-top : 20px;">
+			<i class="icon-spinner icon-spin icon-large"></i>&nbsp; Searching, please wait...
+		</div>
+	</div>
+	
+	<div id="submitPopupWindow" style="display :none;">
+		<div id="submitDiv" class="submitClass"
+			style="height: 50%; margin-top: 20px;">
+			<i class="icon-spinner icon-spin icon-large"></i>&nbsp; Processing,
+			please wait...
+		</div>
+	</div>	
+	<div id="loadingPopupWindow" style="display: none;">
+		<div id="loadingDiv" class="submitClass"
+			style="height: 50%; margin-top: 20px;">
+			<i class="icon-spinner icon-spin icon-large"></i>&nbsp; Loading,
+			please wait...
+		</div>
+	</div>
+	
+	<div id="videoPopupWindow" style="display: none;">
+	  <div id="GuidePlayer" style="min-width: 600px; min-height: 600px;"></div>			
+	</div>
+	
+	<!-- templaes from rightsEdit -->
+	<!-- templates -->
+	<div id="sse_rightStrandPopupWindow" style="display : none;"></div>
+
+	<div id="template_addEditClearanceMemo" class="k-content" style="display : none;"></div>
+
+	<div id="test2_addEditInfoCodeWindow" class="k-content" style="display : none;"></div>
+	<!-- up to here they didn't have display:none -->
+	
+	<div id="template_addCommentsAndAttachments" class="k-content" style="display : none;"></div>
+	
+	<div id="commentsAndAttachmentPopupWindow" style="display : none;"></div>
+	
+	<div id="crs_rightStrandCopyPopupWindow" style="display : none;"></div>
+	
+	<div id="cre_rightStrandCreatePopupWindow" style="display : none;"></div>
+	<!-- end templates -->	
+	
+	<!-- end templates -->
+	
+</body>

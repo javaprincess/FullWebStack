@@ -1,0 +1,66 @@
+<div id="commentsAndAttachmentForm" class="panel maximumWidth mediumFontRights k-content">
+	<input type="hidden" id="commentsAndAttachmentsEntityCommentId" data-bind="value : commentEntityCommentId">
+	<input type="hidden" id="commentsAndAttachmentsEntityKey" data-bind="value : commentEntityKey">
+	<input type="hidden" id="commentsAndAttachmentsCommentId" data-bind="value : commentId">
+	<input type="hidden" id="commentsAndAttachmentsGrantStatusId" data-bind="value : commentStatusId">
+	<input type="hidden" id="commentsAndAttachmentsProductGrantId" data-bind="value : commentProductGrantId">
+	<div id="commentsAndAttachmentsTimestamp" class="panel-body maximumWidth" style="font-weight : 800; margin-bottom : 10px;">
+		Time stamp : <span id="commentsAndAttachmentsUserId"></span>			
+		<div id="commentsPopCopyToClearance" class="panel-body maximumWidth">		
+			<button class="btn btn-xs btn-primary btn-copy" onClick="copyCommentToClearanceMemo();"><i class="icon-copy"></i> Copy to Clearance Memo</button>
+		</div>
+	</div>
+	
+	<div id="showCategorySelectBox" class="panel-body maximumWidth" style="margin-top : 5px; display : none;">
+		<form class="form-inline" role="form">
+			<div class="form-group">
+				<label for="addCommentsAndAttachmentsCategory" class="commentsAndAttachmentPopupColor">Select a category : </label>													
+				<select class="form-control input-sm" id="addCommentsAndAttachmentsCategory" style="width:400px;" data-text-field="name" data-value-field="value" data-bind="source:categories, value: categoryId"></select>
+			</div>
+		</form>
+	</div>
+	
+	<div id="commentsPopSectionSubject" class="panel-body maximumWidth" style="margin-top : 5px;">
+		<form class="form-inline" role="form">
+			<div class="form-group" style="float: left; width: 70%;">
+				<label for="addCommentsAndAttachmentsSubjectInput" class="commentsAndAttachmentPopupColor">Subject : </label>													
+				<input type="text" title="Enter a title for the comment" class="form-control input-sm" id="addCommentsAndAttachmentsSubjectInput" style="width:400px;" data-bind="value: commentSubject" maxlength=200>
+			</div>
+			<div class="form-group" style="float: right; width: 30%; padding-top: 1%;">
+				<label for="addCommentsAndAttachmentsPublicInd" class="commentsAndAttachmentPopupColor">Public : </label>													
+				<input type="checkbox" class="" id="addCommentsAndAttachmentsPublicInd" style="width: 10%;" data-bind="checked: commentPublicInd">
+			</div>
+		</form>
+	</div>
+	<div id="commentsPopSectionText" class="panel-body maximumWidth commentsAndAttachmentPopupColor" style="margin-bottom : 5px; margin-top : 5px;">
+		<i class="icon-comment icon-flip-horizontal" style="color : #e5c45e;"></i> Enter Comment Text.
+	</div>
+	<div id="commentsPopSectionDescription" class="panel-body maximumWidth">
+		<textarea title="Enter a comment description" id="addCommentsAndAttachmentsDescription" class="form-control" rows="5" data-bind="value: commentDescription"></textarea>
+	</div>
+	<div class="panel-body maximumWidth commentsAndAttachmentPopupColor" style="margin-top : 10px; margin-bottom : 5px;">
+		Add one or more attachments to this comment
+	</div>
+	
+	<div class="panel-body maximumWidth" style="margin-bottom : 10px;">
+		<i class="icon-paper-clip"></i> Attachments: <span class="icon-upload-alt">  <a href="#" title="upload" id="upload-attachment-button">Upload</a></span>
+		<input name="fileName" id="upload-fileName" type="hidden" value="" /> 
+		<input name="file" id="upload-commentAttachment" onChange="var filename = $('#upload-commentAttachment').val();$('#upload-fileName').html(filename);$('#upload-fileName').val(filename);" type="file" style="display: none !important;"/>
+	</div>
+	
+	<div class="panel-body maximumWidth" style="margin-top : 10px;">
+		Number of Attachments (<span id="commentsAndAttachmentNumberOfAttachments"></span>)
+	</div>
+	<div class="panel-body maximumWidth" style="border-top : 1px solid #cdcdcd;" id="savedAttachments">
+	</div>
+	<div class="panel-body maximumWidth" style="margin-top : 5px; text-align : right;">
+		<button id="updateCommentsAndAttachments" class="btn btn-xs btn-primary btn-edit">Update Comment</button><button id="saveCommentsAndAttachments" class="btn btn-xs btn-primary btn-add">Save Comment</button>  <button id="cancelCommentsAndAttachments" class="btn btn-xs btn-primary">Cancel</button>
+	</div>
+		
+</div>
+
+<div id="subrights_submitPopupWindow" style="display:none">
+		<div id="submitDiv"  class="submitClass" style="height : 50%; margin-top : 20px;">
+			<i class="icon-spinner icon-spin icon-large"></i>&nbsp; Processing, please wait...
+		</div>
+</div>
