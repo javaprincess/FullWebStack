@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="1.0"
+	xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd">
+	<persistence-unit name="primary">
+		<provider></provider> 
+ 
+ 
+		<jta-data-source>jdbc/ERMDS</jta-data-source>
+
+ 		<!-- QA db, use with caution -->
+ 
+ 		<!-- 
+		<jta-data-source>jdbc/ERMDSQA</jta-data-source>
+ 		--> 		
+ 		<!-- 
+		<jta-data-source>jdbc/ERMDS_C1</jta-data-source>		
+ 		-->
+ 		<class>com.fox.it.erm.User</class>
+		<class>com.fox.it.erm.Role</class>		
+		<class>com.fox.it.erm.Privilege</class>
+		<class>com.fox.it.erm.FunctionPoint</class>				 
+		<class>com.fox.it.erm.Product</class>
+		<class>com.fox.it.erm.ProductHeader</class>
+		<class>com.fox.it.erm.ProductHeaderOnly</class>
+		<class>com.fox.it.erm.ProductVersionAltId</class>
+		<class>com.fox.it.erm.ProductVersion</class>
+		<class>com.fox.it.erm.ProductVersionHeader</class>
+		<class>com.fox.it.erm.ErmParty</class>
+		<class>com.fox.it.erm.ErmProductContact</class>
+		<class>com.fox.it.erm.ErmContractInfo</class>
+		<class>com.fox.it.erm.ErmContractualPartyType</class>
+		<class>com.fox.it.erm.ErmPartyType</class>		
+		<class>com.fox.it.erm.ErmContactType</class>
+		<class>com.fox.it.erm.ErmAccessType</class>
+		<class>com.fox.it.erm.ErmOrganizationType</class>
+		<class>com.fox.it.erm.ErmCountry</class>		
+		<class>com.fox.it.erm.ErmProductVersion</class>
+		<class>com.fox.it.erm.ErmProductRightStrand</class>
+		<class>com.fox.it.erm.ErmProductGrant</class>
+		<class>com.fox.it.erm.ErmProductLanguageRestriction</class>
+		<class>com.fox.it.erm.ErmProductMediaRestriction</class>
+		<class>com.fox.it.erm.ErmProductRestriction</class>
+		<class>com.fox.it.erm.ErmProductRightGrant</class>
+		<class>com.fox.it.erm.ErmProductRightRestriction</class>
+		<class>com.fox.it.erm.ErmProductTerritoryRestriction</class>
+		<class>com.fox.it.erm.ProductHierarchy</class>
+		<class>com.fox.it.erm.ProductType</class>
+		<class>com.fox.it.erm.ProductAlias</class>
+		<class>com.fox.it.erm.Media</class>	
+		<class>com.fox.it.erm.Language</class>
+		<class>com.fox.it.erm.Territory</class>	
+		<class>com.fox.it.erm.RefDate</class>
+		<class>com.fox.it.erm.LegalConfirmationStatus</class>		
+		<class>com.fox.it.erm.BusinessConfirmationStatus</class>
+		<class>com.fox.it.erm.GlobalViewInfo</class>
+		<class>com.fox.it.erm.ProductFileNumber</class>
+		<class>com.fox.it.erm.FoxipediaProductGroup</class>		
+		<class>com.fox.it.erm.ErmProductVersionHeader</class>	
+		<class>com.fox.it.erm.MediaHierarchy</class>	
+		<class>com.fox.it.erm.TerritoryGroup</class>		
+		<class>com.fox.it.erm.Restriction</class>
+		<class>com.fox.it.erm.DateCode</class>						
+		<class>com.fox.it.erm.DateStatus</class>
+		<class>com.fox.it.erm.LanguageHierarchy</class>						
+		<class>com.fox.it.erm.TerritoryHierarchy</class>
+		<class>com.fox.it.erm.LanguageGroup</class>
+		<class>com.fox.it.erm.TerritoryGroupTerritoryIds</class>
+		<class>com.fox.it.erm.LanguageGroupLanguage</class>
+		<class>com.fox.it.erm.RestrictionGroup</class>
+		<class>com.fox.it.erm.ErmRightStrandSet</class>
+		<class>com.fox.it.erm.ErmProductRightStrandLight</class>
+		<class>com.fox.it.erm.RestrictionType</class>
+		<class>com.fox.it.erm.Properties</class>
+		<class>com.fox.it.erm.UserSession</class>
+		<class>com.fox.it.erm.RightStrand</class>
+		<class>com.fox.it.erm.RightStrandForQuery</class>
+		<class>com.fox.it.erm.RightRestrictionForQuery</class>	
+		<class>com.fox.it.erm.ClearanceMemoToc</class>
+		<class>com.fox.it.erm.RightStrandSave</class>
+		<class>com.fox.it.erm.RightStrandRestrictionSave</class>
+		<class>com.fox.it.erm.EntityCommentType</class>		
+		
+		<class>com.fox.it.erm.comments.CommentVersion</class>		
+		<class>com.fox.it.erm.comments.EntityComment</class>		
+		<class>com.fox.it.erm.comments.EntityCommentOnly</class>		
+		<class>com.fox.it.erm.comments.Comment</class>
+		<class>com.fox.it.erm.comments.CommentWithText</class>
+		<class>com.fox.it.erm.comments.EagerComment</class>		
+		<class>com.fox.it.erm.comments.CommentStatus</class>
+		
+		<class>com.fox.it.erm.EntityAttachment</class>
+		<class>com.fox.it.erm.Document</class>
+		
+		<class>com.fox.it.erm.grants.GrantCode</class>
+		<class>com.fox.it.erm.grants.GrantType</class>	
+		<class>com.fox.it.erm.grants.GrantCategory</class>
+		<class>com.fox.it.erm.grants.GrantStatus</class>
+		<class>com.fox.it.erm.grants.ProductGrant</class>	
+		<class>com.fox.it.erm.grants.ProductPromoMaterial</class>
+		<class>com.fox.it.erm.grants.SalesAndMarketingCategory</class>
+			
+		<class>com.fox.it.erm.query.SavedQuery</class>	
+		<class>com.fox.it.erm.query.QueryParameters</class>
+		<class>com.fox.it.erm.query.ProductParameters</class>	
+		
+		<class>com.fox.it.erm.reports.Parameters</class>	
+		<class>com.fox.it.erm.reports.Reports</class>		
+		<class>com.fox.it.erm.reports.Usage</class>	
+		
+		<class>com.fox.it.erm.user.ERMUserRole</class>	
+		
+		<class>com.fox.it.erm.copyright.ERMCopyright</class>	
+		
+		<class>com.fox.it.erm.jobs.Job</class>
+		<class>com.fox.it.erm.jobs.JobAction</class>
+		<class>com.fox.it.erm.ErmRightRestriction</class>
+		<class>com.fox.it.erm.ErmRightStrand</class>
+		<class>com.fox.it.erm.ProductFileNumberHeader</class>
+		
+		<class>com.fox.it.erm.ProductGrantComment</class>
+		<class>com.fox.it.erm.DBErrorLog</class>
+		<class>com.fox.it.erm.SystemSecKey</class>
+		
+		<class>com.fox.it.erm.FoxipediaUser</class>		
+		
+		
+ 		<exclude-unlisted-classes>true</exclude-unlisted-classes>			
+		<properties>
+		
+	        <property name="eclipselink.logging.level.sql" value="FINE"/>
+            <property name="eclipselink.logging.parameters" value="true"/>		
+
+		</properties>		
+	</persistence-unit>
+</persistence>

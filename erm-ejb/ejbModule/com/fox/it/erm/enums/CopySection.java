@@ -1,0 +1,15 @@
+package com.fox.it.erm.enums;
+
+public enum CopySection {
+	STRANDS,
+	COMMENTS,
+	INFO_CODES,
+	CLEARANCE_MEMO,
+	SUBRIGHTS,
+	SALES_AND_MARKETING,
+	CONTACTS,
+	CONTRACTUAL_PARTIES;
+	
+
+
+}
