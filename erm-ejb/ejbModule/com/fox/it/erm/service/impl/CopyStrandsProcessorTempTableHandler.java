@@ -286,29 +286,34 @@ public class CopyStrandsProcessorTempTableHandler extends TempTableSaveHandlerBa
 		return save;
  	}
 
-	private List<EntityComment> findEntityCommentsToCopyInBatch(Long entityTypeId,List<Long> strandIds) {
+	private List<EntityComment> findEntityCommentsToCopyInBatch(Long entityTypeId,List<Long> strandIds,boolean isBusiness) {
 		EntityCommentSearchCriteria criteria = new EntityCommentSearchCriteria(getEntityManager());
 		criteria.setEntityIds(strandIds);
 		List<Long> exclude = new ArrayList<>();
 		exclude.add(EntityCommentType.CLEARANCE_MEMO.getId());
 		exclude.add(EntityCommentType.CLEARANCE_MEMO_MAP.getId());		
 		criteria.excludeCommentTypeIds(exclude);
+		if (isBusiness) {
+			criteria.setIsBusiness();
+		} else {
+			criteria.setIsLegal();
+		}
 		return criteria.getResultList();
 		
 	}
 	
 	
-	private List<EntityComment> findEntityCommentsToCopy(Long entityTypeId,List<Long> strandIds) {
+	private List<EntityComment> findEntityCommentsToCopy(Long entityTypeId,List<Long> strandIds,boolean isBusiness) {
 		if (strandIds==null||strandIds.isEmpty()) {
 			return new ArrayList<EntityComment>();
 		}
 		if (strandIds.size()<=IN_LIMIT) {
-			return findEntityCommentsToCopyInBatch(entityTypeId, strandIds);
+			return findEntityCommentsToCopyInBatch(entityTypeId, strandIds,isBusiness);
 		}
 		List<EntityComment> allComments = new ArrayList<>(strandIds.size());
 		List<List<Long>> lists = Lists.partition(strandIds, IN_LIMIT);;
 		for (List<Long> list:lists) {
-			List<EntityComment> comments = findEntityCommentsToCopyInBatch(entityTypeId,list);
+			List<EntityComment> comments = findEntityCommentsToCopyInBatch(entityTypeId,list,isBusiness);
 			allComments.addAll(comments);
 		}
 		return allComments;
@@ -394,7 +399,7 @@ public class CopyStrandsProcessorTempTableHandler extends TempTableSaveHandlerBa
 		//clone the comment
 		//link each cloned comment to the list of info codes
 		Long entityTypeId = EntityType.STRAND_RESTRICTION.getId();
-		List<EntityComment> entityComments = findEntityCommentsToCopy(entityTypeId ,strandInfoCodeIds);
+		List<EntityComment> entityComments = findEntityCommentsToCopy(entityTypeId ,strandInfoCodeIds,isBusiness);
 		Map<Long,List<Long>> restrictionIdsByCommentId = getEntityIdByCommentId(entityComments);
 		Map<Long,Long> oldRestrictionIdToNewRestrictionIdMap = getOldRestrictionIdToNewRestrictionIdMap(savedRestrictions);
 		for (Long commentId: restrictionIdsByCommentId.keySet()) {
@@ -414,7 +419,7 @@ public class CopyStrandsProcessorTempTableHandler extends TempTableSaveHandlerBa
 		List<Long> strandIds = StrandsUtil.getStrandIds(strands);
 		Long entityTypeId = EntityType.STRAND.getId();
 		//first get all the existing comments for the strands		
-		List<EntityComment> entityComments = findEntityCommentsToCopy( entityTypeId,strandIds);
+		List<EntityComment> entityComments = findEntityCommentsToCopy( entityTypeId,strandIds,isBusiness);
 		Map<Long,List<Long>> restrictionIdsByCommentId = getEntityIdByCommentId(entityComments);
 		Map<Long,Long> oldStrandIdToNewStrandIdMap = getOldStrandIdToNewStrandIdMap(savedStrands);
 		for (Long commentId: restrictionIdsByCommentId.keySet()) {
