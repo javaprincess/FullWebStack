@@ -713,7 +713,11 @@ app.controller('GetStartedController',function GetStartedController($scope,$rout
 
 app.controller('ERMSidePanelController',function ERMSidePanelController($scope,$route,$log){
 	$scope.isERMSidePanelOut = false;	
-	$scope.currentERMSidePanelTab = "productcomments";	
+	$scope.currentERMSidePanelTab = "productcomments";
+	$scope.hide = function hide() {
+		$scope.isERMSidePanelOut = false;		
+	};
+	
 	$scope.switchERMSidePanels=function(tabName) {
 	  if (tabName == 'strandcomments' && $scope.currentERMSidePanelTab != 'strandcomments') {			
 		$scope.currentERMSidePanelTab = 'strandcomments';
@@ -2899,14 +2903,22 @@ app.controller('ProductSearchController',function ProductSearchController($scope
 			 }, 50);
 		 };
 		 
+		 $scope.hideUIElements = function hideUIElements() {
+			 var mainScope = erm.scopes.main();
+			 mainScope.showGetStartedMenu = false;
+			 var sidePanelScope = erm.scopes.comments();
+			 sidePanelScope.hide();			 
+		 };
 		 /**
 		  * Performs a product search.
 		  * It will first construct a criteria object and then submitted to the productService.find()
 		  * The criteria object is obtained from the $scope.productSearch
 		  */
 		 $scope.doProductSearch=function(){
-			 var mainScope = angular.element(document.getElementById("mainController")).scope();
-			 mainScope.showGetStartedMenu = false;
+//			 var mainScope = angular.element(document.getElementById("mainController")).scope();
+//			 var mainScope = erm.scopes.main();
+//			 mainScope.showGetStartedMenu = false;
+			 $scope.hideUIElements();
 			 $scope.errorMessage = null;
 			 if (!$scope.productSearch.searchOptionsChanged) {
 			   $scope.doShowSearchResults();
