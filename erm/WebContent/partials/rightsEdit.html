@@ -407,12 +407,11 @@
 							<br />
 							<div class="memoField">
 								<span class="memoFieldTitle">Fox Produced:</span><br /> 
-								<select 
-									ng-show="security.canUpdateFoxProduced"
-									ng-change="changeFoxProducedInd();" ng-model="currentProductArray.foxProducedInd" class="form-control formElementStyle" style="width: 40%;">
-									<option ng-if="currentProductArray.foxProducedInd == 1 || currentProductArray.foxProducedInd == 0" value=""></option>									
-									<option value="1">YES</option>
-									<option value="0">NO</option>
+								<select ng-show="security.canUpdateFoxProduced" 
+										ng-change="changeFoxProducedInd();" ng-model="currentProductArray.foxProducedInd"
+										ng-options="o.id as o.name for o in foxProducedInd" 
+										class="form-control formElementStyle" style="width: 40%;">
+										<option></option>								
 								</select>
 								<span ng-if="!security.canUpdateFoxProduced&&(!currentProductArray.foxProducedInd)"></span>
 								<span ng-if="!security.canUpdateFoxProduced&&currentProductArray.foxProducedInd===1">YES</span>

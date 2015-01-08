@@ -3365,6 +3365,10 @@ app.controller('RightsController',function RightsController($window, $scope,$log
 	$scope.shouldShowSyncButton = false;
 	$scope.copyrightNoticeHTML = "";
 	
+	var foxProducedInd = [{id:1,name:"YES"},
+						  {id:0,name:"NO"}];
+	$scope.foxProducedInd = foxProducedInd;
+	
 	/** COPYRIGHT NOTICE -- TMA*/
 	
 	$scope.showHideRightStrandSection = function(bool){
