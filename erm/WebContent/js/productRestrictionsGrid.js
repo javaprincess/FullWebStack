@@ -301,12 +301,10 @@ updateProductRestrictions : function (foxVersionId) {
   var parseRestrictions = function(data) {	  
       var res = [];                         
       strands.selections.clearProductRestrictionsSelection();
-      if (data.length == 0) {
-        var rcscope = erm.scopes.rights();
-        //rcscope.productInfoCodesShow = false;
-        //TMA BUG: 47344 -- they want this section to stay open even when the data.length == 0
-        rcscope.productInfoCodesShow = true;
-      }
+//      if (data.length == 0) {
+//        var rcscope = erm.scopes.rights();
+//        rcscope.productInfoCodesShow = true;
+//      }
       $.each(data,function(idx,elem){
     	var hasComments = !!elem.hasComments;
     	var hasMapping = !!elem.mappedToClearanceMemo;

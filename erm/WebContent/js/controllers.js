@@ -3051,6 +3051,10 @@ app.controller('RightsController',function RightsController($window, $scope,$log
 	}
 	
 	
+	$scope.showProductInfoCodes = function showProductInfoCodes(show) {
+		$scope.productInfoCodesShow = show;
+	};
+	
 	
 	$scope.init = function init() {
 		var rcscope = $scope;
@@ -3527,7 +3531,7 @@ app.controller('RightsController',function RightsController($window, $scope,$log
 	
 	$scope.setCurrentProductArray = function setCurrentProductArray(productVersion) {
 		
-		 
+		 $scope.showProductInfoCodes(false);
 		 
 		 if (productVersion != null) {
 			 
