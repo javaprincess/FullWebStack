@@ -90,7 +90,7 @@ function restriction(restrictionCodeId, startDate, startDateCodeId, endDate, end
 	 */
 	this.getCorrectStartDateForDisplay = function getCorrectStartDateForDisplay(){
 		try {
-			if(!isNaN(this.startDate) ){
+			if(this.startDate&&!isNaN(this.startDate) ){
 				return this.getCustomDisplayDate(this.startDate);
 			}
 			else if(this.startDateCodeText.length > 1){
@@ -108,7 +108,7 @@ function restriction(restrictionCodeId, startDate, startDateCodeId, endDate, end
 	 */
 	this.getCorrectEndDateForDisplay = function getCorrectEndDateForDisplay(){
 		try {
-			if(!isNaN(this.endDate) && this.endDate > 0){
+			if(this.endDate&&!isNaN(this.endDate)){
 				return this.getCustomDisplayDate(this.endDate);
 			}
 			else if(this.endDateCodeText.length > 1){
