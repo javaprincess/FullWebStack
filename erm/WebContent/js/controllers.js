@@ -2724,6 +2724,14 @@ app.controller('ProductSearchController',function ProductSearchController($scope
 			 var titleValid = false;
 			 var searchIDValid = false;
 			 
+			 //if the productSearch.title does not have value and the searchId has value, set it as search by id automatically
+			 //this is because if using search in foxipedia, the searchByID is never set
+			 if (!hasValue(productSearch.title) && hasValue(productSearch.searchID)) {
+				 $scope.productSearch.searchByID = true;
+				 $scope.productSearch.searchByTitle = false;				 
+			 }
+			 
+			 
 			 if ($scope.productSearch.searchByTitle && hasValue(productSearch.title)) {
 				 hasTitle=true;
 				 hasValues=true;
