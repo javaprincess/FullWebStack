@@ -1582,6 +1582,7 @@ app.controller('ProductSearchResultsController',function ProductSearchResultsCon
 			 pscScope.productSearch.searchInProgress = false;		 
 			 pscScope.productSearch.isAdvancedSearchCollapsed = true;
 			 pscScope.productSearch.errorMessage = null;
+			 pscScope.productSearch.clearOptions();
 			 if (pscScope.$root.$$phase != '$apply' && pscScope.$root.$$phase != '$digest') {
 				 pscScope.$apply();
 			 }			 
@@ -2468,6 +2469,45 @@ app.controller('ProductSearchController',function ProductSearchController($scope
 					this.prodYearTo = null;
 					$scope.checkValidNumber('', 'advancedSearch_prodYearTo');
 					$scope.checkValidNumber('', 'advancedSearch_prodYearFrom');
+				 },
+				 clearOptions: function clearOptions() {
+						this.isCopySearch = false;
+						this.foxipediaGroupQ = null;
+						this.includeAliases = true;
+						this.showFoxipediaSearchButton = true;
+						this.maxResults = defaultMaxResults;
+						this.selectedProductTypes = [];
+						this.searchID = null;
+						this.releaseYearFrom = null;
+						this.releaseYearTo = null;
+						this.prodYearFrom = null;
+						this.prodYearTo = null;
+						this.wildcardType = defWildcardType;
+						this.businessConfirmationStatusId=null;
+						this.legalConfirmationStatus = null;
+						this.BusinessConfirmationStatus = null;
+						this.legalConfirmationStatusId=null;
+						this.legalConfirmationStatus = null,
+						this.businessConfirmationStatus = null,
+						this.includeAlases=false;
+						this.searchAliases=false;
+						this.wildcardType = defWildcardType;
+						this.idType = defIDType;
+						this.showStrandOptions = false;
+						this.strandsQuery = false;
+						this.clearError();
+						this.contractualPartyTypeId = null;
+						this.contractualPartyId = null;
+						this.onlyDefaultVersion = true;
+						this.foxipediaSearch = false;
+						this.onlyConfidential = false;
+						$(".parsedExcelIds").empty();
+						$scope.doClearPastedExcel();					
+						$scope.checkValidNumber('', 'advancedSearch_prodYearTo');
+						$scope.checkValidNumber('', 'advancedSearch_prodYearFrom');
+						$scope.checkValidNumber('', 'advancedSearch_releaseYearTo');
+						$scope.checkValidNumber('', 'advancedSearch_releaseYearFrom');
+						$scope.checkValidNumber('', 'advancedSearch_maxResults');					 
 				 },
 				 clear: function() {
 					this.isCopySearch = false;
