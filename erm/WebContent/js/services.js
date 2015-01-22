@@ -851,7 +851,7 @@ app.service('rightsService',function($resource,$log,pathProvider) {
 	  });
 	};
 	
-	this.syncReleaseDate = function(foxVersionId, longDate, gridId){
+	this.syncReleaseDate = function syncReleaseDate(foxVersionId, longDate, gridId){
 		var scope = angular.element(document.getElementById("rightsController")).scope();
 		var url = pathProvider.getSyncReleaseDate+"/"+foxVersionId;
 		rightStrandObject.showGeneralPopupWindow("Sync in progress, please wait...");
@@ -860,9 +860,10 @@ app.service('rightsService',function($resource,$log,pathProvider) {
 			payload = '"'+longDate+'"'; 
 		}
 		$.post(url, payload, function(data){	
+			var applyFilter = true;
 			rightStrandObject.closeGeneralPopupWindow();
 			scope.showSuccessMessage();
-			gridStrandsConfigurator.setUpStrandsGrid(foxVersionId,data);
+			gridStrandsConfigurator.setUpStrandsGrid(foxVersionId,data,undefined,applyFilter);
 			$("#rightStrandshowAllDates").prop("checked", false);
 			var ermSidePanelScope = angular.element(document.getElementById("ermSidePanelController")).scope();
 			ermSidePanelScope.loadProductComments();

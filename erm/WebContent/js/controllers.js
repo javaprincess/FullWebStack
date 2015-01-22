@@ -4347,7 +4347,7 @@ app.controller('RightsController',function RightsController($window, $scope,$log
 	
 	$scope.sync = function sync(gridId){
 		rightsService.syncReleaseDate($scope.currentProductArray.foxVersionId, $scope.currentProductArray.firstReleaseDate, gridId);
-		$("#filter-clear-button").click();
+//		$("#filter-clear-button").click();
 	};
 	
 	$scope.showSuccessMessage = function(){
