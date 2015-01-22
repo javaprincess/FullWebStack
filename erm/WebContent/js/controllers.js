@@ -3816,6 +3816,9 @@ app.controller('RightsController',function RightsController($window, $scope,$log
 	$scope.updateRightsIndicator = function(foxVersionId) {
 		if (!$scope.updatingRightsIndictor) {
 		  $scope.updatingRightsIndictor = true;
+		  console.log("TMA debug: trying to update the product level info codes");
+	 	  productRestrictionsGridConfigurator.updateProductRestrictions(foxVersionId);
+	 	  $scope.updatingRightsIndictor = false;		  
 		  //NOTE: this is executing outside angular lifecycle, so $resource.get is not going to get executed until the next digest cycle.
 		  //see https://github.com/angular/angular.js/issues/2438
 		  //to be part of the cycle it needs to be wrapped in $timeout
@@ -3835,16 +3838,14 @@ app.controller('RightsController',function RightsController($window, $scope,$log
 				iconType += "L";
 			  var img = $("#rightsIndicator_" + foxVersionId);
 			  img.attr("src", $scope.getIndicator(iconType));
-			  $scope.updatingRightsIndictor = false;			  			    
+			  			  			    
 		    };
 		    
 		  //TMA update general section when product level info codes are deleted
-			console.log("TMA debug: trying to update the product level info codes");
-			productRestrictionsGridConfigurator.updateProductRestrictions(foxVersionId);
 			 
 		    //console.log("indicatorCompleted $scope.foxVersionId %o", foxVersionId);
 			rightsService.productRightsIndicator(foxVersionId, indicatorCompleted);
-			
+//			$scope.$apply();
 			
 			
 		  }, 500); 
