@@ -23,7 +23,7 @@ public class EmptyCommentProvider extends EmptyCommentsProviderBase {
 	@Override
 	public Map<Long, Boolean> getEmpty(List<Long> foxVersionIds,
 			boolean isBusiness) {
-		List<Long> ids = getFoxVersionIds(foxVersionIds, isBusiness);
+		List<Long> ids = getFoxVersionIdsForProducts(foxVersionIds, isBusiness);
 		return toMap(foxVersionIds,ids);		
 	}
 
