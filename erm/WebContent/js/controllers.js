@@ -143,6 +143,13 @@ app.controller('MainController',function MainController($rootScope,$scope,$windo
 		  $scope.toggleERMSidePanel();			
 	};
 	
+	$scope.closeERMSidePanel = function closeERMSidePanel() {
+		var ermSidePanelScope = angular.element(document.getElementById("ermSidePanelController")).scope();				
+		if (ermSidePanelScope.isERMSidePanelOut)
+		  $scope.toggleERMSidePanel();			
+	};
+	
+	
 	$scope.toggleERMSidePanel= function() {
 		//console.log("Inside toggleERMSidePanel");
 		var ermSidePanelScope = angular.element(document.getElementById("ermSidePanelController")).scope();
@@ -2656,8 +2663,9 @@ app.controller('ProductSearchController',function ProductSearchController($scope
 		 /**
 		  * Alternates between basic search and advanced search
 		  */
-		 $scope.doToggleSearchType=function(){
-			 var mainScope = angular.element(document.getElementById("mainController")).scope();
+		 $scope.doToggleSearchType=function doToggleSearchType(){
+			 var mainScope = angular.element(document.getElementById("mainController")).scope();			 
+			 mainScope.closeERMSidePanel();
 			 mainScope.showGetStartedMenu = false;
 			 $(".rightsController").animate({ opacity: 0 },500);
 			 $(".ermSidePanelOuter").animate({ opacity: 0 },500);			  
