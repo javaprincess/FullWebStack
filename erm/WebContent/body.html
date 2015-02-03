@@ -494,13 +494,15 @@
 							ng-disabled="!productSearch.showStrandOptions" /> <span ng-show="security.canSyncReleaseDate"
 							style="float: left; padding-left: 10px; padding-top: 3px; text-align: left;">with 
 							Unsynced Dates</span>
-					</div>
-					<div style="float: left">
-					<input
-					style="float: left;  clear: left;" type="checkbox"
-					ng-show="security.canViewConfidentialTitles"
-					ng-model="productSearch.onlyConfidential" ng-change="doSetSearchOptionsChanged();" />							
-					<span ng-show="security.canViewConfidentialTitles" style="float: left; padding-left: 10px; padding-top: 3px; text-align: left;">Only confidential titles</span>	
+
+							<div style="float: left" ng-show="security.canViewConfidentialTitles && productSearch.showFoxipediaSearchButton">
+							<input
+							style="float: left;  clear: left;" type="checkbox"
+							ng-show="security.canViewConfidentialTitles"
+							ng-model="productSearch.onlyConfidential" ng-change="doSetSearchOptionsChanged();" />							
+							<span ng-show="security.canViewConfidentialTitles" style="float: left; padding-left: 10px; padding-top: 3px; text-align: left;">Only confidential titles</span>	
+							</div>
+							
 					</div>
 					<!-- end legal stuff -->
 				</div>
