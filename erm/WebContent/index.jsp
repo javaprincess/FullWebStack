@@ -108,6 +108,7 @@ response.setHeader("Cache-Control", "max-stale=0"); // HTTP 1.1
   var foxIdKendo = null;
   var ermAppVersion = "<%=Version.VERSION%>";        
   </script>
+  <%@include file="analytics.jsp" %>  
 </head>
 <%@include file="body.html" %>
 </html>
