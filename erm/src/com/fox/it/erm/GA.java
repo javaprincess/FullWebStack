@@ -34,7 +34,7 @@ public class GA {
 	}
 	
 	private static String getFromEnvVariable(String variableName) {
-		String value = System.getenv(variableName);
+		String value = System.getProperty(variableName);
 		return get(value);
 	}
 	
