@@ -14,7 +14,7 @@
   	  					<td><span style="color : #ffffff;">&nbsp;|&nbsp;</span></td>
   	  					<td><span class="urm" style="cursor: text;">{{security.userRole}}</span></td>
   	  					<td><span style="color : #ffffff;">&nbsp;|&nbsp;</span></td>
-  	  					<td><span class="urm appVersion">v.{{ermAppVersion}}</span></td>  	  					
+  	  					<td><span class="urm appVersion"><a target="about" onclick="window.open('about.jsp','ERM Version','width=400,height=300')" href="about.jsp">{{ermMajorVersion}} </a></span></td>  	  					
   	  					<td><span style="color : #ffffff;">&nbsp;|&nbsp;</span></td>  	  					
   	  					<!-- <td><span class="urm"><a href="" style="color : rgb(213, 239, 251);"><i class="icon-gear"></i> Settings</a></span></td>  
   	  					<td><span style="color : #ffffff;">&nbsp;&nbsp;|&nbsp;&nbsp;</span></td> -->
@@ -35,7 +35,7 @@
 						<i ng-click="doClearCriteria();productSearch.clear()" class="icon-remove"
 							style="margin-left: 5px; color: rgb(66, 139, 202); cursor: pointer;"></i>
 						<button id="searchByTitleBasicButton" class="btn-xs btn-primary btn-search" ng-click="productSearch.setSearchByTitle();doProductSearch();" style="color: white; margin-left: 5px; padding: 0 12px;"><i class="icon-search"></i> Search</button>
-						<button id="searchFoxipediaBasicButton" ng-show="security.canViewConfidentialTitles" class="btn-xs btn-primary btn-search" ng-click="productSearch.setSearchByTitleFoxipedia();doProductSearch();" style="color: white; margin-left: 5px; padding: 0 12px;"><i class="icon-search"></i> Search Foxipedia</button>						
+						<button id="searchFoxipediaBasicButton" ng-show="security.canViewConfidentialTitles" class="btn-xs btn-primary btn-search" ng-click="productSearch.setSearchByTitleFoxipedia();doProductSearch();" style="color: white; margin-left: 5px; padding: 0 12px;"><i class="icon-search"></i> Search Confidential</button>						
 					</div>
 					<a style="float: left; cursor: pointer;"
 						ng-click="doToggleSearchType();productSearch.clear();"
@@ -543,10 +543,11 @@
 				<div style="float: left; text-align: center; clear: left; width: 98.5%; padding-top: 1%; padding-bottom: 1%;">
 					<button ng-show="productSearch.isPasteFromExcelToggle" class="btn-xs btn-primary  btn-search" ng-click="productSearch.setSearchByID();doProductSearch();" style="color: white; margin-left: 5px; padding: 0 12px;"><i
 					class="icon-search"></i> Advanced Search By ID</button>
-					<!-- foxipedia button -->
-					<button id="foxipediaSearchButtonBottom" class="btn-xs btn-primary  btn-search" ng-show="security.canViewConfidentialTitles && productSearch.showFoxipediaSearchButton" ng-click="productSearch.setSearchByTitleFoxipedia();doProductSearch();" style="color: white; margin-left: 5px; padding: 0 12px;"><i class="icon-search"></i> Search Foxipedia</button>	
 					<button ng-show="!productSearch.isPasteFromExcelToggle" id="searchByTitleAdvancedButtonBottom" class="btn-xs btn-primary  btn-search" ng-click="productSearch.setSearchByTitle();doProductSearch();" style="color: white; margin-left: 5px; padding: 0 12px;"><i
-					class="icon-search"></i> Search</button> <a style="padding-left: 2%;" href="" ng-click="doClearCriteria();productSearch.clear()"><i class="icon-remove"></i> clear all</a>
+					class="icon-search"></i> Search</button>
+					<!-- foxipedia button -->
+					<button id="foxipediaSearchButtonBottom" class="btn-xs btn-primary  btn-search" ng-show="security.canViewConfidentialTitles && productSearch.showFoxipediaSearchButton" ng-click="productSearch.setSearchByTitleFoxipedia();doProductSearch();" style="color: white; margin-left: 5px; padding: 0 12px;"><i class="icon-search"></i> Search Confidential</button>					 
+					<a style="padding-left: 2%;" href="" ng-click="doClearCriteria();productSearch.clear()"><i class="icon-remove"></i> clear all</a>
 				</div>	
 			</div>		
 		</div>		

@@ -47,6 +47,7 @@ app.controller('MainController',function MainController($rootScope,$scope,$windo
 	$scope.showGetStartedMenu = document.URL.indexOf("rights") > 0 ? false : true;
 	
 	$scope.ermAppVersion = ermAppVersion;
+	$scope.ermMajorVersion = ermMajorVersion;
 	
 	$scope.popReportsController = function() {		
 	  if (reportsWindow == null) {
