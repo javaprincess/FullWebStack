@@ -457,7 +457,8 @@
 						</select>
 					</div>
 					<!-- end rights stuff -->
-					<div class="form-group" style="margin-top: 4%; float: left; width: 70%; margin-left: 0%;">
+					<div id="strandQuerySearchOptionsDiv" class="form-group" style="margin-top: 4%; float: left; width: 70%; margin-left: 0%;">
+						<div>
 						<input style="float: left;" type="checkbox"
 							ng-model="productSearch.showStrandOptions" ng-change="doDefaultStrandQuery();doSetSearchOptionsChanged();"
 							ng-disabled="productSearch.isFoxipediaGroupSearch()" /> <span
@@ -494,8 +495,8 @@
 							ng-disabled="!productSearch.showStrandOptions" /> <span ng-show="security.canSyncReleaseDate"
 							style="float: left; padding-left: 10px; padding-top: 3px; text-align: left;">with 
 							Unsynced Dates</span>
-
-							<div style="float: left" ng-show="security.canViewConfidentialTitles && productSearch.showFoxipediaSearchButton">
+							</div>
+							<div ng-show="security.canViewConfidentialTitles && productSearch.showFoxipediaSearchButton">
 							<input
 							style="float: left;  clear: left;" type="checkbox"
 							ng-show="security.canViewConfidentialTitles"
