@@ -7,7 +7,7 @@
   })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
   <% if (GAKey!=null) {%>  
-	  ga('create', <%=GAKey%>, 'auto');
+	  ga('create', '<%=GAKey%>', 'auto');
 	  ga('send', 'pageview');
   <%}%>
 </script>
