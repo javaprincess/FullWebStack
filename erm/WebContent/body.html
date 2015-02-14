@@ -382,7 +382,7 @@
 					<span style="font-size: 14px;">MORE SEARCH CRITERIA</span>
 					<a ng-show="!productSearch.searchCollapsed" ng-click="collapseSearchOptions();"><i class="icon-collapse-alt" style="text-decoration: none; cursor: pointer;"></i></a>
 				</div>
-				<div style="float: left; width: 33%">
+				<div style="float: left; width: 33%"> <!-- ? -->
 					<div>
 						<span style="float: left; width: 120px; text-align: left;"
 							class="control-label" for="prodYearFrom">Production Year: <a href="" ng-click="productSearch.clearProdYear();doSetSearchOptionsChanged();"><i class="icon-remove"></i></a>
@@ -457,8 +457,8 @@
 						</select>
 					</div>
 					<!-- end rights stuff -->
-					<div id="strandQuerySearchOptionsDiv" class="form-group" style="margin-top: 4%; float: left; width: 70%; margin-left: 0%;">
-						<div>
+					<div id="strandQuerySearchOptionsDiv" class="form-group" style="margin-top: 4%; float: left; width: 70%; margin-left: 0%;"> <!-- 1 -->
+						<div> <!-- 1.1 -->
 						<input style="float: left;" type="checkbox"
 							ng-model="productSearch.showStrandOptions" ng-change="doDefaultStrandQuery();doSetSearchOptionsChanged();"
 							ng-disabled="productSearch.isFoxipediaGroupSearch()" /> <span
@@ -495,18 +495,18 @@
 							ng-disabled="!productSearch.showStrandOptions" /> <span ng-show="security.canSyncReleaseDate"
 							style="float: left; padding-left: 10px; padding-top: 3px; text-align: left;">with 
 							Unsynced Dates</span>
-							</div>
-							<div ng-show="security.canViewConfidentialTitles && productSearch.showFoxipediaSearchButton">
+							</div> <!-- 1.1 -->
+							<div ng-show="security.canViewConfidentialTitles && productSearch.showFoxipediaSearchButton"> <!-- 1.2 -->
 							<input
 							style="float: left;  clear: left;" type="checkbox"
 							ng-show="security.canViewConfidentialTitles"
 							ng-model="productSearch.onlyConfidential" ng-change="doSetSearchOptionsChanged();" />							
 							<span ng-show="security.canViewConfidentialTitles" style="float: left; padding-left: 10px; padding-top: 3px; text-align: left;">Only confidential titles</span>	
-							</div>
+							</div> <!-- 1.2 -->
 							
-					</div>
+					</div> <!-- 1 -->
 					<!-- end legal stuff -->
-				</div>
+				</div> <!-- ? -->
 				<div style="float: left; width: 33%">
 					<span style="float: left; width: 25%; text-align: left;"
 						class="control-label">Product Type: <a href="" ng-click="doSetSearchOptionsChanged();productSearch.selectedProductTypes={};"><i class="icon-remove"></i></a></span> <select
