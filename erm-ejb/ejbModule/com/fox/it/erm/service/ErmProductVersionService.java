@@ -37,6 +37,8 @@ public interface ErmProductVersionService {
 	
 	public ErmProductVersionHeader findHeaderByFoxVersionId(Long foxVersionId);
 	
+	public void setLastRightsUpdateDate(Long foxVersionId);	
+	
 	public ErmProductVersion createNewErmProductVersion(Long foxVersionId, String userName);
 	
 	public ErmProductVersion findOrCreateNewProductVersion(Long foxVersionId, String userName);	

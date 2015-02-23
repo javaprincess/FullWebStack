@@ -10,7 +10,6 @@ import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fox.it.erm.enums.LegalConfirmationStatusTypes;
 import com.fox.it.erm.service.impl.ClearanceMemoInciatorLglConfStatusProvider;
 
 @MappedSuperclass
@@ -81,6 +80,10 @@ public class ErmProductVersionBase {
 	
 	@Column(name="FTR_MEDIA_IND", nullable=true)	
 	private Integer futureMediaInd;
+	
+	@Temporal(value=TemporalType.TIMESTAMP)
+	@Column(name="LST_RGHTS_INFO_UPD_DT")	
+	private Date lastRightsInfoUpdateDate;
 	
 
 	
@@ -336,6 +339,16 @@ public class ErmProductVersionBase {
 		this.foxProducedInd = foxProducedInd;
 	}
 	
+	
+	
+	public Date getLastRightsInfoUpdateDate() {
+		return lastRightsInfoUpdateDate;
+	}
+
+	public void setLastRightsInfoUpdateDate(Date lastRightsInfoUpdateDate) {
+		this.lastRightsInfoUpdateDate = lastRightsInfoUpdateDate;
+	}
+
 	public void copyFrom(ErmProductVersionBase b) {
 		setBasedOnTemplateId(b.getBasedOnTemplateId());
 		setBusinessConfirmationStatusId(b.getBusinessConfirmationStatusId());
@@ -357,6 +370,7 @@ public class ErmProductVersionBase {
 		setTitleName(b.getTitleName());
 		setUpdateDate(b.getUpdateDate());
 		setUpdateName(b.getUpdateName());
+		setLastRightsInfoUpdateDate(b.getLastRightsInfoUpdateDate());
 	}
 	
 }

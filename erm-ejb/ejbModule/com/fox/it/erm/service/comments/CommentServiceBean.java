@@ -58,6 +58,7 @@ import com.fox.it.erm.service.impl.CommentSearchCriteria;
 import com.fox.it.erm.service.impl.EntityCommentOnlySearchCriteria;
 import com.fox.it.erm.service.impl.EntityCommentSearchCriteria;
 import com.fox.it.erm.service.impl.EntityCommentTypeSearchCriteria;
+import com.fox.it.erm.service.impl.ProductVersionSaveServiceBean;
 import com.fox.it.erm.service.impl.ServiceBase;
 import com.fox.it.erm.util.BusinessLegal;
 import com.fox.it.erm.util.IdsAccumulator;
@@ -119,8 +120,12 @@ public class CommentServiceBean extends ServiceBase implements CommentsService {
 	@EJB
 	private GrantsService ermGrantsService;	
 	
+
+	
 	@Inject
 	private PDFRender pdfRenderService;	
+	
+	
 
 	private EntityCommentSearchCriteria getEntityCommentsCriteria(){
 		return new EntityCommentSearchCriteria(em);
@@ -813,6 +818,33 @@ public class CommentServiceBean extends ServiceBase implements CommentsService {
 		return all;
 	}
 	
+	/**
+	 * Returns all the DNL restrictions associated with a comment id. 
+	 * @param commentId
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	private List<ErmProductRestriction> getRestrictionsForCommentId(Long commentId) {
+		String sql = "select * from prod_rstrcn where " +
+					 "rstrcn_cd_id = 106 and " +
+					 "prod_rstrcn_id in ( " +
+					 "select entty_key From entty_cmnt where cmnt_id = ? " +
+					 "and entty_typ_id = 4 and entty_cmnt_typ_id = 18)";
+		Query q = em.createNativeQuery(sql, ErmProductRestriction.class);
+		q.setParameter(1, commentId);
+		return (List<ErmProductRestriction>)q.getResultList();
+	}
+	
+	private void updateErmProductVersionIfNeeded(Long commentId) {
+		List<ErmProductRestriction> restrictions = getRestrictionsForCommentId(commentId);
+		if (restrictions!=null && !restrictions.isEmpty()) {
+			for (ErmProductRestriction restriction: restrictions) {
+				Long foxVersionId = restriction.getFoxVersionId();
+				ermProductVersionService.setLastRightsUpdateDate(foxVersionId);
+			}
+		}
+	}
+	
 	@Override
 	public Comment saveComment(Comment comment,String userId, boolean isBusiness)  {
 		setUserInDBContext(userId, isBusiness);
@@ -830,6 +862,7 @@ public class CommentServiceBean extends ServiceBase implements CommentsService {
 			comment.setCreateDate(savedComment.getCreateDate());
 			comment.setCreateName(savedComment.getCreateName());
 			em.merge(comment);
+			updateErmProductVersionIfNeeded(comment.getId());			
 		}
 		em.flush();
 		return comment;
@@ -915,6 +948,25 @@ public class CommentServiceBean extends ServiceBase implements CommentsService {
 		return savedEntityComment;
 	}
 
+	private boolean shouldUpdateErmProdVersion(Long prodInfoCodeId) {
+		if (ProductVersionSaveServiceBean.DO_NOT_LICENSE_ID.equals(prodInfoCodeId)) {
+			return true;
+		}
+		return false;
+	}
+	
+	private void updateErmProdVerWhenRestrictionCommentAddedIfNeeded(Long productInfoCodeId) {
+		//get the product info code, to see if is DNL and if so obtain the foxVersionId
+		ErmProductRestriction restriction = ermProductRestrictionService.findErmProductRestrictionByPrimaryKey(productInfoCodeId);
+		if (restriction!=null) {
+			Long prodRestrictionCodeId = restriction.getRestrictionCdId();
+			if (shouldUpdateErmProdVersion(prodRestrictionCodeId)) {
+				Long foxVersionId = restriction.getFoxVersionId();
+				ermProductVersionService.setLastRightsUpdateDate(foxVersionId);
+			}
+		}		
+	}
+	
 	@Override
 	public Long addNewStrandComment(String[] productInfoCodeIdsArray, 
 			String[] rightStrandIdsArray, 
@@ -926,12 +978,14 @@ public class CommentServiceBean extends ServiceBase implements CommentsService {
 		if (productInfoCodeIdsArray != null) {
 		  for (String productInfoCodeId : productInfoCodeIdsArray) {
 			logger.log(Level.SEVERE,"saving entity comment for productInfoCodeId : " + productInfoCodeId);
-			EntityComment entityComment = getEntityComment(EntityType.PROD_RSTRCN.getId(), Long.parseLong(productInfoCodeId), EntityCommentType.INFO_CODE.getId(), userId,true);
+			Long prodInfoCodeId = Long.parseLong(productInfoCodeId);
+			EntityComment entityComment = getEntityComment(EntityType.PROD_RSTRCN.getId(), prodInfoCodeId, EntityCommentType.INFO_CODE.getId(), userId,true);
 			entityComment.setComment(saved);
 			entityComment.setCommentId(commentId);
 			Date now = new Date();
 			setCreate(entityComment, userId, now);
 			saveEntityComment(entityComment);
+			updateErmProdVerWhenRestrictionCommentAddedIfNeeded(prodInfoCodeId);
 			em.flush();	
 		  }
 		}
