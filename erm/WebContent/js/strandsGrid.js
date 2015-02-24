@@ -1854,8 +1854,13 @@
 		 */
 		toCorrectDate: function(d) {
 			if (!d) return d;
-			var dateStr = d.toLocaleDateString('en-US');
+			//it puts some strange characters in the date. We need to remove them
+			//see http://stackoverflow.com/questions/21413757/tolocaledatestring-changes-in-ie11
+			var dateStr = d.toLocaleDateString('en-US').replace(/[^ -~]/g,'');
 			var date = new Date(dateStr);
+			if (!date) {
+				return d;
+			}
 			return date;
 		},
 	
