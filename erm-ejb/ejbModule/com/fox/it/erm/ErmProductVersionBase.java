@@ -81,8 +81,10 @@ public class ErmProductVersionBase {
 	@Column(name="FTR_MEDIA_IND", nullable=true)	
 	private Integer futureMediaInd;
 	
-	@Temporal(value=TemporalType.TIMESTAMP)
-	@Column(name="LST_RGHTS_INFO_UPD_DT")	
+	//TODO uncomment 
+//	@Temporal(value=TemporalType.TIMESTAMP)
+//	@Column(name="LST_RGHTS_INFO_UPD_DT")
+	@Transient
 	private Date lastRightsInfoUpdateDate;
 	
 
