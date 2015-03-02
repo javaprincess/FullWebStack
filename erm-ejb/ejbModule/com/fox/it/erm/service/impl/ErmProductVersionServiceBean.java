@@ -996,12 +996,11 @@ public class ErmProductVersionServiceBean extends ServiceBase implements ErmProd
 
 	@Override
 	public void setLastRightsUpdateDate(Long foxVersionId) {
-		//TODO uncomment
-//		String sql= "update erm_prod_ver set LST_RGHTS_INFO_UPD_DT=sysdate where FOX_VERSION_ID=?";
-//		Query q = em.createNativeQuery(sql);
-//		q.setParameter(1, foxVersionId);
-//		q.executeUpdate();
-//		em.flush();
+		String sql= "update erm_prod_ver set LST_RGHTS_INFO_UPD_DT=sysdate where FOX_VERSION_ID=?";
+		Query q = em.createNativeQuery(sql);
+		q.setParameter(1, foxVersionId);
+		q.executeUpdate();
+		em.flush();
 	}
 	
 	/**
