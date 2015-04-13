@@ -2,6 +2,7 @@
     <wb-module deploy-name="erm">
         <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
+        <wb-resource deploy-path="/" source-path="/WebContent/WEB-INF"/>
         <dependent-module archiveName="clearance-memo-parse.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/clearance-memo-parse/clearance-memo-parse">
             <dependency-type>uses</dependency-type>
         </dependent-module>

@@ -17,15 +17,24 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
 
+
+
+
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
 import com.fox.it.erm.ErmException;
 import com.fox.it.erm.query.QueryHeader;
 import com.fox.it.erm.query.QueryParametersWrapper;
 import com.fox.it.erm.query.SavedQuery;
 import com.fox.it.erm.rest.RESTService;
 import com.fox.it.erm.service.query.QueryService;
+import com.fox.it.erm.service.reports.MicroStrategyReportConfig;
 import com.fox.it.erm.service.reports.ReportMetaData;
 import com.fox.it.erm.service.reports.ReportsProxy;
 import com.fox.it.erm.service.reports.ReportsService;
+
 
 @Path("/report")
 public class ReportsRESTService extends RESTService {
@@ -35,6 +44,8 @@ public class ReportsRESTService extends RESTService {
 	
 	@EJB
 	private QueryService ermQueryService;
+	
+	private ReportMetaData reportMetaData;
 	
 	private static final Logger logger = Logger.getLogger(ReportsRESTService.class.getName());
 	
@@ -204,7 +215,20 @@ public class ReportsRESTService extends RESTService {
 			throw getErmException(e);
 		}
 		
+		
 		return reportMetaData;
+		
+	}
+
+	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/reportsIntegration")
+	public MicroStrategyReportConfig ermReportsIntegration(@Context HttpServletRequest req,
+			@QueryParam("reportName") String reportName,
+			@QueryParam("reportFormat") String reportFormat) {
+		logger.log(Level.INFO, "reportName, reportFormat: " + reportName, reportFormat);
+		return ermReportsService.getReportProperties(new ReportMetaData(reportName, reportFormat));
 		
 	}
 	

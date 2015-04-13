@@ -1121,6 +1121,7 @@ function ReportManagement(){
 		$("#rep_runQuery").click(function(){
 			
 			that.openRedirectWindow();
+			
 		});
 		
 		/**
@@ -1842,13 +1843,26 @@ function ReportManagement(){
 	 * Open the Report management window popup from the main listing on the first report popup window
 	 */
 	this.openReportManagementWindowMain = function(reportId, queryId, closeFlag){
+		//TFS #13584
+		if (reportId == 1) {
+			console.log("I should be in the RSAE Report");
+		} else if (reportId == 6) {
+			console.log("I should be in the PIR Report");
+		} else if (reportId == 5) {
+			console.log("I should be in the DRR Report");
+		}
+			
 		this.openReportManagementWindow(reportId, queryId, closeFlag, erm.security.user.userId);
+	
 	};
 	
 	/**
 	 * Actual method responsible for the opening of the Report popup window
 	 */
 	this.openReportManagementWindow = function(reportId, queryId, closeFlag, userName){
+		console.log("I am in the openReportManagementWindow: " + userName + ":" + erm.security.isLegalAdmin());
+		console.log("reportID: " + reportId);
+		
 		if(erm.security.canViewQuery()){
 			$("#rep_runQuery").show();
 		}
@@ -2426,6 +2440,9 @@ function ReportManagement(){
 	 */
 	this.runReport = function(){
 		var url = this.rep_path.getRunQueryRESTPath();
+		
+		console.log("url: " + url);
+		
 		if(this.queryViewModel.get("reportId") == this.reportIndexes.RIGHTS_AS_ENTERED_REPORT){
 			this.processRightsAsEnteredReport(url, this.rep_runningReportSuccessText);
 		}
@@ -2435,6 +2452,7 @@ function ReportManagement(){
 		else if(this.queryViewModel.get("reportId") == this.reportIndexes.PRODUCT_INQUIRY_REPORT){
 			this.processRightsInquiryReport(url, this.rep_runningReportSuccessText);
 		}
+		
 	};
 	
 	/**
@@ -3302,7 +3320,21 @@ function ReportManagement(){
 		var that = this;
 		var reportJson = JSON.stringify(report);
 		that.showSubmitPopupWindow();
+		
+		console.log("submitReport url: " + url);
+		
 		$.post(url, {q:reportJson}, function(data){
+			
+			console.log("data.reportURL: %o ", data.reportURL);
+			console.log("data.queryId: %o ", data.queryId);
+			console.log("data.userName: %o", data.userName);
+			console.log("data.reportNameFormat: %o", data.reportNameFormat);
+			console.log("data.reportNameStr: %o", data.reportNameStr);
+			console.log("data.reportNameType: %o", data.reportNameType);
+			console.log("REPORTJSON: %o ", reportJson);
+			
+			
+			
 			that.closeSubmitPopupWindow();
 			that.closeSaveQueryWindow();
 			var reportScope = angular.element(document.getElementById("reportController")).scope();
@@ -3310,6 +3342,9 @@ function ReportManagement(){
 				that.openReportDisplayWindow(data.reportURL);
 				that.populateRecentQueries(that.queryViewModel.get("queryId"));				
 				reportScope.$apply();
+				
+				//TFS #13567 ERM/MS reports integration
+				that.dynamicReport(data);
 			}
 			else if(that.processFlag == that.processFlagArray.UPDATE){
 				reportScope.loadReports();
@@ -3323,7 +3358,12 @@ function ReportManagement(){
 				that.successfullSubmitObject.data = data;
 				that.successfullSubmitObject.processFlag = that.processFlag;
 				that.successfullSubmitObject.queryId = that.queryViewModel.get("queryId");
+
 				that.successfullSubmitObject.reportTypeFormat = that.queryViewModel.get("reportTypeFormat");
+				
+				console.log("reportTypeFormat: " + that.successfullSubmitObject.reportTypeFormat);
+				console.log("queryId: " + that.successfullSubmitObject.queryId);
+				
 				successPopup.showSuccessWithCallbackPopupWindow(successTxt, rep_reportManagementObject);
 				
 			}
@@ -3334,8 +3374,15 @@ function ReportManagement(){
 				that.successfullSubmitObject.data = data;
 				that.successfullSubmitObject.processFlag = that.processFlag;
 				that.successfullSubmitObject.queryId = that.queryViewModel.get("queryId");
+
 				that.successfullSubmitObject.reportTypeFormat = that.queryViewModel.get("reportTypeFormat");
+				
+				console.log("reportTypeFormat: " + that.successfullSubmitObject.reportTypeFormat);
+				console.log("queryId: " + that.successfullSubmitObject.queryId);
+				
 				successPopup.showSuccessWithCallbackPopupWindow(successTxt, rep_reportManagementObject);
+				
+				
 			}
 			
 		}).fail(function(xhr,status,message){
@@ -5995,6 +6042,72 @@ function ReportManagement(){
 		$("#rep_dateOptionToTBA")[0].checked = true;
 		$("#rep_dateOptionToTBA").attr('disabled', false);
 	};
+	
+	/* Microstrategy/ERM Reports Integration: BEGIN */
+	this.dynamicReport = function(reportData){
+		$.getJSON("rest/report/reportsIntegration?reportName="+reportData.reportNameStr +"&reportFormat="+reportData.reportNameType, function(data) {
+			console.log("data: %o", data);
+			console.log("reportData: %o", reportData);
+			console.log("format: " + reportData.reportNameFormat);
+			console.log("name: " + reportData.reportNameStr);
+			console.log("type: " + reportData.reportNameType);
+			console.log("evt: " + data.evt);
+		
+			
+			console.log(this.documentID);
+	     	console.log(this.server);
+	     
+	     	var valuePromptAnswers = reportData.queryId + "^'" + reportData.userName + "'";
+	     	
+	     	console.log("valuePromptAnswer: " + valuePromptAnswers);
+	     	
+	     	var evt=data.evt; 
+			var executionMode=data.executionMode;
+	    	var src=data.src;
+	    	var project=data.project;
+	     	var documentID = data.documentID; 
+			var server = data.serverName; 
+			var msUrl = data.microStrategyUrl;
+			
+			console.log(valuePromptAnswers);
+			console.log(documentID);
+	     	console.log(server);
+	     	console.log(msUrl);
+	     	
+	     	
+	    	$('body')
+	        //.append('<form name="mstr", formtarget="_blank", id="mstr"></form>'); 
+	    	.append('<form name="mstr", formtarget='+this.rep_redirectUrlWindow + ', id="mstr"></form>'); 
+	    	$('#mstr') 
+	        	.attr("action", msUrl) .attr("method","post")
+	        	.append('<input type="hidden" name="valuePromptAnswers" id="valuePromptAnswers" value=""/>')
+	        	.append('<input type="hidden" name="evt" id="evt" value=""/>')
+	        	.append('<input type="hidden" name="executionMode" id="executionMode" value=""/>')
+	        	.append('<input type="hidden" name="src" id="src" value=""/>')
+	        	.append('<input type="hidden" name="documentID" id="documentID" value=""/>')
+	        	.append('<input type="hidden" name="server" id="server" value=""/>')
+	        	.append('<input type="hidden" name="project" id="project" value=""/>');
+	        	
+	    	
+	     	  $('#valuePromptAnswers').val(valuePromptAnswers);
+	     	  $('#evt').val(evt);
+	     	  $('#src').val(src);
+	     	  $('#executionMode').val(executionMode);
+	     	  $('#documentID').val(documentID);
+	     	  $('#server').val(server);
+	     	  $('#project').val(project);
+	     	
+	     	  window.document.forms[0].submit();
+	     	  
+	     	 $('#mstr').remove();
+	     	
+		}).done(function(){
+			
+		});
+		
+					
+	};
+	/* Microstrategy/ERM Reports Integration: END */
 	/******************************************************************************************************
 	 *                                                                                                    *
 	 *                                END business logic section                                          *

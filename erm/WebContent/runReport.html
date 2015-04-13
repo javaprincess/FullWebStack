@@ -13,6 +13,8 @@
    <script src="js/app.js?v=0.83"></script>   
   <script src="js/filters.js?v=0.83"></script>
   <script src="js/directives.js?v=0.83"></script>
+   <script src="js/MicroStrategyReportsIntegration.js"></script>  
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script> 
 
 <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css"  media="screen" />
 <title>ERM Report</title>
@@ -43,9 +45,22 @@
        </div>
                 
 </div>
-<!--</form> -->
+
+
 
 </div>
        
 </body>
+
+	<script type="text/javascript">
+
+		window.onload = formSubmit;
+
+		function formSubmit() {
+
+			//reports();
+			//rep_reportManagementObject.dynamicReport();
+     	 	//document.forms[0].submit();
+		}
+	</script>
 </html>

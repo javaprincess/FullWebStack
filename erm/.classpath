@@ -23,8 +23,6 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/iText"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/spring-core"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/swagger"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/apache-http-client"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/httpClient"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/spring-security"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
