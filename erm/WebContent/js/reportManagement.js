@@ -5089,12 +5089,31 @@ function ReportManagement(){
 			qpw.queryParametersList.push(ps);
 		}
 		
-		var contractualPartyType = $("#rep_contractualPartyType").data("kendoDropDownList").value();
-		if(contractualPartyType && contractualPartyType > -1){
+
+			
+		var cpt = $("#rep_contractualPartyType").data("kendoHierarchySelector").getSelected();
+		//if(contractualPartyType && contractualPartyType > -1){
+		if(cpt && (cpt.length > 0)){
+				var contractualPartyType = "";
+				var contractualPartyTypeText = "";
+				for(var i = 0; i < cpt.length; i++){
+					if(cpt[i].value <= 0){
+						continue;
+					}
+					if(i < (cpt.length - 1)){
+						contractualPartyType  += cpt[i].value+",";
+						contractualPartyTypeText += cpt[i].text+", ";
+					}
+					else {
+						contractualPartyType += cpt[i].value;
+						contractualPartyTypeText += cpt[i].text;
+					}
+				}
+			
 			var ps = new QueryParameter();
 			ps.name = "ContractualPartyType";
 			ps.value = contractualPartyType;
-			ps.text = $("#rep_contractualPartyType").data("kendoDropDownList").text();
+			ps.text = contractualPartyTypeText;
 			ps.queryId = this.queryViewModel.get("queryId");
 			qpw.queryParametersList.push(ps);
 		}
