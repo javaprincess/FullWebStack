@@ -5479,8 +5479,23 @@ function ReportManagement(){
 				$("#rep_futureMedia").data("kendoDropDownList").value(parseInt(elem.value));
 			}
 			
+			//if(name == 'ContractualPartyType'){
+			//	$("#rep_contractualPartyType").data("kendoHierarchySelector").value(parseInt(elem.value));
+			//}
 			if(name == 'ContractualPartyType'){
-				$("#rep_contractualPartyType").data("kendoDropDownList").value(parseInt(elem.value));
+				var ids = new Array();
+				if(elem.value.indexOf(",") > -1){
+					var idsString = elem.value.split(",");
+					$.each(idsString, function(id, element){
+						ids.push(parseInt(element));
+					});
+				}
+				else {
+					ids.push(parseInt(elem.value));
+				}
+				if(ids.length > 0){
+					$("rep_contractualPartyType").data("kendoHierarchySelector").setSelected(ids);
+				}
 			}
 			
 			if(name == 'ContractualParty'){
