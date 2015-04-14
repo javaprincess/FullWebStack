@@ -1708,7 +1708,7 @@ function ReportManagement(){
 			erm.dbvalues.afterInit(initializeContractualPartyType);
 		}
 		
-		if(!$("#rep_contractualParty").data("kendoComboBox")){
+		if(!$("#rep_contractualParty").data("kendoHierarchySelector")){
 			var initializeContractualParty = function(){
 				var pt = new Array();
 				var e = erm.dbvalues.contractualParties;
@@ -1724,16 +1724,16 @@ function ReportManagement(){
 						pt.push(ob);
 					});
 					
-					var dataSource = new kendo.data.DataSource({
+					var cpDataSource = new kendo.data.DataSource({
 						data : pt
 					});
 					
-					$("#rep_contractualParty").kendoComboBox({
-						filter : "startswith",
-						dataTextField: "name",
-			            dataValueField: "id",
-			            template: "${ data.name }",
-			            dataSource : dataSource
+					$("#rep_contractualParty").kendoHierarchySelector({
+						//filter : "startswith",
+						id: "id",
+						text: "name",
+			            //template: "${ data.name }",
+			            dataSource : cpDataSource
 					});
 					
 				}
