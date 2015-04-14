@@ -1672,7 +1672,7 @@ function ReportManagement(){
 			});
 		}
 		
-		if(!$("#rep_contractualPartyType").data("kendoDropDownList")){
+		if(!$("#rep_contractualPartyType").data("kendoHierarchySelector")){
 			var initializeContractualPartyType = function(){
 				var pt = new Array();
 				var e = erm.dbvalues.contractualPartyTypes;
@@ -1692,7 +1692,7 @@ function ReportManagement(){
 						data : pt
 					});
 					
-					$("#rep_contractualPartyType").kendoDropDownList({
+					$("#rep_contractualPartyType").kendoHierarchySelector({
 						dataTextField: "name",
 			            dataValueField: "id",
 			            template: "${ data.name }",
