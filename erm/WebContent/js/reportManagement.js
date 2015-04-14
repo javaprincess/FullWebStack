@@ -1300,8 +1300,8 @@ function ReportManagement(){
 			//Since the opening of a popup window must occur as soon as the click is registered by 
 			//the system, this way we can fool the popup blockers into believing that the popup window
 			//opening is a direct result of the user's action.
-			var w = this.rep_runReportWindow.open('runReport.html', '_blank');
-			this.rep_redirectUrlWindow = w;
+			/*var w = this.rep_runReportWindow.open('runReport.html', '_blank');
+			this.rep_redirectUrlWindow = w; */
 			this.processFlag = this.processFlagArray.RUN;
 			this.runReport();
 		}
@@ -1675,6 +1675,8 @@ function ReportManagement(){
 		if(!$("#rep_contractualPartyType").data("kendoHierarchySelector")){
 			var initializeContractualPartyType = function(){
 				var pt = new Array();
+				
+				console.log("-------------CONTRACTUAL PARTY TYPES: %o", erm.dbvalues.contractualPartyTypes);
 				var e = erm.dbvalues.contractualPartyTypes;
 				if(e != null && e.length > 0){
 					var ob1 = new Object();
@@ -1688,15 +1690,17 @@ function ReportManagement(){
 						pt.push(ob);
 					});
 					
-					var dataSource = new kendo.data.DataSource({
+					var cpDataSource = new kendo.data.DataSource({
 						data : pt
 					});
 					
 					$("#rep_contractualPartyType").kendoHierarchySelector({
-						dataTextField: "name",
-			            dataValueField: "id",
-			            template: "${ data.name }",
-			            dataSource : dataSource
+						//dataTextField: "name",
+			            //dataValueField: "id",
+						id: "id",
+						text: "name",
+			            //template: "${ data.name }",
+			            dataSource : cpDataSource
 					});
 					
 				}
@@ -5774,9 +5778,12 @@ function ReportManagement(){
 		$("#rep_futureMedia").data("kendoDropDownList").value(-2);
 		$("#rep_futureMedia").data("kendoDropDownList").enable(false);
 		
-		$("#rep_contractualPartyTypeText").addClass("disableTextClass");
-		$("#rep_contractualPartyType").data("kendoDropDownList").value([]);
-		$("#rep_contractualPartyType").data("kendoDropDownList").enable(false);
+		//$("#rep_contractualPartyTypeText").addClass("disableTextClass");
+		//$("#rep_contractualPartyType").data("kendoDropDownList").value([]);
+		//$("#rep_contractualPartyType").data("kendoDropDownList").enable(false);
+		$("#rep_contractualPartyType").data("kendoHierarchySelector").clear();
+		$("#rep_contractualPartyTypeText").attr("disabled", true);
+		$("#rep_contractualPartyType").attr("disabled", true);
 		
 		$("#rep_contractualPartyText").addClass("disableTextClass");
 		$("#rep_contractualParty").data("kendoComboBox").value([]);
@@ -6110,8 +6117,8 @@ function ReportManagement(){
 	     	
 	     	
 	    	$('body')
-	        //.append('<form name="mstr", formtarget="_blank", id="mstr"></form>'); 
-	    	.append('<form name="mstr", formtarget='+this.rep_redirectUrlWindow + ', id="mstr"></form>'); 
+	        .append('<form name="mstr", target="_blank", id="mstr"></form>'); 
+	    	//.append('<form name="mstr", formtarget="'+this.rep_redirectUrlWindow+'", id="mstr"></form>'); 
 	    	$('#mstr') 
 	        	.attr("action", msUrl) .attr("method","post")
 	        	.append('<input type="hidden" name="valuePromptAnswers" id="valuePromptAnswers" value=""/>')
