@@ -2352,7 +2352,7 @@ function ReportManagement(){
 		$("#rep_subrightsSalesAndMarketing").data("kendoHierarchySelector").clear();
 		$("#rep_doNotLicense").data("kendoDropDownList").value(-1);
 		$("#rep_futureMedia").data("kendoDropDownList").value(-2);
-		$("#rep_contractualPartyType").data("kendoDropDownList").value(-1);
+		$("#rep_contractualPartyType").data("kendoHierarchySelector").clear();
 		$("#rep_contractualParty").data("kendoComboBox").value(-1);
 		$("#rep_foxEntity").data("kendoComboBox").value(-1);
 		$("#rep_contacts").data("kendoHierarchySelector").clear();
