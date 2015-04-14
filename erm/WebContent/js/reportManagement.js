@@ -5248,7 +5248,7 @@ function ReportManagement(){
 			return true;
 		}
 		
-		var cpt = $("#rep_contractualPartyType").data("kendoDropDownList").value();
+		var cpt = $("#rep_contractualPartyType").data("kendoHierarchySelector").getSelected();
 		if(cpt && cpt > 0){
 			return true;
 		}
