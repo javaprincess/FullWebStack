@@ -328,16 +328,17 @@ To get the full set of results, run the report with Method of Transmission and t
 			
 		</div>
 		<div class="panel noBorder" style="width : 18%; float : left; height : 100%; padding-top : 1px; background-color : #f4f4f4;">
+			
+			<!-- LEGAL CONFIRMATION STATUS: START -->
 			<div id="rep_legalConfirmationStatusText" class="panel-body maximumWidth boldFont" style="margin-bottom : 5px;">
 				Legal Confirmation Status
 			</div>
 			<div class="panel-body maximumWidth" style="margin-bottom : 5px;">
-				<select id="rep_legalConfirmationStatus" style="width : 100%;" class="smallFontRights">
-					<option value=""></option>
-					<option value="1">Business</option>
-					<option value="2">Legal</option>
+				<select id="rep_legalConfirmationStatus" multiple style="width : 100%;" class="form-control smallFontRights">
 				</select>
 			</div>
+			<!-- LEGAL CONFIRMATION STATUS: END -->
+			
 			<div id="rep_productInformationCodeText" class="panel-body maximumWidth boldFont" style="margin-bottom : 5px;">
 				Product Information Code
 			</div>
@@ -385,33 +386,22 @@ To get the full set of results, run the report with Method of Transmission and t
 			<div id="rep_contractualPartyText" class="panel-body maximumWidth boldFont" style="margin-bottom : 5px;">
 				Contractual Party
 			</div>
-			<!--  div class="panel noBorder" style="width : 26%; float : left; height : 100%; padding-top : 1px; background-color : #f4f4f4;" -->
-			<!--  div id="rep_contactsText" class="panel-body maximumWidth boldFont" style="margin-bottom : 5px;">
-				Contacts
-			</div>
-			<div class="panel-body maximumWidth" style="margin-bottom : 5px; height : 87%;">
-				<select id="rep_contacts" multiple style="width : 100%; height : 100%;" class="form-control smallFontRights"></select>
-			</div>
-		</div-->
+			
 			<div class="panel-body maximumWidth" style="margin-bottom : 5px;">
-				<select id="rep_contractualParty" multiple style="width : 100%;" class="form-control smallFontRights">
-					<!--  option value=""></option>
-					<option value="1">Business</option>
-					<option value="2">Legal</option -->
+				<select id="rep_contractualParty" multiple style="width : 100%;" class="form-control smallFontRights">	
 				</select>
 			</div>
 			<!-- CONTRACTUAL PARTY: END -->
 			
+			<!-- FOX ENTITY: END -->
 			<div id="rep_foxEntityText" class="panel-body maximumWidth boldFont" style="margin-bottom : 5px;">
 				Fox Entity
 			</div>
 			<div class="panel-body maximumWidth" style="margin-bottom : 5px;">
-				<select id="rep_foxEntity" style="width : 100%;" class="smallFontRights">
-					<option value=""></option>
-					<option value="1">Business</option>
-					<option value="2">Legal</option>
+				<select id="rep_foxEntity" multiple style="width : 100%;" class="form-control smallFontRights">
 				</select>
 			</div>
+			<!-- FOX ENTITY: END -->
 		</div>
 		<div class="panel noBorder" style="width : 26%; float : left; height : 100%; padding-top : 1px; background-color : #f4f4f4;">
 			<div id="rep_contactsText" class="panel-body maximumWidth boldFont" style="margin-bottom : 5px;">

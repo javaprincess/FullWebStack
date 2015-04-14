@@ -1507,7 +1507,7 @@ function ReportManagement(){
        		start : "year"
         });
 		
-		if(!$("#rep_legalConfirmationStatus").data("kendoDropDownList")){
+		if(!$("#rep_legalConfirmationStatus").data("kendoHierarchySelector")){
 			$.getJSON(that.rep_path.getLegalConfirmationStatusRESTPath(), function(data){
 				
 				if(data){
@@ -1526,10 +1526,10 @@ function ReportManagement(){
 						data : dataArray
 					});
 					
-					$("#rep_legalConfirmationStatus").kendoDropDownList({
-						dataTextField: "confirmationStatusCode",
-			            dataValueField: "confirmationStatusId",
-			            template: "${ data.description }",
+					$("#rep_legalConfirmationStatus").kendoHierarchySelector({
+						text: "confirmationStatusCode",
+			            id: "confirmationStatusId",
+			            //template: "${ data.description }",
 			            dataSource : legalConfirmationStatusDataSource 
 					});
 				}
@@ -1741,7 +1741,7 @@ function ReportManagement(){
 			erm.dbvalues.afterInit(initializeContractualParty);
 		}
 		
-		if(!$("#rep_foxEntity").data("kendoComboBox")){
+		if(!$("#rep_foxEntity").data("kendoHierarchySelector")){
 			var initializeContractualParty = function(){
 				var pt = new Array();
 				var e = erm.dbvalues.foxEntities;
@@ -1757,16 +1757,16 @@ function ReportManagement(){
 						pt.push(ob);
 					});
 					
-					var dataSource = new kendo.data.DataSource({
+					var feDataSource = new kendo.data.DataSource({
 						data : pt
 					});
 					
-					$("#rep_foxEntity").kendoComboBox({
-						filter : "startswith",
-						dataTextField: "name",
-			            dataValueField: "id",
-			            template: "${ data.name }",
-			            dataSource : dataSource
+					$("#rep_foxEntity").kendoHierarchySelector({
+						//filter : "startswith",
+						text: "name",
+			            id: "id",
+			            //template: "${ data.name }",
+			            dataSource : feDataSource
 					});
 					
 				}
