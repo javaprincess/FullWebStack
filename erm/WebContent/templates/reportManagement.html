@@ -96,13 +96,7 @@
 		
 		
 	<div id="rep_queryPanelMTLT" class="panel reducedPadding" style="padding : 0px; height : 40%; margin-top : 1px; margin-bottom : 5px; background-color : #f4f4f4;">
-		<!-- 
-		<div class="panel noBorder" style="width : 100%; height : 2%; margin-bottom : 1px; margin-top : 0px; background-color : #f4f4f4; padding-top : 0xp;">
-			<div class="panel-body blueFontStyle boldFont" style="margin-top : 0px; padding-top : 0px;">
-				<font id="rep_denoteRequiredFields"></font>
-			</div>
-		</div>
-		-->
+		
 		<div class="panel noBorder" style="padding : 0px; height : 87%; padding-top : 1px; background-color : #f4f4f4; margin-bottom : 1px;">
 			<div class="panel noBorder" style="width : 18%; float : left; height : 100%; padding-top : 1px; background-color : #f4f4f4; ">
 				<div id="rep_mediaText" class="panel-body boldFont" style="height : 5%; width : 100%;">
@@ -267,131 +261,84 @@
 				
 			</div>			
 			<div class="panel noBorder rightInquiryReportClass" style="width : 20%; float : left; height : 100%; padding-top : 1px; background-color : #f4f4f4; display : none;" id="rep_rightsInquirySideElements">
-				<div id="rep_subrightsSalesAndMarketingText" class="panel-body maximumWidth boldFont" style="margin-bottom : 5px;">
-					Subrights Sales And Marketing
+				<!-- SDO: START -->
+				<!--  div class="panel" style="width : 18%; float : left; height : 100%; padding-top : 1px; background-color : #f4f4f4;" -->
+					<div id="rep_dateOptionText" class="panel-body maximumWidth boldFont" style="margin-bottom : 5px;">
+						Strand Date Option
+					</div>
+					<div class="panel-body maximumWidth" style="margin-bottom : 5px;">
+						<select id="rep_dateOption" style="width : 100%;" class="smallFontRights">
+							<option value=""></option>
+							<option value="1">Expiring</option>
+							<option value="2">Not-expiring</option>
+						</select>
+					</div>
+					<div id="rep_dateOptionFromText" class="panel-body boldFont" style="width : 22%; float : left; margin-bottom : 5px;">
+						From
+					</div>
+					<div class="panel-body" style="width : 50%; float : left; margin-bottom : 5px;">
+						<input type="text" id="rep_dateOptionFrom" style="height : 25px; width : 100%;">
+					</div>
+					<div id="rep_dateOptionFromTBAText" class="panel-body" style="width : 25%; float : left; font-size : 9px; margin-bottom : 5px;">
+						<input type="checkbox" id="rep_dateOptionFromTBA" style="margin-left : 3px;"> TBA
+					</div>
+			
+					<div id="rep_dateOptionToText" class="panel-body boldFont" style="width : 22%; float : left; clear: both; padding-top: 12px;">
+						To
+					</div>
+					<div class="panel-body" style="width : 50%; float : left; padding-top: 5px;">
+						<input type="text" id="rep_dateOptionTo" style="height : 25px; width : 100%; ">
+					</div>
+					<div id="rep_dateOptionToTBAText" class="panel-body" style="width : 25%; float : left; font-size : 9px; padding-top: 5px;">
+						<input type="checkbox" id="rep_dateOptionToTBA" style="margin-left : 3px;"> TBA
+					</div>
+				<!--  /div -->
+				<!-- SDO: END -->
+				
+				<!--  PiC/DNL/FM SECTION: START -->
+				<div id="rep_productInformationCodeText" class="panel-body maximumWidth boldFont" style="margin-bottom : 5px;">
+					Product Information Code
 				</div>
-				<div class="panel-body maximumWidth" style="height : 25%; margin-bottom : 10px;">
-					<select id="rep_subrightsSalesAndMarketing" multiple style="width : 100%; height : 98%; " class="form-control smallFontRights"></select> 
+				<div class="panel-body maximumWidth" style="margin-bottom : 5px;">
+					<select id="rep_productInformationCode" style="width : 100%;" class="smallFontRights">
+						<option value=""></option>
+						<option value="AUX">AUX</option>
+						<option value="COM">COM</option>
+					</select>
 				</div>
-				<div id="rep_methodOfTransmissionText" class="panel-body maximumWidth boldFont methodOfTransmissionClass" style="margin-bottom : 5px;width : 69%;float:left;">
-					Method Of Transmission
+				<div id="rep_doNotLicenseText" class="panel-body boldFont" style="margin-bottom : 5px; width : 50%; float : left; font-size : 10px;">
+					Do Not License
 				</div>
-				<div id="rep_methodOfTransmissionText" class="panel-body maximumWidth boldFont methodOfTransmissionClass" style="margin-bottom : 5px;width : 30%;float:right; text-align:right;">
-					<a href="javascript:$.noop()" id="rep_methodOfTransmissionLink">Clear</a>
+				<div id="rep_futureMediaText" class="panel-body boldFont" style="margin-bottom : 5px; width : 50%; float : left; font-size : 10px;">
+					Future Media
 				</div>
-				<div class="panel-body maximumWidth methodOfTransmissionClass" style="height : 29%; margin-bottom : 10px;margin-top : 30px;">
-					<select id="rep_methodOfTransmission" multiple style="width : 100%; height : 100%;" class="form-control smallFontRights"></select> 
+				<div class="panel-body" style="margin-bottom : 5px; width : 49%; float : left;">				
+					<select id="rep_doNotLicense" style="width : 100%;" class="smallFontRights">
+						<option value=""></option>
+						<option value="AUX">AUX</option>
+						<option value="COM">COM</option>
+					</select>
 				</div>
-				<div class="panel-body maximumWidth methodOfTransmissionClass" style="height : 30%; margin-bottom : 20px;">
-					 <i class="icon-warning-sign" style="color:#e6a044;"></i> <font style="color : #992b0f;">LEGAL USE ONLY - Method of Transmission Results are based on Legal strands entered before June 11th, 2014 (existing titles).
-For Legal strands entered after June 11th, 2014 (new titles) please select a MEDIA.
-To get the full set of results, run the report with Method of Transmission and then run a report again by selecting corresponding MEDIA.
-</font>
+				<div class="panel-body" style="margin-bottom : 5px; width : 49%; float : right;">				
+					<select id="rep_futureMedia" style="width : 100%;" class="smallFontRights">
+						<option value=""></option>
+						<option value="AUX">AUX</option>
+						<option value="COM">COM</option>
+					</select>
 				</div>
+				<!--  PiC/DNL/FM SECTION: END -->
+				
 			</div>
+			
 		</div>
 		
 	</div>
 	
 	<!-- FOR RIGHTS INQUIRY REPORT (BOTTOM ELEMENTS : START) -->
 	<div class="panel reducedPadding rightInquiryReportClass" style="padding : 0px; height : 17%; padding-top : 1px; background-color : #f4f4f4; margin-top : 1px;" id="rep_inquiryReportBottomElements">
-		<div class="panel" style="width : 18%; float : left; height : 100%; padding-top : 1px; background-color : #f4f4f4;">
-			<div id="rep_dateOptionText" class="panel-body maximumWidth boldFont" style="margin-bottom : 5px;">
-				Date Option
-			</div>
-			<div class="panel-body maximumWidth" style="margin-bottom : 5px;">
-				<select id="rep_dateOption" style="width : 100%;" class="smallFontRights">
-					<option value=""></option>
-					<option value="1">Expiring</option>
-					<option value="2">Not-expiring</option>
-				</select>
-			</div>
-			<div id="rep_dateOptionFromText" class="panel-body boldFont" style="width : 22%; float : left; margin-bottom : 5px;">
-				From
-			</div>
-			<div class="panel-body" style="width : 50%; float : left; margin-bottom : 5px;">
-				<input type="text" id="rep_dateOptionFrom" style="height : 25px; width : 100%;">
-			</div>
-			<div id="rep_dateOptionFromTBAText" class="panel-body" style="width : 25%; float : left; font-size : 9px; margin-bottom : 5px;">
-				<input type="checkbox" id="rep_dateOptionFromTBA" style="margin-left : 3px;"> TBA
-			</div>
-			
-			<div id="rep_dateOptionToText" class="panel-body boldFont" style="width : 22%; float : left; clear: both; padding-top: 12px;">
-				To
-			</div>
-			<div class="panel-body" style="width : 50%; float : left; padding-top: 5px;">
-				<input type="text" id="rep_dateOptionTo" style="height : 25px; width : 100%; ">
-			</div>
-			<div id="rep_dateOptionToTBAText" class="panel-body" style="width : 25%; float : left; font-size : 9px; padding-top: 5px;">
-				<input type="checkbox" id="rep_dateOptionToTBA" style="margin-left : 3px;"> TBA
-			</div>
-			
-		</div>
-		<div class="panel noBorder" style="width : 18%; float : left; height : 100%; padding-top : 1px; background-color : #f4f4f4;">
-			
-			<!-- LEGAL CONFIRMATION STATUS: START -->
-			<div id="rep_legalConfirmationStatusText" class="panel-body maximumWidth boldFont" style="margin-bottom : 5px;">
-				Legal Confirmation Status
-			</div>
-			<div class="panel-body maximumWidth" style="margin-bottom : 5px;">
-				<select id="rep_legalConfirmationStatus" multiple style="width : 100%;" class="form-control smallFontRights">
-				</select>
-			</div>
-			<!-- LEGAL CONFIRMATION STATUS: END -->
-			
-			<div id="rep_productInformationCodeText" class="panel-body maximumWidth boldFont" style="margin-bottom : 5px;">
-				Product Information Code
-			</div>
-			<div class="panel-body maximumWidth" style="margin-bottom : 5px;">
-				<select id="rep_productInformationCode" style="width : 100%;" class="smallFontRights">
-					<option value=""></option>
-					<option value="AUX">AUX</option>
-					<option value="COM">COM</option>
-				</select>
-			</div>
-			<div id="rep_doNotLicenseText" class="panel-body boldFont" style="margin-bottom : 5px; width : 50%; float : left; font-size : 10px;">
-				Do Not License
-			</div>
-			<div id="rep_futureMediaText" class="panel-body boldFont" style="margin-bottom : 5px; width : 50%; float : left; font-size : 10px;">
-				Future Media
-			</div>
-			<div class="panel-body" style="margin-bottom : 5px; width : 49%; float : left;">				
-				<select id="rep_doNotLicense" style="width : 100%;" class="smallFontRights">
-					<option value=""></option>
-					<option value="AUX">AUX</option>
-					<option value="COM">COM</option>
-				</select>
-			</div>
-			<div class="panel-body" style="margin-bottom : 5px; width : 49%; float : right;">				
-				<select id="rep_futureMedia" style="width : 100%;" class="smallFontRights">
-					<option value=""></option>
-					<option value="AUX">AUX</option>
-					<option value="COM">COM</option>
-				</select>
-			</div>
-		</div>
+		
 		
 		<div class="panel noBorder" style="width : 18%; float : left; height : 100%; padding-top : 1px; background-color : #f4f4f4;">
-			
-			<!-- CONTRACTUAL PARTY TYPE: START -->
-			<div id="rep_contractualPartyTypeText" class="panel-body maximumWidth boldFont" style="margin-bottom : 5px;">
-				Contractual Party Type
-			</div>
-			<div class="panel-body maximumWidth" style="margin-bottom : 5px;">
-				<select id="rep_contractualPartyType" multiple style="width : 100%;" class="form-control smallFontRights"></select>
-			</div>
-			<!-- CONTRACTUAL PARTY TYPE: END -->
-			
-			<!-- CONTRACTUAL PARTY TYPE: START -->
-			<div id="rep_contractualPartyText" class="panel-body maximumWidth boldFont" style="margin-bottom : 5px;">
-				Contractual Party
-			</div>
-			
-			<div class="panel-body maximumWidth" style="margin-bottom : 5px;">
-				<select id="rep_contractualParty" multiple style="width : 100%;" class="form-control smallFontRights">	
-				</select>
-			</div>
-			<!-- CONTRACTUAL PARTY: END -->
 			
 			<!-- FOX ENTITY: END -->
 			<div id="rep_foxEntityText" class="panel-body maximumWidth boldFont" style="margin-bottom : 5px;">
@@ -402,7 +349,59 @@ To get the full set of results, run the report with Method of Transmission and t
 				</select>
 			</div>
 			<!-- FOX ENTITY: END -->
+			
+			<!-- LEGAL CONFIRMATION STATUS: START -->
+			<div id="rep_legalConfirmationStatusText" class="panel-body maximumWidth boldFont" style="margin-bottom : 5px;">
+				Legal Confirmation Status
+			</div>
+			<div class="panel-body maximumWidth" style="margin-bottom : 5px;">
+				<select id="rep_legalConfirmationStatus" multiple style="width : 100%;" class="form-control smallFontRights">
+				</select>
+			</div>
+			<!-- LEGAL CONFIRMATION STATUS: END -->
+
 		</div>
+		
+		<div class="panel noBorder" style="width : 18%; float : left; height : 100%; padding-top : 1px; background-color : #f4f4f4;">
+			
+			<!-- CONTRACTUAL PARTY : START -->
+			<div id="rep_contractualPartyText" class="panel-body maximumWidth boldFont" style="margin-bottom : 5px;">
+				Contractual Party
+			</div>
+			
+			<div class="panel-body maximumWidth" style="margin-bottom : 5px;">
+				<select id="rep_contractualParty" multiple style="width : 100%;" class="form-control smallFontRights">	
+				</select>
+			</div>
+			<!-- CONTRACTUAL PARTY: END -->
+			
+			<!-- CONTRACTUAL PARTY TYPE: START -->
+			<div id="rep_contractualPartyTypeText" class="panel-body maximumWidth boldFont" style="margin-bottom : 5px;">
+				Contractual Party Type
+			</div>
+			<div class="panel-body maximumWidth" style="margin-bottom : 5px;">
+				<select id="rep_contractualPartyType" multiple style="width : 100%;" class="form-control smallFontRights"></select>
+			</div>
+			<!-- CONTRACTUAL PARTY TYPE: END -->
+			
+			
+			
+		
+		</div>
+		
+		<div class="panel noBorder" style="width : 18%; float : left; height : 100%; padding-top : 1px; background-color : #f4f4f4;">
+			
+			<!-- S&M: START -->
+			<div id="rep_subrightsSalesAndMarketingText" class="panel-body maximumWidth boldFont" style="margin-bottom : 5px;">
+					Sales And Marketing
+			</div>
+			<div class="panel-body maximumWidth" style="height : 25%; margin-bottom : 10px;">
+				<select id="rep_subrightsSalesAndMarketing" multiple style="width : 100%; height : 98%; " class="form-control smallFontRights"></select> 
+			</div>
+			<!-- S&M: END -->
+			
+		</div>
+		
 		<div class="panel noBorder" style="width : 26%; float : left; height : 100%; padding-top : 1px; background-color : #f4f4f4;">
 			<div id="rep_contactsText" class="panel-body maximumWidth boldFont" style="margin-bottom : 5px;">
 				Contacts
@@ -436,3 +435,8 @@ To get the full set of results, run the report with Method of Transmission and t
 	</div>
 	<a href="" style="display:none;" id="rep_redirectUrlParam"></a>
 </div>
+
+<!-- CLEAR EXAMPLE >
+<div id="rep_methodOfTransmissionText" class="panel-body maximumWidth boldFont methodOfTransmissionClass" style="margin-bottom : 5px;width : 30%;float:right; text-align:right;">
+	<a href="javascript:$.noop()" id="rep_methodOfTransmissionLink">Clear</a>
+</div -->
