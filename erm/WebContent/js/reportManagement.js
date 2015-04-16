@@ -1239,6 +1239,21 @@ function ReportManagement(){
 			that.resetReportManagementFields();
 		});
 		
+		//PIR CHANGES
+		$("#rep_clearFoxEntity").click(function(){
+			that.resetFoxEntityFields();
+		});
+		$("#rep_clearLegalConfirmationStatus").click(function(){
+			that.resetLegalConfirmationStatusFields();
+		});
+		$("#rep_clearContractualPary").click(function(){
+			that.resetContractualPartyFields();
+		});
+		$("#rep_clearContractualPartyType").click(function(){
+			that.resetContractualPartyTypeFields();
+		});
+		//PIR CHANGES
+		
 		$("#rep_searchSavedQueryClear").click(function(){
 			that.resetSearchSavedQueryParam();
 		});
@@ -6044,6 +6059,24 @@ function ReportManagement(){
 		$("#rep_languageSelector").data("kendoHierarchySelector").populateSelectorAlt();
 	};
 	
+	//PIR CHANGES
+	this.resetFoxEntityFields = function(){
+		$("#rep_foxEntity").data("kendoHierarchySelector").clear();
+		$("#rep_foxEntity").data("kendoHierarchySelector").populateSelectorAlt();
+	};
+	this.resetLegalConfirmationFields = function(){
+		$("#rep_legalConfirmationStatus").data("kendoHierarchySelector").clear();
+		$("#rep_egalConfirmationStatus").data("kendoHierarchySelector").populateSelectorAlt();
+	};
+	this.resetContractualPartyFields = function(){
+		$("#rep_contractualParty").data("kendoHierarchySelector").clear();
+		$("#rep_contractualParty").data("kendoHierarchySelector").populateSelectorAlt();
+	};
+	this.resetContractualPartyTypeFields = function(){
+		$("#rep_contractualPatryType").data("kendoHierarchySelector").clear();
+		$("#rep_contractualPatryType").data("kendoHierarchySelector").populateSelectorAlt();
+	};
+	//PIR CHANGES
 	/**
 	 * 
 	 */
