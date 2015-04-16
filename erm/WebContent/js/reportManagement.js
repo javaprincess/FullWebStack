@@ -1244,7 +1244,7 @@ function ReportManagement(){
 			that.resetFoxEntityFields();
 		});
 		$("#rep_clearLegalConfirmationStatus").click(function(){
-			that.resetLegalConfirmationStatusFields();
+			that.resetLegalConfirmationFields();
 		});
 		$("#rep_clearContractualPary").click(function(){
 			that.resetContractualPartyFields();
@@ -1669,7 +1669,7 @@ function ReportManagement(){
 			});
 		}
 		
-		if(!$("#rep_methodOfTransmission").data("kendoHierarchySelector")){
+		/*if(!$("#rep_methodOfTransmission").data("kendoHierarchySelector")){
 			var motDataSource = [
 			                     {mediaId:-1, mediaCode:'', mediaDescription:'' },
 			                     {mediaId:37, mediaCode:'BOD', mediaDescription:'Basic On Demand'},
@@ -1685,7 +1685,7 @@ function ReportManagement(){
 				id : "mediaId",
 				text : "mediaDescription"
 			});
-		}
+		} */
 		
 		if(!$("#rep_contractualPartyType").data("kendoHierarchySelector")){
 			var initializeContractualPartyType = function(){
@@ -1790,7 +1790,7 @@ function ReportManagement(){
 			
 		}
 		
-		$("#rep_methodOfTransmissionLink").click(function(){
+		/*$("#rep_methodOfTransmissionLink").click(function(){
 			$("#rep_methodOfTransmission").data("kendoHierarchySelector").setSelected([]);
 			that.enableWithoutMOT();
 		});
@@ -1800,7 +1800,7 @@ function ReportManagement(){
 			if(!that.disabledForMOTFlag && ids && ids.length > 0){
 				that.disableForMOT();
 			}
-		});
+		}); */
 		
 	};
 	
@@ -1811,17 +1811,17 @@ function ReportManagement(){
 		var that = this;
 		$("#rep_rightCheckBusiness").click(function(){
 			if(that.queryViewModel.get("reportId") == that.reportIndexes.PRODUCT_INQUIRY_REPORT){
-				that.resetFromMOT();
-				that.disableMethodOfTransmission();
-				$(".methodOfTransmissionClass").hide();
+				//that.resetFromMOT();
+				//that.disableMethodOfTransmission();
+				//$(".methodOfTransmissionClass").hide();
 			}
 			changeDateOptionDataSource(that, 'BUSINESS');
 		});
 		
 		$("#rep_rightCheckLegal").click(function(){
 			if(that.queryViewModel.get("reportId") == that.reportIndexes.PRODUCT_INQUIRY_REPORT){
-				$(".methodOfTransmissionClass").show();
-				that.enableMethodOfTransmission();
+				//$(".methodOfTransmissionClass").show();
+				//that.enableMethodOfTransmission();
 			}
 			changeDateOptionDataSource(that, 'LEGAL');
 		});
@@ -1925,7 +1925,7 @@ function ReportManagement(){
 			$(".legalRadioCheckClass").hide();
 			$("#rep_rightCheckBusiness")[0].checked = true;
 			$(".rightsAsEnteredClass").hide();
-			$(".methodOfTransmissionClass").hide();
+			//$(".methodOfTransmissionClass").hide();
 			var allCheckbox = $(".selectAllRightsGroupClass");
 			if(allCheckbox){
 				$.each(allCheckbox, function(id, elem){
@@ -1961,12 +1961,12 @@ function ReportManagement(){
 				$("#rep_productTypeLabel").html(this.productTypeName);
 				$("#rep_rightCheckLegal")[0].checked = true;
 				if($("#rep_rightCheckLegal")[0].checked){
-					$(".methodOfTransmissionClass").show();
-					that.enableMethodOfTransmission();
+					//$(".methodOfTransmissionClass").show();
+					//that.enableMethodOfTransmission();
 				}
 				else {
-					that.disableMethodOfTransmission();
-					$(".methodOfTransmissionClass").hide();
+					//that.disableMethodOfTransmission();
+					//$(".methodOfTransmissionClass").hide();
 				}
 				$(".rightsAsEnteredClass").hide();				
 				$(".productInquiryReportClass").show();
@@ -2366,16 +2366,16 @@ function ReportManagement(){
 		$("#rep_dateOptionTo").data("kendoDatePicker").value(null);
 		$("#rep_dateOptionTo").data("kendoDatePicker").enable(false);
 		$("#rep_dateOptionToTBA")[0].checked = false;
-		$("#rep_legalConfirmationStatus").data("kendoDropDownList").value(-1);
+		$("#rep_legalConfirmationStatus").data("kendoHierarchySelector").clearSelected();
 		$("#rep_productInformationCode").data("kendoDropDownList").value(-1);		
-		$("#rep_subrightsSalesAndMarketing").data("kendoHierarchySelector").clear();
+		$("#rep_subrightsSalesAndMarketing").data("kendoHierarchySelector").clearSelected();
 		$("#rep_doNotLicense").data("kendoDropDownList").value(-1);
 		$("#rep_futureMedia").data("kendoDropDownList").value(-2);
-		$("#rep_contractualPartyType").data("kendoHierarchySelector").clear();
-		$("#rep_contractualParty").data("kendoComboBox").value(-1);
-		$("#rep_foxEntity").data("kendoComboBox").value(-1);
-		$("#rep_contacts").data("kendoHierarchySelector").clear();
-		$("#rep_methodOfTransmission").data("kendoHierarchySelector").clear();
+		$("#rep_contractualPartyType").data("kendoHierarchySelector").clearSelected();
+		$("#rep_contractualParty").data("kendoHierarchySelector").clearSelected();
+		$("#rep_foxEntity").data("kendoHierarchySelector").clearSelected();
+		$("#rep_contacts").data("kendoHierarchySelector").clearSelected();
+		//$("#rep_methodOfTransmission").data("kendoHierarchySelector").clear();
 		setValidDateFromat("rep_dateOptionFrom");
 		setValidDateFromat("rep_dateOptionTo");
 		setValidDateFromat("rep_fromTimePeriod");
@@ -3018,12 +3018,12 @@ function ReportManagement(){
 			return this.validateAvailsReport();
 		}
 		else if(this.queryViewModel.get("reportId") == this.reportIndexes.PRODUCT_INQUIRY_REPORT){
-			if(this.productRightsInquiryReportMOTCheck()){
-				return true;
-			}
-			else {
+			//if(this.productRightsInquiryReportMOTCheck()){
+			//	return true;
+			//}
+			//else {
 				return this.validateRightsInquiryReport();
-			}			
+			//}			
 		}
 	};
 	
@@ -3124,12 +3124,12 @@ function ReportManagement(){
 			return this.validateAvailsForRun();
 		}
 		else if(this.queryViewModel.get("reportId") == this.reportIndexes.PRODUCT_INQUIRY_REPORT){
-			if(this.productRightsInquiryReportMOTCheck()){
-				return true;
-			}
-			else {
+			//if(this.productRightsInquiryReportMOTCheck()){
+			//	return true;
+			//}
+			//else {
 				return this.validateRightsInquiryReport();
-			}			
+			//}			
 		}
 		else if(this.queryViewModel.get("reportId") == this.reportIndexes.RIGHTS_AS_ENTERED_REPORT){
 			return this.validateRightsAsEntered();
@@ -4027,7 +4027,7 @@ function ReportManagement(){
 				
 				if(that.queryViewModel.get("reportId") == that.reportIndexes.PRODUCT_INQUIRY_REPORT){
 					if(!$("#rep_rightCheckLegal")[0].checked){
-						$(".methodOfTransmissionClass").hide();
+						//$(".methodOfTransmissionClass").hide();
 					}
 					that.populateRightsInquirySpecificFields(queryParametersList);
 				}
@@ -4943,7 +4943,7 @@ function ReportManagement(){
 	/**
 	 * 
 	 */
-	this.productRightsInquiryReportMOTCheck = function(){
+	/*this.productRightsInquiryReportMOTCheck = function(){
 		var mots = $("#rep_methodOfTransmission").data("kendoHierarchySelector").getSelected();
 		if(mots && mots.length > 0){
 			return true;
@@ -4951,7 +4951,7 @@ function ReportManagement(){
 		else {
 			return false;
 		}
-	};
+	}; */
 	
 	/**
 	 * 
@@ -4990,7 +4990,7 @@ function ReportManagement(){
 			}			
 		}
 		
-		var mot = $("#rep_methodOfTransmission").data("kendoHierarchySelector").getSelected();
+		/*var mot = $("#rep_methodOfTransmission").data("kendoHierarchySelector").getSelected();
 		if(mot && (mot.length > 0)){
 			var methodOfTransmission = "";
 			var methodOfTransmissionText = "";
@@ -5014,7 +5014,7 @@ function ReportManagement(){
 			ps.text = methodOfTransmissionText;
 			ps.queryId = this.queryViewModel.get("queryId");
 			qpw.queryParametersList.push(ps);
-		}
+		} */
 		
 		var dateOption = $("#rep_dateOption").data("kendoDropDownList").value();
 		if(dateOption && dateOption > 0){
@@ -5568,12 +5568,12 @@ function ReportManagement(){
 				else {
 					ids.push(parseInt(elem.value));
 				}
-				if(ids.length > 0){
-					$("#rep_methodOfTransmission").data("kendoHierarchySelector").setSelected(ids);
-					$(".methodOfTransmissionClass").show();
-					that.enableMethodOfTransmission();
-					that.disableForMOT();
-				}
+				//if(ids.length > 0){
+				//	$("#rep_methodOfTransmission").data("kendoHierarchySelector").setSelected(ids);
+				//	$(".methodOfTransmissionClass").show();
+				//	that.enableMethodOfTransmission();
+				//	that.disableForMOT();
+				//}
 			}
 		});
 	};
@@ -5970,7 +5970,7 @@ function ReportManagement(){
 	/**
 	 * 
 	 */
-	this.disableMethodOfTransmission = function(){
+	/*this.disableMethodOfTransmission = function(){
 		$("#rep_methodOfTransmissionText").addClass("disableTextClass");
 		if($("#rep_methodOfTransmission").data("kendoHierarchySelector")){
 			$("#rep_methodOfTransmission").data("kendoHierarchySelector").clear();
@@ -5978,23 +5978,19 @@ function ReportManagement(){
 		$("#rep_methodOfTransmission").attr("disabled", true);
 	};
 	
-	/**
-	 * 
-	 */
+	
 	this.enableMethodOfTransmission = function(){
 		$("#rep_methodOfTransmissionText").removeClass("disableTextClass");
 		$("#rep_methodOfTransmission").attr("disabled", false);
 	};
 	
-	/**
-	 * 
-	 */
+	
 	this.resetFromMOT = function(){
 		if($("#rep_methodOfTransmission").data("kendoHierarchySelector").getSelected().length > 0){
 			$("#rep_methodOfTransmission").data("kendoHierarchySelector").setSelected([]);
 			this.enableWithoutMOT();
 		}		
-	};
+	}; */
 	
 	/**
 	 * 
@@ -6065,8 +6061,9 @@ function ReportManagement(){
 		$("#rep_foxEntity").data("kendoHierarchySelector").populateSelectorAlt();
 	};
 	this.resetLegalConfirmationFields = function(){
-		$("#rep_legalConfirmationStatus").data("kendoHierarchySelector").clear();
-		$("#rep_egalConfirmationStatus").data("kendoHierarchySelector").populateSelectorAlt();
+		//$("#rep_legalConfirmationStatus").data("kendoHierarchySelector").clear();
+		$("#rep_legalConfirmationStatus").data("kendoHierarchySelector").setSelected([]);
+		$("#rep_legalConfirmationStatus").data("kendoHierarchySelector").clearSelected();
 	};
 	this.resetContractualPartyFields = function(){
 		$("#rep_contractualParty").data("kendoHierarchySelector").clear();
