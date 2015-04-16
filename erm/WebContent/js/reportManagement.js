@@ -1246,11 +1246,17 @@ function ReportManagement(){
 		$("#rep_clearLegalConfirmationStatus").click(function(){
 			that.resetLegalConfirmationFields();
 		});
-		$("#rep_clearContractualPary").click(function(){
+		$("#rep_clearContractualParty").click(function(){
 			that.resetContractualPartyFields();
 		});
 		$("#rep_clearContractualPartyType").click(function(){
 			that.resetContractualPartyTypeFields();
+		});
+		$("#rep_clearContacts").click(function(){
+			that.resetContactsFields();
+		});
+		$("#rep_clearSalesAndMarketing").click(function(){
+			that.resetSalesAndMarketingFields();
 		});
 		//PIR CHANGES
 		
@@ -1646,7 +1652,7 @@ function ReportManagement(){
 			});
 		}
 		
-		if(!$("#rep_subrightsSalesAndMarketing").data("kendoHierarchySelector")){
+		if(!$("#rep_salesAndMarketing").data("kendoHierarchySelector")){
 			$.getJSON(that.rep_path.getAllActiveGrantCodeRESTPath(), function(data){
 				if(data){
 					var dataArray = new Array();
@@ -1659,7 +1665,7 @@ function ReportManagement(){
 						data : dataArray
 					});
 					
-					$("#rep_subrightsSalesAndMarketing").kendoHierarchySelector({
+					$("#rep_salesAndMarketing").kendoHierarchySelector({
 						dataSource : dataSource,
 						id : "id",
 						text : "description"
@@ -2368,7 +2374,7 @@ function ReportManagement(){
 		$("#rep_dateOptionToTBA")[0].checked = false;
 		$("#rep_legalConfirmationStatus").data("kendoHierarchySelector").clearSelected();
 		$("#rep_productInformationCode").data("kendoDropDownList").value(-1);		
-		$("#rep_subrightsSalesAndMarketing").data("kendoHierarchySelector").clearSelected();
+		$("#rep_salesAndMarketing").data("kendoHierarchySelector").clearSelected();
 		$("#rep_doNotLicense").data("kendoDropDownList").value(-1);
 		$("#rep_futureMedia").data("kendoDropDownList").value(-2);
 		$("#rep_contractualPartyType").data("kendoHierarchySelector").clearSelected();
@@ -4962,29 +4968,29 @@ function ReportManagement(){
 		this.processSelectedInfoCodes(qpw);
 		this.processMTL(qpw);
 		
-		var ssm = $("#rep_subrightsSalesAndMarketing").data("kendoHierarchySelector").getSelected();
+		var ssm = $("#rep_salesAndMarketing").data("kendoHierarchySelector").getSelected();
 		if(ssm && (ssm.length > 0)){
-			var subrightsSalesAndMarketing = "";
-			var subrightsSalesAndMarketingText = "";
+			var salesAndMarketing = "";
+			var salesAndMarketingText = "";
 			for(var i = 0; i < ssm.length; i++){
 				if(ssm[i].value <= 0){
 					continue;
 				}
 				if(i < (ssm.length - 1)){
-					subrightsSalesAndMarketing += ssm[i].value+",";
-					subrightsSalesAndMarketingText += ssm[i].text+",";
+					salesAndMarketing += ssm[i].value+",";
+					salesAndMarketingText += ssm[i].text+",";
 				}
 				else {
-					subrightsSalesAndMarketing += ssm[i].value;
-					subrightsSalesAndMarketingText += ssm[i].text;
+					salesAndMarketing += ssm[i].value;
+					salesAndMarketingText += ssm[i].text;
 				}
 			}
 			
-			if(subrightsSalesAndMarketing.length > 0){
+			if(salesAndMarketing.length > 0){
 				var ps = new QueryParameter();
-				ps.name = "SubrightsSalesAndMarketing";
-				ps.value = subrightsSalesAndMarketing;
-				ps.text = subrightsSalesAndMarketingText;
+				ps.name = "SalesAndMarketing";
+				ps.value = salesAndMarketing;
+				ps.text = salesAndMarketingText;
 				ps.queryId = this.queryViewModel.get("queryId");
 				qpw.queryParametersList.push(ps);
 			}			
@@ -5241,7 +5247,7 @@ function ReportManagement(){
 			return true;
 		}
 		
-		var ssm = $("#rep_subrightsSalesAndMarketing").data("kendoHierarchySelector").getSelected();
+		var ssm = $("#rep_salesAndMarketing").data("kendoHierarchySelector").getSelected();
 		if(ssm && ssm.length > 0){
 			return true;
 		}
@@ -5541,7 +5547,7 @@ function ReportManagement(){
 				}
 			}
 			
-			if(name == 'SubrightsSalesAndMarketing'){
+			if(name == 'SalesAndMarketing'){
 				var ids = new Array();
 				if(elem.value.indexOf(",") > -1){
 					var idsString = elem.value.split(",");
@@ -5553,7 +5559,7 @@ function ReportManagement(){
 					ids.push(parseInt(elem.value));
 				}
 				if(ids.length > 0){
-					$("#rep_subrightsSalesAndMarketing").data("kendoHierarchySelector").setSelected(ids);
+					$("#rep_salesAndMarketing").data("kendoHierarchySelector").setSelected(ids);
 				}
 			}
 			
@@ -5754,9 +5760,9 @@ function ReportManagement(){
 		$("#rep_infoCodeAddSelected").attr("disabled", true);
 		$("#rep_infoCodeRemoveSelected").attr("disabled", true);
 		
-		$("#rep_subrightsSalesAndMarketingText").addClass("disableTextClass");
-		$("#rep_subrightsSalesAndMarketing").data("kendoHierarchySelector").clear();
-		$("#rep_subrightsSalesAndMarketing").attr("disabled", true);
+		$("#rep_salesAndMarketingText").addClass("disableTextClass");
+		$("#rep_salesAndMarketing").data("kendoHierarchySelector").clear();
+		$("#rep_salesAndMarketing").attr("disabled", true);
 		
 		$("#rep_dateOptionText").addClass("disableTextClass");
 		$("#rep_dateOption").data("kendoDropDownList").value([]);
@@ -5904,9 +5910,9 @@ function ReportManagement(){
 		$("#rep_infoCodeAddSelected").attr("disabled", false);
 		$("#rep_infoCodeRemoveSelected").attr("disabled", false);
 		
-		$("#rep_subrightsSalesAndMarketingText").removeClass("disableTextClass");		
-		$("#rep_subrightsSalesAndMarketing").attr("disabled", false);
-		$("#rep_subrightsSalesAndMarketing").data("kendoHierarchySelector").clear();
+		$("#rep_salesAndMarketingText").removeClass("disableTextClass");		
+		$("#rep_salesAndMarketing").attr("disabled", false);
+		$("#rep_salesAndMarketing").data("kendoHierarchySelector").clear();
 		
 		$("#rep_dateOptionText").removeClass("disableTextClass");		
 		$("#rep_dateOption").attr("disabled", false);
@@ -6057,8 +6063,8 @@ function ReportManagement(){
 	
 	//PIR CHANGES
 	this.resetFoxEntityFields = function(){
-		$("#rep_foxEntity").data("kendoHierarchySelector").clear();
-		$("#rep_foxEntity").data("kendoHierarchySelector").populateSelectorAlt();
+		$("#rep_foxEntity").data("kendoHierarchySelector").setSelected([]);
+		$("#rep_foxEntity").data("kendoHierarchySelector").clearSelected();
 	};
 	this.resetLegalConfirmationFields = function(){
 		//$("#rep_legalConfirmationStatus").data("kendoHierarchySelector").clear();
@@ -6066,12 +6072,20 @@ function ReportManagement(){
 		$("#rep_legalConfirmationStatus").data("kendoHierarchySelector").clearSelected();
 	};
 	this.resetContractualPartyFields = function(){
-		$("#rep_contractualParty").data("kendoHierarchySelector").clear();
-		$("#rep_contractualParty").data("kendoHierarchySelector").populateSelectorAlt();
+		$("#rep_contractualParty").data("kendoHierarchySelector").setSelected([]);
+		$("#rep_contractualParty").data("kendoHierarchySelector").clearSelected();
 	};
 	this.resetContractualPartyTypeFields = function(){
-		$("#rep_contractualPatryType").data("kendoHierarchySelector").clear();
-		$("#rep_contractualPatryType").data("kendoHierarchySelector").populateSelectorAlt();
+		$("#rep_contractualPartyType").data("kendoHierarchySelector").setSelected([]);
+		$("#rep_contractualPartyType").data("kendoHierarchySelector").clearSelected();
+	};
+	this.resetContactsFields = function(){
+		$("#rep_contacts").data("kendoHierarchySelector").setSelected([]);
+		$("#rep_contacts").data("kendoHierarchySelector").clearSelected();
+	};
+	this.resetSalesAndMarketingFields = function(){
+		$("#rep_salesAndMarketing").data("kendoHierarchySelector").setSelected([]);
+		$("#rep_salesAndMarketing").data("kendoHierarchySelector").clearSelected();
 	};
 	//PIR CHANGES
 	/**
