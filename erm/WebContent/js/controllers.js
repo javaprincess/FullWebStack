@@ -4242,10 +4242,7 @@ app.controller('RightsController',function RightsController($window, $scope,$log
 	$scope.displayConfirmationStatus = function() {
 		var rcscope = angular.element(document.getElementById("rightsController")).scope();
 		var legalConfirmationStatusId = eval(rcscope.currentProductArray.legalConfirmationStatusId);
-		if (legalConfirmationStatusId == 1)
-		  $("#create-new-version").prop('checked',true);
-		else
-		  $("#create-new-version").prop('checked',false);
+ 	    $("#create-new-version").prop('checked',false);
 		if (legalConfirmationStatusId != null)
 		  $(".memoPreviewConfirmationStatus").html(erm.dbvalues.legalConfirmationStatusMap[legalConfirmationStatusId]);
 		//$(".memoPreviewConfirmationStatus").html("DRAFT:  Do Not Use");			
