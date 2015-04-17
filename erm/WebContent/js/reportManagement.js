@@ -1258,6 +1258,14 @@ function ReportManagement(){
 		$("#rep_clearSalesAndMarketing").click(function(){
 			that.resetSalesAndMarketingFields();
 		});
+		//SUBRIGHTS
+		$("#rep_clearSubrights").click(function(){
+			that.resetSubrightsFields();
+		});
+		$("#rep_clearSubrightsStatus").click(function(){
+			that.resetSubrightsStatusFields();
+		});
+		//SUBRIGHTS
 		//PIR CHANGES
 		
 		$("#rep_searchSavedQueryClear").click(function(){
@@ -1674,6 +1682,53 @@ function ReportManagement(){
 				
 			});
 		}
+		
+		//SUBRIGHTS
+		if(!$("#rep_subrights").data("kendoHierarchySelector")){
+			$.getJSON(that.rep_path.getAllActiveGrantCodeRESTPath(), function(data){
+				if(data){
+					var dataArray = new Array();
+					var ob = new Object();
+					ob.id = -1;
+					ob.description = '';
+					dataArray.push(ob);
+					dataArray = dataArray.concat(data);
+					var dataSource = new kendo.data.DataSource({
+						data : dataArray
+					});
+					
+					$("#rep_subrights").kendoHierarchySelector({
+						dataSource : dataSource,
+						id : "id",
+						text : "description"
+					});
+				}
+				
+			});
+		}
+		if(!$("#rep_subrightsStatus").data("kendoHierarchySelector")){
+			$.getJSON(that.rep_path.getAllActiveGrantCodeRESTPath(), function(data){
+				if(data){
+					var dataArray = new Array();
+					var ob = new Object();
+					ob.id = -1;
+					ob.description = '';
+					dataArray.push(ob);
+					dataArray = dataArray.concat(data);
+					var dataSource = new kendo.data.DataSource({
+						data : dataArray
+					});
+					
+					$("#rep_subrightsStatus").kendoHierarchySelector({
+						dataSource : dataSource,
+						id : "id",
+						text : "description"
+					});
+				}
+				
+			});
+		}
+		//SUBRIGHTS
 		
 		/*if(!$("#rep_methodOfTransmission").data("kendoHierarchySelector")){
 			var motDataSource = [
@@ -5074,15 +5129,34 @@ function ReportManagement(){
 			qpw.queryParametersList.push(ps);
 		}
 		
-		var legalConfirmationStatus = $("#rep_legalConfirmationStatus").data("kendoDropDownList").value();
+		var legalConfirmationStatus = $("#rep_legalConfirmationStatus").data("kendoHierarchySelector").getSelected();
 		if(legalConfirmationStatus && legalConfirmationStatus > 0){
+			
+			var lcfs = "";
+			var lcfsText = "";
+			for(var i = 0; i < legalConfirmationStatus.length; i++){
+				if(parseInt(legalConfirmationStatus[i].value) <= 0){
+					continue;
+				}
+				if(i < (legalConfirmationStatus.length - 1)){
+					lcfs += legalConfirmationStatus[i].value+",";
+					lcfsText += legalConfirmationStatusy[i].text+",";
+				}
+				else {
+					lcfs += legalConfirmationStatus[i].value;
+					lcfsText += legalConfirmationStatus[i].text;
+				}
+			}
+			
+			
 			var ps = new QueryParameter();
 			ps.name = "LegalConfirmationStatus";
-			ps.value = legalConfirmationStatus;
-			ps.text = $("#rep_legalConfirmationStatus").data("kendoDropDownList").text();
+			ps.value = lcfs;
+			ps.text = lcfsText;
 			ps.queryId = this.queryViewModel.get("queryId");
 			qpw.queryParametersList.push(ps);
 		}
+		
 		
 		var productInformationCode = $("#rep_productInformationCode").data("kendoDropDownList").value();
 		if(productInformationCode && productInformationCode > -1){
@@ -5143,22 +5217,61 @@ function ReportManagement(){
 			qpw.queryParametersList.push(ps);
 		}
 		
-		var contractualParty = $("#rep_contractualParty").data("kendoComboBox").value();
+		var contractualParty = $("#rep_contractualParty").data("kendoHierarchySelector").getSelected();;
 		if(contractualParty && contractualParty > 0){
+			
+			var cp = "";
+			var cpText = "";
+			for(var i = 0; i < contractualParty.length; i++){
+				if(parseInt(contractualParty[i].value) <= 0){
+					continue;
+				}
+				if(i < (contractualParty.length - 1)){
+					cp += contractualParty[i].value+",";
+					cpText += contractualParty[i].text+",";
+				}
+				else {
+					cp += contractualParty[i].value;
+					cpText += contractualParty[i].text;
+				}
+			}
+			
+			
 			var ps = new QueryParameter();
 			ps.name = "ContractualParty";
-			ps.value = contractualParty;
-			ps.text = $("#rep_contractualParty").data("kendoComboBox").text();
+			ps.value = cp;
+			ps.text = cpText;
 			ps.queryId = this.queryViewModel.get("queryId");
 			qpw.queryParametersList.push(ps);
+	
+			
 		}
 		
-		var foxEntity = $("#rep_foxEntity").data("kendoComboBox").value();
+		var foxEntity = $("#rep_foxEntity").data("kendoHierarchySelector").getSelected();
+		
 		if(foxEntity && foxEntity > 0){
+			
+				var fe = "";
+				var feText = "";
+				for(var i = 0; i < foxEntity.length; i++){
+					if(parseInt(foxEntity[i].value) <= 0){
+						continue;
+					}
+					if(i < (foxEntity.length - 1)){
+						fe += foxEntity[i].value+",";
+						feText += foxEntity[i].text+",";
+					}
+					else {
+						fe += foxEntity[i].value;
+						feText += foxEntity[i].text;
+					}
+				}
+				
+				
 			var ps = new QueryParameter();
 			ps.name = "FoxEntity";
-			ps.value = foxEntity;
-			ps.text = $("#rep_foxEntity").data("kendoComboBox").text();
+			ps.value = fe;
+			ps.text = feText;
 			ps.queryId = this.queryViewModel.get("queryId");
 			qpw.queryParametersList.push(ps);
 		}
@@ -5252,8 +5365,18 @@ function ReportManagement(){
 			return true;
 		}
 		
+		//SUBRIGHTS
+		var sbr = $("#rep_subrights").data("kendoHierarchySelector").getSelected();
+		if(sbr && sbr.length > 0){
+			return true;
+		}
+		var sbrs = $("#rep_subrightsStatus").data("kendoHierarchySelector").getSelected();
+		if(sbrs && sbrs.length > 0){
+			return true;
+		}
+		//SUBRIGHTS
 						
-		var lcs = $("#rep_legalConfirmationStatus").data("kendoDropDownList").value();
+		var lcs = $("#rep_legalConfirmationStatus").data("kendoHierarchySelector").getSelected();
 		if(lcs && lcs > 0){
 			return true;
 		}
@@ -5278,12 +5401,12 @@ function ReportManagement(){
 			return true;
 		}
 		
-		var cp = $("#rep_contractualParty").data("kendoComboBox").value();
+		var cp = $("#rep_contractualParty").data("kendoHierarchySelector").getSelected();
 		if(cp && cp > 0){
 			return true;
 		}
 		
-		var fe = $("#rep_foxEntity").data("kendoComboBox").value();
+		var fe = $("#rep_foxEntity").data("kendoHierarchySelector").getSelected();
 		if(fe && fe > 0){
 			return true;
 		}
@@ -6087,6 +6210,16 @@ function ReportManagement(){
 		$("#rep_salesAndMarketing").data("kendoHierarchySelector").setSelected([]);
 		$("#rep_salesAndMarketing").data("kendoHierarchySelector").clearSelected();
 	};
+	//SUBRIGHTS
+	this.resetSubrightsFields = function(){
+		$("#rep_subrights").data("kendoHierarchySelector").setSelected([]);
+		$("#rep_subrights").data("kendoHierarchySelector").clearSelected();
+	};
+	this.resetSubrightsStatusFields = function(){
+		$("#rep_subrightsStatus").data("kendoHierarchySelector").setSelected([]);
+		$("#rep_subrightsStatus").data("kendoHierarchySelector").clearSelected();
+	};
+	//SUBRIGHTS
 	//PIR CHANGES
 	/**
 	 * 
