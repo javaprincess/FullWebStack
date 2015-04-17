@@ -1664,13 +1664,28 @@ function ReportManagement(){
 			$.getJSON(that.rep_path.getAllActiveGrantCodeRESTPath(), function(data){
 				if(data){
 					var dataArray = new Array();
+					var salesAndMarketingArray = new Array();
+					
 					var ob = new Object();
 					ob.id = -1;
 					ob.description = '';
 					dataArray.push(ob);
 					dataArray = dataArray.concat(data);
+					
+					console.log("data %o", data);
+					
+					$.each(data, function(id, elem){
+						var element = dataArray.pop();
+						if ((element.code==="PAM") ||
+								(element.code==="COM") ||
+								(element.code==="BILL")  ||
+								(element.code==="TTLCRD")  ||
+								(element.code==="ARTRSTRCN"))
+							salesAndMarketingArray.push(element);
+					});
+					
 					var dataSource = new kendo.data.DataSource({
-						data : dataArray
+						data : salesAndMarketingArray
 					});
 					
 					$("#rep_salesAndMarketing").kendoHierarchySelector({
@@ -1688,17 +1703,35 @@ function ReportManagement(){
 			$.getJSON(that.rep_path.getAllActiveGrantCodeRESTPath(), function(data){
 				if(data){
 					var dataArray = new Array();
+					var subrightsArray = new Array();
+					
 					var ob = new Object();
 					ob.id = -1;
 					ob.description = '';
 					dataArray.push(ob);
 					dataArray = dataArray.concat(data);
-					var dataSource = new kendo.data.DataSource({
-						data : dataArray
+					
+					$.each(data, function(id, elem){
+						var element = data.pop();
+						console.log("element before %o", element);
+						
+						if (	(element.code==="LEGSTG") ||
+								(element.code==="REMK")  ||
+								(element.code==="FILMCS")) { 
+								
+							subrightsArray.push(element);
+							console.log("element after %o", element);
+						}
+					});
+					
+					console.log("subrightsArray: %o", subrightsArray);
+					
+					var sDataSource = new kendo.data.DataSource({
+						data : subrightsArray
 					});
 					
 					$("#rep_subrights").kendoHierarchySelector({
-						dataSource : dataSource,
+						dataSource : sDataSource,
 						id : "id",
 						text : "description"
 					});
@@ -1716,8 +1749,19 @@ function ReportManagement(){
 					dataArray.push(ob);
 					dataArray = dataArray.concat(data);
 					var dataSource = new kendo.data.DataSource({
-						data : dataArray
+						data : [
+						        {id:0, description:"No Status (blank)"},
+						        {id:1, description:"Yes"},
+						        {id:2, description:"Yes - Limited"},
+						        {id:3, description:"Yes – With Obligation"},
+						        {id:4, description:"Yes  -With Passive Only"},
+						        {id:5, description:"No"},
+						        {id:6, description:"Not Researched"},
+						        {id:7, description:"No – Rights of First Negotiation or Refusal"}
+						       ]
 					});
+					
+					console.log("datasource: %o", dataSource);
 					
 					$("#rep_subrightsStatus").kendoHierarchySelector({
 						dataSource : dataSource,
