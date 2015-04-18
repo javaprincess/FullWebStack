@@ -5381,6 +5381,65 @@ function ReportManagement(){
 			
 		}
 		
+		//SUBRIGHTS
+		var subrights = $("#rep_subrights").data("kendoHierarchySelector").getSelected();
+		if(subrights  && (subrights .length > 0)){
+			var cs = "";
+			var csText = "";
+			for(var i = 0; i < subrights .length; i++){
+				if(parseInt(subrights [i].value) <= 0){
+					continue;
+				}
+				if(i < (subrights .length - 1)){
+					cs += subrights [i].value+",";
+					csText += subrights [i].text+",";
+				}
+				else {
+					cs += subrights [i].value;
+					csText += subrights [i].text;
+				}
+			}
+			
+			if(cs.length > 0){
+				var ps = new QueryParameter();
+				ps.name = "Subrights";
+				ps.value = cs;
+				ps.text = csText;
+				ps.queryId = this.queryViewModel.get("queryId");
+				qpw.queryParametersList.push(ps);
+			}
+			
+		}
+		var subrightsStatus = $("#rep_subrightsStatus").data("kendoHierarchySelector").getSelected();
+		if(subrightsStatus && (subrightsStatus.length > 0)){
+			var cs = "";
+			var csText = "";
+			for(var i = 0; i < subrightsStatus.length; i++){
+				if(parseInt(subrightsStatus[i].value) <= 0){
+					continue;
+				}
+				if(i < (subrightsStatus.length - 1)){
+					cs += subrightsStatus[i].value+",";
+					csText += subrightsStatus[i].text+",";
+				}
+				else {
+					cs += subrightsStatus[i].value;
+					csText += subrightsStatus[i].text;
+				}
+			}
+			
+			if(cs.length > 0){
+				var ps = new QueryParameter();
+				ps.name = "SubrightsStatus";
+				ps.value = cs;
+				ps.text = csText;
+				ps.queryId = this.queryViewModel.get("queryId");
+				qpw.queryParametersList.push(ps);
+			}
+			
+		}
+		//SUBRIGHTS
+		
 		var queryObject = qpw.getObjectForJSON();
 		console.log(" RIGHTS INQUIRY OBJECT : %o", queryObject);
 		this.submitReport(queryObject, url, successText);
@@ -5687,8 +5746,22 @@ function ReportManagement(){
 				$("#rep_dateOptionToTBA")[0].checked = true;
 			}
 			
+			//if(name == 'LegalConfirmationStatus'){
+			//	$("#rep_legalConfirmationStatus").data("kendoDropDownList").value(parseInt(elem.value));
+			//}
+			
 			if(name == 'LegalConfirmationStatus'){
-				$("#rep_legalConfirmationStatus").data("kendoDropDownList").value(parseInt(elem.value));
+				var ids = new Array();
+				if(elem.value.indexOf(",") > -1){
+					var idsString = elem.value.split(",");
+					$.each(idsString, function(id, element){
+						ids.push(parseInt(element));
+					});
+				} else {
+					ids.push(parseInt(elem.value));
+				} if(ids.length > 0){
+					$("#rep_legalConfirmationStatus").data("kendoHierarchySelector").setSelected(ids);
+				}
 			}
 			
 			if(name == 'ProductInformationCode'){
@@ -5713,21 +5786,48 @@ function ReportManagement(){
 					$.each(idsString, function(id, element){
 						ids.push(parseInt(element));
 					});
-				}
-				else {
+				} else {
 					ids.push(parseInt(elem.value));
-				}
-				if(ids.length > 0){
+				} if(ids.length > 0){
 					$("rep_contractualPartyType").data("kendoHierarchySelector").setSelected(ids);
 				}
 			}
 			
+			//if(name == 'ContractualParty'){
+			//	$("#rep_contractualParty").data("kendoComboBox").value(parseInt(elem.value));
+			//}
+			
+
 			if(name == 'ContractualParty'){
-				$("#rep_contractualParty").data("kendoComboBox").value(parseInt(elem.value));
+				var ids = new Array();
+				if(elem.value.indexOf(",") > -1){
+					var idsString = elem.value.split(",");
+					$.each(idsString, function(id, element){
+						ids.push(parseInt(element));
+					});
+				} else {
+					ids.push(parseInt(elem.value));
+				} if(ids.length > 0){
+					$("#rep_contractualParty").data("kendoHierarchySelector").setSelected(ids);
+				}
 			}
 			
+			//if(name == 'FoxEntity'){
+			//	$("#rep_foxEntity").data("kendoComboBox").value(parseInt(elem.value));
+			//}
+
 			if(name == 'FoxEntity'){
-				$("#rep_foxEntity").data("kendoComboBox").value(parseInt(elem.value));
+				var ids = new Array();
+				if(elem.value.indexOf(",") > -1){
+					var idsString = elem.value.split(",");
+					$.each(idsString, function(id, element){
+						ids.push(parseInt(element));
+					});
+				} else {
+					ids.push(parseInt(elem.value));
+				} if(ids.length > 0){
+					$("#rep_foxEntity").data("kendoHierarchySelector").setSelected(ids);
+				}
 			}
 			
 			if(name == 'Contacts'){
@@ -5737,11 +5837,9 @@ function ReportManagement(){
 					$.each(idsString, function(id, element){
 						ids.push(parseInt(element));
 					});
-				}
-				else {
+				} else {
 					ids.push(parseInt(elem.value));
-				}
-				if(ids.length > 0){
+				} if(ids.length > 0){
 					$("#rep_contacts").data("kendoHierarchySelector").setSelected(ids);
 				}
 			}
@@ -5753,16 +5851,45 @@ function ReportManagement(){
 					$.each(idsString, function(id, element){
 						ids.push(parseInt(element));
 					});
-				}
-				else {
+				} else {
 					ids.push(parseInt(elem.value));
-				}
-				if(ids.length > 0){
+				} if(ids.length > 0){
 					$("#rep_salesAndMarketing").data("kendoHierarchySelector").setSelected(ids);
 				}
 			}
 			
-			if(name == 'MethodOfTransmission'){
+			//SUBRIGHTS
+			if(name == 'Subrights'){
+				var ids = new Array();
+				if(elem.value.indexOf(",") > -1){
+					var idsString = elem.value.split(",");
+					$.each(idsString, function(id, element){
+						ids.push(parseInt(element));
+					});
+				} else {
+					ids.push(parseInt(elem.value));
+				} if(ids.length > 0){
+					$("#rep_subrights").data("kendoHierarchySelector").setSelected(ids);
+				}
+			}
+			
+
+			if(name == 'SubrightsStatus'){
+				var ids = new Array();
+				if(elem.value.indexOf(",") > -1){
+					var idsString = elem.value.split(",");
+					$.each(idsString, function(id, element){
+						ids.push(parseInt(element));
+					});
+				} else {
+					ids.push(parseInt(elem.value));
+				} if(ids.length > 0){
+					$("#rep_subrightsStatus").data("kendoHierarchySelector").setSelected(ids);
+				}
+			}
+			//SUBRIGHTS
+			
+			/*if(name == 'MethodOfTransmission'){
 				var ids = new Array();
 				if(elem.value.indexOf(",") > -1){
 					var idsString = elem.value.split(",");
@@ -5772,14 +5899,15 @@ function ReportManagement(){
 				}
 				else {
 					ids.push(parseInt(elem.value));
-				}
+				} 
+				*/
 				//if(ids.length > 0){
 				//	$("#rep_methodOfTransmission").data("kendoHierarchySelector").setSelected(ids);
 				//	$(".methodOfTransmissionClass").show();
 				//	that.enableMethodOfTransmission();
 				//	that.disableForMOT();
 				//}
-			}
+			//}
 		});
 	};
 	
