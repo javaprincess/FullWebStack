@@ -1704,25 +1704,39 @@ function ReportManagement(){
 				if(data){
 					var dataArray = new Array();
 					var subrightsArray = new Array();
+				
+					//var ob = new Object();
+					//ob.id = -1;
+					//ob.description = '';
+					//dataArray.push(ob);
+					//dataArray = dataArray.concat(data);
 					
-					var ob = new Object();
-					ob.id = -1;
-					ob.description = '';
-					dataArray.push(ob);
-					dataArray = dataArray.concat(data);
-					
-					$.each(data, function(id, elem){
-						var element = data.pop();
-						console.log("element before %o", element);
+					if (erm.security.isSubrightsAdmin()) {
+						$.each(data, function(id, elem){
+							var element = data.pop();
+							console.log("element before %o", element);
 						
-						if (	(element.code==="LEGSTG") ||
-								(element.code==="REMK")  ||
-								(element.code==="FILMCS")) { 
+							if (element.code==="FILMCS")  { 
+									subrightsArray.push(element);
+									console.log("element after %o", element);
+							}
+						});
+					} else if (erm.security.isLegalAdmin()) {
+						$.each(data, function(id, elem){
+							var element = data.pop();
+							console.log("element before %o", element);
+						
+							if (	(element.code==="LEGSTG") ||
+									(element.code==="REMK")  ||
+									(element.code==="FILMCS")) { 
 								
-							subrightsArray.push(element);
-							console.log("element after %o", element);
-						}
-					});
+									subrightsArray.push(element);
+									console.log("element after %o", element);
+								}
+						 });
+					  }
+						
+					
 					
 					console.log("subrightsArray: %o", subrightsArray);
 					
@@ -1752,12 +1766,12 @@ function ReportManagement(){
 						data : [
 						        {id:0, description:"No Status (blank)"},
 						        {id:1, description:"Yes"},
-						        {id:2, description:"Yes - Limited"},
-						        {id:3, description:"Yes – With Obligation"},
-						        {id:4, description:"Yes  -With Passive Only"},
+						        {id:2, description:"Yes \- Limited"},
+						        {id:3, description:"Yes \– With Obligation"},
+						        {id:4, description:"Yes \- With Passive Only"},
 						        {id:5, description:"No"},
 						        {id:6, description:"Not Researched"},
-						        {id:7, description:"No – Rights of First Negotiation or Refusal"}
+						        {id:7, description:"No \– Rights of First Negotiation or Refusal"}
 						       ]
 					});
 					
@@ -1985,7 +1999,25 @@ function ReportManagement(){
 	 */
 	this.openReportManagementWindow = function(reportId, queryId, closeFlag, userName){
 		console.log("I am in the openReportManagementWindow: " + userName + ":" + erm.security.isLegalAdmin());
+		console.log("I am in the openReportManagementWindow: " + userName + ":" + erm.security.isSubrightsAdmin());
+		
+		
 		console.log("reportID: " + reportId);
+		
+		//PIR CHANGES
+		if (	(erm.security.isLegalAdmin()) ||
+				(erm.security.isSubrightsAdmin()) ) {
+			$("#rep_subrights").show();
+			$("#rep_subrightsStatus").show();
+			$("#rep_subrightsText").show();
+			$("#rep_subrightsStatusText").show();
+		} else {
+			$("#rep_subrights").hide();
+			$("#rep_subrightsStatus").hide();
+			$("#rep_subrightsText").hide();
+			$("#rep_subrightsStatusText").hide();
+		}
+		//PIR CHANGES
 		
 		if(erm.security.canViewQuery()){
 			$("#rep_runQuery").show();
@@ -2065,7 +2097,7 @@ function ReportManagement(){
 				$("#rep_territorySelector").data("kendoHierarchySelector").setDataSource(productInquiryTerritories);
 				$("#rep_productTypeLabel").html(this.productTypeName);
 				$("#rep_rightCheckLegal")[0].checked = true;
-				if($("#rep_rightCheckLegal")[0].checked){
+				if($("#rep_rightCheckLegal")[0].checked){                                
 					//$(".methodOfTransmissionClass").show();
 					//that.enableMethodOfTransmission();
 				}
