@@ -52,6 +52,26 @@ public class ReportsServiceBean extends ServiceBase implements ReportsService {
 	
 		return eM.createQuery(queryStr).getResultList();
 	}
+	
+	@SuppressWarnings("unchecked")
+	public MicroStrategyReportConfig getReportProperties(ReportMetaData reportMetaData) {
+		//EntityManager eM = getEntityManagerFactory().createEntityManager();
+		
+		MicroStrategyReportConfig reportProperties = null;
+		reportProperties = (MicroStrategyReportConfig) eM.createNativeQuery(
+					//"SELECT REPORT_NAME, REPORT_FORMAT, SRC, EXECUTION_MODE, ENVIRON_NAME, PROJECT, MS_URL, DOCUMENT_ID from REPORTS_CONFIG where REPORT_NAME='DRR' and REPORT_FORMAT='EXCEL'", MicroStrategyReportConfig.class)
+				"SELECT * from REPORTS_CONFIG where REPORT_NAME=? and REPORT_FORMAT=?", MicroStrategyReportConfig.class)	
+				.setParameter(1, reportMetaData.getReportNameStr())
+				.setParameter(2, reportMetaData.getReportNameType())
+				.getSingleResult(); 		
+		//eM.close();
+	
+		logger.info("reportProperties.evt: " + reportProperties.getEvt());
+		logger.info("reportProperties.documentID: " + reportProperties.getDocumentID());
+		logger.info("reportProperties.serverName: " + reportProperties.getServerName());
+		
+		return reportProperties;
+	}
 
 	@Override
 	public ReportsProxy findAllReportMetadata(String userId, boolean isBusiness)
@@ -102,7 +122,9 @@ public class ReportsServiceBean extends ServiceBase implements ReportsService {
 			savedQueryId = queryService.save(json, userId, isBusiness);
 			logger.info("saved ReportsServiceBean.submit() for userId: " + userId + " with queryId: " + savedQueryId);			
 		}
-		
+		reportMetaData.setReportNameFormat(reportNameFormat);
+		reportMetaData.setReportNameStr(reportNameStr);
+		reportMetaData.setUserName(userId);
 		reportMetaData.setQueryId(savedQueryId);
 		reportMetaData.setReportURL(buildReportsURL(userId, savedQueryId, reportNameStr, reportNameFormat));
 		
@@ -131,6 +153,7 @@ public class ReportsServiceBean extends ServiceBase implements ReportsService {
 			Long savedQueryId = new Long(-1); 
 			String reportNameStr = null;
 			String reportNameFormat = null;
+			String reportNameType = null;
 			
 			for(QueryParameters p : parametersList){
 				
@@ -144,13 +167,24 @@ public class ReportsServiceBean extends ServiceBase implements ReportsService {
 				if("ReportFormat".equals(p.getName())){
 					reportNameFormat = p.getValue();
 				}
+				
+				if("ReportFormat".equals(p.getName())){
+					reportNameType = p.getText();
+				}
 			}
 			
 			savedQueryId = queryService.save(json, userId, isBusiness);		
 			logger.info("saved ReportsServiceBean.submit() for userId: " + userId + " with queryId: " + savedQueryId);
 			
 			reportMetaData.setQueryId(savedQueryId);
-			reportMetaData.setReportURL(buildReportsURL(userId, savedQueryId, reportNameStr, reportNameFormat));
+			//reportMetaData.setReportURL(buildReportsURL(userId, savedQueryId, reportNameStr, reportNameFormat));
+			//TODO: for POC...remove for SIT
+		
+			reportMetaData.setReportNameFormat(reportNameFormat);
+			reportMetaData.setReportNameStr(reportNameStr);
+			reportMetaData.setReportNameType(reportNameType);
+			reportMetaData.setUserName(userId);
+			//reportMetaData.setReportURL("http://localhost:7001/erm/rest/report/reportsIntegration");
 			
 			return reportMetaData;
 	}

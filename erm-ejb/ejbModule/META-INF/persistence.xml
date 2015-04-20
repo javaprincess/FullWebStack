@@ -122,7 +122,8 @@
 		<class>com.fox.it.erm.DBErrorLog</class>
 		<class>com.fox.it.erm.SystemSecKey</class>
 		
-		<class>com.fox.it.erm.FoxipediaUser</class>		
+		<class>com.fox.it.erm.FoxipediaUser</class>	
+		<class>com.fox.it.erm.service.reports.MicroStrategyReportConfig</class>	
 		
 		
  		<exclude-unlisted-classes>true</exclude-unlisted-classes>			

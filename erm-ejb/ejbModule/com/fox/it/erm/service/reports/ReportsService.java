@@ -22,5 +22,7 @@ public interface ReportsService {
 			String reportNameStr, 
 			String reportNameFormat);	
 	
+	public MicroStrategyReportConfig getReportProperties(ReportMetaData reportMetaData);
+	
 	public ReportMetaData runQuery(String json, String userId, boolean isBusiness) throws ErmException; 
 }
