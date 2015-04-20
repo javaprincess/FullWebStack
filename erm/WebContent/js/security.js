@@ -72,6 +72,7 @@ erm.security = {
 	setUser:function(user) {
 		this.user=user;
 	},
+	
 	isBusiness: function() {
 		if (!this.user) {
 			console.log("Error: erm.security user is not set");
@@ -100,6 +101,11 @@ erm.security = {
 	isLegalAdmin: function isLegalAdmin(){
 		var privs = this.user.privileges;
 		return privs.some(function(e) {return e.roleName === "ERM Legal Admin";});
+		
+	},
+	isSubrightsAdmin: function isSubrightsAdmin(){
+		var privs = this.user.privileges;
+		return privs.some(function(e) {return e.roleName === "ERM Subrights Admin";});
 		
 	},
 	isAdmin: function isAdmin() {
