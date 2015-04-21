@@ -1766,12 +1766,12 @@ function ReportManagement(){
 						data : [
 						        {id:0, description:"No Status (blank)"},
 						        {id:1, description:"Yes"},
-						        {id:2, description:"Yes \- Limited"},
-						        {id:3, description:"Yes \– With Obligation"},
-						        {id:4, description:"Yes \- With Passive Only"},
+						        {id:2, description:"Yes - Limited"},
+						        {id:3, description:"Yes - With Obligation"},
+						        {id:4, description:"Yes - With Passive Only"},
 						        {id:5, description:"No"},
 						        {id:6, description:"Not Researched"},
-						        {id:7, description:"No \– Rights of First Negotiation or Refusal"}
+						        {id:7, description:"No - Rights of First Negotiation or Refusal"}
 						       ]
 					});
 					
@@ -6467,7 +6467,15 @@ function ReportManagement(){
 	
 	/* Microstrategy/ERM Reports Integration: BEGIN */
 	this.dynamicReport = function(reportData){
-		$.getJSON("rest/report/reportsIntegration?reportName="+reportData.reportNameStr +"&reportFormat="+reportData.reportNameType, function(data) {
+		var newReportNameStr = reportData.reportNameStr;
+		
+		if ((reportData.userRole==erm.security.isLegalAdmin()) ||
+				reportData.userRole==erm.security.isSubrightsAdmin()) {
+			if (reportData.reportNameStr==="PIR")
+				newReportNameStr="PIR1";
+		}
+		
+		$.getJSON("rest/report/reportsIntegration?reportName="+newReportNameStr+"&reportFormat="+reportData.reportNameType, function(data) {
 			console.log("data: %o", data);
 			console.log("reportData: %o", reportData);
 			console.log("format: " + reportData.reportNameFormat);
@@ -6521,10 +6529,10 @@ function ReportManagement(){
 	     	
 	     	  window.document.forms[0].submit();
 	     	  
-	     	 $('#mstr').remove();
+	     	 //$('#mstr').remove();
 	     	
 		}).done(function(){
-			
+			 $('#mstr').remove();
 		});
 		
 					

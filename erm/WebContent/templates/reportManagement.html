@@ -297,7 +297,7 @@
 				
 				<!--  PiC/DNL/FM SECTION: START -->
 				<div id="rep_productInformationCodeText" class="panel-body maximumWidth boldFont" style="padding-top: 35%; margin-bottom : 5px;">
-					Product Information Code
+					Product Informational Codes
 				</div>
 				<div class="panel-body maximumWidth" style="margin-bottom : 5px;">
 					<select id="rep_productInformationCode" style="width : 100%;" class="smallFontRights">
@@ -357,32 +357,10 @@
 	<!-- FOR RIGHTS INQUIRY REPORT (BOTTOM ELEMENTS : START) -->
 	<div class="panel reducedPadding rightInquiryReportClass" style="padding : 0px; height : 20%; padding-top : 1px; background-color : #f4f4f4; margin-top : 1px;" id="rep_inquiryReportBottomElements">
 		
-		
+		<!-- CP AND LCS CONTAINER: START -->
 		<div class="panel noBorder" style="width : 18%; float : left; height : 100%; padding-top : 1px; background-color : #f4f4f4;">
-			
-			<!-- FOX ENTITY: START -->
-			<div id="rep_foxEntityText" class="panel-body maximumWidth boldFont" style="margin-bottom : 5px;">
-				Fox Entity&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:$.noop()" id="rep_clearFoxEntity">Clear</a>
-			</div>
-			<div class="panel-body maximumWidth" style="margin-bottom : 5px;">
-				<select id="rep_foxEntity" multiple style="width : 100%;" class="form-control smallFontRights">
-				</select>
-			</div>
-			<!-- FOX ENTITY: END -->
-			
-			<!-- LEGAL CONFIRMATION STATUS: START -->
-			<div id="rep_legalConfirmationStatusText" class="panel-body maximumWidth boldFont" style="margin-bottom : 5px;">
-				Legal Confirmation Status&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:$.noop()" id="rep_clearLegalConfirmationStatus">Clear</a>
-			</div>
-			<div class="panel-body maximumWidth" style="margin-bottom : 5px;">
-				<select id="rep_legalConfirmationStatus" multiple style="width : 100%;" class="form-control smallFontRights">
-				</select>
-			</div>
-		</div>
-		<!-- LEGAL CONFIRMATION STATUS: END -->
-		
-		<!-- CONTRACTUAL PARTY : START -->
-		<div class="panel noBorder" style="width : 18%; float : left; height : 100%; padding-top : 1px; background-color : #f4f4f4;">
+	
+			<!-- CONTRACTUAL PARTY: START -->
 			<div id="rep_contractualPartyText" class="panel-body maximumWidth boldFont" style="margin-bottom : 5px;">
 				Contractual Party&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:$.noop()" id="rep_clearContractualParty">Clear</a>
 			</div>
@@ -393,6 +371,31 @@
 			</div>
 			<!-- CONTRACTUAL PARTY: END -->
 			
+			<!-- LEGAL CONFIRMATION STATUS: START -->
+			<div id="rep_legalConfirmationStatusText" class="panel-body maximumWidth boldFont" style="margin-bottom : 5px;">
+				Legal Confirmation Status&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:$.noop()" id="rep_clearLegalConfirmationStatus">Clear</a>
+			</div>
+			<div class="panel-body maximumWidth" style="margin-bottom : 5px;">
+				<select id="rep_legalConfirmationStatus" multiple style="width : 100%;" class="form-control smallFontRights">
+				</select>
+			</div>
+			<!-- LEGAL CONFIRMATION STATUS: END -->
+		</div>
+		<!-- CP AND LCS CONTAINER: END -->
+		
+		<!-- FE AND CPT CONTAINER: START -->
+		<div class="panel noBorder" style="width : 18%; float : left; height : 100%; padding-top : 1px; background-color : #f4f4f4;">
+
+			<!-- FOX ENTITY: START -->
+			<div id="rep_foxEntityText" class="panel-body maximumWidth boldFont" style="margin-bottom : 5px;">
+				Fox Entity&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:$.noop()" id="rep_clearFoxEntity">Clear</a>
+			</div>
+			<div class="panel-body maximumWidth" style="margin-bottom : 5px;">
+				<select id="rep_foxEntity" multiple style="width : 100%;" class="form-control smallFontRights">
+				</select>
+			</div>
+			<!-- FOX ENTITY: END -->
+			
 			<!-- CONTRACTUAL PARTY TYPE: START -->
 			<div id="rep_contractualPartyTypeText" class="panel-body maximumWidth boldFont" style="margin-bottom : 5px;">
 				Contractual Party Type&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:$.noop()" id="rep_clearContractualPartyType">Clear</a>
@@ -400,9 +403,9 @@
 			<div class="panel-body maximumWidth" style="margin-bottom : 5px;">
 				<select id="rep_contractualPartyType" multiple style="width : 100%;" class="form-control smallFontRights"></select>
 			</div>
-
+			<!-- CONTRACTUAL PARTY TYPE: END -->
 		</div>
-		<!-- CONTRACTUAL PARTY TYPE: END -->
+		<!-- FE AND CPT CONTAINER: END -->
 		
 		<!-- S&M: START -->
 		<div class="panel noBorder" style="width : 18%; float : left; height : 100%; padding-top : 50px; background-color : #f4f4f4;">
@@ -431,7 +434,7 @@
 		<!-- SUBRIGHTS: START -->
 		<div class="panel noBorder" style="width : 18%; float : left; height : 100%; padding-top : 1px; background-color : #f4f4f4;">
 				<div id="rep_subrightsText" class="panel-body maximumWidth boldFont" style="padding-top: 1%; margin-bottom : 5px;">
-					Subrights&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:$.noop()" id="rep_clearSubrights">Clear</a>
+					Subrights&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:$.noop()" id="rep_clearSubrights">Clear</a>
 				</div>
 				<div class="panel-body maximumWidth" style="margin-bottom : 5px;">
 					<select id="rep_subrights" multiple style="width : 100%;" class="form-control smallFontRights">
