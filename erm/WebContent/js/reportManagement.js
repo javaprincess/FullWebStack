@@ -6527,11 +6527,16 @@ function ReportManagement(){
 	     	  $('#server').val(server);
 	     	  $('#project').val(project);
 	     	
-	     	  window.document.forms[0].submit();
+	     	  //window.document.forms[0].submit();
+	     	  $('#mstr').submit();
 	     	  
-	     	 //$('#mstr').remove();
+	     	  $('#mstr').remove();
 	     	
 		}).done(function(){
+			console.log("**********in done**************");
+			//$('#mstr').remove();
+		}).error(function(){
+			console.log("**********some error occured in dynamicReport**************");
 			 $('#mstr').remove();
 		});
 		
