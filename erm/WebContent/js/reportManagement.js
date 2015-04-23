@@ -1543,7 +1543,7 @@ function ReportManagement(){
 					var dataArray = new Array();
 					var obj = new Object();
 					obj.confirmationStatusId = -1;
-					obj.confirmationStatusCode = "";
+					obj.confirmationStatusDescription = "";
 					obj.description = "";
 					dataArray.push(obj);
 					$.each(data, function(id, elem){
@@ -1558,7 +1558,7 @@ function ReportManagement(){
 					});
 					
 					$("#rep_legalConfirmationStatus").kendoHierarchySelector({
-						text: "confirmationStatusCode",
+						text: "confirmationStatusDescription",
 			            id: "confirmationStatusId",
 			            //template: "${ data.description }",
 			            dataSource : legalConfirmationStatusDataSource 
@@ -6471,8 +6471,9 @@ function ReportManagement(){
 	this.dynamicReport = function(reportData){
 		var newReportNameStr = reportData.reportNameStr;
 		
-		if ((reportData.userRole==erm.security.isLegalAdmin()) ||
-				reportData.userRole==erm.security.isSubrightsAdmin()) {
+		if (    (erm.security.isLegalAdmin()) ||
+				(erm.security.isSubrightsAdmin())
+		   ) {
 			if (reportData.reportNameStr==="PIR")
 				newReportNameStr="PIR1";
 		}
@@ -6481,7 +6482,7 @@ function ReportManagement(){
 			console.log("data: %o", data);
 			console.log("reportData: %o", reportData);
 			console.log("format: " + reportData.reportNameFormat);
-			console.log("name: " + reportData.reportNameStr);
+			console.log("name after evaluation: " + newReportNameStr);
 			console.log("type: " + reportData.reportNameType);
 			console.log("evt: " + data.evt);
 		
