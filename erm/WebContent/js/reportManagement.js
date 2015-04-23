@@ -1551,6 +1551,8 @@ function ReportManagement(){
 						dataArray.push(elem);
 					});
 					
+					console.log("legalConfirmationStatusData: %o", data);
+					
 					var legalConfirmationStatusDataSource = new kendo.data.DataSource({
 						data : dataArray
 					});
@@ -1607,22 +1609,22 @@ function ReportManagement(){
 		ynObject3.text = 'Undetermined';
 		futureMediaArray.push(ynObject3);
 		
-		var doNotLicenseDataSource = new kendo.data.DataSource({
-			data : yesNoArray
-		});
+		//var doNotLicenseDataSource = new kendo.data.DataSource({
+		//	data : yesNoArray
+		//});
 		
 		var futureMediaDataSource = new kendo.data.DataSource({
 			data : futureMediaArray
 		});
 		
-		if(!$("#rep_doNotLicense").data("kendoDropDownList")){
-			$("#rep_doNotLicense").kendoDropDownList({
-				dataTextField: "text",
-	            dataValueField: "id",
-	            template: "${ data.text }",
-	            dataSource : doNotLicenseDataSource
-			});
-		}
+		//if(!$("#rep_doNotLicense").data("kendoDropDownList")){
+		//	$("#rep_doNotLicense").kendoDropDownList({
+		//		dataTextField: "text",
+	   //         dataValueField: "id",
+	    //        template: "${ data.text }",
+	    //        dataSource : doNotLicenseDataSource
+		//	});
+		//}
 		
 		if(!$("#rep_futureMedia").data("kendoDropDownList")){
 			$("#rep_futureMedia").kendoDropDownList({
@@ -2506,7 +2508,7 @@ function ReportManagement(){
 		$("#rep_legalConfirmationStatus").data("kendoHierarchySelector").clearSelected();
 		$("#rep_productInformationCode").data("kendoDropDownList").value(-1);		
 		$("#rep_salesAndMarketing").data("kendoHierarchySelector").clearSelected();
-		$("#rep_doNotLicense").data("kendoDropDownList").value(-1);
+		//$("#rep_doNotLicense").data("kendoDropDownList").value(-1);
 		$("#rep_futureMedia").data("kendoDropDownList").value(-2);
 		$("#rep_contractualPartyType").data("kendoHierarchySelector").clearSelected();
 		$("#rep_contractualParty").data("kendoHierarchySelector").clearSelected();
@@ -5244,7 +5246,7 @@ function ReportManagement(){
 			qpw.queryParametersList.push(ps);
 		}
 		
-		var doNotLicense = $("#rep_doNotLicense").data("kendoDropDownList").value();
+		/*var doNotLicense = $("#rep_doNotLicense").data("kendoDropDownList").value();
 		if(doNotLicense && doNotLicense >= 0){
 			var ps = new QueryParameter();
 			ps.name = "DoNotLicense";
@@ -5252,7 +5254,7 @@ function ReportManagement(){
 			ps.text = $("#rep_doNotLicense").data("kendoDropDownList").text();
 			ps.queryId = this.queryViewModel.get("queryId");
 			qpw.queryParametersList.push(ps);
-		}
+		}*/
 		
 		var futureMedia = $("#rep_futureMedia").data("kendoDropDownList").value();
 		if(futureMedia && futureMedia >= 0){
@@ -5521,10 +5523,10 @@ function ReportManagement(){
 			return true;
 		}
 		
-		var dnl = $("#rep_doNotLicense").data("kendoDropDownList").value();
+		/*var dnl = $("#rep_doNotLicense").data("kendoDropDownList").value();
 		if(dnl && dnl > -1){
 			return true;
-		}
+		}*/
 		
 		var fm = $("#rep_futureMedia").data("kendoDropDownList").value();
 		if(fm && fm > -2){
@@ -5768,9 +5770,9 @@ function ReportManagement(){
 				$("#rep_productInformationCode").data("kendoDropDownList").value(parseInt(elem.value));
 			}
 			
-			if(name == 'DoNotLicense'){
+			/*if(name == 'DoNotLicense'){
 				$("#rep_doNotLicense").data("kendoDropDownList").value(parseInt(elem.value));
-			}
+			}*/
 			
 			if(name == 'FutureMedia'){
 				$("#rep_futureMedia").data("kendoDropDownList").value(parseInt(elem.value));
@@ -6118,9 +6120,9 @@ function ReportManagement(){
 		$("#rep_productInformationCode").data("kendoDropDownList").value([]);
 		$("#rep_productInformationCode").data("kendoDropDownList").enable(false);
 		
-		$("#rep_doNotLicenseText").addClass("disableTextClass");
+		/*$("#rep_doNotLicenseText").addClass("disableTextClass");
 		$("#rep_doNotLicense").data("kendoDropDownList").value(-1);
-		$("#rep_doNotLicense").data("kendoDropDownList").enable(false);
+		$("#rep_doNotLicense").data("kendoDropDownList").enable(false);*/
 		
 		$("#rep_futureMediaText").addClass("disableTextClass");
 		$("#rep_futureMedia").data("kendoDropDownList").value(-2);
@@ -6267,9 +6269,9 @@ function ReportManagement(){
 		$("#rep_productInformationCode").data("kendoDropDownList").enable(true);
 		$("#rep_productInformationCode").data("kendoDropDownList").value([]);
 		
-		$("#rep_doNotLicenseText").removeClass("disableTextClass");		
+		/*$("#rep_doNotLicenseText").removeClass("disableTextClass");		
 		$("#rep_doNotLicense").data("kendoDropDownList").enable(true);
-		$("#rep_doNotLicense").data("kendoDropDownList").value(-1);
+		$("#rep_doNotLicense").data("kendoDropDownList").value(-1);*/
 		
 		$("#rep_futureMediaText").removeClass("disableTextClass");		
 		$("#rep_futureMedia").data("kendoDropDownList").enable(true);
