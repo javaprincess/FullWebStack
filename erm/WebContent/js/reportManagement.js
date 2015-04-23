@@ -1911,17 +1911,6 @@ function ReportManagement(){
 			
 		}
 		
-		/*$("#rep_methodOfTransmissionLink").click(function(){
-			$("#rep_methodOfTransmission").data("kendoHierarchySelector").setSelected([]);
-			that.enableWithoutMOT();
-		});
-		
-		$("#rep_methodOfTransmission").click(function(){
-			var ids = $("#rep_methodOfTransmission").data("kendoHierarchySelector").getSelected();
-			if(!that.disabledForMOTFlag && ids && ids.length > 0){
-				that.disableForMOT();
-			}
-		}); */
 		
 	};
 	
@@ -5208,7 +5197,7 @@ function ReportManagement(){
 		}
 		
 		var legalConfirmationStatus = $("#rep_legalConfirmationStatus").data("kendoHierarchySelector").getSelected();
-		if(legalConfirmationStatus && legalConfirmationStatus > 0){
+		if(legalConfirmationStatus && (legalConfirmationStatus.length > 0)){
 			
 			var lcfs = "";
 			var lcfsText = "";
@@ -5295,8 +5284,10 @@ function ReportManagement(){
 			qpw.queryParametersList.push(ps);
 		}
 		
-		var contractualParty = $("#rep_contractualParty").data("kendoHierarchySelector").getSelected();;
-		if(contractualParty && contractualParty > 0){
+		var contractualParty = $("#rep_contractualParty").data("kendoHierarchySelector").getSelected();
+		console.log("contractualPary: %o", contractualParty);
+		
+		if(contractualParty && (contractualParty.length > 0)){
 			
 			var cp = "";
 			var cpText = "";
@@ -5326,8 +5317,9 @@ function ReportManagement(){
 		}
 		
 		var foxEntity = $("#rep_foxEntity").data("kendoHierarchySelector").getSelected();
+		console.log("foxEntity: %o", foxEntity);
 		
-		if(foxEntity && foxEntity > 0){
+		if(foxEntity && (foxEntity.length > 0)){
 			
 				var fe = "";
 				var feText = "";
@@ -5372,44 +5364,44 @@ function ReportManagement(){
 				}
 			}
 			
-			if(cs.length > 0){
+			
 				var ps = new QueryParameter();
 				ps.name = "Contacts";
 				ps.value = cs;
 				ps.text = csText;
 				ps.queryId = this.queryViewModel.get("queryId");
 				qpw.queryParametersList.push(ps);
-			}
+			
 			
 		}
 		
 		//SUBRIGHTS
 		var subrights = $("#rep_subrights").data("kendoHierarchySelector").getSelected();
-		if(subrights  && (subrights .length > 0)){
+		if(subrights  && (subrights.length > 0)){
 			var cs = "";
 			var csText = "";
-			for(var i = 0; i < subrights .length; i++){
-				if(parseInt(subrights [i].value) <= 0){
+			for(var i = 0; i < subrights.length; i++){
+				if(parseInt(subrights[i].value) <= 0){
 					continue;
 				}
-				if(i < (subrights .length - 1)){
-					cs += subrights [i].value+",";
-					csText += subrights [i].text+",";
+				if(i < (subrights.length - 1)){
+					cs += subrights[i].value+",";
+					csText += subrights[i].text+",";
 				}
 				else {
-					cs += subrights [i].value;
-					csText += subrights [i].text;
+					cs += subrights[i].value;
+					csText += subrights[i].text;
 				}
 			}
 			
-			if(cs.length > 0){
+			
 				var ps = new QueryParameter();
 				ps.name = "Subrights";
 				ps.value = cs;
 				ps.text = csText;
 				ps.queryId = this.queryViewModel.get("queryId");
 				qpw.queryParametersList.push(ps);
-			}
+			
 			
 		}
 		var subrightsStatus = $("#rep_subrightsStatus").data("kendoHierarchySelector").getSelected();
